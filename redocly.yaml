@@ -1,0 +1,78 @@
+l10n:
+  defaultLocale: en
+  locales: 
+    - code: en
+      name: English
+    - code: ja
+      name: 日本語 (Japanese)
+    - code: ru
+      name: русский (Russian)
+    - code: vi
+      name: tiếng việt (Vietnamese)
+residency: https://app.cloud.eu.redocly.com
+analytics:
+  gtm:
+    includeInDevelopment: false
+    trackingId: GTM-NWZXQKJ
+    defaultDataLayer:
+      platform: redocly
+    enableWebVitalsTracking: true
+    pageViewEventName: routeChange 
+reunite:
+  # ignoreLint: true
+  ignoreLinkChecker: true
+extends:
+  - minimal
+links:
+  - href: https://fonts.googleapis.com/css2?family=VT323&display=swap
+  - href: https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap
+seo:
+  title: Tisane Developer Documentation
+  description: Tisane is an NLP platform, used for content moderation & more.
+mockServer:
+  off: true  
+navbar:
+  items:
+    - page: quickstart/quickstart.md
+      label: Get Started
+      labelTranslationKey: navbar.getstarted.label
+    - page: apis/tisane-api-short.yaml
+      label: API Reference
+      labelTranslationKey: navbar.apireference.label
+    - page: guides/index.md
+      label: Guides
+      labelTranslationKey: navbar.guides.label
+    - page: sdks/index.md
+      label: SDKs          
+      labelTranslationKey: navbar.sdks.label
+    - page: support/troubleshooting.md
+      label: Troubleshooting
+      labelTranslationKey: navbar.troubleshooting.label
+    - href: /
+      label: Documentation Home
+      labelTranslationKey: navbar.home.label
+markdown:
+  toc:
+    depth: 2
+logo:
+  image: images/logo.png
+  link: https://tisane.ai
+  favicon: images/favicon.ico
+footer:
+  copyrightText: Copyright © 2017-2025 Tisane Labs. All Rights Reserved.
+  items:
+    - href: https://tisane.ai/terms/
+      label: Terms & Conditions
+      labelTranslationKey: navbar.terms.label
+    - href: https://tisane.ai/privacy-policy/ 
+      label: Privacy Policy
+    - page: abouttisane.md
+      label: About
+      labelTranslationKey: navbar.about.label
+scripts:
+  body: 
+    - src: '//js.hs-scripts.com/4148098.js'
+      async: true
+      defer: true
+      type: 'text/javascript'
+  
