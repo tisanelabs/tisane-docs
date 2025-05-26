@@ -93,8 +93,8 @@ Read more: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
     *   Use the `Parse` function to analyze text using specified settings: 
         *   `language`: A standard ISO-639-1 language code (e.g., "en", "zh-CN"), a vertical-bar delimited list of language codes, or `*` for automatic detection.
         *   `content`: UTF-8 text to parse.
-        *   `settings`: JSON string with settings. (See: [The response and configuration guide](../apis/tisane-api-response-guide.md)).`
-        *   `Returns`: JSON string (See: [The response and configuration guide](../apis/tisane-api-response-guide.md) Guide).
+        *   `settings`: JSON string with settings. (See: [The response and configuration guide](/apis/@l10n/ru/tisane-api-response-guide.md)).`
+        *   `Returns`: JSON string (See: [The response and configuration guide](/apis/@l10n/ru/tisane-api-response-guide.md) Guide).
     
   *   Detect language: 
     *   Use  the `DetectLanguage` function to identify the language of a given text.
@@ -114,7 +114,7 @@ Read more: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
 
 See also: 
 
-- [API response and configuration guide](../apis/tisane-api-response-guide.md)
+- [API response and configuration guide](/apis/@l10n/ru/tisane-api-response-guide.md)
 
 
 ## Function Reference
@@ -380,7 +380,7 @@ Example code:
 ```
 
 
-See: [Response](../apis/tisane-api-response-guide.md).
+See: [Response](/apis/@l10n/ru/tisane-api-response-guide.md).
 
 ### ParseTextFile
 ```cpp
@@ -464,8 +464,8 @@ Parameters:
 
 See also: 
 
-- [API response and configuration guide](../apis/tisane-api-response-guide.md)
-- [Configuration and customization Guide](../apis/tisane-api-configuration.md)
+- [API response and configuration guide](/apis/@l10n/ru/tisane-api-response-guide.md)
+- [Configuration and customization Guide](/apis/@l10n/ru/tisane-api-configuration.md)
 
 Return Value: 
 

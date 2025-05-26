@@ -78,7 +78,7 @@ Analyzes text and returns a JSON structure with results.
 
 - `language`: Language code for analysis. Use `*` for language autodetection, or a pipe-delimited list of language codes (e.g., `de|fr|ja`).
 - `content`: The text to analyze.
-- `settings`: A JSON object defining analysis settings. See [Configuration and Customization Guide](../apis/tisane-api-configuration.md).
+- `settings`: A JSON object defining analysis settings. See [Configuration and Customization Guide](/apis/@l10n/vi/tisane-api-configuration.md).
 
 Returns: A JSON response object.
 
@@ -91,7 +91,7 @@ Console.WriteLine(result);
 
 Also see: 
  
-* [Response guide](../apis/tisane-api-response-guide.md)
+* [Response guide](/apis/@l10n/vi/tisane-api-response-guide.md)
 
 ##### Transform
 
@@ -104,13 +104,13 @@ Translates or paraphrases text.
 - `sourceLanguage`:  Language code of the input text. Use `*` or a pipe-delimited list (e.g., `de|fr|ja`) for language autodetection.
 - `targetLanguage`: Target language code
 - `content`: The text to transform
-- `settings`: A JSON object defining transformation settings. See [Configuration and Customization Guide](../apis/tisane-api-configuration.md).
+- `settings`: A JSON object defining transformation settings. See [Configuration and Customization Guide](/apis/@l10n/vi/tisane-api-configuration.md).
 
 Returns: A transformed/translated text.
 
 See also: 
 
-- [API response and configuration guide](../apis/tisane-api-response-guide.md)
+- [API response and configuration guide](/apis/@l10n/vi/tisane-api-response-guide.md)
 
 Example:
 

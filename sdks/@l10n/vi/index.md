@@ -7,9 +7,9 @@ The core library is based on POSIX C/C++ and uses RocksDB to store its language 
 * [Tisane Embedded SDK for C/C++](./candc++.md)
 * [Tisane Embedded SDK for .NET](./dotnet.md)
 
-For on-premise deployment of Tisane as a separate web service, see: [On-premise Deployment](../guides/deployment/onprem.md).
+For on-premise deployment of Tisane as a separate web service, see: [On-premise Deployment](/guides/deployment/@l10n/vi/onprem.md).
 
 ## Response and Configuration Guides
 
-* [Configuration and customization](../apis/tisane-api-configuration.md)
-* [Response JSON reference](../apis/tisane-api-response-guide.md)
+* [Configuration and customization](/apis/@l10n/vi/tisane-api-configuration.md)
+* [Response JSON reference](/apis/@l10n/vi/tisane-api-response-guide.md)
