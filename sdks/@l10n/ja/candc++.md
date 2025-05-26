@@ -70,7 +70,7 @@ Read more: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
 ### Setup And Use
 
 1. Include the header file:  
-  *  Ensure you include the necessary header file ([`tisane.h`](./tisane.h)) in your C/C++ project. 
+  *  Ensure you include the necessary header file ([`tisane.h`](/sdks/tisane.h)) in your C/C++ project. 
   *  This file will contain the function declarations.
 
 2. Link your application with the Tisane library (e.g., `tisane.so` or `libTisane.dll`).  
@@ -93,8 +93,8 @@ Read more: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
     *   Use the `Parse` function to analyze text using specified settings: 
         *   `language`: A standard ISO-639-1 language code (e.g., "en", "zh-CN"), a vertical-bar delimited list of language codes, or `*` for automatic detection.
         *   `content`: UTF-8 text to parse.
-        *   `settings`: JSON string with settings. (See: [The response and configuration guide](../apis/tisane-api-response-guide.md)).`
-        *   `Returns`: JSON string (See: [The response and configuration guide](../apis/tisane-api-response-guide.md) Guide).
+        *   `settings`: JSON string with settings. (See: [The response and configuration guide](/apis/@l10n/ja/tisane-api-response-guide.md)).`
+        *   `Returns`: JSON string (See: [The response and configuration guide](/apis/@l10n/ja/tisane-api-response-guide.md) Guide).
     
   *   Detect language: 
     *   Use  the `DetectLanguage` function to identify the language of a given text.
@@ -114,7 +114,7 @@ Read more: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
 
 See also: 
 
-- [API response and configuration guide](../apis/tisane-api-response-guide.md)
+- [API response and configuration guide](/apis/@l10n/ja/tisane-api-response-guide.md)
 
 
 ## Function Reference
@@ -380,7 +380,7 @@ Example code:
 ```
 
 
-See: [Response](../apis/tisane-api-response-guide.md).
+See: [Response](/apis/@l10n/ja/tisane-api-response-guide.md).
 
 ### ParseTextFile
 ```cpp
@@ -464,8 +464,8 @@ Parameters:
 
 See also: 
 
-- [API response and configuration guide](../apis/tisane-api-response-guide.md)
-- [Configuration and customization Guide](../apis/tisane-api-configuration.md)
+- [API response and configuration guide](/apis/@l10n/ja/tisane-api-response-guide.md)
+- [Configuration and customization Guide](/apis/@l10n/ja/tisane-api-configuration.md)
 
 Return Value: 
 
