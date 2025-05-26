@@ -112,6 +112,7 @@ See also:
 
 - [API response and configuration guide](/apis/@l10n/ja/tisane-api-response-guide.md)
 
+
 Example:
 
 ```c#
