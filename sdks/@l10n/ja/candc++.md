@@ -70,7 +70,7 @@ Read more: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
 ### Setup And Use
 
 1. Include the header file:  
-  *  Ensure you include the necessary header file ([`tisane.h`](./tisane.h)) in your C/C++ project. 
+  *  Ensure you include the necessary header file ([`tisane.h`](/sdks/tisane.h)) in your C/C++ project. 
   *  This file will contain the function declarations.
 
 2. Link your application with the Tisane library (e.g., `tisane.so` or `libTisane.dll`).  
