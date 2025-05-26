@@ -30,7 +30,7 @@ For applications like investigation suites, it's yet another type of extracted i
 
 {% /admonition %}
 
-For the complete reference on types of problematic content, see: [Type of Problematic Content](https://doctest.tisane.ai/guides#types-of-problematic-content).
+For the reference on types of problematic content, see: [Problematic Content](/apis/tisane-api-response-guide#supported-types).
 
 ## If You Don't Want Problematic Content Detected
 

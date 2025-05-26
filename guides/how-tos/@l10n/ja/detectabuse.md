@@ -30,7 +30,7 @@ For applications like investigation suites, it's yet another type of extracted i
 
 {% /admonition %}
 
-For the complete reference on types of problematic content, see: [Type of Problematic Content](https://doctest.tisane.ai/guides#types-of-problematic-content).
+For the reference on types of problematic content, see: [Problematic Content](/apis/@l10n/ja/tisane-api-response-guide#supported-types).
 
 ## If You Don't Want Problematic Content Detected
 
@@ -56,4 +56,4 @@ Indeed, abusive and problematic content often overlaps with negative sentiment. 
 
 When someone is exchanging contact details, the sentiment is neutral; however, it still can be marked as `external_contact`. Racial slurs can easily be used in utterances with positive sentiment, too.
 
-On the other hand, “very negative sentiment” does not necessarily mean cyberbullying or hate speech. Even utterances like "I hate him" are not personal attacks, as they are not aimed at someone participating in the current conversation.  See: [Personal Attacks](../abuse/personalattack.md)
+On the other hand, “very negative sentiment” does not necessarily mean cyberbullying or hate speech. Even utterances like "I hate him" are not personal attacks, as they are not aimed at someone participating in the current conversation.  See: [Personal Attacks](/guides/abuse/@l10n/ja/personalattack.md)

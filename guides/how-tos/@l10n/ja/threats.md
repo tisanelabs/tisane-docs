@@ -2,4 +2,4 @@
 
 Threats are logged as `criminal_activity` with `threat` under `tags`. 
 
-For more details on detecting criminal activity, see [Detecting criminal activity](/abuse/@l10n/ja/criminalactivity.md)
+For more details on detecting criminal activity, see [Detecting criminal activity](/guides/abuse/@l10n/ja/criminalactivity.md)
