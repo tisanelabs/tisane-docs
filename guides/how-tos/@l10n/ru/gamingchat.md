@@ -41,13 +41,13 @@ Note: The flag won’t silence actual threats like *“I know where you live”*
 
 Example without the `game violence` flag:
 
-![tisaneShootHimNoGVOK.png](../../images/tisaneShootHimNoGVOK.png)
+![tisaneShootHimNoGVOK.png](/images/tisaneShootHimNoGVOK.png)
 
 Example with the  `game violence` flag set:
 
-![tisaneGvOk.png](../../images/tisaneGvOk.png)
+![tisaneGvOk.png](/images/tisaneGvOk.png)
 
-Also see: [2-Factor Moderation](../abuse/whatis2fm.md)
+Also see: [2-Factor Moderation](/guides/abuse/@l10n/ru/whatis2fm.md)
 
 ##  Using Tisane in an iGaming platform
 

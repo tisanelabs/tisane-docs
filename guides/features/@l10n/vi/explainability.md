@@ -55,9 +55,9 @@ Response:
 
 In debugging mode, Tisane generates a log which can then be loaded in a special debugger environment.
 
-![Parse tree presented in the debugger](../../images/lamp-es-debugger1.png)
+![Parse tree presented in the debugger](/images/lamp-es-debugger1.png)
 
-![Debugger: intermediate structures](../../images/lamp-es-debugger2.png)
+![Debugger: intermediate structures](/images/lamp-es-debugger2.png)
 
 Language Model Portal platform is available only for private cloud installations.
 

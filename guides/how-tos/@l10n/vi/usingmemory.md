@@ -18,8 +18,8 @@ To display the content of the memory module, set `state` to `true` in the `setti
 
 If it’s an ongoing dialogue, then the memory structure of every last processed message must be included in the next request as shown on the diagram below:
 
-![tisaneMemoryUse.png](../images/tisaneMemoryUse.png)
+![tisaneMemoryUse.png](/images/tisaneMemoryUse.png)
 
 Can these memories be changed and edited? Of course, so external context may be introduced as well. Note that the retention of the data is the responsibility of the caller.
 
-See: [Context and Long-Term Memory](/apis/tisane-api-configuration#context-and-long-term-memory)
+See: [Context and Long-Term Memory](/apis/@l10n/vi/tisane-api-configuration.md#context-and-long-term-memory)

@@ -24,7 +24,7 @@ To parse a full name, send a `POST /parse` request with:
 The response will categorize the name components under the `role` attribute.
 
 Example of Name Parsing:
-![tisaneAliKilicoglu.png](../../images/tisaneAliKilicoglu.png)
+![tisaneAliKilicoglu.png](/images/tisaneAliKilicoglu.png)
 
 
 ## Validating Real Names
@@ -43,7 +43,7 @@ The `subtype` attribute in the `entity` structure indicates the type of name det
 
 Example of Fictional Character Name Parsing:
 
-![tisaneFictionalCharacter.png](../../images/tisaneFictionalCharacter.png)
+![tisaneFictionalCharacter.png](/images/tisaneFictionalCharacter.png)
 
 
 
@@ -84,4 +84,4 @@ Send a send a `POST /parse` request with:
 
 Example of nickname vetting:
 
-![tisaneAliasCreep.png](../../images/tisaneAliasCreep.png)
+![tisaneAliasCreep.png](/images/tisaneAliasCreep.png)
