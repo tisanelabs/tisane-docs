@@ -1,0 +1,58 @@
+- page: quickstart/quickstart.md
+- group: Guides
+  groupTranslationKey: group.guides.label
+  page: guides/index.md
+  items:
+    - group: Features and Languages 
+      groupTranslationKey: group.features.label
+      items:  
+        - page: guides/features/languages.md
+        - page: guides/features/functionality.md
+        - group: Moderation and Investigations
+          groupTranslationKey: group.abuse.label
+          items:  
+            - page: guides/abuse/personalattack.md
+            - page: guides/abuse/hatespeechandbigotry.md
+            - page: guides/abuse/externalcontact.md
+            - page: guides/abuse/sexualadvances.md
+            - page: guides/abuse/adultonly.md
+            - page: guides/abuse/allegation.md
+            - page: guides/abuse/criminalactivity.md
+            - page: guides/abuse/mental.md
+            - page: guides/abuse/profanity.md
+            - page: guides/abuse/disturbing.md
+            - page: guides/abuse/dataleak.md
+            - page: guides/abuse/contentious.md
+            - page: guides/abuse/nomeaningfulcontent.md
+            - page: guides/abuse/socialhierarchy.md
+            - page: guides/abuse/spam.md
+            - page: guides/abuse/tags.md
+            - page: guides/abuse/whatis2fm.md
+        - page: guides/features/entities.md
+        - page: guides/features/topics.md
+        - page: guides/features/sentiment.md
+        - page: guides/features/translation.md
+        - page: guides/features/programminglanguages.md
+        - page: guides/features/algospeak.md
+        - page: guides/features/explainability.md
+    - group: How-to Topics
+      groupTranslationKey: group.howto.label
+      directory: guides/how-tos
+    - group: Deployment and Traffic
+      groupTranslationKey: group.deployment.label
+      items:
+        - page: guides/deployment/exceedquota.md
+        - page: guides/deployment/onprem.md
+        - page: guides/deployment/embedded.md
+- group: API Reference
+  groupTranslationKey: group.apis.label
+  items:  
+    - page: apis/tisane-api-short.yaml    
+    - page: apis/tisane-api-response-guide.md
+    - page: apis/tisane-api-configuration.md
+- group: Tisane Embedded SDKs
+  groupTranslationKey: group.sdks.label
+  directory: sdks
+- page: support/troubleshooting.md   
+- page: support/support.md  
+- page: changelog.md
