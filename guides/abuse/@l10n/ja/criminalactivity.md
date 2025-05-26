@@ -14,7 +14,7 @@ We identify and flag text related to:
 
 {% admonition type="warning" %}
 
-1. The criminal activity type does not capture conversations about crime committed by someone else or allegations. The purpose of the `criminal_activity` type is to capture either crime in progress or admission of criminal activity. To capture conversations about crime, use topic extraction. See: [Topic Extraction](../features/topics.md). To capture allegations about someone else committing crimes, see: [Allegations](./allegation.md)
+1. The criminal activity type does not capture conversations about crime committed by someone else or allegations. The purpose of the `criminal_activity` type is to capture either crime in progress or admission of criminal activity. To capture conversations about crime, use topic extraction. See: [Topic Extraction](/guides/features/@l10n/ja/topics.md). To capture allegations about someone else committing crimes, see: [Allegations](./allegation.md)
 2. As the legislation varies from jurisdiction to jurisdiction, inspect `tags` to determine if the instance is to be ignored. For example, `cannabis` or `soft_drug` may be used to ignore the references to use of marijuana.
 
 {% /admonition %}
@@ -120,6 +120,6 @@ The `tags` array may contain the following tags.
 
 ## Offline and Law Enforcement Use
 
-Law enforcement applications often have to operate in air-gapped environments. To accommodate this need, [Tisane Embedded](../../sdks/index.md) is available. Tisane Embedded allows running Tisane as an in-process library. [On-prem installations](/guides/deployment/onprem) are are available as well. 
+Law enforcement applications often have to operate in air-gapped environments. To accommodate this need, [Tisane Embedded](/sdks/@l10n/ja/index.md) is available. Tisane Embedded allows running Tisane as an in-process library. [On-prem installations](/guides/deployment/onprem) are are available as well. 
 
 
