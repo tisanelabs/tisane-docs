@@ -1,4 +1,4 @@
-# Guides
+﻿# Guides
 This section provides guidance on features, solution walkthrus, and other topics. 
 
 ## Getting Started

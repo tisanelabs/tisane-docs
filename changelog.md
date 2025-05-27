@@ -1,4 +1,4 @@
-# Changelog
+﻿# Changelog
 
 Notable changes to Tisane codebase will be documented in this file.
 
