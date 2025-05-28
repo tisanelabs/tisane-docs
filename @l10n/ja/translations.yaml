@@ -20,7 +20,7 @@ content.contentmoderationandmore: "ソーシャルメディア向けNLPプラッ
 content.quickstart: "クイックスタート"
 tisane.documentation.title: "Tisane開発者向けドキュメント"
 content.setup: "環境を設定し、最初のコールを実行しましょう。"
-content.tisane.description1: "ネットいじめ、ヘイトスピーチ、セクシャルハラスメント、自殺行為、告発、トピック、エンティティ、感情などを、30言語以上で検出します。"
+content.tisane.description1: "ネットいじめ、ヘイトスピーチ、セクシャルハラスメント、自殺行為、中傷、トピック、エンティティ、感情などを、30言語以上で検出します。"
 content.tisane.description2: "Tisaneは自然言語処理ライブラリで、以下の機能があります。"
 content.tisane.line1: "標準的なNLP機能（エンティティ抽出、トピック検出、感情分析など）。"
 content.tisane.line2: "問題のあるコンテンツの検出。"
