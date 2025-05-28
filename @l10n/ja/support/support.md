@@ -1,12 +1,11 @@
-# Contact Support
+﻿# サポートへのお問い合わせ
 
-## How To Contact Us
+## お問い合わせ方法
 
-* <a href="https://tisane.ai/contact-us/#support" target="_blank">Contact Tisane technical support</a>
+* <a href="https://tisane.ai/contact-us/#support" target="blank">Tisaneのテクニカルサポートに問い合わせる</a>
 
-You can contact Tisane technical support to: 
+以下について、Tisaneのテクニカルサポートまでお問い合わせいただけます。
 
-* Report a bug
-* Report the API is down
-* Make a feature request
-
+* バグの報告
+* APIが利用できないことの報告
+* 新しい機能のリクエスト

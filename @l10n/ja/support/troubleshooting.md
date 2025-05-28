@@ -1,73 +1,73 @@
-# Troubleshooting
-If your requests to Tisane API fail, check the error codes and troubleshooting steps below.
+# トラブルシューティング
+Tisane APIへのリクエストが失敗した場合、以下のエラーコードとトラブルシューティングの手順を確認してください。
 
-## API calls fail with error code 400 (Bad Request)
+## API呼び出しがエラーコード400（Bad Request）で失敗
 
-Usually this means malformed or invalid request body. In `/parse` and `/transform`, the input content and valid language codes must be specified.
+通常、これは不正な形式または無効なリクエストボディを意味します。`/parse`と`/transform`では、入力コンテンツと有効な言語コードを指定する必要があります。
 
-Possible reasons:
+考えられる原因：
 
-- Invalid JSON. Check for unterminated string literals or unescaped double quotes in your strings.
-- Invalid language code(s). Verify that the language model exists and the attribute name is correct (`language` in `/parse`, `from` and `to` in `/transform`).
-- Missing `content` element.
+- 無効なJSON。文字列に未終了の文字列リテラルやエスケープされていないダブルクォートが含まれていないか確認してください。
+- 無効な言語コード。言語モデルが存在し、属性名が正しいことを確認してください（`/parse` では`language`、`/transform`では`from`と`to`)。
+- `content`要素の欠落
 
-## API calls fail with error code 401 (Unauthorized)
+## API呼び出しがエラーコード401（Unauthorized）で失敗
 
-This means your request failed authorization. Possible reasons:
+これは、リクエストが認証に失敗したことを意味します。考えられる原因：
 
-- Incorrect API Key
-  - Ensure you provide the `Ocp-Apim-Subscription-Key` HTTP header with the correct API key value.
+- 不正なAPIキー
+  - `Ocp-Apim-Subscription-Key` HTTPヘッダーに正しいAPIキー値を必ず指定してください。
 
-- Rate Limit Exceeded
-  - Each subscription plan has a rate limit. The rate limit of the free Community Plan is set to 10 requests per minute only (enough to test, not enough to go to production for most purposes). Check the limits on the [Subscription Plans page](https://tisane.ai/subscription-plans/).
+- レート制限超過
+  - 各サブスクリプションプランにはレート制限があります。無料のCommunity Planのレート制限は、1分あたり10リクエストのみに設定されています（テストには十分ですが、ほとんどの用途の本番環境には不十分です）。[サブスクリプションプランページ](https://tisane.ai/subscription-plans/)でレート制限を確認してください。
 
-- Monthly Quota Exceeded
-  - If you've reached the monthly quota, consider upgrading on the [Subscription Plans page](https://tisane.ai/subscription-plans/). Multiple notifications are sent when approaching the monthly quota.
+- 月間クォータ超過
+  - 月間クォータに達した場合は、[サブスクリプションプランページ](https://tisane.ai/subscription-plans/)でアップグレードをご検討ください。月間クォータに近づくと、複数の通知が送信されます。
 
-## API calls fail with error code 404
+## API呼び出しがエラーコード404で失敗
 
-Check that the method name is correct and that the verb is correct. For example, specifying `GET` when the operation uses `POST` will result in status code 404.
+メソッド名が正しいことを確認し、動詞が正しいことを確認してください。例えば、操作に`POST`を使用している場合に`GET`を指定すると、ステータスコード404が返されます。
 
-##  Other Error Codes (Invalid JSON Or Markup Issues)
+##  その他のエラーコード（Invalid JSONまたはMarkup Issues）
 
-If you're getting an error other than 401, check for invalid JSON formatting:
+401以外のエラーが表示される場合は、JSONのフォーマットが不正であるか確認してください。
 
-- Escaping Double Quotes Properly
-  - If your content contains double quotes (`"`), ensure they are properly escaped (`\"`).
+- ダブルクォートの適切なエスケープ
+  - コンテンツにダブルクォート （`"`） が含まれている場合、適切にエスケープ（`\"`） しているか確認してください。
 
-- Avoid Sending Markup Content
-  - Tisane API processes natural language, so sending HTML, XML, or JSON as content may cause issues.
-  - If you must send markup, sanitize your input before submitting.
+- マークアップコンテンツの送信の回避
+  - Tisane APIは自然言語を処理するため、コンテンツとしてHTML、XML、またはJSONを送信すると問題が発生する可能性があります。
+  - マークアップを送信する必要がある場合は、送信前に入力内容のサニタイズを行ってください。
 
-##  Finding Your API Key
+##  APIキーの取得
 
-**tl;dr**: Sign in to our developer portal and retrieve your API key from your profile page.
+**tl;dr**：開発者向けポータルにサインインし、プロフィールページからAPIキーを取得してください。
 
-### Step-by-Step Instructions
+### 手順
 
-1. Log in using your credentials [here](https://dev.tisane.ai/signin/).
-2. If you do not have an account, sign up [here](https://dev.tisane.ai/signup/).
-3. Click the menu in the upper-right corner and go to *Profile*, or use [this direct link](https://dev.tisane.ai/profile).
-4. Under *Primary Key* or *Secondary Key*, click *Show* to reveal your API key.
-5. In your application, provide this key as `Ocp-Apim-Subscription-Key` HTTP header.
+1. [こちら](https://dev.tisane.ai/signin/)をクリックして、ご登録の認証情報でログインします。
+2. アカウントをお持ちでない場合は、[こちら](https://dev.tisane.ai/signup/)から登録します。
+3. 画面の右上にあるメニューをクリックして、「プロフィール」に移動するか、**[こちらのダイレクトリンク](https://dev.tisane.ai/profile)を使用します。
+4. 「プライマリキー」または「セカンダリキー」で、「表示」をクリックしてAPIキーを表示します。******
+5. アプリケーション内で、このキーを`Ocp-Apim-Subscription-Key` HTTPヘッダーとして指定します。
 
-##  General Troubleshooting Steps
+##  一般的なトラブルシューティングの手順
 
-- Check your API key 
-- Check your subscription limits
-- Validate JSON formatting before sending
-- Sanitize the input to remove any markup
+- APIキーを確認します。 
+- サブスクリプションの制限を確認します
+- 送信前にJSONフォーマットを検証します
+- 入力内容のサニタイズを行い、任意のマークアップを削除します
 
-## We Are Not Getting The Response We Were Expecting
+## 期待する応答が得られていません
 
-While we cannot guarantee 100% accuracy, please [send us a note](https://tisane.ai/contact-us/#support) and we will look into it. We are constantly working on improving the accuracy of Tisane, and your collaboration is appreciated.
+100%の精度を保証することはできませんが、ご不明な点がございましたら、[お問い合わせ](https://tisane.ai/contact-us/#support)ください。ご確認いたします。当社は、Tisaneの精度向上に継続的に取り組んでおり、お客様のご協力に感謝いたします。
 
-## Can I process text from a markup content (HTML or XML)?
+## マークアップコンテンツ（HTMLまたはXML）からテキストを処理することはできますか？
 
-Here is a generic regular expression that can be used in any programming language to remove HTML tags from text:
+以下の正規表現は、任意のプログラミング言語でテキストからHTMLタグを削除するために使用できる汎用的なものです。
 
 `<[^>]+>`
 
-- `<` → Matches the **opening angle bracket** of an HTML tag.
-- `[^>]+` → Matches **any characters inside the tag**, except `>`.
-- `>` → Matches the **closing angle bracket** of an HTML tag.
+- `<` → HTMLタグの**開始角括弧**と同等です。
+- `[^>]+` → **タグ内の任意の文字（**`>`を除く）と同等です。
+- `>` → HTMLタグの**閉じ角括弧**と同等です。
