@@ -1,93 +1,93 @@
-# Response
+# レスポンス
 
-This section details all the components and data structures in response structures returned by Tisane.
+このセクションでは、Tisaneが返すレスポンス構造のすべてのコンポーネントとデータ構造について詳しく説明します。
 
-The `POST /parse` response includes sections that can be displayed or hidden based to the provided settings. (See [Configuration And Customization Guide](/apis/tisane-api-configuration) for more information.) 
+`POST /parse`レスポンスには、提供された設定に基づいて表示または非表示にできるセクションが含まれています。（詳しくは[設定およびカスタマイズガイド](/apis/tisane-api-configuration)をご覧ください。） 
 
-The root-level attributes are:
+ルートレベルの属性は以下のとおりです。
 
-- `text` (string) - The original input text.
-- `language` (string) - The detected language code, if language identification was used.
-- `reduced_output` (boolean) - Indicates if verbose information was omitted due to input size. 
-- `sentiment` (floating-point number) - A document-level sentiment score (-1 to 1). Only shown when `document_sentiment` setting is set to `true`.
-- `signal2noise` (floating-point number) - A relevance score showing how closely the text matches the concepts from the `relevant` setting. This value appears only if the `relevant` setting exists.
+- `text`（文字列） - 最初に入力したテキスト。
+- `language`（文字列） - 言語判定が使用された場合の検出された言語コード。
+- `reduced_output`（ブール値） - 入力サイズが原因で詳細情報が省略されたかどうかを示す。 
+- `sentiment`（浮動小数点数） - ドキュメントレベルのセンチメントスコア（-1 から 1）。`document_sentiment`設定が`true`の時にのみ表示される。
+- `signal2noise`（浮動小数点数） - テキストが`relevant`設定の概念にどれだけ近いかを示す関連性スコア。この値は、`relevant`設定が存在する場合にのみ表示される。
 
- ## Problematic Content
+## 問題のあるコンテンツ
 
-Tisane automatically analyzes the text for potential instances of abuse (problematic content) and flags them in the response.
+Tisaneは、悪用される可能性のあるインスタンス（問題のあるコンテンツ）についてテキストを自動的に分析し、レスポンスで警告します。
 
-The `abuse` section lists detected instances of content that may require attention of moderators, or be relevant to law enforcement agencies. 
+`abuse`セクションでは、モデレーターの介入を必要とする、または法執行機関への引継ぎを要する可能性のあるとして検出されたコンテンツのインスタンスをリストします。 
 
-This section appears if:
+このセクションは、以下の場合に表示されます。
 
-1. Instances of problematic content is found, and;
-2. The `abuse` setting is set to `true` (or omitted).
+1. 問題のあるコンテンツのインスタンスが見つかっている。
+2. `abuse`設定が`true`に設定（または省略）されている。
 
-Note: use case scenarios can vary. It is the responsibility of integrators and community administrators whether and how to act upon different types of flagged content. 
+注：事例の背景はそれぞれ異なります。さまざまなタイプの警告されたコンテンツにどのように対処するかは、インテグレーターおよびコミュニティ管理者の責任となります。 
 
-For example: It might not be appropriate to restrict sexual advances in a dating app, or censor profanity in communities where it’s commonly accepted, or restrict external contact if it's allowed.
+例：出会い系アプリで性的な誘いを制限すること、広く受け入れられるコミュニティで暴言を検閲すること、または外部との接触が許されている場合にそれを制限することは適切ではないかもしれません。
 
-### If You Don't Want Abuse Appear in Response
+### レスポンスにabuseセクションを含めたくない場合
 
-If you *don't* want problematic content appear in your response, you must explicitly set the `abuse` setting to `false`.
+問題のあるコンテンツ（abuse）情報をレスポンスに表示*したくない*場合は、`abuse`設定を必ず明示的に`false`に設定してください。
 
-### Content Attributes
+### コンテンツ属性
 
-Every instance contains the following attributes:
+各インスタンスには次の属性が含まれます。
 
 
- - `type` (string) - The type of the abuse
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) - Length of the content.
- - `sentence_index` (unsigned integer)  - Index of the sentence containing the instance. It is zero-based.
- - `text` (string) -  The fragment of text containing the instance. Only appears if the `snippets` setting is set to `true`.
- - `tags` (array of strings) - Additional abuse details. For example: if the fragment is classified as an attempt to sell hard drugs, the instance contains the `hard_drug` tag.
- - `severity` (string) - How severe the abuse is. The levels of severity are `low`, `medium`, `high`, and `extreme`.
- - `explanation` (string) - The rationale for classification (if `explain` is enabled).
+ - `type`（文字列） - 不適切な内容の種類
+ - `offset`（符号なし整数） - インスタンスの開始位置。（0から始まる）
+ - `length`（符号なし整数） - コンテンツの長さ。
+ - `sentence_index`（符号なし整数） - インスタンスを含むセンテンスのインデックス。（0から始まる）
+ - `text`（文字列） - インスタンスを含むテキストのフラグメント。`snippets`設定が`true`に設定されている場合のみ表示される。
+ - `tags`（文字列の配列） - 不適切とされる詳細のタグ。例えば、そのフラグメントがハードドラッグの販売を試みるものとして分類される場合、インスタンスに`hard_drug`タグが含まれる。
+ - `severity`（文字列） - 不適切度のレベル。`low（低）`、`medium（中）`、`high（高）`、`extreme（最高）`の4段階に分類される。
+ - `explanation`（文字列） - 分類の根拠（`explain`が有効である場合）。
 
-###  Supported Types 
+###  サポートされるタイプ 
 
-The supported problematic types are:
+サポートされる問題のタイプは以下の通りです。
 
-- `personal_attack` - Direct insults or attacks targeting an individual. For example: instances of cyberbullying. Note: Criticism of ideas, posts, or general negative sentiment is not the same as a personal insult. See: [Personal Attack](/guides/abuse/personalattack.md)
-- `bigotry` - Hate speech or expression of bigoted opinions; adversarial remarks targetting <a href="https://en.wikipedia.org/wiki/Protected_group" target="_blank">protected groups</a>. This includes not just racial slurs but any hostile statements directed at the group as a whole. See: [Bigotry and Hate Speech](/guides/abuse/hatespeechandbigotry.md)
-- `profanity` - Use of profane language, regardless of the context or intent. Note that racial slurs are not captured by this type. See: [Profanity](/guides/abuse/profanity.md)
-- `sexual_advances` - Attempts, whether welcome or unwelcome, to seek sexual favors or gratification. Also see: [Sexual Advances](/guides/abuse/sexualadvances.md)
-- `criminal_activity` - Content involving attempts to sell or acquire illegal items, engage in criminal services, issue threats, or similar actions. Also see: [Criminal Activity](/guides/abuse/criminalactivity.md)
-- `external_contact` - Attempts to initiate communication or payment through external channels. For example: Phone, email, messaging apps. These attempts might violate rules in certain communities, such as gig economy platforms or e-commerce sites. Also see: [Attempts to Establish External Contact](/guides/abuse/externalcontact.md)
+- `personal_attack` -  個人を標的にした直接的な侮辱や攻撃。例：ネットいじめのインスタンス。注：アイデア、投稿、一般的な否定的感情に対する批判は、個人的な侮辱とは異なります。参考：[Personal Attack（個人攻撃）](/guides/abuse/personalattack.md)
+- `bigotry` - ヘイトスピーチや偏見に満ちた意見の表明、 <a href="https://en.wikipedia.org/wiki/Protected_group" target="_blank">保護されたグループ</a>を標的にした敵対的な発言。これには人種的中傷だけでなく、グループ全体に向けられた敵対的な発言も含まれます。参考：[Bigotry and Hate Speech（偏見・ヘイトスピーチ）](/guides/abuse/hatespeechandbigotry.md)
+- `profanity` - 文脈や意図にかかわらず、攻撃的な言葉を使用すること。なお、人種差別はこのタイプには含まれません。参考：[Profanity（暴言）](/guides/abuse/profanity.md)
+- `sexual_advances` - 歓迎されるか否かを問わず、性的な好意や満足を求めようとする行為。こちらも参考：[Sexual Advances（性的なアプローチ）](/guides/abuse/sexualadvances.md)
+- `criminal_activity` - 違法な物品を販売または取得しようとする行為、犯罪的サービスに従事する行為、脅迫、またはこれらに類似する行為を含むコンテンツ。こちらも参考：[Criminal Activity（犯罪行為）](/guides/abuse/criminalactivity.md)
+- `external_contact` - 外部チャネルを通じてコミュニケーションまたは支払いを開始しようとすること。例：電話、メール、メッセージアプリなど。このような行為は、ギグエコノミープラットフォームやeコマースサイトなど、特定のコミュニティにおける規則に抵触する可能性があります。こちらも参考：[Attempts to Establish External Contact（外部接触の試み）](/guides/abuse/externalcontact.md)
 
-- `adult_only` - activities restricted for minors. For example: Consumption of alcohol. Also see: [Adult-Only Content](/guides/abuse/adultonly.md)
-- `mental_issues` - Content that might indicate mental health concerns, such as suicidal thoughts or signs of depression. Also see: [Mental Issues](/guides/abuse/mental.md)
-- `allegation` - Claims or accusations of misconduct, which may or may not involve criminal activity. Also see: [Allegations](/guides/abuse/allegation.md)
-- `contentious` - Content likely to incite or provoke emotional reactions from individuals or groups. Also see: [Contentious Content](/guides/abuse/contentious.md)
-- `disturbing` - Graphic or unsettling descriptions that might be distressing to readers. Also see: [Disturbing Content](/guides/abuse/disturbing.md)
-- `no_meaningful_content` - Nonsensical or gibberish text that lacks clear meaning. Also see: [Meaningless Content](/guides/abuse/nomeaningfulcontent.md)
-- `data_leak` - Sensitive personal information. For example: Passwords, ID numbers. Also see: [Data Leaks](/guides/abuse/dataleak.md)
-- `spam` - Spam content. Also see: [Spam](/guides/abuse/spam.md)
-- `social_hierarchy` - Forceful assertion of hierarchy in a community. For example: Someone is acting as a control freak. Also see: [Assertion of Hierarchy](/guides/abuse/socialhierarchy.md)
-- `generic` - Content that doesn't fit into any specific category; undefined.
+- `adult_only` - 未成年者の利用を制限する活動。例：アルコールの摂取。こちらも参考：[Adult-Only Content（成人向けコンテンツ）](/guides/abuse/adultonly.md)
+- `mental_issues` - 自殺願望やうつ病の兆候など、精神衛生上の懸念を示す可能性のある内容。こちらも参考：[Mental Issues（メンタルヘルスに関する内容）](/guides/abuse/mental.md)
+- `allegation` - 犯罪行為を伴う、または伴わない可能性のある不正行為の申立てまたは告発。こちらも参考：[Allegations（申立て・告発）](/guides/abuse/allegation.md)
+- `contentious` - 個人または集団の感情的な反応を扇動または誘発する可能性のある内容。こちらも参考：[Contentious Content（論争を招くコンテンツ）](/guides/abuse/contentious.md)
+- `disturbing` - 読者を不安にさせるような描写。こちらも参考：[Disturbing Content（不安を引き起こす内容）](/guides/abuse/disturbing.md)
+- `no_meaningful_content` - 明確な意味を持たず、無意味または意味不明な文章。こちらも参考：[Meaningless Content（意味のないコンテンツ）](/guides/abuse/nomeaningfulcontent.md)
+- `data_leak` - 機微な個人情報。例：パスワード、ID番号など。こちらも参考：[Data Leaks（データ漏洩）](/guides/abuse/dataleak.md)
+- `spam` - スパムコンテンツ。こちらも参考：[スパム](/guides/abuse/spam.md)
+- `social_hierarchy` - コミュニティーにおけるヒエラルキーを強引に主張すること。例：他人をコントロールしようとする態度。こちらも参考：[Social Hierarchy（ヒエラルキーの主張）](/guides/abuse/socialhierarchy.md)
+- `generic` - 特定のカテゴリーに当てはまらないコンテンツ。未定義。
 
- ## Sentiment Analysis
+## センチメント分析
 
-The `sentiment_expressions` section highlights the sentiment towards aspects or entities.
+`sentiment_expressions`セクションでは、アスペクトまたはエンティティに対するセンチメントが強調されます。
 
-This section appears if: 
+このセクションは、以下の場合に表示されます。 
 
-1. Instances where sentiment is expressed are found, and; 
-2. The `sentiment` setting is set to `true` (or omitted).
+1. センチメントが表現されるインスタンスが見つかっている。 
+2. `sentiment`設定が`true`に設定（または省略）されている。
 
- Every instance contains the following attributes:
+ 各インスタンスには次の属性が含まれます。
 
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) - Length of the content.
- - `sentence_index`  (unsigned integer)  - Index of the sentence containing the instance. It is zero-based.
- - `text` (string) -  The fragment of text containing the instance (if the `snippets` setting is set to `true`).
- - `polarity` (string) - Indicates the sentiment of the text: `positive`, `negative`, or `mixed`. There is also a default value used when the sentiment has been pre-determined by the application. For example: if a review is split into two portions, _What did you like?_ and _What did you not like?_, and the reviewer replies briefly with _The quiet. The service_. In such cases, the _default_ polarity allows the application to assign sentiment externally based on the context.
- - `targets` (array of strings) - Lists the specific aspects or entities the sentiment refers to, if available. For example, in the sentence _The breakfast was yummy but the staff is unfriendly_, the the sentiment targets are `meal` and `staff`. Named entities can also be sentiment targets.
- - `reasons` (array of strings) - Justifications for the sentiment. if  available. For example, in the sentence _The breakfast was yummy but the staff is unfriendly_, the `reasons` array for the `staff` is `["unfriendly"]`, while the `reasons` array for `meal` is `["tasty"]`.
- - `explanation` (string) - The rationale for the sentiment (if `explain` is enabled).
+ - `offset`（符号なし整数） - インスタンスの開始位置。（0から始まる）
+ - `length`（符号なし整数） - コンテンツの長さ。
+ - `sentence_index`（符号なし整数） - インスタンスを含むセンテンスのインデックス。（0から始まる）
+ - `text`（文字列） - インスタンスを含むテキストのフラグメント（`snippets`設定が`true`に設定されている場合）。
+ - `polarity`（文字列） - テキストのセンチメント（`positive`、`negative`、`mixed`）を表す。また、センチメントがアプリケーションで事前に定義されている場合は、デフォルト値も使用される。例：レビューが、_どこが気に入ったか_と_どこが気に入らなかったか_の2つがあり、レビュアーが単に_言葉を発せずに（絵文字などで）答えている場合。サービス_。そのような場合、_default_の極性に従い、アプリケーションが文脈に基づいてセンチメントを外部に割り当てることができる。
+ - `targets`（文字列の配列） - センチメントが言及する特定のアスペクトやエンティティがあれば、これをリストする。例えば、_朝食はおいしかったが、スタッフは愛想がない_という文章では、センチメントのターゲットは`食事`と`スタッフ`になる。固有表現もセンチメントのターゲットになり得る。
+ - `reasons`（文字列の配列） - センチメントの正当性を示す（ある場合）。たとえば、_朝食はおいしかったが、スタッフは愛想がない_という文章では、`staff`に対する`reasons`は`["unfriendly"]`（愛想がない）であり、`meal`に対する`reasons`は`["tasty"]`（おいしい）になります。
+ - `explanation`（文字列） - センチメントの根拠（`説明`が有効である場合）。
 
- Example:
+ 例：
 
  ```json
 "sentiment_expressions": [
@@ -110,31 +110,31 @@ This section appears if:
      ]
  ```
 
- ## Named Entities
+## 固有表現
 
-The `entities_summary` section lists detected entities in the text. 
+`entities_summary`セクションは、本文中で検出されたエンティティをリストします。 
 
-This section appears if: 
+このセクションは、以下の場合に表示されます。 
 
-1. Named entities are found, and;
-2. The `entities` setting is set to `true` (or omitted).
+1. 固有表現が見つかっている。
+2. `entities`設定が`true`に設定（または省略）されている。
 
- Every entity contains the following attributes:
+ すべてのエンティティには次の属性が含まれます。
 
- - `name` (string) - The most complete form of the entity's name found in the text across all mentions.
- - `ref_lemma` (string) - The dictionary form (lemma) of the entity in English, if available, regardless of the input language.
- - `type` (string or array of strings) - Defines the entity's type. Some entities may have multiple types. A country (or any other geopolical entity declaring itself a country, even if not universally recognized as such) is considered both a place and an organization.
- - `subtype` (string) - Specifies a more detailed classification within the entity type.
- - `mentions` (array of objects) - Lists all instances where the entity appears in the text.
+ - `name`（文字列） - すべてのメンションで、テキスト内で最も完全な形で検出されたエンティティ名の形式。
+ - `ref_ lemma`（文字列） - 入力言語に関係なく、英語でのエンティティの辞書形式（lemma）（ある場合）。
+ - `type`（文字列または文字列の配列） - エンティティのタイプを定義する。エンティティによっては複数のタイプを持つものもある。国（または、世界的に認められていなくても、国であることを宣言しているその他の地政学的実体）は、場所であると同時に組織でもあると考えられる。
+ - `subtype`（文字列） - エンティティタイプ内のより詳細な分類を指定する。
+ - `mentions`（オブジェクトの配列） - テキストにエンティティが表示されるすべてのインスタンスをリストする。
 
- Every mention contains the following attributes:
+ すべてのメンションには次の属性が含まれます。
 
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) - Length of the content.
- - `sentence_index` (unsigned integer) - Index of the sentence containing the instance. It is zero-based.
- - `text` (string) - The fragment of text containing the instance (if the `snippets` setting is set to `true`).
+ - `offset`（符号なし整数） - インスタンスの開始位置。（0から始まる）
+ - `length`（符号なし整数） - コンテンツの長さ。
+ - `sentence_index`（符号なし整数） - インスタンスを含むセンテンスのインデックス。（0から始まる）
+ - `text`（文字列） - インスタンスを含むテキストのフラグメント（`snippets`設定が`true`に設定されている場合）。
 
- Example:
+ 例：
 
  ```json
  "entities_summary": [
@@ -165,175 +165,175 @@ This section appears if:
      ]
  ```
 
- ### Entity Types And Subtypes
+### エンティティタイプとサブタイプ
 
- The currently supported entity types are:
+ 現在サポートされるエンティティは以下の通りです。
 
-- `person`, with optional subtypes: `fictional_character`, `important_person`, `spiritual_being`
-- `organization` Note: A country is both an organization and a place
-- `place`
-- `time_range`
-- `date`
-- `time`
-- `hashtag`
-- `email`
-- `amount_of_money`
-- `phone` - Phone number, either domestic or international, in a variety of formats
-- `role` - A social role. For example: A position in an organization.
-- `software` - A named software package
-- `website` (URL), with an optional subtype: `tor` for Onion links; Note: Web services can also have the `software` type assigned
-- `item_of_interest` - Any type of artifact of potential interest to the investigation. For example: Weapons, drugs, vehicles, luxury.
-- `weight`
-- `bank_account` Only IBAN format is currently supported; subtypes: `iban`
-- `credit_card` - A credit card number, with optional subtypes: `visa`, `mastercard`, `american_express`, `diners_club`, `discovery`, `jcb`, `unionpay`
-- `coordinates` - GPS coordinates
-- `credential`, with optional subtypes: `md5`, `sha-1`
-- `crypto`, with optional subtypes: `bitcoin`, `ethereum`, `monero`, `monero_payment_id`, `litecoin`, `dash`
-- `event` - A notable event involving participation of multiple people.
-- `file` Only Windows pathnames are supported; subtypes: `windows`, `facebook` (for images downloaded from Facebook)
-- `flight_code`
-- `identifier` Any alphanumeric identifiers (ID numbers, codes, etc.) not classified elsewhere.
-- `ip_address`, subtypes: `v4`, `v6`
-- `mac_address`
-- `numeric` (an unclassified numeric entity)
-- `username` - A user name or a user's alias.
+- `person`（人物） オプションのサブタイプ：`fictional_character`、`important_person`、`spiritualな_being`
+- `organization`（組織） 注：国は「組織」と「場所」の両方として扱われる
+- `place`（場所）
+- `time_range`（時間範囲）
+- `date`（日付）
+- `time`（時刻）
+- `hashtag`（ハッシュタグ）
+- `email`（Eメール）
+- `amount_of_money`（金額）
+- `phone`（電話） - 様々な形式の電話番号（国内または海外）
+- `role`（役割） - 社会的役割例：組織における役職
+- `software`（ソフトウェア） - よく知られるソフトウェアパッケージ
+- `website`（ウェブサイト／URL） オプションのサブタイプ：`tor`（Onionリンク）　注：ウェブサービスにも`software`タイプを割り当てることができる
+- `item_of_interest`（調査対象物） - 調査の対象となる可能性のあるあらゆるタイプの人工物。例：武器、ドラッグ、車、高級品。
+- `weight`（重量）
+- `bank_account`（銀行口座） 現在のところ以下の形式のみがサポートされる：`IBAN`
+- `credit_card`（クレジットカード） - 以下のオプションサブタイプを持つクレジットカード番号：`ビザ`、`マスターカード`、`アメリカン_・エクスプレス`、`ダイナース_クラブ`、`ディスカバリー`、`JCB`、`ユニオンペイ`
+- `coordinates`（座標） - GPS座標
+- `credential`（認証情報） オプションのサブタイプ：`md5`、`sha-1`
+- `crypto`（暗号資産） オプションのサブタイプ：`ビットコイン`、`イーサリアム`、`モネロ`、`モネロ_ペイメント_ID`、`ライトコイン`、`ダッシュ`
+- `event`（イベント） - 複数の人が参加する注目すべきイベント。
+- `file`（ファイル） Windowsのパス名のみがサポートされる。サブタイプ：`Windows`、`Facebook`（Facebookからダウンロードした画像用）。
+- `flight_code`（フライトコード）
+- `identifier`（識別子） 他に分類されない英数字の識別子（ID番号、コードなど）。
+- `ip_address`（IPアドレス）、サブタイプ：`v4`、`v6`
+- `mac_address`（MACアドレス）
+- `numeric`（分類されていない数値エンティティ）
+- `username` - ユーザー名またはユーザーのエイリアス。
 
- ## Topics
+## トピック
 
-The `topics` section lists detected topics in the text. For example: subjects, domains, themes in other terms. 
+`topics`セクションは、本文中で検出されたトピックをリストします。例： 
 
-This section appears if:
+このセクションは、以下の場合に表示されます。
 
-1. Topics are found, and; 
-2. The `topics` setting is set to `true` (or omitted).
+1. トピックが検出されている。 
+2. `topics`設定が`true`に設定（または省略）されている。
 
- If `topic_stats` setting is set to `true`, every entry in the array contains:
+ `topic_stats`の設定が`true`に設定されている場合、配列の各エントリーに以下が含まれます。
 
- - `topic` (string) - The name of the topic.
- - `coverage` (floating-point number) - A relevance score representing the ratio of sentences where the topic is detected to the total number of sentences.
+ - `topic`（文字列） - トピックの名前。
+ - `coverage`（浮動小数点数） - 文章の総数に対する、トピックが検出された文の割合を表す関連性スコア。
 
- ## Long-Term Memory
+## 長期記憶
 
-The `memory` section provides optional context that can be passed to the `settings` in subsequent messages within the same conversation thread. 
+`memory`セクションは、同じ会話スレッド内の後続のメッセージの中で`settings`に受け渡せるオプションのコンテキストを提供します。 
 
-See [Context and Long-Term Memory](/apis/tisane-api-configuration#context-and-long-term-memory) for more details.
+詳しくは[Context and Long-Term Memory（コンテキストと長期記憶）](/apis/tisane-api-configuration#context-and-long-term-memory)をご覧ください。
 
- ## Low-Level Data: Sentences, Phrases, and Words
+## 低レベルデータ：文章、フレーズ、単語
 
- Tisane can also provide more detailed linguistic data:
+ Tisanは、以下のより詳細な言語データも提供できます。
 
- - Sentences: Original sentences, along with their corrected versions if any misspellings are detected.
- - Lexical chunks: Groups of words (chunks) annotated with grammatical and stylistic features.
- - Parse Trees and Phrases: Hierarchical representations of sentence structure, highlighting phrases and their relationships.
+ - 文章：元の文章と、スペルミスが検出された場合の修正後の文章。
+ - 語彙チャンク：文法や文体の特徴を注釈した単語のグループ（チャンク）。
+ - パースツリーとフレーズ：フレーズとその関係を強調して文章の構造を階層的に表現する。
 
-### Sentences
+### 文章
 
- The `sentence_list` section is generated if:
+ `sentence_list`のセクションは、以下の場合に生成されます。
 
-* The `words` or the `parses` setting is set to `true`.
+* `words`または`parses`設定が`true`に設定されている。
 
- Every sentence structure in the list contains:
+ リストにあるすべての文章構造は以下を含みます。
 
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) - Length of the content. 
- - `text` (string) - The original input text. 
- - `corrected_text` (string) - The automatically corrected version of the sentence, if a misspelling or obfuscation/algospeak was detected and spellchecking is enabled.
- - `words` (array of structures) - Provides detailed information about each lexical chunk, if `words` setting is set to `true`. Note: While the term "word" is used for simplicity, it may not be linguistically accurate to equate lexical chunks with individual words.
- - `parse_tree` (object) - Contains the parse tree and detected phrases for the sentence when the `parses` setting is set to `true`.
- - `nbest_parses` (array of parse objects) - Lists alternative parse trees that are close to the best one. Generated when both `parses` setting is `true` and `deterministic` setting is explicitly set to `false`.
+ - `offset`（符号なし整数） - インスタンスの開始位置。（0から始まる）
+ - `length`（符号なし整数） - コンテンツの長さ。 
+ - `text`（文字列） - 最初に入力したテキスト。 
+ - `corrected_text`（文字列） - スペルミスや難読化/アルゴスピークが検出され、スペルチェックが有効になっている場合の自動修正後の文章。
+ - `words`（構造の配列） - `words`設定が`true`に設定されている場合、各語彙チャンクの詳細情報を提供する。注：分かりやすくするために「単語」という用語を使っていますが、語彙チャンクを個々の単語と同一視するのは言語学的に正確ではないことがあります。
+ - `parse_tree`（オブジェクト） - `parses`設定が`true`に設定されている場合、文章のパースツリーと検出されたフレーズが含まれる。
+ - `N-best_parses`（構文オブジェクトの配列） - 最適なパースツリーに近い代替のパースツリーをリストする。`parses`設定が`true`で、かつ`deterministic`設定が明示的に`false`に設定されている場合に生成されます。
 
- ### Words
+### 単語
 
- The words section is generated if:
+ 単語セクションは、以下の場合に生成されます。
 
-* The `words` setting is set to `true`.
+* `words`設定が`true`に設定されている。
 
- Every lexical chunk (referred to as a "word" for simplicity) structure in the `words` array contains:
+ `words`配列のすべての語彙チャンク（分かりやすくするため「単語」と呼びます）構造には、以下のものが含まれます。
 
- - `type` (string) - Defines the element's category. For example: `punctuation` for punctuation marks, `numeral` for numerals, or `word` for all other text elements.
- - `text` (string) - The original input text. 
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) - Length of the content.
- - `corrected_text` (string) - The automatically corrected version of the sentence, if a misspelling was detected.
- - `lettercase` (string) - Indicates the original letter case of the word: `upper`, `capitalized`, or `mixed`. Note: If the text is entirely lowercase or case-insensitive, this attribute is omitted.
- - `stopword` (boolean) - Specifies whether the word is a <a href="https://en.wikipedia.org/wiki/Stop_words" target="_blank">stopword</a>
- - `grammar` (array of strings or structures) - Lists the grammatical features associated with the `word`. If the `feature_standard` setting is defined as `native`, each feature is an object containing an `index`(a numeral) and a `value`(string). Otherwise, each feature is represented as a plain string.
+ - `type`（文字列） - エレメントのカテゴリーを定義する。例：句読点には`punctuation`を、数字には`numeral`を、その他のすべてのテキスト要素には`word`を使用します。
+ - `text`（文字列） - 最初に入力したテキスト。 
+ - `offset`（符号なし整数） - インスタンスの開始位置。（0から始まる）
+ - `length`（符号なし整数） - コンテンツの長さ。
+ - `corrected_text`（文字列） - スペルミスが検出された場合の自動修正後の文章。
+ - `lettercase`（文字列） - 元の単語のレターケースを`大文字`、`最初だけ大文字`、`混在`で示す。注：テキストがすべて小文字である、または大文字と小文字を区別しない場合、この属性は省略されます。
+ - `stopword`（ブール値） - 単語が<a href="https://en.wikipedia.org/wiki/Stop_words" target="_blank">ストップワード</a>であるかどうかを特定する。
+ - `grammar`（文字列の配列または構造） - `単語`に関連する文法的特徴をリストする。`feature_standard`の設定が`native`に定義されている場合、各機能は`index`（数字）と`value`（文字列）を含むオブジェクトとなる。そうでない場合、各機能はプレーンな文字列として示される。
 
- #### Advanced
+#### 高度な設定
 
- For lexical words only:
+ 語彙的な単語のみ：
 
- - `role` (string) - The semantic role of the word. For example: `agent` or `patient`. Note: In the passive voice, semantic roles are reversed relative to syntactic roles. For example: In _The car was driven by David_, _car_ is the patient, and _David_ is the agent.
- - `numeric_value` (floating-point number) - The numeric value, if the word represents or is associated with one.
- - `family` (integer number) - the ID of the associated family with the disambiguated word-sense of the lexical chunk.
- - `definition` (string) - the definition of the family. 
-   - Included if the `fetch_definitions` setting is set to `true`.
- - `lexeme` (integer number) - The ID of the lexeme entry associated with the disambiguated word-sense.
- - `nondictionary_pattern` (integer number) - The ID of a non-dictionary pattern that matched the word if it was not found in the language model but classified using non-dictionary heuristics.
- - `style` (array of strings or structures) - Generates a list of style features associated with the `word`.
-   - Included if the `feature_standard` setting is set to `native` or `description`.
- - `semantics` (array of strings or structures) - Generates a list of semantic features associated with the `word`. 
-   - Included if the `feature_standard` setting is set to `native` or `description`.
- - `segmentation` (structure) - Provides information on the selected segmentation. A segmentation is an array of word structures.
+ - `role`（文字列） - 単語の意味役割。例：`agent`（動作主）または`patient`（被動者）。注：受動態では、意味役割が構文的役割と逆転します。例：_The car was driven by David_という文章では、_car_は被動者であり、_David_は動作主です。
+ - `numeric_value`（浮動小数点数） - 単語が数値を表す場合、または数値に関連する場合の数値。
+ - `family`（整数） - 語彙チャンクの曖昧性が解消された語義に関連するファミリーのID。
+ - `definition`（文字列） - ファミリーの定義。 
+   - `fetch_definitions`設定が`true`に設定されている場合に含まれる。
+ - `lexeme`（整数） - 曖昧性が解消された語義に関連する語彙素エントリーのID。
+ - `nondictionary_pattern`（整数） - 言語モデルでは見つからなかったが、非辞書的ヒューリスティックスを使用して分類された場合に、単語に一致する非辞書的パターンのID。
+ - `style`（文字列または構造の配列） - `単語`に関連するスタイルの特徴のリストを生成する。
+   - `feature_standard`設定が`native`または`description`に設定されている場合に含まれる。
+ - `semantics`（文字列または構造の配列） - `単語`に関連するセマンティックの特徴のリストを生成する。 
+   - `feature_standard`設定が`native`または`description`に設定されている場合に含まれる。
+ - `segmentation`（構造） - 選択したセグメンテーションに関する情報を提供する。セグメンテーションは単語構造の配列である。
 
-   - Included if multiple segmentations are possible, and the `deterministic` setting is set to `false`.
+   - 複数のセグメンテーションが可能で、`deterministic`設定が`false`に設定されている場合に含まれる。
 
- - `other_segmentations` (array of structures) - Lists alternative segmentations considered incorrect during the disambiguation process. Each entry has the same structure as `segmentation`.
- - `nbest_senses` (array of structures) - Provides alternative disambiguation hypotheses. 
+ - `other_segmentations`（構造の配列） - 曖昧性除去のプロセスで不正確と見なされた別のセグメンテーションをリストする。各エントリーは`segmentation`と同じ構造を持つ。
+ - `N-best_senses`（構造の配列） - 別の曖昧性除去の仮説を提供する。 
 
-   - Included if the `deterministic` setting is `false`.
+   - `deterministic`設定が`false`の場合に含まれる。
 
-   - Each hypothesis includes: 
+   - 各仮説には以下が含まれます。 
 
-     - `grammar`, `style`, and `semantics`. These are structured identically to the corresponding attributes above. 
-     - `senses`. Lists word-senses for the hypothesis, each containing:
-       - `family`: The associated family ID. 
-       - `definition`: The family’s definition if `fetch_definitions` is enabled. 
-       - `ref_lemma`: The reference lemma, if available.
-
-
- For punctuation marks only:
-
- - `id` (integer number) - The ID of the punctuation mark.
-
- - `behavior` (string) - The behavior code  that defines the function of the punctuation mark. Values:
-   - `sentenceTerminator`
-   - `genericComma`
-   - `bracketStart`
-   - `bracketEnd`
-   - `scopeDelimiter`
-   - `hyphen`
-   - `quoteStart`
-   - `quoteEnd`
-   - `listComma` (for East-Asian enumeration commas such as  `、`)
-
-Punctuation marks have no n-best senses.
-
- ### Parse Trees and Phrases
-
-A parse tree, or more precisely, a parse forest, is a hierarchical collection of phrases linked to one another.
-
-The parse tree section is generated if:
-
-* The `parses` setting is set to `true`.
-
-At the top level of the parse, there is an array of root phrases contained within the `phrases` element, each associated with a numeric `id`. 
-
-Every phrase can have child phrases, forming a nested structure.
-
- Each phrase includes the following attributes:
-
- - `type` (string) - A standard phrase tag denoting the type of the phrase. For example: `S`, `VP`, `NP`, `ADJP`, `ADVP`.
- - `family` (integer number) - An ID of the phrase family.
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) -  Length of the phrase.
- - `role` (string) - The semantic role of the phrase, if applicable, similar to semantic roles assigned to individual words.
- - `text` (string) - The textual representation of the phrase: Phrase members are separated by the vertical bar character (|). Children phrases are enclosed in parentheses (). For example: 
-   - _driven|by|David_ 9 (a flat phrase with three members) 
-   - _(The|car)|was|(driven|by|David)_ (a hierarchical structure with child phrases).
+     - `grammar`、`style`、`semantics`。これらは、上記の対応する属性と同じ構造である。 
+     - `senses`。仮説の語義をリストします。それぞれには以下が含まれます。
+       - `family`：関連するファミリーID。 
+       - `definition`：`fetch_definitions`が有効になっている場合のファミリーの定義。 
+       - `ref_lemma`：参照レマ（ある場合）
 
 
- Example:
+ 句読点のみ：
+
+ - `id`（整数） - 句読点のID。
+
+ - `behavior`（文字列） - 句読点の機能を定義する行動コード。数値：
+   - `sentenceTerminator`（文末句点）
+   - `genericComma`（一般的なカンマ）
+   - `bracketStart`（括弧の開始）
+   - `bracketEnd`（括弧の終了）
+   - `scopeDelimiter`（範囲を区切る記号）
+   - `hyphen`（ハイフン）
+   - `quoteStart`（引用符の開始）
+   - `quoteEnd`（引用符の終了）
+   - `listComma`（ `、`などの東アジアの列挙コンマ ）
+
+N-best意義のない句読点。
+
+### パースツリーとフレーズ
+
+パースツリー（正確にはパースフォレスト）は、互いにリンクされたフレーズの階層的な集合体です。
+
+パースツリーセクションは、以下の場合に生成されます。
+
+* `parses`設定が`true`に設定されている。
+
+パースのトップレベルでは、`phrases`要素の中にルートフレーズの配列があり、それぞれが数値`id`と関連付けられる。 
+
+すべてのフレーズは子フレーズを持つことができ、入れ子構造を形成します。
+
+ すべてのフレーズには次の属性が含まれます。
+
+ - `type`（文字列） - フレーズのタイプを示す標準的なフレーズタグ。例：`S`、`VP`、`NP`、`ADJP`、`ADVP`。
+ - `family`（整数） - フレーズファミリーのID。
+ - `offset`（符号なし整数） - インスタンスの開始位置。（0から始まる）
+ - `length`（符号なし整数） - フレーズの長さ。
+ - `role`（文字列） - 個々の単語に割り当てられる意味役割と同じように、該当する場合は、フレーズの意味役割。
+ - `text`（文字列） - フレーズのテキスト表現：フレーズのメンバーは、縦棒文字 (|).子フレーズは括弧（）で囲まれます。例： 
+   - _driven|by|David_ 9（3つのメンバーを持つフラットフレーズ） 
+   - _(The|car)|was|(driven|by|David)_ (子フレーズのある階層構造）。
+
+
+ 例：
 
  ```json
 "parse_tree": {
@@ -366,31 +366,31 @@ Every phrase can have child phrases, forming a nested structure.
 }
  ```
 
- ### Context-Aware Spelling Correction
+### コンテキストを考慮したスペル訂正
 
-Tisane supports context-aware spelling correction. It identifies and corrects misspellings or intentional obfuscations by deducing the intended meaning, especially when the language model does not recognize a word.
+Tisaneはコンテキストを考慮したスペル訂正をサポートしています。特に言語モデルが単語を認識できない場合に、意図された意味を推測することで、スペルミスや意図的な難読化を識別し、修正します。
 
-When a correction is made, Tisane adds the `corrected_text` attribute:
+修正が行われると、Tisaneは`corrected_text`の属性を付け加えます。
 
- - At the word level: If individual words or lexical chunks are returned.
+ - 単語レベル：個々の単語や語彙チャンクが返される場合。
 
- - At the sentence level: If the sentence text is generated. 
+ - 文章レベル：文章テキストが作成される場合。 
 
 
-Sentence-level `corrected_text` appears when:
+文章レベルでの`corrected_text`は、以下の場合に表示されます。
 
-* The `words` or `parses` settings are set to `true`.
+* `words`または`parses`設定が`true`に設定されている。
 
-####  Exclude Rare Terms
+####  希少用語を除外する
 
-Tisane works with large dictionaries. You can exclude esoteric terms by adjusting the `min_generic_frequency` setting.
+Tisaneは大手辞書と提携しています。`min_generic_frequency`設定を調整することで、難解な用語を除外することができます。
 
-####  Spell-Check Invocation
+####  スペルチェックの呼び出し
 
-Note: Spell-checking runs regardless of whether sentence or word sections are included in the output.
+注：スペルチェックは、出力に文章セクションが含まれるか単語セクションが含まれるかに関係なく実行されます。
 
-You can control this behavior with the following settings:
+この動作は以下の設定でコントロールできます。
 
-- Set `disable_spellcheck` to `true` to turn off spell-checking entirely.
+- スペルチェックを完全にオフにするには、`disable_spellcheck`を`true`に設定します。
 
-- To avoid correcting proper nouns (in languages with capitalization), set `lowercase_spellcheck_only` to `true`. This restricts spell-checking to lowercase words, excluding capitalized and uppercase terms.
+- 固有名詞の訂正を避けるには（大文字で始まる単語を使う言語では）、`lowercase_spellcheck_only`を`true`に設定します。これによりスペルチェックを小文字の単語に限定し、大文字の単語や大文字で始まる単語は除外します。
