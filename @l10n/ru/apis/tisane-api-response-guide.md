@@ -1,93 +1,93 @@
-# Response
+# Ответ
 
-This section details all the components and data structures in response structures returned by Tisane.
+В этом разделе подробно описаны все компоненты и структуры данных в структурах ответов, возвращаемых Tisane.
 
-The `POST /parse` response includes sections that can be displayed or hidden based to the provided settings. (See [Configuration And Customization Guide](/apis/tisane-api-configuration) for more information.) 
+Ответ `POST /parse` включает разделы, которые могут быть отображены или скрыты в зависимости от предоставленных настроек. (Дополнительную информацию см. в [Руководство по конфигурации и настройке](/apis/tisane-api-configuration).) 
 
-The root-level attributes are:
+Атрибуты корневого уровня:
 
-- `text` (string) - The original input text.
-- `language` (string) - The detected language code, if language identification was used.
-- `reduced_output` (boolean) - Indicates if verbose information was omitted due to input size. 
-- `sentiment` (floating-point number) - A document-level sentiment score (-1 to 1). Only shown when `document_sentiment` setting is set to `true`.
-- `signal2noise` (floating-point number) - A relevance score showing how closely the text matches the concepts from the `relevant` setting. This value appears only if the `relevant` setting exists.
+- `text` (string) — исходный введенный текст.
+- `language` (string) — обнаруженный код языка, если использовалась идентификация языка.
+- `reduced_output` (boolean) — указывает, была ли пропущена подробная информация из-за размера входных данных. 
+- `sentiment` (floating-point number) — оценка настроения на уровне документа (от -1 до 1). Отображается только в том случае, если для параметра `document_sentiment` задано значение `true`.
+- `signal2noise` (floating-point number) — показатель релевантности, показывающий, насколько близко текст соответствует концепциям из параметра `relevant`. Это значение появляется только в том случае, если существует настройка `relevant`.
 
- ## Problematic Content
+## Проблемный контент
 
-Tisane automatically analyzes the text for potential instances of abuse (problematic content) and flags them in the response.
+Tisane автоматически анализирует текст на предмет потенциальных случаев оскорблений (проблемного контента) и отмечает их в реакциях.
 
-The `abuse` section lists detected instances of content that may require attention of moderators, or be relevant to law enforcement agencies. 
+В разделе `abuse` перечислены обнаруженные случаи контента, которые могут потребовать внимания модераторов или иметь отношение к правоохранительным органам. 
 
-This section appears if:
+Этот раздел появляется, если:
 
-1. Instances of problematic content is found, and;
-2. The `abuse` setting is set to `true` (or omitted).
+1. Обнаружены случаи проблемного контента;
+2. Параметр `abuse` установлен на `true` (или пропущен).
 
-Note: use case scenarios can vary. It is the responsibility of integrators and community administrators whether and how to act upon different types of flagged content. 
+Примечание: сценарии использования могут различаться. Интеграторы и администраторы сообществ несут ответственность за то, следует ли реагировать на различные типы помеченного контента и как именно это делать. 
 
-For example: It might not be appropriate to restrict sexual advances in a dating app, or censor profanity in communities where it’s commonly accepted, or restrict external contact if it's allowed.
+Например: Возможно, нецелесообразно ограничивать сексуальные домогательства в приложении для знакомств или цензурировать ненормативную лексику в сообществах, где это общепринято, или ограничивать внешние контакты, если они разрешены.
 
-### If You Don't Want Abuse Appear in Response
+### Если вы не хотите, чтобы в ответе появились оскорбления
 
-If you *don't* want problematic content appear in your response, you must explicitly set the `abuse` setting to `false`.
+Если вы *не* хотите, чтобы в вашем ответе отображался проблемный контент, вам необходимо явно установить для параметра `abuse` значение `false`.
 
-### Content Attributes
+### Атрибуты контента
 
-Every instance contains the following attributes:
+Каждый экземпляр содержит следующие атрибуты:
 
 
- - `type` (string) - The type of the abuse
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) - Length of the content.
- - `sentence_index` (unsigned integer)  - Index of the sentence containing the instance. It is zero-based.
- - `text` (string) -  The fragment of text containing the instance. Only appears if the `snippets` setting is set to `true`.
- - `tags` (array of strings) - Additional abuse details. For example: if the fragment is classified as an attempt to sell hard drugs, the instance contains the `hard_drug` tag.
- - `severity` (string) - How severe the abuse is. The levels of severity are `low`, `medium`, `high`, and `extreme`.
- - `explanation` (string) - The rationale for classification (if `explain` is enabled).
+ - `type` (string) - Тип нарушения
+ - `offset` (unsigned integer) — начальная позиция экземпляра. Отсчет ведется от нуля.
+ - `length` (unsigned integer) — длина содержимого.
+ - `sentence_index` (unsigned integer) — индекс предложения, содержащего экземпляр. Отсчет ведется от нуля.
+ - `text` (string) — фрагмент текста, содержащий экземпляр. Появляется только в том случае, если для параметра `snippets` задано значение `true`.
+ - `tags` (array of strings) — дополнительные сведения о злоупотреблениях. Например: если фрагмент классифицируется как попытка продажи тяжелых наркотиков, экземпляр содержит тег `hard_drug`tag.
+ - `severity` (string) — насколько серьезен факт злоупотребления. Уровни серьезности: `low`, `medium`, `high` и `extreme`.
+ - `explanation` (string) — обоснование классификации (если включено `explain`).
 
-###  Supported Types 
+###  Поддерживаемые типы 
 
-The supported problematic types are:
+Поддерживаемые проблемные типы:
 
-- `personal_attack` - Direct insults or attacks targeting an individual. For example: instances of cyberbullying. Note: Criticism of ideas, posts, or general negative sentiment is not the same as a personal insult. See: [Personal Attack](/guides/abuse/personalattack.md)
-- `bigotry` - Hate speech or expression of bigoted opinions; adversarial remarks targetting <a href="https://en.wikipedia.org/wiki/Protected_group" target="_blank">protected groups</a>. This includes not just racial slurs but any hostile statements directed at the group as a whole. See: [Bigotry and Hate Speech](/guides/abuse/hatespeechandbigotry.md)
-- `profanity` - Use of profane language, regardless of the context or intent. Note that racial slurs are not captured by this type. See: [Profanity](/guides/abuse/profanity.md)
-- `sexual_advances` - Attempts, whether welcome or unwelcome, to seek sexual favors or gratification. Also see: [Sexual Advances](/guides/abuse/sexualadvances.md)
-- `criminal_activity` - Content involving attempts to sell or acquire illegal items, engage in criminal services, issue threats, or similar actions. Also see: [Criminal Activity](/guides/abuse/criminalactivity.md)
-- `external_contact` - Attempts to initiate communication or payment through external channels. For example: Phone, email, messaging apps. These attempts might violate rules in certain communities, such as gig economy platforms or e-commerce sites. Also see: [Attempts to Establish External Contact](/guides/abuse/externalcontact.md)
+- `personal_attack` - Прямые оскорбления или нападки, направленные на отдельного человека. Например: случаи кибербуллинга. Примечание: Критика идей, постов или негативная тональность не является личным оскорблением. Рекомендуем ознакомиться: [Личные нападки](/guides/abuse/personalattack.md)
+- `bigotry` — разжигание ненависти или выражение нетерпимых мнений; враждебные высказывания, направленные на защищённые группы (религия, национальность, сексуальная ориентация, семейное положение, инвалидность, пол). Сюда входят не только расовые оскорбления, но и любые враждебные высказывания, направленные против группы в целом. Рекомендуем ознакомиться: [Нетерпимость и разжигание ненависти](/guides/abuse/hatespeechandbigotry.md)
+- `profanity` — использование ненормативной лексики независимо от контекста или намерения. Обратите внимание, что расовые оскорбления не попадают в этот тип. Рекомендуем ознакомиться: [Ненормативная лексика](/guides/abuse/profanity.md)
+- `sexual_advances` - попытки, как желательные, так и нежелательные, добиться сексуальных услуг или удовлетворения. См. также: [Сексуальные домогательства](/guides/abuse/sexualadvances.md)
+- `criminal_activity` — контент, включающий попытки продать или приобрести незаконные предметы, заняться оказанием преступных услуг, или высказывание угроз физической расправы. См. также: [Преступная деятельность](/guides/abuse/criminalactivity.md)
+- `external_contact` - попытки инициировать общение или оплату через внешние каналы. Например: Телефон, электронная почта, приложения для обмена сообщениями. Подобные попытки могут нарушать правила определенных сообществ, например, платформ гиг-экономики или сайтов электронной коммерции. См. также: [Попытки установить внешний контакт](/guides/abuse/externalcontact.md)
 
-- `adult_only` - activities restricted for minors. For example: Consumption of alcohol. Also see: [Adult-Only Content](/guides/abuse/adultonly.md)
-- `mental_issues` - Content that might indicate mental health concerns, such as suicidal thoughts or signs of depression. Also see: [Mental Issues](/guides/abuse/mental.md)
-- `allegation` - Claims or accusations of misconduct, which may or may not involve criminal activity. Also see: [Allegations](/guides/abuse/allegation.md)
-- `contentious` - Content likely to incite or provoke emotional reactions from individuals or groups. Also see: [Contentious Content](/guides/abuse/contentious.md)
-- `disturbing` - Graphic or unsettling descriptions that might be distressing to readers. Also see: [Disturbing Content](/guides/abuse/disturbing.md)
-- `no_meaningful_content` - Nonsensical or gibberish text that lacks clear meaning. Also see: [Meaningless Content](/guides/abuse/nomeaningfulcontent.md)
-- `data_leak` - Sensitive personal information. For example: Passwords, ID numbers. Also see: [Data Leaks](/guides/abuse/dataleak.md)
-- `spam` - Spam content. Also see: [Spam](/guides/abuse/spam.md)
-- `social_hierarchy` - Forceful assertion of hierarchy in a community. For example: Someone is acting as a control freak. Also see: [Assertion of Hierarchy](/guides/abuse/socialhierarchy.md)
-- `generic` - Content that doesn't fit into any specific category; undefined.
+- `adult_only` - действия и темы, неприемлемые для несовершеннолетних. Например: Употребление алкоголя. См. также: [Контент только для взрослых](/guides/abuse/adultonly.md)
+- `mental_issues` — контент, который может указывать на проблемы с психическим здоровьем, такие как мысли о самоубийстве или признаки депрессии. См. также: [Проблемы с психическим здоровьем](/guides/abuse/mental.md)
+- `allegation` — обвинения в неправомерном преступном поведении. См. также: [Обвинения](/guides/abuse/allegation.md)
+- `contentious` — контент, который может вызвать или спровоцировать эмоциональную реакцию у отдельных лиц или групп. См. также: [Спорный контент](/guides/abuse/contentious.md)
+- `disturbing` - яркие или тревожные описания, которые могут огорчить читателей. См. также: [Графический контент](/guides/abuse/disturbing.md)
+- `no_meaningful_content` - текст, не имеющий ясного смысла. См. также: [Бессмысленный контент](/guides/abuse/nomeaningfulcontent.md)
+- `data_leak` - Конфиденциальная личная информация. Например: Пароли, идентификационные номера. См. также: [Утечки данных](/guides/abuse/dataleak.md)
+- `spam` - Спам-контент. См. также: [Спам](/guides/abuse/spam.md)
+- `social_hierarchy` - Насильственное утверждение иерархии в сообществе. См. также: [Утверждение иерархии](/guides/abuse/socialhierarchy.md)
+- `generic` — контент, который не вписывается ни в одну определенную категорию.
 
- ## Sentiment Analysis
+## Анализ настроений
 
-The `sentiment_expressions` section highlights the sentiment towards aspects or entities.
+Раздел` sentiment_expressions` подчеркивает отношение к аспектам или сущностям.
 
-This section appears if: 
+Этот раздел появляется, если: 
 
-1. Instances where sentiment is expressed are found, and; 
-2. The `sentiment` setting is set to `true` (or omitted).
+1. Найдены случаи, когда чувства выражаются; и 
+2. Параметр `sentiment` установлен на `true` (или опущен).
 
- Every instance contains the following attributes:
+ Каждый экземпляр содержит следующие атрибуты:
 
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) - Length of the content.
- - `sentence_index`  (unsigned integer)  - Index of the sentence containing the instance. It is zero-based.
- - `text` (string) -  The fragment of text containing the instance (if the `snippets` setting is set to `true`).
- - `polarity` (string) - Indicates the sentiment of the text: `positive`, `negative`, or `mixed`. There is also a default value used when the sentiment has been pre-determined by the application. For example: if a review is split into two portions, _What did you like?_ and _What did you not like?_, and the reviewer replies briefly with _The quiet. The service_. In such cases, the _default_ polarity allows the application to assign sentiment externally based on the context.
- - `targets` (array of strings) - Lists the specific aspects or entities the sentiment refers to, if available. For example, in the sentence _The breakfast was yummy but the staff is unfriendly_, the the sentiment targets are `meal` and `staff`. Named entities can also be sentiment targets.
- - `reasons` (array of strings) - Justifications for the sentiment. if  available. For example, in the sentence _The breakfast was yummy but the staff is unfriendly_, the `reasons` array for the `staff` is `["unfriendly"]`, while the `reasons` array for `meal` is `["tasty"]`.
- - `explanation` (string) - The rationale for the sentiment (if `explain` is enabled).
+ - `offset` (unsigned integer) — начальная позиция экземпляра. Отсчет ведется от нуля.
+ - `length` (unsigned integer) — длина содержимого.
+ - `sentence_index` (unsigned integer) — индекс предложения, содержащего экземпляр. Отсчет ведется от нуля.
+ - `text` (string) — фрагмент текста, содержащий экземпляр (если параметр `snippets` имеет значение `true`).
+ - `polarity` (string) — указывает на тон текста: `положительный`, `отрицательный` или `смешанный`. Также существует значение по умолчанию, используемое в случае, когда тональность заранее определена приложением. Например: если обзор разделен на две части: _Что вам понравилось?_ и _Что вам не понравилось?_, а рецензент отвечает кратко: _Тишина. Служба_. В таких случаях полярность _по умолчанию_ позволяет приложению назначать настроение извне на основе контекста.
+ - `targets` (array of strings) — перечисляет конкретные аспекты или сущности, к которым относится мнение, если таковые имеются. Например, в предложении _Завтрак был вкусным, но персонал недружелюбный_ целевыми настроениями являются `еда` и `персонал`. Именованные сущности также могут быть целями настроений.
+ - `reasons` (array of strings) — обоснования мнения, если таковые имеются. Например, в предложении _Завтрак был вкусным, но персонал недружелюбный_ массив `причин` для `персонала` — это `["unfriendly"]`, а массив `причин` для `еды` — это `["tasty"]`.
+ - `explanation` (string) — обоснование мнения (если включено `explain`).
 
- Example:
+ Пример:
 
  ```json
 "sentiment_expressions": [
@@ -110,31 +110,31 @@ This section appears if:
      ]
  ```
 
- ## Named Entities
+## Именованные объекта
 
-The `entities_summary` section lists detected entities in the text. 
+В разделе `entities_summary` перечислены обнаруженные в тексте объекты. 
 
-This section appears if: 
+Этот раздел появляется, если: 
 
-1. Named entities are found, and;
-2. The `entities` setting is set to `true` (or omitted).
+1. Названные объекты найдены, и:
+2. Параметр `entities` установлен на `true` (или пропущен).
 
- Every entity contains the following attributes:
+ Каждый объект содержит следующие атрибуты:
 
- - `name` (string) - The most complete form of the entity's name found in the text across all mentions.
- - `ref_lemma` (string) - The dictionary form (lemma) of the entity in English, if available, regardless of the input language.
- - `type` (string or array of strings) - Defines the entity's type. Some entities may have multiple types. A country (or any other geopolical entity declaring itself a country, even if not universally recognized as such) is considered both a place and an organization.
- - `subtype` (string) - Specifies a more detailed classification within the entity type.
- - `mentions` (array of objects) - Lists all instances where the entity appears in the text.
+ - `name` (string) — Наиболее полная форма названия объекта, встречающаяся в тексте во всех упоминаниях.
+ - `ref_lemma` (string) — словарная форма (лемма) объекта на английском языке, если она доступна, независимо от языка ввода.
+ - `type` (string or array of strings) — определяет тип объекта. Некоторые объекты могут иметь несколько типов. Страна (или любое другое геополитическое образование, объявляющее себя страной, даже если оно не общепризнано в качестве такового) считается одновременно местом и организацией.
+ - `subtype` (string) — указывает более подробную классификацию в пределах типа объекта.
+ - `mentions` (array of objects) — выводит список всех случаев, когда объект появляется в тексте.
 
- Every mention contains the following attributes:
+ Каждое упоминание содержит следующие атрибуты:
 
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) - Length of the content.
- - `sentence_index` (unsigned integer) - Index of the sentence containing the instance. It is zero-based.
- - `text` (string) - The fragment of text containing the instance (if the `snippets` setting is set to `true`).
+ - `offset` (unsigned integer) — начальная позиция экземпляра. Отсчет ведется от нуля.
+ - `length` (unsigned integer) — длина содержимого.
+ - `sentence_index` (unsigned integer) — индекс предложения, содержащего экземпляр. Отсчет ведется от нуля.
+ - `text` (string) — фрагмент текста, содержащий экземпляр (если параметр `snippets` имеет значение `true`).
 
- Example:
+ Пример:
 
  ```json
  "entities_summary": [
@@ -165,138 +165,138 @@ This section appears if:
      ]
  ```
 
- ### Entity Types And Subtypes
+### Типы и подтипы объектов
 
- The currently supported entity types are:
+ В настоящее время поддерживаются следующие типы объектов:
 
-- `person`, with optional subtypes: `fictional_character`, `important_person`, `spiritual_being`
-- `organization` Note: A country is both an organization and a place
-- `place`
-- `time_range`
-- `date`
-- `time`
-- `hashtag`
-- `email`
-- `amount_of_money`
-- `phone` - Phone number, either domestic or international, in a variety of formats
-- `role` - A social role. For example: A position in an organization.
-- `software` - A named software package
-- `website` (URL), with an optional subtype: `tor` for Onion links; Note: Web services can also have the `software` type assigned
-- `item_of_interest` - Any type of artifact of potential interest to the investigation. For example: Weapons, drugs, vehicles, luxury.
-- `weight`
-- `bank_account` Only IBAN format is currently supported; subtypes: `iban`
-- `credit_card` - A credit card number, with optional subtypes: `visa`, `mastercard`, `american_express`, `diners_club`, `discovery`, `jcb`, `unionpay`
-- `coordinates` - GPS coordinates
-- `credential`, with optional subtypes: `md5`, `sha-1`
-- `crypto`, with optional subtypes: `bitcoin`, `ethereum`, `monero`, `monero_payment_id`, `litecoin`, `dash`
-- `event` - A notable event involving participation of multiple people.
-- `file` Only Windows pathnames are supported; subtypes: `windows`, `facebook` (for images downloaded from Facebook)
-- `flight_code`
-- `identifier` Any alphanumeric identifiers (ID numbers, codes, etc.) not classified elsewhere.
-- `ip_address`, subtypes: `v4`, `v6`
-- `mac_address`
+- `person` — имя человека. С дополнительными подтипами: `fictional_character`, `important_person`, `spiritual_being`
+- `organization` — Примечание: Страна — это и организация, и место
+- `place` — место
+- `time_range` — временной диапазон
+- `date` — дата
+- `time` — время
+- `hashtag` — хэштег
+- `email` — адрес электронной почты
+- `amount_of_money` - сумма денег
+- `phone` — номер телефона, как внутренний, так и международный, в различных форматах.
+- `role` — социальная роль. Например: Должность в организации.
+- `software` — пакет программного обеспечения
+- `website` — адрес вебсайта ; Примечание: Веб-службам также может быть назначен тип `программного обеспечения
+- `item_of_interest` — Любой тип артефакта, представляющий потенциальный интерес для расследования. Например: Оружие, наркотики, транспортные средства, предметы роскоши.
+- `weight` — вес
+- `bank_account` В настоящее время поддерживается только формат IBAN; подтипы: `iban`
+- `credit_card` — номер кредитной карты с дополнительными подтипами: `visa`, `mastercard`, `american_express`, `diners_club`, `discovery`, `jcb`, `unionpay`
+- `coordinates` — GPS-координаты
+- `credential` — учетные данные, с дополнительными подтипами: `md5`, `sha-1`
+- `crypto` — криптовалюта, с дополнительными подтипами: `биткойн`, `эфириум`, `монеро`, `идентификатор_платежа_Monero`, `литкойн`, `dash`
+- `event` — значимое событие, в котором принимают участие несколько человек.
+- `file` — название или путь файла. Поддерживаются только пути Windows; подтипы: `windows`, `facebook` (для изображений, загруженных из Facebook)
+- `flight_code` — код рейса
+- `identifier` — любые буквенно-цифровые идентификаторы (идентификационные номера, коды и т. д.), не классифицированные в другом месте.
+- `ip_address` — IP-адрес, подтипы: `v4`, `v6`
+- `mac_address` — МАС-адрес
 - `numeric` (an unclassified numeric entity)
-- `username` - A user name or a user's alias.
+- `username` — имя пользователя
 
- ## Topics
+## Темы
 
-The `topics` section lists detected topics in the text. For example: subjects, domains, themes in other terms. 
+В разделе `topics` перечислены обнаруженные в тексте темы. Например: субъекты, домены, темы в других терминах. 
 
-This section appears if:
+Этот раздел появляется, если:
 
-1. Topics are found, and; 
-2. The `topics` setting is set to `true` (or omitted).
+1. Темы найдены, и; 
+2. Параметр `topics` установлен на `true` (или пропущен).
 
- If `topic_stats` setting is set to `true`, every entry in the array contains:
+ Если настройка `topic_stats` установлена на `true`, каждая запись в массиве содержит:
 
- - `topic` (string) - The name of the topic.
- - `coverage` (floating-point number) - A relevance score representing the ratio of sentences where the topic is detected to the total number of sentences.
+ - `topic` (string) - Название темы.
+ - `coverage` (floating-point number) — показатель релевантности, представляющий собой отношение предложений, в которых обнаружена тема, к общему количеству предложений.
 
- ## Long-Term Memory
+## Долговременная память
 
-The `memory` section provides optional context that can be passed to the `settings` in subsequent messages within the same conversation thread. 
+Раздел `memory` предоставляет необязательный контекст, который можно передать в `settings` в последующих сообщениях в той же ветке беседы. 
 
-See [Context and Long-Term Memory](/apis/tisane-api-configuration#context-and-long-term-memory) for more details.
+Более подробную информацию см. в разделе [Контекст и долговременная память](/apis/tisane-api-configuration#context-and-long-term-memory).
 
- ## Low-Level Data: Sentences, Phrases, and Words
+## Данные низкого уровня: Предложения, фразы и слова
 
- Tisane can also provide more detailed linguistic data:
+ Tisane также может предоставить более подробные лингвистические данные:
 
- - Sentences: Original sentences, along with their corrected versions if any misspellings are detected.
- - Lexical chunks: Groups of words (chunks) annotated with grammatical and stylistic features.
- - Parse Trees and Phrases: Hierarchical representations of sentence structure, highlighting phrases and their relationships.
+ - Предложения: Оригинальные предложения, а также их исправленные версии, если обнаружены какие-либо ошибки.
+ - Лексические фрагменты: Группы слов (фрагменты), снабженные грамматическими и стилистическими примечаниями.
+ - Деревья синтаксического анализа и фразы: Иерархические представления структуры предложения, выделение фраз и их взаимосвязей.
 
-### Sentences
+### Предложения
 
- The `sentence_list` section is generated if:
+ Раздел `sentence_list` генерируется, если:
 
-* The `words` or the `parses` setting is set to `true`.
+* Параметр `words` или `parses` установлен на `true`.
 
- Every sentence structure in the list contains:
+ Каждая структура предложения в списке содержит:
 
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) - Length of the content. 
- - `text` (string) - The original input text. 
- - `corrected_text` (string) - The automatically corrected version of the sentence, if a misspelling or obfuscation/algospeak was detected and spellchecking is enabled.
- - `words` (array of structures) - Provides detailed information about each lexical chunk, if `words` setting is set to `true`. Note: While the term "word" is used for simplicity, it may not be linguistically accurate to equate lexical chunks with individual words.
- - `parse_tree` (object) - Contains the parse tree and detected phrases for the sentence when the `parses` setting is set to `true`.
- - `nbest_parses` (array of parse objects) - Lists alternative parse trees that are close to the best one. Generated when both `parses` setting is `true` and `deterministic` setting is explicitly set to `false`.
+ - `offset` (unsigned integer) — начальная позиция экземпляра. Отсчет ведется от нуля.
+ - `length` (unsigned integer) — длина содержимого. 
+ - `text` (string) — исходный введенный текст. 
+ - `corrected_text` (string) — автоматически исправленная версия предложения, если обнаружена опечатка или запутывание/алгоритмическая ошибка и включена проверка орфографии.
+ - `words` (array of structures) — предоставляет подробную информацию о каждом лексическом фрагменте, если параметр `words` установлен в значение `true`. Примечание: Хотя термин «слово» используется для простоты, с лингвистической точки зрения может быть некорректно отождествлять лексические блоки с отдельными словами.
+ - `parse_tree` (object) — содержит дерево анализа и обнаруженные фразы для предложения, когда параметр `parses` установлен в значение `true`.
+ - `nbest_parses` (array of parse objects) — выводит список альтернативных деревьев анализа, которые близки к лучшему. Генерируется, когда оба параметра `parses` имеют значение `true`, а параметр `deterministic` явно установлен в значение `false`.
 
- ### Words
+### Слова
 
- The words section is generated if:
+ Раздел слов генерируется, если:
 
-* The `words` setting is set to `true`.
+* Параметр `words` установлен на `true`.
 
- Every lexical chunk (referred to as a "word" for simplicity) structure in the `words` array contains:
+ Каждая лексическая часть (для простоты называемая «словом») в массиве `words` содержит:
 
- - `type` (string) - Defines the element's category. For example: `punctuation` for punctuation marks, `numeral` for numerals, or `word` for all other text elements.
- - `text` (string) - The original input text. 
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) - Length of the content.
- - `corrected_text` (string) - The automatically corrected version of the sentence, if a misspelling was detected.
- - `lettercase` (string) - Indicates the original letter case of the word: `upper`, `capitalized`, or `mixed`. Note: If the text is entirely lowercase or case-insensitive, this attribute is omitted.
- - `stopword` (boolean) - Specifies whether the word is a <a href="https://en.wikipedia.org/wiki/Stop_words" target="_blank">stopword</a>
- - `grammar` (array of strings or structures) - Lists the grammatical features associated with the `word`. If the `feature_standard` setting is defined as `native`, each feature is an object containing an `index`(a numeral) and a `value`(string). Otherwise, each feature is represented as a plain string.
+ - `type` (string) — определяет категорию элемента. Например: `пунктуация` для знаков препинания, `цифра` для цифр или `слово` для всех остальных текстовых элементов.
+ - `text` (string) — исходный введенный текст. 
+ - `offset` (unsigned integer) — начальная позиция экземпляра. Отсчет ведется от нуля.
+ - `length` (unsigned integer) — длина содержимого.
+ - `_text` (string) — автоматически исправленная версия предложения, если обнаружена ошибка.
+ - `lettercase` (string) — указывает исходный регистр букв слова: `заглавные`, `заглавные` или `смешанные`. Примечание: Если текст полностью состоит из строчных букв или нечувствителен к регистру, этот атрибут опускается.
+ - `stopword` (boolean) — указывает, является ли слово <a href="https://en.wikipedia.org/wiki/Stop_words" target="_blank">stopword</a>
+ - `grammar` (array of strings or structures) — перечисляет грамматические особенности, связанные со `словом`. Если параметр `feature_standard` определен как `native`, каждый параметр представляет собой объект, содержащий `index`(a numeral) и `value`(string). В противном случае каждый признак представляется в виде простой строки.
 
- #### Advanced
+#### Дополнительно
 
- For lexical words only:
+ Только для лексических слов:
 
- - `role` (string) - The semantic role of the word. For example: `agent` or `patient`. Note: In the passive voice, semantic roles are reversed relative to syntactic roles. For example: In _The car was driven by David_, _car_ is the patient, and _David_ is the agent.
- - `numeric_value` (floating-point number) - The numeric value, if the word represents or is associated with one.
- - `family` (integer number) - the ID of the associated family with the disambiguated word-sense of the lexical chunk.
- - `definition` (string) - the definition of the family. 
-   - Included if the `fetch_definitions` setting is set to `true`.
- - `lexeme` (integer number) - The ID of the lexeme entry associated with the disambiguated word-sense.
- - `nondictionary_pattern` (integer number) - The ID of a non-dictionary pattern that matched the word if it was not found in the language model but classified using non-dictionary heuristics.
- - `style` (array of strings or structures) - Generates a list of style features associated with the `word`.
-   - Included if the `feature_standard` setting is set to `native` or `description`.
- - `semantics` (array of strings or structures) - Generates a list of semantic features associated with the `word`. 
-   - Included if the `feature_standard` setting is set to `native` or `description`.
- - `segmentation` (structure) - Provides information on the selected segmentation. A segmentation is an array of word structures.
+ - `role` (string) - Семантическая роль слова. Например: `агент` или `пациент`. Примечание: В пассивном залоге семантические роли меняются местами относительно синтаксических. Например: В _The car was driven by David_, _car_ — пациент, а _David_ — агент.
+ - `numeric_value` (floating-point number) — числовое значение, если слово представляет его или связано с ним.
+ - `family` (integer number) — идентификатор связанной семьи с разрешенным значением слова лексического фрагмента.
+ - `definition` (string) - определение семейства. 
+   - Включается, если параметр `fetch_definitions` установлен в значение `true`.
+ - `lexeme` (integer number) — идентификатор записи лексемы, связанной с разрешенным значением слова.
+ - `nondictionary_pattern` (integer number) — идентификатор несловарного шаблона, который соответствовал слову, если оно не было найдено в языковой модели, но классифицировано с использованием несловарной эвристики.
+ - `style` (array of strings or structures) — создает список стилевых особенностей, связанных со `словом`.
+   - Включено, если для параметра `feature_standard` задано значение `native` или `description`.
+ - `semantics` (array of strings or structures) — создает список семантических признаков, связанных со `словом`. 
+   - Включено, если для параметра `feature_standard` задано значение `native` или `description`.
+ - `segmentation` (structure) — предоставляет информацию о выбранной сегментации. Сегментация — это массив структур слов.
 
-   - Included if multiple segmentations are possible, and the `deterministic` setting is set to `false`.
+   - Включается, если возможны множественные сегментации, а параметр `deterministic` установлен на `false`.
 
- - `other_segmentations` (array of structures) - Lists alternative segmentations considered incorrect during the disambiguation process. Each entry has the same structure as `segmentation`.
- - `nbest_senses` (array of structures) - Provides alternative disambiguation hypotheses. 
+ - `other_segmentations` (array of structures) — перечисляет альтернативные сегментации, которые считаются неверными в процессе устранения неоднозначности. Каждая запись имеет ту же структуру, что и `segmentation`.
+ - `nbest_senses` (array of structures) — предоставляет альтернативные гипотезы разрешения неоднозначности. 
 
-   - Included if the `deterministic` setting is `false`.
+   - Включается, если параметр `deterministic` равен `true`.
 
-   - Each hypothesis includes: 
+   - Каждая гипотеза включает в себя: 
 
-     - `grammar`, `style`, and `semantics`. These are structured identically to the corresponding attributes above. 
-     - `senses`. Lists word-senses for the hypothesis, each containing:
-       - `family`: The associated family ID. 
-       - `definition`: The family’s definition if `fetch_definitions` is enabled. 
-       - `ref_lemma`: The reference lemma, if available.
+     - `грамматика`, `стиль` и `семантика`. Они структурированы идентично соответствующим атрибутам выше. 
+     - `senses`. Перечисляет значения слов для гипотезы, каждое из которых содержит:
+       - `family`: Соответствующий семейный идентификатор. 
+       - `определение`: Определение семейства, если `fetch_definitions` включено. 
+       - `ref_lemma`: Справочная лемма, если таковая имеется.
 
 
- For punctuation marks only:
+ Только для знаков препинания:
 
- - `id` (integer number) - The ID of the punctuation mark.
+ - `id` (integer number) — идентификатор знака препинания.
 
- - `behavior` (string) - The behavior code  that defines the function of the punctuation mark. Values:
+ - `behavior` (string) — код поведения, определяющий функцию знака препинания. Значения:
    - `sentenceTerminator`
    - `genericComma`
    - `bracketStart`
@@ -305,35 +305,35 @@ See [Context and Long-Term Memory](/apis/tisane-api-configuration#context-and-lo
    - `hyphen`
    - `quoteStart`
    - `quoteEnd`
-   - `listComma` (for East-Asian enumeration commas such as  `、`)
+   - `listComma` (для восточноазиатских запятых перечисления, таких как `、`)
 
-Punctuation marks have no n-best senses.
+Знаки препинания не имеют n-лучших значений.
 
- ### Parse Trees and Phrases
+### Разбор грамматических деревьев и фраз
 
-A parse tree, or more precisely, a parse forest, is a hierarchical collection of phrases linked to one another.
+Дерево синтаксического анализа, или, точнее, лес синтаксического анализа, представляет собой иерархическую совокупность фраз, связанных друг с другом.
 
-The parse tree section is generated if:
+Раздел дерева синтаксического анализа генерируется, если:
 
-* The `parses` setting is set to `true`.
+* Параметр `parses` установлен на `true`.
 
-At the top level of the parse, there is an array of root phrases contained within the `phrases` element, each associated with a numeric `id`. 
+На верхнем уровне синтаксического анализа находится массив корневых фраз, содержащихся в элементе `phrases`, каждая из которых связана с числовым `id`. 
 
-Every phrase can have child phrases, forming a nested structure.
+Каждая фраза может иметь дочерние фразы, образуя вложенную структуру.
 
- Each phrase includes the following attributes:
+ Каждая фраза включает в себя следующие атрибуты:
 
- - `type` (string) - A standard phrase tag denoting the type of the phrase. For example: `S`, `VP`, `NP`, `ADJP`, `ADVP`.
- - `family` (integer number) - An ID of the phrase family.
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) -  Length of the phrase.
- - `role` (string) - The semantic role of the phrase, if applicable, similar to semantic roles assigned to individual words.
- - `text` (string) - The textual representation of the phrase: Phrase members are separated by the vertical bar character (|). Children phrases are enclosed in parentheses (). For example: 
-   - _driven|by|David_ 9 (a flat phrase with three members) 
-   - _(The|car)|was|(driven|by|David)_ (a hierarchical structure with child phrases).
+ - `type` (string) — стандартный тег фразы, обозначающий тип фразы. Например: `S`, `VP`, `NP`, `ADJP`, `ADVP`.
+ - `family` (integer number) — идентификатор семейства фраз.
+ - `offset` (unsigned integer) — начальная позиция экземпляра. Отсчет ведется от нуля.
+ - `length` (unsigned integer) — длина фразы.
+ - `role` (string) — семантическая роль фразы, если применимо, аналогичная семантическим ролям, назначаемым отдельным словам.
+ - `text` (string) — текстовое представление фразы: Члены фразы разделяются символом вертикальной черты (|). Дочерние фразы заключены в скобки (). Например: 
+   - _driven|by|David_ 9 (плоская фраза, состоящая из трех частей) 
+   - _(The|car)|was|(driven|by|David)_ (иерархическая структура с дочерними фразами).
 
 
- Example:
+ Пример:
 
  ```json
 "parse_tree": {
@@ -366,31 +366,31 @@ Every phrase can have child phrases, forming a nested structure.
 }
  ```
 
- ### Context-Aware Spelling Correction
+### Исправление орфографии с учетом контекста
 
-Tisane supports context-aware spelling correction. It identifies and corrects misspellings or intentional obfuscations by deducing the intended meaning, especially when the language model does not recognize a word.
+Tisane поддерживает контекстно-зависимую коррекцию орфографии. Он выявляет и исправляет опечатки или преднамеренные искажения, выводя предполагаемое значение, особенно когда языковая модель не распознает слово.
 
-When a correction is made, Tisane adds the `corrected_text` attribute:
+При внесении исправления Tisane добавляет атрибут `corrected_text`:
 
- - At the word level: If individual words or lexical chunks are returned.
+ - На уровне слов: Если возвращаются отдельные слова или лексические фрагменты.
 
- - At the sentence level: If the sentence text is generated. 
+ - На уровне предложения: Если текст предложения сгенерирован. 
 
 
-Sentence-level `corrected_text` appears when:
+Sentence-level `corrected_text` появляется, когда:
 
-* The `words` or `parses` settings are set to `true`.
+* Настройки `words` или `parses` установлены на `true`.
 
-####  Exclude Rare Terms
+####  Исключить редкие термины
 
-Tisane works with large dictionaries. You can exclude esoteric terms by adjusting the `min_generic_frequency` setting.
+Tisane работает с большими словарями. Вы можете исключить эзотерические термины, изменив настройку `min_generic_frequency`.
 
-####  Spell-Check Invocation
+####  Вызов проверки орфографии
 
-Note: Spell-checking runs regardless of whether sentence or word sections are included in the output.
+Примечание: Проверка орфографии выполняется независимо от того, включены ли в вывод предложения или части слов.
 
-You can control this behavior with the following settings:
+Вы можете контролировать это поведение с помощью следующих настроек:
 
-- Set `disable_spellcheck` to `true` to turn off spell-checking entirely.
+- Установите для параметра `disable_spellcheck` значение `true`, чтобы полностью отключить проверку орфографии.
 
-- To avoid correcting proper nouns (in languages with capitalization), set `lowercase_spellcheck_only` to `true`. This restricts spell-checking to lowercase words, excluding capitalized and uppercase terms.
+- Чтобы избежать исправления имен собственных (в языках с заглавными буквами), установите для параметра `lowercase_spellcheck_только` значение `true`. Это ограничивает проверку орфографии словами, написанными строчными буквами, исключая термины, написанные заглавными и прописными буквами.
