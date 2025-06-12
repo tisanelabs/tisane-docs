@@ -1,6 +1,4 @@
-﻿# Связаться с поддержкой
-
-## Как связаться с нами
+﻿# Как связаться с нами
 
 * <a href="https://tisane.ai/contact-us/#support" target="_blank">Связаться с техподдержкой Tisane</a>
 

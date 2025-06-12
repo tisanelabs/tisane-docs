@@ -226,7 +226,7 @@ Tisane's long-term memory module addresses these challenges. It consists of thre
 
 This ensures more precise language understanding. The module helps detect hidden abuse, scams, and contextual nuances.
 
-#### What Is A hypernym?
+#### What Is a Hypernym?
 
 A hypernym is a word that serves as a broad category under which more specific words (called hyponyms) fall. For example, *color* is a hypernym of *pink*; *vehicle* is a hypernym of *truck*. In computational linguistics and natural language processing (NLP), hypernyms help categorize words hierarchically, which can be useful for filtering or refining content analysis.
 
