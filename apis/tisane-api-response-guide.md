@@ -27,8 +27,6 @@ Note: use case scenarios can vary. It is the responsibility of integrators and c
 
 For example: It might not be appropriate to restrict sexual advances in a dating app, or censor profanity in communities where it’s commonly accepted, or restrict external contact if it's allowed.
 
-### If You Don't Want Abuse Appear in Response
-
 If you *don't* want problematic content appear in your response, you must explicitly set the `abuse` setting to `false`.
 
 ### Content Attributes
