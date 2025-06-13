@@ -1,93 +1,91 @@
-# Response
+# Phản hồi
 
-This section details all the components and data structures in response structures returned by Tisane.
+Phần này trình bày chi tiết về tất cả các thành phần và cấu trúc dữ liệu trong các cấu trúc phản hồi được Tisane trả về.
 
-The `POST /parse` response includes sections that can be displayed or hidden based to the provided settings. (See [Configuration And Customization Guide](/apis/tisane-api-configuration) for more information.) 
+Phản hồi `POST /parse` bao gồm các phần có thể được hiển thị hoặc ẩn đi dựa trên các cài đặt được cung cấp. (Xem [Hướng dẫn cấu hình và tùy chỉnh](/apis/tisane-api-configuration) để biết thêm thông tin). 
 
-The root-level attributes are:
+Các thuộc tính cấp gốc bao gồm:
 
-- `text` (string) - The original input text.
-- `language` (string) - The detected language code, if language identification was used.
-- `reduced_output` (boolean) - Indicates if verbose information was omitted due to input size. 
-- `sentiment` (floating-point number) - A document-level sentiment score (-1 to 1). Only shown when `document_sentiment` setting is set to `true`.
-- `signal2noise` (floating-point number) - A relevance score showing how closely the text matches the concepts from the `relevant` setting. This value appears only if the `relevant` setting exists.
+- `text` (chuỗi) - Văn bản đầu vào ban đầu.
+- `language` (chuỗi) - Mã ngôn ngữ được phát hiện, nếu sử dụng nhận dạng ngôn ngữ.
+- `reduced_output` (boolean) - Cho biết liệu thông tin chi tiết có bị bỏ qua do kích thước dữ liệu đầu vào hay không. 
+- `sentiment` (số dấu phẩy động) - Điểm cảm xúc ở cấp độ tài liệu (-1 đến 1). Chỉ hiển thị khi cài đặt `document_sentiment` được đặt thành `true`.
+- `signal2noise` (số dấu phẩy động) - Điểm liên quan cho biết mức độ phù hợp của văn bản với các khái niệm từ cài đặt `relevant`. Giá trị này chỉ xuất hiện nếu có cài đặt `relevant`.
 
- ## Problematic Content
+ ## Nội dung có vấn đề
 
-Tisane automatically analyzes the text for potential instances of abuse (problematic content) and flags them in the response.
+Tisane tự động phân tích văn bản để tìm ra các trường hợp lạm dụng tiềm ẩn (nội dung có vấn đề) và gắn cờ chúng trong phản hồi.
 
-The `abuse` section lists detected instances of content that may require attention of moderators, or be relevant to law enforcement agencies. 
+Phần `abuse` liệt kê các trường hợp nội dung được phát hiện có thể cần sự chú ý của người kiểm duyệt hoặc có liên quan đến các cơ quan thực thi pháp luật. 
 
-This section appears if:
+Phần này sẽ xuất hiện nếu:
 
-1. Instances of problematic content is found, and;
-2. The `abuse` setting is set to `true` (or omitted).
+1. Tìm thấy các trường hợp nội dung có vấn đề và;
+2. Cài đặt `abuse` được đặt thành `true` (hoặc bỏ qua).
 
-Note: use case scenarios can vary. It is the responsibility of integrators and community administrators whether and how to act upon different types of flagged content. 
+Lưu ý: trường hợp sử dụng có thể khác nhau. Người tích hợp và quản trị viên cộng đồng có trách nhiệm quyết định có xử lý hay không và xử lý như thế nào đối với các loại nội dung bị gắn cờ khác nhau. 
 
-For example: It might not be appropriate to restrict sexual advances in a dating app, or censor profanity in communities where it’s commonly accepted, or restrict external contact if it's allowed.
+Ví dụ: Hạn chế những hành vi tình dục trong ứng dụng hẹn hò, kiểm duyệt lời nói tục tĩu trong những cộng đồng mà những hành vi này được chấp nhận rộng rãi, hoặc hạn chế tiếp xúc bên ngoài nếu được phép có thể là những việc không phù hợp.
 
-### If You Don't Want Abuse Appear in Response
+Nếu bạn *không* muốn nội dung có vấn đề xuất hiện trong phản hồi của mình, bạn phải chủ động đặt cài đặt `abuse` thành `false`.
 
-If you *don't* want problematic content appear in your response, you must explicitly set the `abuse` setting to `false`.
+### Thuộc tính nội dung
 
-### Content Attributes
-
-Every instance contains the following attributes:
+Mỗi trường hợp đều chứa các thuộc tính sau:
 
 
- - `type` (string) - The type of the abuse
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) - Length of the content.
- - `sentence_index` (unsigned integer)  - Index of the sentence containing the instance. It is zero-based.
- - `text` (string) -  The fragment of text containing the instance. Only appears if the `snippets` setting is set to `true`.
- - `tags` (array of strings) - Additional abuse details. For example: if the fragment is classified as an attempt to sell hard drugs, the instance contains the `hard_drug` tag.
- - `severity` (string) - How severe the abuse is. The levels of severity are `low`, `medium`, `high`, and `extreme`.
- - `explanation` (string) - The rationale for classification (if `explain` is enabled).
+ - `type` (chuỗi) - Loại hành vi lạm dụng
+ - `offset` (số nguyên không dấu) - Vị trí bắt đầu của trường hợp. Giá trị này bắt đầu từ số không.
+ - `length` (số nguyên không dấu) - Độ dài của nội dung.
+ - `sentence_index` (số nguyên không dấu) - Chỉ mục của câu chứa trường hợp đó. Giá trị này bắt đầu từ số không.
+ - `text` (chuỗi) - Đoạn văn bản chứa trường hợp. Chỉ xuất hiện nếu cài đặt `snippets` được đặt thành `true`.
+ - `tags` (mảng chuỗi) - Thông tin chi tiết bổ sung về hành vi lạm dụng. Ví dụ: nếu đoạn văn bản được phân loại là hành vi bán ma túy hạng nặng, thì trường hợp này sẽ mang thẻ `hard_drug`.
+ - `severity` (chuỗi) - Mức độ nghiêm trọng của hành vi lạm dụng. Các mức độ nghiêm trọng là `low`, `medium`, `high` và `extreme`.
+ - `explanation` (chuỗi) - Cơ sở cho việc phân loại (nếu `explain` được bật).
 
-###  Supported Types 
+###  Các loại được hỗ trợ 
 
-The supported problematic types are:
+Các loại vấn đề được hỗ trợ là:
 
-- `personal_attack` - Direct insults or attacks targeting an individual. For example: instances of cyberbullying. Note: Criticism of ideas, posts, or general negative sentiment is not the same as a personal insult. See: [Personal Attack](/guides/abuse/personalattack.md)
-- `bigotry` - Hate speech or expression of bigoted opinions; adversarial remarks targetting <a href="https://en.wikipedia.org/wiki/Protected_group" target="_blank">protected groups</a>. This includes not just racial slurs but any hostile statements directed at the group as a whole. See: [Bigotry and Hate Speech](/guides/abuse/hatespeechandbigotry.md)
-- `profanity` - Use of profane language, regardless of the context or intent. Note that racial slurs are not captured by this type. See: [Profanity](/guides/abuse/profanity.md)
-- `sexual_advances` - Attempts, whether welcome or unwelcome, to seek sexual favors or gratification. Also see: [Sexual Advances](/guides/abuse/sexualadvances.md)
-- `criminal_activity` - Content involving attempts to sell or acquire illegal items, engage in criminal services, issue threats, or similar actions. Also see: [Criminal Activity](/guides/abuse/criminalactivity.md)
-- `external_contact` - Attempts to initiate communication or payment through external channels. For example: Phone, email, messaging apps. These attempts might violate rules in certain communities, such as gig economy platforms or e-commerce sites. Also see: [Attempts to Establish External Contact](/guides/abuse/externalcontact.md)
+- `personal_attack` - Lăng mạ hoặc tấn công trực tiếp nhắm vào một cá nhân. Ví dụ: các trường hợp bắt nạt trên mạng. Lưu ý: Việc chỉ trích ý tưởng, bài đăng hoặc quan điểm tiêu cực nói chung không giống với hành vi xúc phạm cá nhân. Xem phần: [Tấn công cá nhân](/guides/abuse/personalattack.md)
+- `bigotry` - Phát ngôn thù hận hoặc thể hiện quan điểm cố chấp; nhận xét mang tính thù địch nhắm vào <a href="https://en.wikipedia.org/wiki/Protected_group" target="_blank">các nhóm được bảo vệ</a>. Điều này không chỉ bao gồm những lời lẽ phân biệt chủng tộc mà còn bao gồm bất kỳ phát biểu thù địch nào nhắm vào toàn thể nhóm. Xem phần: [Cố chấp và phát ngôn thù hận](/guides/abuse/hatespeechandbigotry.md)
+- `profanity` - Sử dụng ngôn ngữ tục tĩu, bất kể ngữ cảnh hoặc mục đích. Lưu ý rằng loại vấn đề này không bao gồm lời lẽ phân biệt chủng tộc. Xem phần: [Thô tục](/guides/abuse/profanity.md)
+- `sexual_advances` - Các hành vi, bất kể có được hoan nghênh hay không, nhằm tìm kiếm sự ưu ái hoặc thỏa mãn tình dục. Xem thêm phần: [Hành vi tình dục](/guides/abuse/sexualadvances.md)
+- `criminal_activity` - Nội dung liên quan đến các hành vi bán hoặc mua các mặt hàng bất hợp pháp, tham gia vào các dịch vụ tội phạm, đưa ra sự đe dọa hoặc các hành động tương tự. Xem thêm phần: [Hoạt động tội phạm](/guides/abuse/criminalactivity.md)
+- `external_contact` - Các hành vi khởi xướng giao tiếp hoặc thanh toán thông qua các kênh bên ngoài. Ví dụ: Điện thoại, email, ứng dụng nhắn tin. Các hành vi này có thể vi phạm quy định ở một số cộng đồng, chẳng hạn như các nền tảng kinh tế gig hoặc các trang web thương mại điện tử. Xem thêm phần: [Hành vi thiết lập liên lạc bên ngoài](/guides/abuse/externalcontact.md)
 
-- `adult_only` - activities restricted for minors. For example: Consumption of alcohol. Also see: [Adult-Only Content](/guides/abuse/adultonly.md)
-- `mental_issues` - Content that might indicate mental health concerns, such as suicidal thoughts or signs of depression. Also see: [Mental Issues](/guides/abuse/mental.md)
-- `allegation` - Claims or accusations of misconduct, which may or may not involve criminal activity. Also see: [Allegations](/guides/abuse/allegation.md)
-- `contentious` - Content likely to incite or provoke emotional reactions from individuals or groups. Also see: [Contentious Content](/guides/abuse/contentious.md)
-- `disturbing` - Graphic or unsettling descriptions that might be distressing to readers. Also see: [Disturbing Content](/guides/abuse/disturbing.md)
-- `no_meaningful_content` - Nonsensical or gibberish text that lacks clear meaning. Also see: [Meaningless Content](/guides/abuse/nomeaningfulcontent.md)
-- `data_leak` - Sensitive personal information. For example: Passwords, ID numbers. Also see: [Data Leaks](/guides/abuse/dataleak.md)
-- `spam` - Spam content. Also see: [Spam](/guides/abuse/spam.md)
-- `social_hierarchy` - Forceful assertion of hierarchy in a community. For example: Someone is acting as a control freak. Also see: [Assertion of Hierarchy](/guides/abuse/socialhierarchy.md)
-- `generic` - Content that doesn't fit into any specific category; undefined.
+- `adult_only` - các hoạt động bị hạn chế đối với trẻ vị thành niên. Ví dụ: Sử dụng đồ uống có cồn. Xem thêm phần: [Nội dung chỉ dành cho người lớn](/guides/abuse/adultonly.md)
+- `mental_issue` - Nội dung có thể chỉ ra những lo ngại về sức khỏe tâm thần, chẳng hạn như ý định tự tử hoặc dấu hiệu trầm cảm. Xem thêm phần: [Vấn đề về tâm thần](/guides/abuse/mental.md)
+- `allegation` - Khiếu nại hoặc cáo buộc về hành vi sai trái, có thể liên quan hoặc không liên quan đến hoạt động tội phạm. Xem thêm phần: [Cáo buộc](/guides/abuse/allegation.md)
+- `contentious` - Nội dung có khả năng kích động hoặc khơi dậy phản ứng cảm xúc từ cá nhân hoặc nhóm người. Xem thêm phần: [Nội dung gây tranh cãi](/guides/abuse/contentious.md)
+- `disturbing` - Mô tả chi tiết hoặc gây khó chịu có thể khiến người đọc cảm thấy khó chịu. Xem thêm phần: [Nội dung gây khó chịu](/guides/abuse/disturbing.md)
+- `no_meaningful_content` - Văn bản vô nghĩa hoặc vô lý, thiếu ý nghĩa rõ ràng. Xem thêm phần: [Nội dung vô nghĩa](/guides/abuse/nomeaningfulcontent.md)
+- `data_leak` - Thông tin cá nhân nhạy cảm. Ví dụ: Mật khẩu, số ID. Xem thêm phần: [Rò rỉ dữ liệu](/guides/abuse/dataleak.md)
+- `spam` - Nội dung gây phiền toái. Xem thêm phần: [Làm phiền](/guides/abuse/spam.md)
+- `social_hierarchy` - Sự khẳng định mạnh mẽ về thứ bậc trong một cộng đồng. Ví dụ: Ai đó đang hành động như một kẻ thích kiểm soát. Xem thêm phần: [Khẳng định về thứ bậc](/guides/abuse/socialhierarchy.md)
+- `generic` - Nội dung không thuộc bất kỳ danh mục cụ thể nào; không xác định.
 
- ## Sentiment Analysis
+ ## Phân tích cảm xúc
 
-The `sentiment_expressions` section highlights the sentiment towards aspects or entities.
+Phần `sentiment_expressions` làm nổi bật cảm xúc đối với các khía cạnh hoặc thực thể.
 
-This section appears if: 
+Phần này sẽ xuất hiện nếu: 
 
-1. Instances where sentiment is expressed are found, and; 
-2. The `sentiment` setting is set to `true` (or omitted).
+1. Xác định được những trường hợp thể hiện cảm xúc, và; 
+2. Cài đặt `sentiment` được đặt thành `true` (hoặc bỏ qua).
 
- Every instance contains the following attributes:
+ Mỗi trường hợp đều chứa các thuộc tính sau:
 
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) - Length of the content.
- - `sentence_index`  (unsigned integer)  - Index of the sentence containing the instance. It is zero-based.
- - `text` (string) -  The fragment of text containing the instance (if the `snippets` setting is set to `true`).
- - `polarity` (string) - Indicates the sentiment of the text: `positive`, `negative`, or `mixed`. There is also a default value used when the sentiment has been pre-determined by the application. For example: if a review is split into two portions, _What did you like?_ and _What did you not like?_, and the reviewer replies briefly with _The quiet. The service_. In such cases, the _default_ polarity allows the application to assign sentiment externally based on the context.
- - `targets` (array of strings) - Lists the specific aspects or entities the sentiment refers to, if available. For example, in the sentence _The breakfast was yummy but the staff is unfriendly_, the the sentiment targets are `meal` and `staff`. Named entities can also be sentiment targets.
- - `reasons` (array of strings) - Justifications for the sentiment. if  available. For example, in the sentence _The breakfast was yummy but the staff is unfriendly_, the `reasons` array for the `staff` is `["unfriendly"]`, while the `reasons` array for `meal` is `["tasty"]`.
- - `explanation` (string) - The rationale for the sentiment (if `explain` is enabled).
+ - `offset` (số nguyên không dấu) - Vị trí bắt đầu của trường hợp. Giá trị này bắt đầu từ số không.
+ - `length` (số nguyên không dấu) - Độ dài của nội dung.
+ - `sentence_index` (số nguyên không dấu) - Chỉ mục của câu chứa trường hợp đó. Giá trị này bắt đầu từ số không.
+ - `text` (chuỗi) - Đoạn văn bản chứa trường hợp (nếu cài đặt `snippets` được đặt thành `true`).
+ - `polarity` (chuỗi) - Biểu thị cảm xúc của văn bản: `positive`, `negative` hoặc `mixed`. Ngoài ra còn có một giá trị mặc định được sử dụng khi cảm xúc đã được xác định trước bởi ứng dụng. Ví dụ: nếu bài đánh giá được chia thành hai phần, _What did you like?_ và _What did you not like?_, và người đánh giá trả lời ngắn gọn bằng _The quiet. The service_. Trong những trường hợp như vậy, cực _default_ cho phép ứng dụng gán cảm xúc bên ngoài dựa trên ngữ cảnh.
+ - `targets` (mảng chuỗi) - Liệt kê các khía cạnh hoặc thực thể cụ thể mà cảm xúc đề cập đến, nếu có. Ví dụ: trong câu _The breakfast was yummy but the staff is unfriendly_, mục tiêu của cảm xúc là `meal` và `staff`. Các thực thể được đặt tên cũng có thể là mục tiêu của cảm xúc.
+ - `reasons` (mảng chuỗi) - Lý do cho cảm xúc, nếu có. Ví dụ: trong câu _The breakfast was yummy but the staff is unfriendly_, mảng `reasons` cho `staff` là `["unfriendly"]`, trong khi mảng `reasons` cho `meal` là `["tasty"]`.
+ - `explanation` (chuỗi) - Lý do cho cảm xúc (nếu `explain` được bật).
 
- Example:
+ Ví dụ:
 
  ```json
 "sentiment_expressions": [
@@ -110,31 +108,31 @@ This section appears if:
      ]
  ```
 
- ## Named Entities
+ ## Các thực thể được đặt tên
 
-The `entities_summary` section lists detected entities in the text. 
+Phần `entities_summary` liệt kê các thực thể được phát hiện trong văn bản. 
 
-This section appears if: 
+Phần này sẽ xuất hiện nếu: 
 
-1. Named entities are found, and;
-2. The `entities` setting is set to `true` (or omitted).
+1. Tìm thấy các thực thể được đặt tên và;
+2. Cài đặt `entities` được đặt thành `true` (hoặc bỏ qua).
 
- Every entity contains the following attributes:
+ Mỗi thực thể đều chứa các thuộc tính sau:
 
- - `name` (string) - The most complete form of the entity's name found in the text across all mentions.
- - `ref_lemma` (string) - The dictionary form (lemma) of the entity in English, if available, regardless of the input language.
- - `type` (string or array of strings) - Defines the entity's type. Some entities may have multiple types. A country (or any other geopolical entity declaring itself a country, even if not universally recognized as such) is considered both a place and an organization.
- - `subtype` (string) - Specifies a more detailed classification within the entity type.
- - `mentions` (array of objects) - Lists all instances where the entity appears in the text.
+ - `name` (chuỗi) - Dạng đầy đủ nhất của tên thực thể được tìm thấy trong văn bản trong tất cả các lần đề cập.
+ - `ref_lemma` (chuỗi) - Dạng từ điển (lemma) của thực thể bằng tiếng Anh, nếu có, bất kể ngôn ngữ đầu vào.
+ - `type` (chuỗi hoặc mảng chuỗi) - Xác định loại của thực thể. Một số thực thể có thể có nhiều loại. Một quốc gia (hoặc bất kỳ thực thể địa chính trị nào tự tuyên bố mình là một quốc gia, ngay cả khi không được công nhận rộng rãi) được đồng thời coi là một địa điểm và một tổ chức.
+ - `subtype` (chuỗi) - Xác định phân loại chi tiết hơn trong loại thực thể.
+ - `mentions` (mảng đối tượng) - Liệt kê tất cả các trường hợp mà thực thể xuất hiện trong văn bản.
 
- Every mention contains the following attributes:
+ Mỗi lần đề cập đều chứa các thuộc tính sau:
 
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) - Length of the content.
- - `sentence_index` (unsigned integer) - Index of the sentence containing the instance. It is zero-based.
- - `text` (string) - The fragment of text containing the instance (if the `snippets` setting is set to `true`).
+ - `offset` (số nguyên không dấu) - Vị trí bắt đầu của trường hợp. Giá trị này bắt đầu từ số không.
+ - `length` (số nguyên không dấu) - Độ dài của nội dung.
+ - `sentence_index` (số nguyên không dấu) - Chỉ mục của câu chứa trường hợp. Giá trị này bắt đầu từ số không.
+ - `text` (chuỗi) - Đoạn văn bản chứa trường hợp (nếu cài đặt `snippets` được đặt thành `true`).
 
- Example:
+ Ví dụ:
 
  ```json
  "entities_summary": [
@@ -165,12 +163,12 @@ This section appears if:
      ]
  ```
 
- ### Entity Types And Subtypes
+ ### Các loại thực thể và các loại phụ
 
- The currently supported entity types are:
+ Các loại thực thể hiện được hỗ trợ là:
 
-- `person`, with optional subtypes: `fictional_character`, `important_person`, `spiritual_being`
-- `organization` Note: A country is both an organization and a place
+- `person`, với các loại phụ tùy chọn: `fictional_character`, `important_person`, `spiritual_being`
+- `organization` Lưu ý: Một quốc gia vừa là một tổ chức vừa là một địa điểm
 - `place`
 - `time_range`
 - `date`
@@ -178,125 +176,125 @@ This section appears if:
 - `hashtag`
 - `email`
 - `amount_of_money`
-- `phone` - Phone number, either domestic or international, in a variety of formats
-- `role` - A social role. For example: A position in an organization.
-- `software` - A named software package
-- `website` (URL), with an optional subtype: `tor` for Onion links; Note: Web services can also have the `software` type assigned
-- `item_of_interest` - Any type of artifact of potential interest to the investigation. For example: Weapons, drugs, vehicles, luxury.
+- `phone` - Số điện thoại, trong nước hoặc quốc tế, ở nhiều định dạng khác nhau
+- `role` - Một vai trò xã hội. Ví dụ: Một vị trí trong một tổ chức.
+- `software` - Một gói phần mềm được đặt tên
+- `website` (URL), với một loại phụ tùy chọn: `tor` cho các liên kết Onion; Lưu ý; Các dịch vụ web cũng có thể có loại `software` được chỉ định
+- `item_of_interest` - Bất kỳ loại hiện vật nào có thể có ích cho cuộc điều tra. Ví dụ: Vũ khí, ma túy, xe cộ, đồ xa xỉ.
 - `weight`
-- `bank_account` Only IBAN format is currently supported; subtypes: `iban`
-- `credit_card` - A credit card number, with optional subtypes: `visa`, `mastercard`, `american_express`, `diners_club`, `discovery`, `jcb`, `unionpay`
-- `coordinates` - GPS coordinates
-- `credential`, with optional subtypes: `md5`, `sha-1`
-- `crypto`, with optional subtypes: `bitcoin`, `ethereum`, `monero`, `monero_payment_id`, `litecoin`, `dash`
-- `event` - A notable event involving participation of multiple people.
-- `file` Only Windows pathnames are supported; subtypes: `windows`, `facebook` (for images downloaded from Facebook)
+- `bank_account` Hiện tại chỉ hỗ trợ định dạng IBAN; các loại phụ: `iban`
+- `credit_card` - Một số thẻ tín dụng, với các loại phụ tùy chọn: `visa`, `mastercard`, `american_express`, `diners_club`, `discovery`, `jcb`, `unionpay`
+- `coordinates` - Tọa độ GPS
+- `credential`, với các loại phụ tùy chọn: `md5`, `sha-1`
+- `crypto`, với các loại phụ tùy chọn: `bitcoin`, `ethereum`, `monero`, `monero_payment_id`, `litecoin`, `dash`
+- `event` - Một sự kiện đáng chú ý có sự tham gia của nhiều người.
+- `file` Chỉ hỗ trợ tên đường dẫn Windows; các loại phụ: `windows`, `facebook` (đối với hình ảnh tải xuống từ Facebook)
 - `flight_code`
-- `identifier` Any alphanumeric identifiers (ID numbers, codes, etc.) not classified elsewhere.
-- `ip_address`, subtypes: `v4`, `v6`
+- `identifier` Mọi mã định danh gồm chữ và số (số ID, mã, v.v.) không được phân loại ở nơi khác.
+- `ip_address`, các loại phụ: `v4`, `v6`
 - `mac_address`
-- `numeric` (an unclassified numeric entity)
-- `username` - A user name or a user's alias.
+- `numeric` (một thực thể số chưa được phân loại)
+- `username` - Tên người dùng hoặc bí danh của người dùng.
 
- ## Topics
+ ## Chủ đề
 
-The `topics` section lists detected topics in the text. For example: subjects, domains, themes in other terms. 
+Phần `topics` liệt kê các chủ đề được phát hiện trong văn bản. Ví dụ: chủ đề, lĩnh vực, chủ đề nói theo những thuật ngữ khác. 
 
-This section appears if:
+Phần này sẽ xuất hiện nếu:
 
-1. Topics are found, and; 
-2. The `topics` setting is set to `true` (or omitted).
+1. Xác định được các chủ đề và; 
+2. Cài đặt `topics` được đặt thành `true` (hoặc bỏ qua).
 
- If `topic_stats` setting is set to `true`, every entry in the array contains:
+ Nếu cài đặt `topic_stats` được đặt thành `true`, thì mọi mục nhập trong mảng đều chứa:
 
- - `topic` (string) - The name of the topic.
- - `coverage` (floating-point number) - A relevance score representing the ratio of sentences where the topic is detected to the total number of sentences.
+ - `topic` (chuỗi) - Tên của chủ đề.
+ - `coverage` (số dấu phẩy động) - Điểm liên quan biểu thị tỷ lệ các câu phát hiện ra chủ đề trên tổng số câu.
 
- ## Long-Term Memory
+ ## Bộ nhớ dài hạn
 
-The `memory` section provides optional context that can be passed to the `settings` in subsequent messages within the same conversation thread. 
+Phần `memory` cung cấp ngữ cảnh tùy chọn có thể được chuyển đến `settings` trong các tin nhắn tiếp theo trong cùng một chuỗi hội thoại. 
 
-See [Context and Long-Term Memory](/apis/tisane-api-configuration#context-and-long-term-memory) for more details.
+Xem phần [Bối cảnh và Bộ nhớ dài hạn](/apis/tisane-api-configuration#context-and-long-term-memory) để biết thêm chi tiết.
 
- ## Low-Level Data: Sentences, Phrases, and Words
+ ## Dữ liệu cấp thấp: Câu, cụm từ và từ
 
- Tisane can also provide more detailed linguistic data:
+ Tisane cũng có thể cung cấp dữ liệu ngôn ngữ chi tiết hơn:
 
- - Sentences: Original sentences, along with their corrected versions if any misspellings are detected.
- - Lexical chunks: Groups of words (chunks) annotated with grammatical and stylistic features.
- - Parse Trees and Phrases: Hierarchical representations of sentence structure, highlighting phrases and their relationships.
+ - Câu: Câu gốc, cùng với bản sửa lỗi nếu phát hiện có lỗi chính tả.
+ - Các khối từ vựng: Nhóm từ (khối) được chú thích bằng các đặc điểm ngữ pháp và phong cách.
+ - Cây phân tích cú pháp và cụm từ: Biểu diễn phân cấp của cấu trúc câu, làm nổi bật các cụm từ và mối quan hệ của chúng.
 
-### Sentences
+### Câu
 
- The `sentence_list` section is generated if:
+ Phần `sentence_list` được tạo nếu:
 
-* The `words` or the `parses` setting is set to `true`.
+* Cài đặt `words` hoặc `parses` được đặt thành `true`.
 
- Every sentence structure in the list contains:
+ Mỗi cấu trúc câu trong danh sách đều chứa:
 
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) - Length of the content. 
- - `text` (string) - The original input text. 
- - `corrected_text` (string) - The automatically corrected version of the sentence, if a misspelling or obfuscation/algospeak was detected and spellchecking is enabled.
- - `words` (array of structures) - Provides detailed information about each lexical chunk, if `words` setting is set to `true`. Note: While the term "word" is used for simplicity, it may not be linguistically accurate to equate lexical chunks with individual words.
- - `parse_tree` (object) - Contains the parse tree and detected phrases for the sentence when the `parses` setting is set to `true`.
- - `nbest_parses` (array of parse objects) - Lists alternative parse trees that are close to the best one. Generated when both `parses` setting is `true` and `deterministic` setting is explicitly set to `false`.
+ - `offset` (số nguyên không dấu) - Vị trí bắt đầu của trường hợp. Giá trị này bắt đầu từ số không.
+ - `length` (số nguyên không dấu) - Độ dài của nội dung. 
+ - `text` (chuỗi) - Văn bản đầu vào ban đầu. 
+ - `corrected_text` (chuỗi) - Phiên bản được tự động sửa của câu, nếu phát hiện lỗi chính tả hoặc lỗi tối nghĩa/thuật ngữ và tính năng kiểm tra chính tả được bật.
+ - `words` (mảng cấu trúc) - Cung cấp thông tin chi tiết về từng khối từ vựng, nếu cài đặt `words` được đặt thành `true`. Lưu ý: Mặc dù thuật ngữ "từ" được sử dụng để đơn giản hóa, nhưng có thể không chính xác về mặt ngôn ngữ khi coi các khối từ vựng là các từ riêng lẻ.
+ - `parse_tree` (đối tượng) - Bao gồm cây phân tích cú pháp và cụm từ được phát hiện cho câu khi cài đặt `parses` được đặt thành `true`.
+ - `nbest_parses` (mảng các đối tượng phân tích cú pháp) - Liệt kê các cây phân tích cú pháp thay thế gần với cây chính xác nhất. Được tạo khi cả hai cài đặt `parses` được đặt thành `true` và cài đặt `deterministic` được chủ động đặt thành `false`.
 
- ### Words
+ ### Từ
 
- The words section is generated if:
+ Phần từ được tạo nếu:
 
-* The `words` setting is set to `true`.
+* Cài đặt `words` được đặt thành `true`.
 
- Every lexical chunk (referred to as a "word" for simplicity) structure in the `words` array contains:
+ Mỗi khối từ vựng (được gọi đơn giản là "từ") trong mảng `words` đều chứa:
 
- - `type` (string) - Defines the element's category. For example: `punctuation` for punctuation marks, `numeral` for numerals, or `word` for all other text elements.
- - `text` (string) - The original input text. 
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) - Length of the content.
- - `corrected_text` (string) - The automatically corrected version of the sentence, if a misspelling was detected.
- - `lettercase` (string) - Indicates the original letter case of the word: `upper`, `capitalized`, or `mixed`. Note: If the text is entirely lowercase or case-insensitive, this attribute is omitted.
- - `stopword` (boolean) - Specifies whether the word is a <a href="https://en.wikipedia.org/wiki/Stop_words" target="_blank">stopword</a>
- - `grammar` (array of strings or structures) - Lists the grammatical features associated with the `word`. If the `feature_standard` setting is defined as `native`, each feature is an object containing an `index`(a numeral) and a `value`(string). Otherwise, each feature is represented as a plain string.
+ - `type` (chuỗi) - Xác định danh mục của phần tử. Ví dụ: `punctuation` cho các dấu câu, `numeral` cho các chữ số hoặc `word` cho tất cả các thành phần văn bản khác.
+ - `text` (chuỗi) - Văn bản đầu vào ban đầu. 
+ - `offset` (số nguyên không dấu) - Vị trí bắt đầu của trường hợp. Giá trị này bắt đầu từ số không.
+ - `length` (số nguyên không dấu) - Độ dài của nội dung.
+ - `corrected_text` (chuỗi) - Phiên bản được tự động sửa của câu nếu phát hiện lỗi chính tả.
+ - `lettercase` (chuỗi) - Biểu thị trạng thái viết hoa ban đầu của từ: `upper`, `capitalized` hoặc `mixed`. Lưu ý: Nếu toàn bộ văn bản là chữ thường hoặc không phân biệt chữ hoa chữ thường, thuộc tính này sẽ bị bỏ qua.
+ - `stopword` (boolean) - Xác định xem từ đó có phải là <a href="https://en.wikipedia.org/wiki/Stop_words" target="_blank">stopword</a> hay không
+ - `grammar` (mảng chuỗi hoặc cấu trúc) - Liệt kê các đặc điểm ngữ pháp liên quan đến `word`. Nếu cài đặt `feature_standard` được định nghĩa là `native`, thì mỗi tính năng là một đối tượng chứa một `index`(số) và một `value`(chuỗi). Nếu không, mỗi đặc điểm sẽ được biểu diễn dưới dạng một chuỗi thông thường.
 
- #### Advanced
+ #### Nâng cao
 
- For lexical words only:
+ Chỉ dành cho các từ vựng:
 
- - `role` (string) - The semantic role of the word. For example: `agent` or `patient`. Note: In the passive voice, semantic roles are reversed relative to syntactic roles. For example: In _The car was driven by David_, _car_ is the patient, and _David_ is the agent.
- - `numeric_value` (floating-point number) - The numeric value, if the word represents or is associated with one.
- - `family` (integer number) - the ID of the associated family with the disambiguated word-sense of the lexical chunk.
- - `definition` (string) - the definition of the family. 
-   - Included if the `fetch_definitions` setting is set to `true`.
- - `lexeme` (integer number) - The ID of the lexeme entry associated with the disambiguated word-sense.
- - `nondictionary_pattern` (integer number) - The ID of a non-dictionary pattern that matched the word if it was not found in the language model but classified using non-dictionary heuristics.
- - `style` (array of strings or structures) - Generates a list of style features associated with the `word`.
-   - Included if the `feature_standard` setting is set to `native` or `description`.
- - `semantics` (array of strings or structures) - Generates a list of semantic features associated with the `word`. 
-   - Included if the `feature_standard` setting is set to `native` or `description`.
- - `segmentation` (structure) - Provides information on the selected segmentation. A segmentation is an array of word structures.
+ - `role` (chuỗi) - Vai trò ngữ nghĩa của từ. Ví dụ: `agent` hoặc `patient`. Lưu ý: Trong dạng bị động, vai trò ngữ nghĩa bị đảo ngược so với vai trò cú pháp. Ví dụ: Trong _The car was driven by David_, _car_ là bị thể và _David_ là tác thể.
+ - `numeric_value` (số dấu phẩy động) - Giá trị số, nếu từ biểu thị hoặc liên kết với một số.
+ - `family` (số nguyên) - ID của họ liên quan đến nghĩa từ được giải thích rõ ràng của khối từ vựng.
+ - `definition` (chuỗi) - định nghĩa của họ. 
+   - Được bao gồm nếu cài đặt `fetch_definitions` được đặt thành `true`.
+ - `lexeme` (số nguyên) - ID của mục từ vựng liên quan đến nghĩa của từ đã được giải thích rõ ràng.
+ - `nondictionary_pattern` (số nguyên) - ID của một mẫu không có trong từ điển khớp với từ nếu mẫu không được tìm thấy trong mô hình ngôn ngữ nhưng được phân loại bằng phương pháp tìm kiếm không có trong từ điển.
+ - `style` (mảng chuỗi hoặc cấu trúc) - Tạo danh sách các đặc điểm phong cách liên quan đến `word`.
+   - Được bao gồm nếu cài đặt `feature_standard` được đặt thành `native` hoặc `description`.
+ - `semantics` (mảng chuỗi hoặc cấu trúc) - Tạo danh sách các đặc điểm ngữ nghĩa liên quan đến `từ`. 
+   - Được bao gồm nếu cài đặt `feature_standard` được đặt thành `native` hoặc `description`.
+ - `segmentation` (cấu trúc) - Cung cấp thông tin về phân đoạn đã chọn. Phân đoạn là một mảng các cấu trúc từ.
 
-   - Included if multiple segmentations are possible, and the `deterministic` setting is set to `false`.
+   - Được bao gồm nếu có thể phân đoạn nhiều lần và cài đặt `deterministic` được đặt thành `false`.
 
- - `other_segmentations` (array of structures) - Lists alternative segmentations considered incorrect during the disambiguation process. Each entry has the same structure as `segmentation`.
- - `nbest_senses` (array of structures) - Provides alternative disambiguation hypotheses. 
+ - `other_segmentations` (mảng cấu trúc) - Liệt kê các phân đoạn thay thế được coi là không chính xác trong quá trình phân định. Mỗi mục nhập có cùng cấu trúc như `segmentation`.
+ - `nbest_senses` (mảng cấu trúc) - Cung cấp các giả thuyết giải thích thay thế. 
 
-   - Included if the `deterministic` setting is `false`.
+   - Được bao gồm nếu cài đặt `deterministic` được đặt thành `false`.
 
-   - Each hypothesis includes: 
+   - Mỗi giả thuyết bao gồm: 
 
-     - `grammar`, `style`, and `semantics`. These are structured identically to the corresponding attributes above. 
-     - `senses`. Lists word-senses for the hypothesis, each containing:
-       - `family`: The associated family ID. 
-       - `definition`: The family’s definition if `fetch_definitions` is enabled. 
-       - `ref_lemma`: The reference lemma, if available.
+     - `grammar`, `style` và `semantics`. Chúng có cấu trúc giống hệt với các thuộc tính tương ứng ở trên. 
+     - `senses`. Liệt kê các nghĩa của từ cho giả thuyết, mỗi nghĩa chứa:
+       - `family`: ID họ liên quan. 
+       - `definition`: Định nghĩa của họ nếu `fetch_definitions` được bật. 
+       - `ref_lemma`: Bổ đề tham chiếu, nếu có.
 
 
- For punctuation marks only:
+ Chỉ dành cho dấu chấm câu:
 
- - `id` (integer number) - The ID of the punctuation mark.
+ - `id` (số nguyên) - ID của dấu chấm câu.
 
- - `behavior` (string) - The behavior code  that defines the function of the punctuation mark. Values:
+ - `behavior` (chuỗi) - Mã hành vi xác định chức năng của dấu chấm câu. Các giá trị:
    - `sentenceTerminator`
    - `genericComma`
    - `bracketStart`
@@ -305,35 +303,35 @@ See [Context and Long-Term Memory](/apis/tisane-api-configuration#context-and-lo
    - `hyphen`
    - `quoteStart`
    - `quoteEnd`
-   - `listComma` (for East-Asian enumeration commas such as  `、`)
+   - `listComma` (dành cho dấu phẩy liệt kê trong các ngôn ngữ Đông Á như `、`)
 
-Punctuation marks have no n-best senses.
+Dấu câu không có nghĩa n-best.
 
- ### Parse Trees and Phrases
+ ### Cây phân tích cú pháp và cụm từ
 
-A parse tree, or more precisely, a parse forest, is a hierarchical collection of phrases linked to one another.
+Cây phân tích cú pháp, hay chính xác hơn là rừng phân tích cú pháp, là tập hợp các cụm từ theo thứ bậc được liên kết với nhau.
 
-The parse tree section is generated if:
+Phần cây phân tích cú pháp được tạo ra nếu:
 
-* The `parses` setting is set to `true`.
+* Cài đặt `parses` được đặt thành `true`.
 
-At the top level of the parse, there is an array of root phrases contained within the `phrases` element, each associated with a numeric `id`. 
+Ở cấp độ cao nhất của cú pháp, có một mảng các cụm từ gốc được chứa trong phần tử `phrases`, mỗi cụm từ được liên kết với một `id` số. 
 
-Every phrase can have child phrases, forming a nested structure.
+Mỗi cụm từ có thể có các cụm từ con, tạo thành một cấu trúc lồng nhau.
 
- Each phrase includes the following attributes:
+ Mỗi cụm từ bao gồm các thuộc tính sau:
 
- - `type` (string) - A standard phrase tag denoting the type of the phrase. For example: `S`, `VP`, `NP`, `ADJP`, `ADVP`.
- - `family` (integer number) - An ID of the phrase family.
- - `offset` (unsigned integer) - The starting position of the instance. It is zero-based.
- - `length` (unsigned integer) -  Length of the phrase.
- - `role` (string) - The semantic role of the phrase, if applicable, similar to semantic roles assigned to individual words.
- - `text` (string) - The textual representation of the phrase: Phrase members are separated by the vertical bar character (|). Children phrases are enclosed in parentheses (). For example: 
-   - _driven|by|David_ 9 (a flat phrase with three members) 
-   - _(The|car)|was|(driven|by|David)_ (a hierarchical structure with child phrases).
+ - `type` (chuỗi) - Thẻ cụm từ chuẩn biểu thị loại cụm từ. Ví dụ: `S`, `VP`, `NP`, `ADJP`, `ADVP`.
+ - `family` (số nguyên) - ID của họ cụm từ.
+ - `offset` (số nguyên không dấu) - Vị trí bắt đầu của trường hợp. Giá trị này bắt đầu từ số không.
+ - `length` (số nguyên không dấu) - Độ dài của cụm từ.
+ - `role` (chuỗi) - Vai trò ngữ nghĩa của cụm từ, nếu có, tương tự như vai trò ngữ nghĩa được gán cho từng từ riêng lẻ.
+ - `text` (chuỗi) - Biểu diễn văn bản của cụm từ: Các phần của cụm từ được phân tách bằng ký tự thanh dọc (|). Cụm từ con được đặt trong dấu ngoặc đơn (). Ví dụ: 
+   - _driven|by|David_ 9 (một cụm từ đơn giản với ba phần) 
+   - _(The|car)|was|(driven|by|David)_ (một cấu trúc phân cấp với các cụm từ con).
 
 
- Example:
+ Ví dụ:
 
  ```json
 "parse_tree": {
@@ -366,31 +364,31 @@ Every phrase can have child phrases, forming a nested structure.
 }
  ```
 
- ### Context-Aware Spelling Correction
+ ### Sửa lỗi chính tả theo ngữ cảnh
 
-Tisane supports context-aware spelling correction. It identifies and corrects misspellings or intentional obfuscations by deducing the intended meaning, especially when the language model does not recognize a word.
+Tisane hỗ trợ sửa lỗi chính tả theo ngữ cảnh. Nó xác định và sửa lỗi chính tả hoặc lỗi cố ý làm tối nghĩa bằng cách suy ra ý nghĩa mong muốn, đặc biệt là khi mô hình ngôn ngữ không nhận dạng được một từ.
 
-When a correction is made, Tisane adds the `corrected_text` attribute:
+Khi thực hiện chỉnh sửa, Tisane sẽ thêm thuộc tính `corrected_text`:
 
- - At the word level: If individual words or lexical chunks are returned.
+ - Ở cấp độ từ: Nếu trả về từng từ riêng lẻ hoặc từng khối từ vựng.
 
- - At the sentence level: If the sentence text is generated. 
+ - Ở cấp độ câu: Nếu tạo văn bản câu. 
 
 
-Sentence-level `corrected_text` appears when:
+`corrected_text` cấp độ câu xuất hiện khi:
 
-* The `words` or `parses` settings are set to `true`.
+* Cài đặt `words` hoặc `parses` được đặt thành `true`.
 
-####  Exclude Rare Terms
+####  Loại trừ các thuật ngữ hiếm
 
-Tisane works with large dictionaries. You can exclude esoteric terms by adjusting the `min_generic_frequency` setting.
+Tisane làm việc với các từ điển lớn. Bạn có thể loại trừ các thuật ngữ khó hiểu bằng cách điều chỉnh cài đặt `min_generic_frequency`.
 
-####  Spell-Check Invocation
+####  Gọi Kiểm tra chính tả
 
-Note: Spell-checking runs regardless of whether sentence or word sections are included in the output.
+Lưu ý: Kiểm tra chính tả sẽ chạy bất kể câu hay phần từ có được bao gồm trong đầu ra hay không.
 
-You can control this behavior with the following settings:
+Bạn có thể kiểm soát hành vi này bằng các cài đặt sau:
 
-- Set `disable_spellcheck` to `true` to turn off spell-checking entirely.
+- Đặt `disable_spellcheck` thành `true` để tắt hoàn toàn kiểm tra chính tả.
 
-- To avoid correcting proper nouns (in languages with capitalization), set `lowercase_spellcheck_only` to `true`. This restricts spell-checking to lowercase words, excluding capitalized and uppercase terms.
+- Để tránh sửa danh từ riêng (trong các ngôn ngữ viết hoa), hãy đặt `lowercase_spellcheck_only` thành `true`. Thao tác này hạn chế kiểm tra chính tả đối với các từ viết thường, bỏ qua các thuật ngữ viết hoa chữ cái đầu và viết hoa toàn bộ.
