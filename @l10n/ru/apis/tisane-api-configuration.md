@@ -174,8 +174,8 @@
 
 - `ud`- <a href="https://universaldependencies.org/u/pos/" target="_blank">Универсальные теги зависимостей</a> (по умолчанию)
 - `penn` - <a href="https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html" target="_blank">Теги Penn treebank</a>
-- `native` - коды собственных функций Tisane
-- `description` - описания особенностей Tisane на родном языке
+- `native` - собственные коды Tisane
+- `description` - описания собственных кодов Tisane
 - `glossing` - <a href="https://en.wikipedia.org/wiki/List_of_glossing_abbreviations" target="_blank">стандартные сокращения глосс</a>
 
 Примечание: Наибольшее количество обозначений функций предлагают собственные коды Tisane (и их описания), за которыми следуют аббревиатуры толкования, потом идут универсальные зависимости, а затем теги Penn treebank.
