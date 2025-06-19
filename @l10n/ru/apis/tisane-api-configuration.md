@@ -1,71 +1,71 @@
-# Configuration and Customization
+# Конфигурация и настройка
 
-This section covers the ways you can configure and customize the API's behavior through various parameters.
+Этот раздел описывает способы конфигурирования и персонализации поведения API с помощью различных параметров.
 
-The settings structure enables you to:
+Структура настроек позволяет вам:
 
-1. Provide cues about the content being processed to improve analysis results.
-2. Customize output and select specific sections to display.
-3. Define standards for tags to conform the standards you use.
+1. Предоставлять подсказки о содержании обрабатываемого текста для улучшения результатов анализа.
+2. Настраивать выходные данные и выбирать конкретные разделы для отображения.
+3. Определять стандарты тегов в соответствии с используемыми вами стандаратми.
 
-### General Notes
+### Общие примечания
 
-- All settings are optional.
-- To use default settings, provide an empty object: `{}`.
-- Specify only the settings you want to modify.
+- Все настройки выполняются по желанию.
+- Чтобы использовать настройки по умолчанию, передайте пустой объект: `{}`.
+- Указывайте только те настройки, которые вы хотите изменить.
 
-## Content Cues
+## Подсказки по содержанию
 
-Content cues help tailor the analysis by telling where the content comes from, what topics are to be expected, and more.
+Помогают адаптировать анализ, указывая источник текста, ожидаемые темы и т. д.
 
-### Format
+### Формат
 
-The `format` setting allows using format-aware logic.
+Параметр `format` определяет формат текста и влияет на логику обработки.
 
 `format` (string) - Defines the format of the content. This influences how the underlying language models process the content. For example: when Tisane is told it's a review, it might look for sentiment more aggressively. With aliases, Tisane may try segment words and expect specific length. And so on. 
 
-Default: empty/undefined.
+Значение по умолчанию: пусто/не задано.
 
-#### Supported Format Values
+#### Поддерживаемые значения формата
 
-The supported values are:
+Поддерживаются следующие значения формата:
 
-- `review` - For product, service, or general reviews. It prioritizes detecting sentiment and promotional spam (unwanted commercial solicitation) that may contain obfuscated words.
-- `dialogue` - For comments/posts in a dialogue. It detects context-specific cues, such as name calling and other personal attacks. For example: A comment made of the word "snowflake" might be flagged as a personal attack (unlike if it's a review or an alias).
+- `review` - отзывы о продуктах/услугах или люзоры общего характера. Приоритет отдается обнаружению настроений и рекламного спама (нежелательных коммерческих предложений), которые могут содержать запутанные слова.
+- `dialogue` - для комментариев/постов в диалоге. Он распознает контекстно-зависимые сигналы, такие как оскорбления и другие личные нападки. Например: Комментарий, содержащий слово «снежинка», может быть помечен как личное оскорбление (в отличие от отзыва или псевдонима).
 
-- `shortpost` - For microblogging posts. For example, a tweet which is not a reply to another tweet.
+- `shortpost` - для постов в микроблогах. Например, твит, который не является ответом на другой твит.
 
-- `longform` - For long posts or articles.
+- `longform` - для длинных постов или статей.
 
-- `proofread` - For posts that have been proofread. In this format, spellchecking is automatically disabled.
-- `alias` - Represents a nickname in online communities or a username.
+- `proofread` - для постов, прошедших вычитку. В этом формате проверка орфографии автоматически отключается.
+- `alias` - представляет собой псевдоним в интернет-сообществах или имя пользователя.
 
-- `search` - For search queries; search queries are not necessarily complete or grammatically correct sentences. 
+- `search` - для поисковых запросов; поисковые запросы не обязательно представляют собой полные или грамматически правильные предложения. 
 
-### Spellchecking and Adversarial Text Manipulations
+### Проверка орфографии и работа с текстом
 
-These settings control the spellchecking policies. They help manage when and how spellchecking is applied to minimize errors and false positives.
+Эти настройки управляют политикой проверки орфографии. Они помогают управлять тем, когда и как применяется проверка орфографии, чтобы свести к минимуму ошибки и ложные срабатывания.
 
-- `disable_spellcheck` (boolean) - Disables automatic spellchecking when set to `true`. Default: `false` (spellchecking is enabled).
-- `lowercase_spellcheck_only` (boolean) - Applies spellchecking only to lowercase words. This helps avoid false positives on proper nouns. Default: `false` (applies to all words).
+- `disable_spellcheck` (логическое значение) — отключает автоматическую проверку орфографии, если установлено значение ` true` . По умолчанию: `false` (проверка орфографии включена).
+- `lowercase_spellcheck_only` (логическое значение) — проверка орфографии применяется только к словам, написанным строчными буквами. Это помогает избежать ложных срабатываний при распознавании имен собственных. По умолчанию: `false` (относится ко всем словам).
 
-### Parsing Settings
+### Настройки синтаксического анализа (парсинга)
 
-These settings control lexical filtering and parsing behavior, allowing for more precise text analysis. They help refine language processing by filtering rare terms, enabling context-specific parsing, and customizing language detection boundaries.
+Эти настройки управляют лексической фильтрацией и поведением синтаксического анализа, позволяя проводить более точный анализ текста. Они помогают улучшить обработку языка, фильтруя редкие термины, обеспечивая контекстно-зависимый анализ и настраивая границы обнаружения языка.
 
-- `min_generic_frequency` (integer) -  Excludes rare or esoteric terms based on frequency. Only applies for lexical items without domains. Valid range: '0' to '10' (higher values exclude more rare terms).
-- `subscope` (boolean) - Enables sub-scope parsing for specific contexts such as hashtags, URLs, obfuscated text (e.g., *“ihateyou”*). Default: `false`.
-- `lang_detect_segmentation_regex` (string) - Custom language detection boundaries using regular expressions. For example: `(([\r\n]|[.!?][ ]))`.This regex treats newlines and sentence-ending punctuation as boundaries. This can be useful for texts that contain multiple languages.
-- `disable_phrases` (boolean) - if `true`, syntactic structures are not mapped. **Only use if you need to detect simple entities or fall back to "bag of words" mode.**
-- `disable_commonsense_cues` (boolean) - if `true`, syntactic structures are mapped but the common-sense knowledge is not applied. Speeds up the processing but decreases the accuracy; context-dependent structures (most of `abuse`, some entities) will not be detected.
+- `min_generic_frequency` (целое число) — исключает редкие или эзотерические термины на основе частоты. Применяется только к лексическим единицам без областей. Допустимый диапазон: От «0» до «10» (более высокие значения исключают более редкие термины).
+- `subscope` (логическое значение) — включает синтаксический анализ подобластей для определенных контекстов, таких как хэштеги, URL-адреса, запутанный текст (например,*«ятебяненавижу»*). По умолчанию: `false`.
+- `lang_detect_segmentation_regex` (строка) — пользовательские границы определения языка с использованием регулярных выражений. Например: `(([\r\n]|[.!?][ ]))` .Это регулярное выражение рассматривает символы новой строки и знаки препинания в конце предложения как границы. Это может быть полезно для текстов, содержащих несколько языков.
+- `disable_phrases` (логического знаечние) — если`true`, синтаксические структуры не отображаются. **Используйте только в том случае, если вам необходимо обнаружить простые объекты или вернуться к режиму «мешка слов».**
+- `disable_commonsense_cues` (логическое значение) - если `true`, синтаксические структуры отображаются, но знание здравого смысла не применяется. Ускоряет обработку, но снижает точность; контекстно-зависимые структуры (большинство `abuse` , некоторые объекты) не будут обнаружены.
 
-### Domain Customization
+### Настройка областей
 
-This setting allows for fine-tuned control over content relevance by making specific domains more or less influential/prominent. 
+Эта настройка позволяет осуществлять точный контроль над релевантностью контента, делая определенные области более или менее влиятельными/заметными. 
 
-- `domain_factors` (array of structures) -  This setting provides session-specific cues to adjust the relevance of different content domains. This helps to amplify or suppress specific types of content based on your use case.
+- `domain_factors` (массив структур) — этот параметр предоставляет подсказки, специфичные для сеанса, для настройки релевантности различных областей контента. Это помогает усиливать или подавлять определенные типы контента в зависимости от вашего варианта использования.
 
-#### Array Element Format
+#### Формат элемента массива
 
 `{ "domain_id": multiplier }`
 
@@ -73,286 +73,286 @@ This setting allows for fine-tuned control over content relevance by making spec
 
 `multiplier` (number): A factor that increases or decreases the relevance of the domain.
 
-Example: 
+Пример: 
 ```json
 "domain_factors": {"12345": 2.3, "2222": 5.0}
 ```
 
-#### Sample Use Cases
+#### Примеры использования
 
-1. To amplify relevant domains, by setting values greater than 1.
+1. Чтобы усилить соответствующие обсласти, установите значения больше 1.
 
-Example:
+Пример:
 
-Emphasizing topics such as crime or drugs:
+Акцент на таких темах, как преступность или наркотики:
 
 `"domain_factors": {"31058": 5.0, "45220": 5.0, "14112": 5.0, "14509": 3.0, "28309": 5.0, "43220": 5.0, "34581": 5.0}`. 
 
-2. To suppress irrelevant domains, by setting values less than 1. This helps reduce noise from unrelated topics.
+2. Чтобы скрыть неуместные области, установите значения меньше 1. Это помогает снизить шум от не связанных между собой тем.
 
-### Temporal Context (RESERVED)
+### Временной контекст (ЗАРЕЗЕРВИРОВАНО)
 
-The temporal context feature ensures more accurate language interpretation by considering how word usage has evolved over time.
+Функция временного контекста обеспечивает более точную интерпретацию языка, учитывая, как со временем менялось употребление слов.
 
-- `when` (date string, format YYYY-MM-DD) - Enables you to specify the creation date of the content. This helps the model filter out anachronistic word meanings that didn’t exist at the specified time.
+- `when` (строка даты, формат ГГГГ-ММ-ДД) — позволяет указать дату создания контента. Это помогает модели отфильтровывать анахроничные значения слов, которые не существовали в указанное время.
 
-For example: The words _troll_, _mail_, and _post_ had different meanings before the Internet era. For historical texts, this setting helps ignore modern word senses that didn’t exist at that time.
+Например: Слова_troll (тролль)_, _mail (почта)_ и _post (пост)_ имели другие значения до эпохи Интернета. В исторических текстах эта настройка помогает игнорировать современные значения слов, которых в то время не существовало.
 
-## Customizing the Output
+## Настройка вывода
 
-The following settings allow you to customize the output by specifying relevant/irrelevant functionality and the required level of detail. 
+Следующие параметры позволяют настраивать вывод, указывая релевантные/нерелевантные функции и требуемый уровень детализации. 
 
-All settings are optional, with default values provided.
+Все настройки являются необязательными, предусмотрены значения по умолчанию.
 
-### Response Customization
+### Настройка ответа
 
-Response customization enables you to eliminate irrelevant sections from the response JSON structure, or show sections normally not included in the response. 
+Настройка ответа позволяет исключить ненужные разделы из структуры ответа JSON или отобразить разделы, которые обычно не включаются в ответ. 
 
-The following settings control which aspects of the content are reported:
+Следующие настройки определяют, какие аспекты контента будут сообщаться:
 
-- `abuse` (boolean) - Outputs information on detected instances of problematic content. Default: `true`.
-- `sentiment` (boolean) - Outputs sentiment-related snippets. Default: `true`.
-- `document_sentiment` (boolean) - Outputs document-level sentiment. It provides an overall sentiment analysis for the entire text. Default: `false`.
-- `entities` (boolean) - Outputs named entities detected in the text. For example: People, organizations, locations. Default: `true`.
-- `topics` (boolean) - Outputs topics identified in the content. Default: `true`.
+- `abuse` (логическое значение) — выводит информацию об обнаруженных случаях проблемного контента. По умолчанию: `true`.
+- `sentiment` (логическое значение) — выводит фрагменты, связанные с настроениями. По умолчанию: `true`.
+- `document_sentiment` (логическое значение) — выводит тональность на уровне документа. Он предоставляет общий анализ настроений для всего текста. По умолчанию: `false`.
+- `entities` (логическое значение) — выводит именованные объекты, обнаруженные в тексте. Например: Люди, организации, места. По умолчанию: `true`.
+- `topics` (логическое значение) — выводит темы, указанные в контенте. По умолчанию: `true`.
 
-Note: if the structure in question is not detected in the input, the section is omitted.
+Примечание: если рассматриваемая структура не обнаружена во входных данных, раздел пропускается.
 
-#### Topic Detection
+#### Определение темы
 
-Topic detection enables you to identify key topics (subjects, themes) within the content. 
+Функция определения тем позволяет вам определять ключевые темы (предметы, темы) в контенте. 
 
-The following settings control how topics are extracted and presented:
+Следующие настройки управляют тем, как извлекаются и представляются темы:
 
 
-- `topic_stats` (boolean) - Includes coverage statistics for each topic, if enabled. Default: `false`. When set to `true`, the output becomes an object with the following attributes:
+- `topic_stats` (логическое значение) — включает статистику охвата по каждой теме, если включено. По умолчанию: `false`. При установке на `true`, вывод становится объектом со следующими атрибутами:
 
-  - `topic` (string): The topic name.
+  - `topic` (строка): Название темы.
 
-  - `coverage` (floating-point number): The proportion of sentences in the input that refer to the topic.
+  - `coverage` (число с плавающей точкой): Доля предложений во входных данных, относящихся к теме.
 
-- `optimize_topics` (boolean) - Removes less specific topics when they overlap with more specific ones, if enabled. For example: When the topic is `cryptocurrency`, the optimization removes `finance`. Default: `false`.
+- `optimize_topics` (логическое значение) — удаляет менее конкретные темы, если они пересекаются с более конкретными, если включено. Например: Когда темой является `cryptocurrency`, оптимизация удаляет `finance`. По умолчанию: `false` .
 
-#### Low-level Functionality
+#### Низкоуровневая функциональность
 
-These settings provide deep insights into the structure and meaning of text by breaking it down into lexical chunks, definitions, and phrase structures. The detailed insights may be used when matching particular criteria not reflected in the upper-level sections like `abuse` or `topics`. For example, when looking for all noun phrases, or references to different types of motor vehicles, etc.
+Эти настройки обеспечивают глубокое понимание структуры и смысла текста путем разбиения его на лексические блоки, определения и фразовые структуры. Подробные сведения могут быть использованы при сопоставлении определенных критериев, не отраженных в разделах верхнего уровня, таких как `abuse` или `topics` . Например, при поиске всех словосочетаний или ссылок на различные типы транспортных средств и т. д.
 
-- `words` (boolean) - Outputs lexical chunks (or words) for every sentence. Default: `false`
+- `words` (логическое значение) — выводит лексические фрагменты (или слова) для каждого предложения. По умолчанию: `false`
 
-In languages without spaces (Chinese, Japanese, Thai), results of tokenization are considered words.
+В языках без пробелов (китайский, японский, тайский) результаты токенизации считаются словами.
 
-In languages using compounds (German, Dutch, Norwegian, Hungarian), the compound words are divided into individual lexical components. 
+В языках, использующих сложные слова (немецкий, голландский, норвежский, венгерский), сложные слова делятся на отдельные лексические компоненты. 
 
-- `fetch_definitions` (boolean) - Includes dictionary definitions of the words in the input text. Default: `false`. 
+- `fetch_definitions` (логическое значение) — включает словарные определения слов во входном тексте. По умолчанию: `false`. 
 
-Note: `fetch_definitions` is only considered when `words` is set to `true`.
+Примечание: `fetch_definitions` рассматривается только тогда, когда `words` установлено на `true` .
 
-- `parses` (boolean) - Outputs parse forests representing the hierarchical structure of phrases within sentences. Default: `false`.
+- `parses` (логическое значение) — выводит леса синтаксического анализа, представляющие иерархическую структуру фраз в предложениях. По умолчанию: `false`.
 
-- `deterministic` (boolean) - Controls whether to output only the detected sense or include most morphologically feasible interpretations:
+- `deterministic` (логическое значение) — определяет, следует ли выводить только обнаруженный смысл или включать наиболее морфологически возможные интерпретации:
 
-  - If `true` (default): Outputs only the detected sense.
+  - Если `true` (по умолчанию): Выводит только обнаруженное значение.
 
-  - If `false`: Outputs n-best senses.
+  - Если `false`: Выводятся n-лучшие значения.
 
 
-### Explainability
+### Объяснимость
 
-These settings control the inclusion of relevant text fragments and explanations for detected abuse, sentiment, and entities. They help provide clarity on why specific text segments were flagged or extracted.
+Эти настройки управляют включением соответствующих фрагментов текста и пояснений для обнаруженных оскорблений, настроений и объектов. Они помогают прояснить, почему определенные сегменты текста были помечены или извлечены.
 
-- `snippets` (boolean) - Includes text snippets in the abuse, sentiment, and entities sections. Default: `false`
+- `snippets` (логическое значение) — включает фрагменты текста в разделах оскорблений, настроений и объектов. По умолчанию: `false`
 
-- `explain` (boolean) - Provides reasoning or explanations for detected abuse and sentiment snippets, where possible. Default: `false`.
- ## Standards and Formats
-The following parameters determine the standards and formats used in the response object.
+- `explain` (логическое значение) — предоставляет обоснования или объяснения для обнаруженных фрагментов оскорблений и настроений, где это возможно. По умолчанию: `false`.
+ ## Стандарты и форматы
+Следующие параметры определяют стандарты и форматы, используемые в объекте ответа.
 
- ### Feature Standard
+ ### Стандарт характеристик
 
-- `feature_standard` (string) - Specifies the standard for outputting features related to grammar, style, and semantics. 
+- `feature_standard` (строка) — определяет стандарт вывода характеристик, связанных с грамматикой, стилем и семантикой. 
 
- The supported values are:
+ Поддерживаются следующие значения формата:
 
-- `ud`- <a href="https://universaldependencies.org/u/pos/" target="_blank">Universal Dependencies tags</a> (default)
-- `penn` - <a href="https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html" target="_blank">Penn treebank tags</a>
-- `native` -  Tisane's native feature codes
-- `description` - Tisane's native feature descriptions
-- `glossing` - <a href="https://en.wikipedia.org/wiki/List_of_glossing_abbreviations" target="_blank">standard glossing abbreviations</a>
+- `ud`- <a href="https://universaldependencies.org/u/pos/" target="_blank">Универсальные теги зависимостей</a> (по умолчанию)
+- `penn` - <a href="https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html" target="_blank">Теги Penn treebank</a>
+- `native` - коды собственных функций Tisane
+- `description` - описания особенностей Tisane на родном языке
+- `glossing` - <a href="https://en.wikipedia.org/wiki/List_of_glossing_abbreviations" target="_blank">стандартные сокращения глосс</a>
 
-Note: Tisane native codes (and their descriptions) offer the largest number of feature designations, followed by the glossing abbreviations, followed by the Universal Dependencies, and then followed by the Penn treebank tags.
+Примечание: Наибольшее количество обозначений функций предлагают собственные коды Tisane (и их описания), за которыми следуют аббревиатуры толкования, потом идут универсальные зависимости, а затем теги Penn treebank.
 
-### Topic Standard
+### Стандарт тем
 
-- `topic_standard` (string) - Defines the standard used for outputting topics in the response object. 
+- `topic_standard` (строка) - определяет стандарт, используемый для вывода тем в объекте ответа.. 
 
-The supported values are:    
+Поддерживаются следующие значения формата:    
 
-- `iptc_code` - IPTC topic taxonomy code
+- `iptc_code` - rод таксономии темы IPTC
 
-- `iptc_description` - IPTC topic taxonomy description (default)
-- `iab_code` - IAB topic taxonomy code
-- `iab_description` - IAB topic taxonomy description
-- `native` - Tisane's domain description (derived from the family description)
+- `iptc_description` - описание таксономии тем IPTC (по умолчанию)
+- `iab_code` - код таксономии темы IAB
+- `iab_description` - описание таксономии тем IAB
+- `native` - описание области Tisane (взято из описания семьи)
 
-### Sentiment Analysis Type
+### Тип анализа настроений
 
-- `sentiment_analysis_type` (string) - Determines the sentiment analysis strategy used. 
+- `sentiment_analysis_type` (строка) - определяет используемую стратегию анализа настроений. 
 
-The supported values are:
+Поддерживаются следующие значения формата:
 
-* `products_and_services` - The most common type of sentiment analysis: products and services.
-* `entity` - Sentiment analysis with entities as targets.
+* `products_and_services` - наиболее распространенный тип анализа настроений: товары и услуги.
+* `entity` – анализ настроений с использованием объектов в качестве целей.
 
-## Context and Long-Term Memory
+## Контекст и долговременная память
 
-Human understanding of language goes beyond processing individual sentences in isolation. Comprehension often requires context beyond current verbal or textual input, including gestures, visuals, or knowledge based on prior verbal or textual input. 
+Понимание человеком языка выходит за рамки обработки отдельных предложений по отдельности. Понимание часто требует контекста, выходящего за рамки текущего вербального или текстового ввода, включая жесты, визуальные образы или знания, основанные на предыдущей вербальной или текстовой входящей информацией. 
 
-In some cases, code-words or indirect references can conceal or obscure the original intended meaning of words.
+В некоторых случаях кодовые слова или косвенные ссылки могут скрывать или затуманивать первоначальное значение слов.
 
-The long-term memory module provides a way to address these gaps.
+Модуль долговременной памяти позволяет устранить эти пробелы.
 
-### When Text Only is Not Enough
+### Когда одного текста недостаточно
 
-Oftentimes, more than just textual input is required to perform an NLP task:
+Зачастую для выполнения задачи НЛП требуется нечто большее, чем просто текстовый ввод:
 
-- Abuse: A term referring to an ethnicity or religious group may not be offensive on its own, but when it is paired with a derogatory image (For example: an ape, a pig), the intent to offend is clear.
-- Gender Ambiguity in Translation: Languages like English don’t always indicate a person's gender. When translating to languages that require it (For example: Russian or French), additional context is needed.
-- Scams: Fraudsters may extract details, piece-by-piece, over multiple messages. In isolation, without referencing previous messages, it’s hard or impossible to detect the moment when crime is committed.
+- Злоупотребление: Термин, относящийся к этнической или религиозной группе, сам по себе может не быть оскорбительным, но когда он сочетается с уничижительным образом (например, обезьяна, свинья), намерение оскорбить становится очевидным.
+- Гендерная неоднозначность при переводе: В таких языках, как английский, пол человека указывается не всегда. При переводе на языки, требующие этого (например: русский или французский), необходим дополнительный контекст.
+- Мошенничество: Мошенники могут извлекать данные по частям из нескольких сообщений. В отрыве от предыдущих сообщений, без ссылок на них, трудно или невозможно определить момент совершения преступления.
 
-Tisane's long-term memory module addresses these challenges. It consists of three components (all optional):
+Модуль долговременной памяти Tisane решает эти проблемы. Он состоит из трех компонентов (все необязательные):
 
-- Reassignments - Reassigning meanings, attributes, and hypernyms for custom interpretation. 
-- Flags - To provide non-textual context.
-- Antecedents -  For accurate pronoun and reference tracking.
+- Переназначения — переназначение значений, атрибутов и гиперонимов для индивидуальной интерпретации. 
+- Флаги — для предоставления нетекстового контекста.
+- Антецеденты — для точного отслеживания местоимений и ссылок.
 
-This ensures more precise language understanding. The module helps detect hidden abuse, scams, and contextual nuances.
+Это обеспечивает более точное понимание языка. Модуль помогает обнаружить скрытые злоупотребления, мошенничество и контекстные нюансы.
 
-#### What Is A hypernym?
+#### Что такое гипероним?
 
-A hypernym is a word that serves as a broad category under which more specific words (called hyponyms) fall. For example, *color* is a hypernym of *pink*; *vehicle* is a hypernym of *truck*. In computational linguistics and natural language processing (NLP), hypernyms help categorize words hierarchically, which can be useful for filtering or refining content analysis.
+Гипероним — это слово, которое представляет собой широкую категорию, в которую попадают более конкретные слова (называемые гипонимами). Например, *цвет* является гипернимом *розовый*; * транспортное средство* является гипернимом *грузовик*. В компьютерной лингвистике и обработке естественного языка (NLP) гипернимы помогают иерархически классифицировать слова, что может быть полезно для фильтрации или уточнения анализа контента.
 
-####  Reassignments
+####  Перезначение
 
-Reassignments modify how text is analyzed by adjusting attributes and conditions based on context. 
+Переназначения изменяют способ анализа текста, корректируя атрибуты и условия в зависимости от контекста. 
 
-Examples:
+Примеры:
 
-- If a word is a verb in 1st or 2nd person, assign a specific gender. This will generate more accurate translations to a language where inflected forms may be different for a different gender.
+- Если слово является глаголом в 1-м или 2-м лице, укажите определенный род. Это позволит получать более точные переводы на язык, где склоняемые формы могут различаться для разных родов.
 
-- Overwriting the original meaning of a group of words (including all inflected forms).  This allows detecting code-words and secret language.
+- Перезапись первоначального значения группы слов (включая все флективные формы).  Это позволяет обнаруживать кодовые слова и секретный язык.
 
-- Adding features or hypernyms. For example, we may want to mark a specific category of artifacts as `item_of_interest`, which will cause these artifacts to be extracted as an entity.  
+- Добавление функций или гиперонимов. Например, мы можем захотеть отметить определенную категорию артефактов как `item_of_interest`, что приведет к извлечению этих артефактов как объекта.  
 
-##### How Reassignments Work
+##### Как работают переназначения
 
-Reassignments are defined in the `assign` section as an array of structures with two main components: conditions (`if` )  and attributes (`then`). 
+Переназначения определены в разделе `assign` раздел как массив структур с двумя основными компонентами: условия (`if`) и атрибуты (`then`). 
 
-- `if` - The condition that must match, based on a combination of:
+- `if` - условие, которое должно совпадать, основано на комбинации:
 
-  - `regex` - A regular expression (RE2 syntax)
-  - `family` - A family ID
-  - `features` - A list of feature values. For example: `[{"index":1, "value":"NOUN"}]`.
-  - `hypernym` - A hypernym's family ID
+  - `regex` - регулярное выражение (синтаксис RE2)
+  - `family` - семейный идентификатор
+  - `features` - список значений характеристик. Например: `[{"index":1, "value":"NOUN"}]`.
+  - `hypernym` — идентификатор семьи гиперонима
 
-- `then` -  The attributes to assign if all requirements in the condition match:
-     - `family` - a family ID
-     - `features` - A list of feature values. For example: `[{"index":5, "value":"F"}]`.
-     - `hypernym` - A hypernym's family ID
+- `then` - атрибуты, назначаемые при соблюдении всех требований в условии:
+     - `family` - идентификатор семьи
+     - `features` - список значений характеристик. Например: `[{"index":5, "value":"F"}]`.
+     - `hypernym` — идентификатор семьи гиперонима
      
 
- Examples:
+ Примеры:
 
-1. Assume the speaker is female (if 1st person, assign feminine gender):
+1. Предположим, что говорит женщина (если это 1-е лицо, укажите женский род):
 
 ```json
  `"assign":[{"if":{"features":[{"index":9,"value":"1"}]},"then":{"features":[{"index":5,"value":"F"}]}}]`
 ```
 
-2. Assume any mention of a container refers to an illegal item: 
+2. Предположим, что любое упоминание контейнера относится к незаконному предмету: 
 
 ```json
    `"assign":[{"if":{"family":26888},"then":{"hypernym":123078}}]`
 ```
 
-3. Mark attacks on specifically named 3rd parties as personal attacks (by redefining names as "discussion participants"):
+3. Отмечать нападки на конкретно указанных третьих лиц как личные нападки (переопределив имена как «участников обсуждения»):
 
  ```json
    `"assign":[{"if":{"features":[{"index":14,"value":"NA"},{"index":22,"value":"PERS"}]},"then":{"features":[{"index":33,"value":"DIPA"}],"hypernym":123887}}]`
  ```
 
-   #### Flags
+   #### Флаги
 
-Flags serve as contextual hints that either providing information beyond the current text input, or tweak the way analysis is done in a specific way. Each flag is represented as a string. (Some of these flags may be toggled automatically with specific textual input.) 
+Флаги служат контекстными подсказками, которые либо предоставляют информацию, выходящую за рамки текущего текстового ввода, либо изменяют способ выполнения анализа определенным образом. Каждый флаг представлен в виде строки. (Некоторые из этих флагов могут переключаться автоматически при вводе определенного текста.) 
 
-In addition to the flags returned in the `memory` section, the following flags can be set manually:
+В дополнение к флагам, возвращенным в раздел `memory`, следующие флаги можно установить вручную:
 
-| **Flag**                | **Meaning**                                                  |
+| **Флаг**                | **Значение**                                                  |
 | ----------------------- | ------------------------------------------------------------ |
-| `agents_of_bad_things`  | A bad actor or was previously referred to.                  |
-| `aggressive_crime_scan` | When uncertain, assume crime-related intent.                 |
-| `bad_animal`            | Context involves an animal that symbolizes bad qualities. For example: pig, ape, snake. |
-| `bulk_message`          | The message was sent in bulk.                                |
-| `death_related`         | The context involves death.                                  |
-| `game_violence_ok`      | In gaming chats, allow calls to violence.                    |
-| `make_money`            | Context is about making money.                               |
-| `my_departure`          | The author mentioned leaving.                                |
-| `sexually_conservative` | Any photo-sharing or ambiguous interaction is assumed sexual. |
-| `trusted_party`         | The author claims to be a trusted individual. For example: Spouse, relative. |
-| `waste`                 | The topic is about waste (organic/inorganic).                |
-| `won_prize`             | Mentions or implications of winning money/prizes.            |
-| `work_from_home`        | Mentions working from home.                                  |
-| `organization`          | An organization was mentioned.                               |
-| `role`                  | A position or role was mentioned.                            |
+| `agents_of_bad_things`  | Плохой актер, о котором уже упоминалось ранее.                  |
+| `aggressive_crime_scan` | В случае неопределенности предполагается наличие преступного умысла.                 |
+| `bad_animal`            | Контекст включает животное, символизирующее плохие качества. Например: свинья, обезьяна, змея. |
+| `bulk_message`          | Выполняется массовая рассылка сообщения.                                |
+| `death_related`         | Контекст подразумевает смерть.                                  |
+| `game_violence_ok`      | В игровых чатах разрешать призывы к насилию.                    |
+| `make_money`            | Контекст — это зарабатывание денег.                               |
+| `my_departure`          | Автор упомянул об отъезде.                                |
+| `sexually_conservative` | Любой обмен фотографиями или двусмысленное взаимодействие считается сексуальным. |
+| `trusted_party`         | Автор утверждает, что является доверенным лицом. Например: Супруг, родственник. |
+| `waste`                 | Тема посвящена отходам (органическим/неорганическим).                |
+| `won_prize`             | Упоминания или намеки на выигрыш денег/призов.            |
+| `work_from_home`        | Упоминается работа на дому.                                  |
+| `organization`          | Была упомянута организация.                               |
+| `role`                  | Была упомянута должность или роль.                            |
 
-####    Antecedents
+####    Антецеденты
 
-Antecedents help with coreference resolution. 
+Антецеденты помогают в разрешении тождества по референту. 
 
-This provides context for pronouns or other references, that may impact analysis results.
+Это обеспечивает контекст для местоимений или других ссылок, которые могут повлиять на результаты анализа.
 
-##### Structure
+##### Структура
 
-Each antecedent contains:
+Каждый антецедент содержит:
 
-- `family` - The family ID of the antecedent
- - `features` - A list of feature values. For example: `{"index":36, "value":"WFH"}`.
+- `family` - идентификатор семьи антецедента
+ - `features` - список значений характеристик. Например: `{"index":36, "value":"WFH"}`.
 
-##     Signal To Noise Ranking
+##     Рейтинг отношения сигнал/шум
 
-When analyzing posts that comment on an issue or article, it's useful to prioritize those that are most relevant and based on reason, rather than emotion. The signal-to-noise ranking helps achieve this by filtering content for relevance and logical quality.
+При анализе сообщений, в которых комментируется какая-либо проблема или статья, полезно отдавать приоритет тем, которые наиболее актуальны и основаны на разуме, а не на эмоциях. Ранжирование по принципу «сигнал-шум» помогает достичь этого, фильтруя контент по релевантности и логическому качеству.
 
-### How It Works
+### Как это работает
 
-To calculate the signal to noise ranking:    
-1. Analyze the article headline using `keyword_features` and (optionally) `stop_hypernyms` in the settings. Extract the `relevant` attribute.
-2. Rank posts by relevance using the `relevant` attribute.
+Чтобы рассчитать рейтинг отношения сигнал/шум:    
+1. Проанализируйте заголовок статьи, используя `keyword_features` и (по желанию) `stop_hypernyms` в настройках. Извлеките атрибут `relevant`.
+2. Ранжируйте посты по релевантности, используя атрибут `relevant`.
 
-#### Step 1:  Identify Relevant Concepts
+#### Шаг 1:  Определите соответствующие концепции
 
 (This step can be omitted, if we already know the relevant concepts.)
 
-To determine relevant concepts, we analyze the article's headline. This is usually sufficient.
+Для определения соответствующих концепций мы анализируем заголовок статьи. Обычно этого достаточно.
 
-Two key settings affect this analysis:
+На этот анализ влияют два ключевых параметра:
 
-- `keyword_features` (an object of strings with string values) - Defines the characteristics to look for in a word. If a match is found, the corresponding family ID is added to the set of potentially relevant family IDs.
-- `stop_hypernyms` (an array of integers) - Filters out unwanted generalizations, such as abstract terms or emotion. If a potentially relevant family ID has a hypernym listed in this setting, it will not be considered. For example: In the headline *Fear and Loathing in Las Vegas*, we might only want *Las Vegas*. This setting is optional.
+- `keyword_features` (объект строк со строковыми значениями) — определяет характеристики, которые следует искать в слове. Если совпадение найдено, соответствующий семейный идентификатор добавляется в набор потенциально релевантных семейных идентификаторов.
+- `stop_hypernyms` (массив целых чисел) — отфильтровывает нежелательные обобщения, такие как абстрактные термины или эмоции. Если в этом параметре указан гиперним для потенциально соответствующего семейного идентификатора, он не будет рассматриваться. Например: В заголовке *Страх и ненависть в Лас-Вегасе* мы можем захотеть оставить только *Лас-Вегас*. Эта настройка необязательная.
 
-If `keyword_features` is used, the response will include a `relevant` attribute, containing the identified family IDs.  
+Если используется `keyword_features`, ответ будет включать атрибут `relevant`, содержащий идентифицированные идентификаторы семьи.  
 
-We recommend you include the `relevant` array in the settings when you do Step 2 ("Rank posts for relevance"). It helps prioritize posts that mention concepts related to those family IDs, ensuring the ranking process focuses on the most relevant content.
+Мы рекомендуем вам включить массив `relevant` в настройках при выполнении шага 2 («Ранжирование сообщений по релевантности»). Это помогает расставить приоритеты в публикациях, в которых упоминаются концепции, связанные с этими идентификаторами семей, гарантируя, что процесс ранжирования будет сосредоточен на наиболее релевантном контенте.
 
-#### Step 2: Rank Posts For Relevance
+#### Шаг 2: Оцените релевантность постов
 
-Use the `relevant` attribute from step 1 to assess posts or comments. 
+Используйте атрибут `relevant` из шага 1 для оценки постов или комментариев. 
 
-Ranking is boosted when:
+Рейтинг повышается, когда:
 
-* Relevant domains, hypernyms, or related families appear in the post. 
-* Sentiment (positive or negative) is linked to specific aspects.
+* В публикации указаны соответствующие области, гипернимы или родственные семейства. 
+* Настроение (положительное или отрицательное) связано с определенными аспектами.
 
-Ranking is penalized when:
+Рейтинг снижается в штрафном порядке, если:
 
-- Negativity is not tied to specific aspects.
-- Abusive content is detected (unless looking for specific criminal content).
+- Негативность не привязана к конкретным аспектам.
+- Обнаружен проблемный контент (если только не ищется конкретный криминальный контент).
 
-Note: The `abuse_not_noise` parameter (when set to `true`) prevents abuse from being penalized.
+Примечание: Параметр `abuse_not_noise` (при установке на `true`) предотвращает снижение рейтинга при обнаружении проблемного контента.

@@ -1,71 +1,71 @@
-# Configuration and Customization
+# Cấu hình và tùy chỉnh
 
-This section covers the ways you can configure and customize the API's behavior through various parameters.
+Phần này trình bày những cách bạn có thể cấu hình và tùy chỉnh hành vi của API thông qua các tham số khác nhau.
 
-The settings structure enables you to:
+Cấu trúc cài đặt cho phép bạn:
 
-1. Provide cues about the content being processed to improve analysis results.
-2. Customize output and select specific sections to display.
-3. Define standards for tags to conform the standards you use.
+1. Cung cấp các dấu hiệu về nội dung đang được xử lý để cải thiện kết quả phân tích.
+2. Tùy chỉnh đầu ra và chọn các phần cụ thể để hiển thị.
+3. Xác định các tiêu chuẩn cho thẻ để tuân thủ các tiêu chuẩn bạn sử dụng.
 
-### General Notes
+### Lưu ý chung
 
-- All settings are optional.
-- To use default settings, provide an empty object: `{}`.
-- Specify only the settings you want to modify.
+- Tất cả cài đặt đều là tùy chọn.
+- Để sử dụng cài đặt mặc định, hãy cung cấp một đối tượng trống: `{}`.
+- Chỉ xác định những cài đặt bạn muốn sửa đổi.
 
-## Content Cues
+## Các đặc điểm của nội dung
 
-Content cues help tailor the analysis by telling where the content comes from, what topics are to be expected, and more.
+Các đặc điểm của nội dung giúp điều chỉnh phân tích bằng cách cho biết nội dung đến từ đâu, chủ đề nào sẽ được mong đợi và nhiều thông tin khác.
 
-### Format
+### Định dạng
 
-The `format` setting allows using format-aware logic.
+Cài đặt `format` cho phép sử dụng logic nhận biết định dạng.
 
 `format` (string) - Defines the format of the content. This influences how the underlying language models process the content. For example: when Tisane is told it's a review, it might look for sentiment more aggressively. With aliases, Tisane may try segment words and expect specific length. And so on. 
 
-Default: empty/undefined.
+Mặc định: trống/không xác định.
 
-#### Supported Format Values
+#### Các giá trị định dạng được hỗ trợ
 
-The supported values are:
+Các giá trị được hỗ trợ là:
 
-- `review` - For product, service, or general reviews. It prioritizes detecting sentiment and promotional spam (unwanted commercial solicitation) that may contain obfuscated words.
-- `dialogue` - For comments/posts in a dialogue. It detects context-specific cues, such as name calling and other personal attacks. For example: A comment made of the word "snowflake" might be flagged as a personal attack (unlike if it's a review or an alias).
+- `review` - Dành cho đánh giá sản phẩm, dịch vụ hoặc đánh giá chung. Định dạng này ưu tiên phát hiện cảm xúc và thư rác quảng cáo (gửi lời chào hàng thương mại không mong muốn) có thể chứa từ ngữ tối nghĩa.
+- `dialogue` - Dành cho bình luận/bài đăng trong cuộc hội thoại. Định dạng này phát hiện các đặc điểm cụ thể theo ngữ cảnh, chẳng hạn như chửi rủa và các hành vi tấn công cá nhân khác. Ví dụ: Bình luận sử dụng từ "bông tuyết" có thể bị đánh dấu là tấn công cá nhân (không giống như trường hợp từ này xuất hiện trong đánh giá hoặc biệt danh).
 
-- `shortpost` - For microblogging posts. For example, a tweet which is not a reply to another tweet.
+- `shortpost` - Dành cho bài đăng microblog. Ví dụ: một tweet không phải là phản hồi cho một tweet khác.
 
-- `longform` - For long posts or articles.
+- `longform` - Dành cho bài đăng hoặc bài viết dài.
 
-- `proofread` - For posts that have been proofread. In this format, spellchecking is automatically disabled.
-- `alias` - Represents a nickname in online communities or a username.
+- `proofread` - Dành cho bài đăng đã được hiệu đính. Ở định dạng này, tính năng kiểm tra chính tả sẽ tự động bị tắt.
+- `alias` - Biểu thị biệt danh trong cộng đồng trực tuyến hoặc tên người dùng.
 
-- `search` - For search queries; search queries are not necessarily complete or grammatically correct sentences. 
+- `search` - Dành cho truy vấn tìm kiếm; truy vấn tìm kiếm không nhất thiết phải là câu hoàn chỉnh hoặc đúng ngữ pháp. 
 
-### Spellchecking and Adversarial Text Manipulations
+### Kiểm tra chính tả và sử dụng văn bản đối nghịch
 
-These settings control the spellchecking policies. They help manage when and how spellchecking is applied to minimize errors and false positives.
+Các cài đặt này kiểm soát chính sách kiểm tra chính tả. Chúng giúp quản lý thời điểm và cách kiểm tra chính tả được áp dụng nhằm giảm thiểu các trường hợp lỗi và nhận diện sai.
 
-- `disable_spellcheck` (boolean) - Disables automatic spellchecking when set to `true`. Default: `false` (spellchecking is enabled).
-- `lowercase_spellcheck_only` (boolean) - Applies spellchecking only to lowercase words. This helps avoid false positives on proper nouns. Default: `false` (applies to all words).
+- `disable_spellcheck` (boolean) - Tắt kiểm tra chính tả tự động khi được đặt thành `true`. Mặc định: `false` (đã bật kiểm tra chính tả).
+- `lowercase_spellcheck_only` (boolean) - Chỉ áp dụng kiểm tra chính tả cho các từ viết thường. Điều này giúp tránh nhận diện sai với danh từ riêng. Mặc định: `false` (áp dụng cho tất cả từ).
 
-### Parsing Settings
+### Cài đặt phân tích cú pháp
 
-These settings control lexical filtering and parsing behavior, allowing for more precise text analysis. They help refine language processing by filtering rare terms, enabling context-specific parsing, and customizing language detection boundaries.
+Các cài đặt này kiểm soát hành vi phân tích cú pháp và lọc từ vựng, cho phép phân tích văn bản chính xác hơn. Chúng giúp tinh chỉnh quá trình xử lý ngôn ngữ bằng cách lọc các thuật ngữ hiếm, cho phép phân tích cú pháp theo ngữ cảnh và tùy chỉnh các ranh giới phát hiện ngôn ngữ.
 
-- `min_generic_frequency` (integer) -  Excludes rare or esoteric terms based on frequency. Only applies for lexical items without domains. Valid range: '0' to '10' (higher values exclude more rare terms).
-- `subscope` (boolean) - Enables sub-scope parsing for specific contexts such as hashtags, URLs, obfuscated text (e.g., *“ihateyou”*). Default: `false`.
-- `lang_detect_segmentation_regex` (string) - Custom language detection boundaries using regular expressions. For example: `(([\r\n]|[.!?][ ]))`.This regex treats newlines and sentence-ending punctuation as boundaries. This can be useful for texts that contain multiple languages.
-- `disable_phrases` (boolean) - if `true`, syntactic structures are not mapped. **Only use if you need to detect simple entities or fall back to "bag of words" mode.**
-- `disable_commonsense_cues` (boolean) - if `true`, syntactic structures are mapped but the common-sense knowledge is not applied. Speeds up the processing but decreases the accuracy; context-dependent structures (most of `abuse`, some entities) will not be detected.
+- `min_generic_frequency` (số nguyên) -  Loại trừ các thuật ngữ hiếm hoặc khó hiểu dựa trên tần suất. Chỉ áp dụng cho các mục từ vựng không có miền. Phạm vi hợp lệ: '0' đến '10' (giá trị cao hơn loại trừ các thuật ngữ hiếm hơn).
+- `subscope` (boolean) - Cho phép phân tích cú pháp phạm vi phụ cho các ngữ cảnh cụ thể như hashtag, URL, văn bản bị làm cho tối nghĩa (ví dụ: *“ihateyou”*). Mặc định: `false`.
+- `lang_detect_segmentation_regex` (chuỗi) -  Tùy chỉnh ranh giới phát hiện ngôn ngữ bằng cách sử dụng biểu thức chính quy. Ví dụ: `(([\r\n]|[.!?][ ]))`.Biểu thức chính quy này coi ký tự xuống dòng và dấu chấm kết thúc câu là các ranh giới. Điều này có thể hữu ích cho các văn bản chứa nhiều ngôn ngữ.
+- `disable_phrases` (boolean) - nếu được đặt thành `true`, cấu trúc cú pháp không được ánh xạ. **Chỉ sử dụng nếu bạn cần phát hiện các thực thể đơn giản hoặc quay lại chế độ "túi từ".**
+- `disable_commonsense_cues` (boolean) -nếu được đặt thành `true`, cấu trúc cú pháp được ánh xạ nhưng kiến ​​thức thông thường không được áp dụng. Tăng tốc độ xử lý nhưng làm giảm độ chính xác; các cấu trúc phụ thuộc vào ngữ cảnh (phần lớn `abuse`, một số thực thể) sẽ không được phát hiện.
 
-### Domain Customization
+### Tùy chỉnh miền
 
-This setting allows for fine-tuned control over content relevance by making specific domains more or less influential/prominent. 
+Cài đặt này cho phép kiểm soát chặt chẽ mức độ liên quan của nội dung bằng cách tăng hoặc giảm mức độ ảnh hưởng/đáng chú ý của các miền cụ thể. 
 
-- `domain_factors` (array of structures) -  This setting provides session-specific cues to adjust the relevance of different content domains. This helps to amplify or suppress specific types of content based on your use case.
+- `domain_factors` (mảng cấu trúc) - Cài đặt này cung cấp đặc điểm cụ thể theo từng phiên để điều chỉnh mức độ liên quan của các miền nội dung khác nhau. Điều này giúp mở rộng hoặc hạn chế các loại nội dung cụ thể dựa trên trường hợp sử dụng của bạn.
 
-#### Array Element Format
+#### Định dạng phần tử mảng
 
 `{ "domain_id": multiplier }`
 
@@ -73,286 +73,286 @@ This setting allows for fine-tuned control over content relevance by making spec
 
 `multiplier` (number): A factor that increases or decreases the relevance of the domain.
 
-Example: 
+Ví dụ: 
 ```json
 "domain_factors": {"12345": 2.3, "2222": 5.0}
 ```
 
-#### Sample Use Cases
+#### Các trường hợp sử dụng mẫu
 
-1. To amplify relevant domains, by setting values greater than 1.
+1. Để mở rộng các miền có liên quan bằng cách đặt các giá trị lớn hơn 1.
 
-Example:
+Ví dụ:
 
-Emphasizing topics such as crime or drugs:
+Nhấn mạnh các chủ đề như tội phạm hoặc ma túy:
 
 `"domain_factors": {"31058": 5.0, "45220": 5.0, "14112": 5.0, "14509": 3.0, "28309": 5.0, "43220": 5.0, "34581": 5.0}`. 
 
-2. To suppress irrelevant domains, by setting values less than 1. This helps reduce noise from unrelated topics.
+2. Để hạn chế các miền không liên quan, bằng cách đặt giá trị nhỏ hơn 1. Điều này giúp giảm nhiễu từ các chủ đề không liên quan.
 
-### Temporal Context (RESERVED)
+### Ngữ cảnh thời gian (ĐÃ ĐẶT TRƯỚC)
 
-The temporal context feature ensures more accurate language interpretation by considering how word usage has evolved over time.
+Tính năng ngữ cảnh thời gian đảm bảo việc diễn giải ngôn ngữ chính xác hơn bằng cách xem xét cách sử dụng từ đã thay đổi như thế nào theo thời gian.
 
-- `when` (date string, format YYYY-MM-DD) - Enables you to specify the creation date of the content. This helps the model filter out anachronistic word meanings that didn’t exist at the specified time.
+- `when` (chuỗi ngày, định dạng YYYY-MM-DD) - Cho phép bạn chỉ định ngày tạo nội dung. Cài đặt này giúp mô hình lọc ra những nghĩa từ không đúng thời điểm không tồn tại tại thời điểm được chỉ định.
 
-For example: The words _troll_, _mail_, and _post_ had different meanings before the Internet era. For historical texts, this setting helps ignore modern word senses that didn’t exist at that time.
+Ví dụ: Trước thời đại internet, các từ _troll_, _mail_, và _post_ có nghĩa khác với bây giờ. Đối với các văn bản lịch sử, cài đặt này giúp bỏ qua các nghĩa từ hiện đại không tồn tại vào thời điểm đó.
 
-## Customizing the Output
+## Tùy chỉnh đầu ra
 
-The following settings allow you to customize the output by specifying relevant/irrelevant functionality and the required level of detail. 
+Các thiết lập sau đây cho phép bạn tùy chỉnh đầu ra bằng cách chỉ định chức năng có liên quan/không liên quan và mức độ chi tiết yêu cầu. 
 
-All settings are optional, with default values provided.
+Tất cả các cài đặt đều là tùy chọn, có sẵn các giá trị mặc định.
 
-### Response Customization
+### Tùy chỉnh phản hồi
 
-Response customization enables you to eliminate irrelevant sections from the response JSON structure, or show sections normally not included in the response. 
+Tùy chỉnh phản hồi cho phép bạn loại bỏ các phần không liên quan khỏi cấu trúc JSON của phản hồi hoặc hiển thị các phần thường không có trong phản hồi. 
 
-The following settings control which aspects of the content are reported:
+Các cài đặt sau đây kiểm soát những khía cạnh nào của nội dung sẽ được báo cáo:
 
-- `abuse` (boolean) - Outputs information on detected instances of problematic content. Default: `true`.
-- `sentiment` (boolean) - Outputs sentiment-related snippets. Default: `true`.
-- `document_sentiment` (boolean) - Outputs document-level sentiment. It provides an overall sentiment analysis for the entire text. Default: `false`.
-- `entities` (boolean) - Outputs named entities detected in the text. For example: People, organizations, locations. Default: `true`.
-- `topics` (boolean) - Outputs topics identified in the content. Default: `true`.
+- `abuse` (boolean) - Xuất thông tin về các trường hợp phát hiện nội dung có vấn đề. Mặc định: `true`.
+- `sentiment` (boolean) - Đưa ra các đoạn trích liên quan đến cảm xúc. Mặc định: `true`.
+- `document_sentiment` (boolean) - Đưa ra cảm xúc ở cấp độ tài liệu. Cài đặt này cung cấp phân tích cảm xúc chung cho toàn bộ văn bản. Mặc định: `false`.
+- `entities` (boolean) - Đưa ra các thực thể được đặt tên được phát hiện trong văn bản. Ví dụ: Con người, tổ chức, địa điểm. Mặc định: `true`.
+- `topics` (boolean) - Đưa ra các chủ đề được xác định trong nội dung. Mặc định: `true`.
 
-Note: if the structure in question is not detected in the input, the section is omitted.
+Lưu ý: nếu cấu trúc đang đề cập không được phát hiện trong dữ liệu đầu vào, phần này sẽ bị bỏ qua.
 
-#### Topic Detection
+#### Phát hiện chủ đề
 
-Topic detection enables you to identify key topics (subjects, themes) within the content. 
+Phát hiện chủ đề cho phép bạn xác định các chủ đề chính (đề tài, chủ đề) trong nội dung. 
 
-The following settings control how topics are extracted and presented:
-
-
-- `topic_stats` (boolean) - Includes coverage statistics for each topic, if enabled. Default: `false`. When set to `true`, the output becomes an object with the following attributes:
-
-  - `topic` (string): The topic name.
-
-  - `coverage` (floating-point number): The proportion of sentences in the input that refer to the topic.
-
-- `optimize_topics` (boolean) - Removes less specific topics when they overlap with more specific ones, if enabled. For example: When the topic is `cryptocurrency`, the optimization removes `finance`. Default: `false`.
-
-#### Low-level Functionality
-
-These settings provide deep insights into the structure and meaning of text by breaking it down into lexical chunks, definitions, and phrase structures. The detailed insights may be used when matching particular criteria not reflected in the upper-level sections like `abuse` or `topics`. For example, when looking for all noun phrases, or references to different types of motor vehicles, etc.
-
-- `words` (boolean) - Outputs lexical chunks (or words) for every sentence. Default: `false`
-
-In languages without spaces (Chinese, Japanese, Thai), results of tokenization are considered words.
-
-In languages using compounds (German, Dutch, Norwegian, Hungarian), the compound words are divided into individual lexical components. 
-
-- `fetch_definitions` (boolean) - Includes dictionary definitions of the words in the input text. Default: `false`. 
-
-Note: `fetch_definitions` is only considered when `words` is set to `true`.
-
-- `parses` (boolean) - Outputs parse forests representing the hierarchical structure of phrases within sentences. Default: `false`.
-
-- `deterministic` (boolean) - Controls whether to output only the detected sense or include most morphologically feasible interpretations:
-
-  - If `true` (default): Outputs only the detected sense.
-
-  - If `false`: Outputs n-best senses.
+Các cài đặt sau kiểm soát cách chủ đề được trích xuất và trình bày:
 
 
-### Explainability
+- `topic_stats` (boolean) - Bao gồm số liệu thống kê phạm vi cho từng chủ đề, nếu được bật. Mặc định: `false`. Khi được đặt thành `true`, đầu ra trở thành một đối tượng có các thuộc tính sau:
 
-These settings control the inclusion of relevant text fragments and explanations for detected abuse, sentiment, and entities. They help provide clarity on why specific text segments were flagged or extracted.
+  - `topic` (chuỗi): Tên chủ đề.
 
-- `snippets` (boolean) - Includes text snippets in the abuse, sentiment, and entities sections. Default: `false`
+  - `coverage` (số dấu phẩy động): Tỷ lệ các câu trong văn bản đầu vào đề cập đến chủ đề.
 
-- `explain` (boolean) - Provides reasoning or explanations for detected abuse and sentiment snippets, where possible. Default: `false`.
- ## Standards and Formats
-The following parameters determine the standards and formats used in the response object.
+- `optimize_topics` (boolean) - Xóa các chủ đề ít cụ thể hơn khi chúng chồng chéo với các chủ đề cụ thể hơn, nếu được bật. Ví dụ: Khi chủ đề là `cryptocurrency`, thuộc tính tối ưu hóa sẽ xóa `finance`. Mặc định: `false`.
 
- ### Feature Standard
+#### Chức năng cấp thấp
 
-- `feature_standard` (string) - Specifies the standard for outputting features related to grammar, style, and semantics. 
+Các cài đặt này cung cấp thông tin chuyên sâu về cấu trúc và ý nghĩa của văn bản bằng cách chia nhỏ văn bản thành các khối từ vựng, định nghĩa và cấu trúc cụm từ. Thông tin chi tiết có thể được sử dụng khi đối chiếu các tiêu chí cụ thể không được phản ánh trong các phần ở cấp độ cao hơn như `abuse` hoặc `topics`. Ví dụ: khi tìm kiếm tất cả các cụm danh từ hoặc tham chiếu đến các loại phương tiện cơ giới khác nhau, v.v.
 
- The supported values are:
+- `words` (boolean) - Đưa ra các khối từ vựng (hoặc từ) cho mỗi câu. Mặc định: `false`
 
-- `ud`- <a href="https://universaldependencies.org/u/pos/" target="_blank">Universal Dependencies tags</a> (default)
+Trong các ngôn ngữ không có khoảng trắng (tiếng Trung, tiếng Nhật, tiếng Thái), kết quả của phép phân tách được coi là các từ.
+
+Trong các ngôn ngữ sử dụng từ ghép (tiếng Đức, tiếng Hà Lan, tiếng Na Uy, tiếng Hungary), các từ ghép được chia thành các thành phần từ vựng riêng lẻ. 
+
+- `fetch_definitions` (boolean) - Bao gồm định nghĩa theo từ điển của các từ trong văn bản đầu vào. Mặc định: `false`. 
+
+Lưu ý: `fetch_definitions` chỉ được cân nhắc khi cài đặt `words` được đặt thành `true`.
+
+- `parses` (boolean) - Đưa ra các rừng phân tích cú pháp biểu diễn cấu trúc phân cấp của cụm từ trong câu. Mặc định: `false`.
+
+- `deterministic` (boolean) - Kiểm soát việc chỉ đưa ra ý nghĩa được phát hiện hay bao gồm hầu hết các cách giải thích khả thi về mặt hình thái:
+
+  - Nếu được đặt thành `true` (mặc định): Chỉ đưa ra các nghĩa được phát hiện.
+
+  - Nếu được đặt thành `false`: Đưa ra các nghĩa n-best.
+
+
+### Khả năng giải thích
+
+Các cài đặt này kiểm soát việc đưa vào các đoạn văn bản có liên quan và giải thích về hành vi lạm dụng, cảm xúc và thực thể được phát hiện. Chúng giúp làm rõ lý do tại sao các đoạn văn bản cụ thể được đánh dấu hoặc trích xuất.
+
+- `snippets` (boolean) - Bao gồm các đoạn văn bản trong phần lạm dụng, cảm xúc và thực thể. Mặc định: `false`
+
+- `explain` (boolean) - Cung cấp lý do hoặc giải thích cho các đoạn trích liên quan đến lạm dụng và cảm xúc được phát hiện, nếu có thể. Mặc định: `false`.
+ ## Tiêu chuẩn và định dạng
+Các tham số sau đây xác định các tiêu chuẩn và định dạng được sử dụng trong đối tượng phản hồi.
+
+ ### Tiêu chuẩn đặc điểm
+
+- `feature_standard` (string) - Chỉ định tiêu chuẩn để đưa ra các đặc điểm liên quan đến ngữ pháp, phong cách và ngữ nghĩa. 
+
+ Các giá trị được hỗ trợ là:
+
+- `ud`- <a href="https://universaldependencies.org/u/pos/" target="_blank">Universal Dependencies tags</a> (mặc định)
 - `penn` - <a href="https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html" target="_blank">Penn treebank tags</a>
-- `native` -  Tisane's native feature codes
-- `description` - Tisane's native feature descriptions
+- `native` -  Mã đặc điểm gốc của Tisane
+- `description` - Mô tả đặc điểm gốc của Tisane
 - `glossing` - <a href="https://en.wikipedia.org/wiki/List_of_glossing_abbreviations" target="_blank">standard glossing abbreviations</a>
 
-Note: Tisane native codes (and their descriptions) offer the largest number of feature designations, followed by the glossing abbreviations, followed by the Universal Dependencies, and then followed by the Penn treebank tags.
+Lưu ý: Mã gốc Tisane (và các mô tả của chúng) cung cấp số lượng lớn nhất các ký hiệu đặc điểm, tiếp theo là các chữ viết tắt chú thích, tiếp theo là Universal Dependencies và cuối cùng là các thẻ Penn treebank.
 
-### Topic Standard
+### Tiêu chuẩn chủ đề
 
-- `topic_standard` (string) - Defines the standard used for outputting topics in the response object. 
+- `topic_standard` (string) - Xác định tiêu chuẩn được sử dụng để đưa ra chủ đề trong đối tượng phản hồi. 
 
-The supported values are:    
+Các giá trị được hỗ trợ là:    
 
-- `iptc_code` - IPTC topic taxonomy code
+- `iptc_code` - Mã phân loại chủ đề IPTC
 
-- `iptc_description` - IPTC topic taxonomy description (default)
-- `iab_code` - IAB topic taxonomy code
-- `iab_description` - IAB topic taxonomy description
-- `native` - Tisane's domain description (derived from the family description)
+- `iptc_description` - Mô tả phân loại chủ đề IPTC (mặc định)
+- `iab_code` - Mã phân loại chủ đề IAB
+- `iab_description` - Mô tả phân loại chủ đề IAB
+- `native` - Mô tả miền của Tisane (lấy từ mô tả họ)
 
-### Sentiment Analysis Type
+### Loại phân tích cảm xúc
 
-- `sentiment_analysis_type` (string) - Determines the sentiment analysis strategy used. 
+- `sentiment_analysis_type` (chuỗi) - Xác định chiến lược phân tích cảm xúc được sử dụng. 
 
-The supported values are:
+Các giá trị được hỗ trợ là:
 
-* `products_and_services` - The most common type of sentiment analysis: products and services.
-* `entity` - Sentiment analysis with entities as targets.
+* `products_and_services` - Loại phân tích cảm xúc phổ biến nhất: sản phẩm và dịch vụ.
+* `entity` - Phân tích cảm xúc  với các thực thể là mục tiêu.
 
-## Context and Long-Term Memory
+## Bối cảnh và Bộ nhớ dài hạn
 
-Human understanding of language goes beyond processing individual sentences in isolation. Comprehension often requires context beyond current verbal or textual input, including gestures, visuals, or knowledge based on prior verbal or textual input. 
+Sự hiểu biết của con người về ngôn ngữ không chỉ giới hạn ở việc xử lý từng câu riêng lẻ. Sự hiểu biết thường đòi hỏi ngữ cảnh vượt ra ngoài thông tin bằng lời nói hoặc văn bản hiện tại, bao gồm cử chỉ, hình ảnh hoặc kiến ​​thức dựa trên thông tin bằng lời nói hoặc văn bản trước đó. 
 
-In some cases, code-words or indirect references can conceal or obscure the original intended meaning of words.
+Trong một số trường hợp, mật mã hoặc tham chiếu gián tiếp có thể che giấu hoặc làm lu mờ ý nghĩa ban đầu của từ.
 
-The long-term memory module provides a way to address these gaps.
+Mô-đun bộ nhớ dài hạn cung cấp một giải pháp để giải quyết những khoảng trống này.
 
-### When Text Only is Not Enough
+### Khi chỉ văn bản là không đủ
 
-Oftentimes, more than just textual input is required to perform an NLP task:
+Thông thường, cần nhiều hơn là chỉ đầu vào văn bản để thực hiện tác vụ NLP:
 
-- Abuse: A term referring to an ethnicity or religious group may not be offensive on its own, but when it is paired with a derogatory image (For example: an ape, a pig), the intent to offend is clear.
-- Gender Ambiguity in Translation: Languages like English don’t always indicate a person's gender. When translating to languages that require it (For example: Russian or French), additional context is needed.
-- Scams: Fraudsters may extract details, piece-by-piece, over multiple messages. In isolation, without referencing previous messages, it’s hard or impossible to detect the moment when crime is committed.
+- Lạm dụng: Một thuật ngữ đề cập đến một nhóm dân tộc hoặc tôn giáo có thể không mang tính xúc phạm, nhưng khi đi kèm với một hình ảnh mang tính xúc phạm (Ví dụ: con vượn, con lợn), thì ý định xúc phạm là rõ ràng.
+- Sự mơ hồ về giới tính trong dịch thuật: Các ngôn ngữ như tiếng Anh không phải lúc nào cũng thể hiện giới tính của một người. Khi dịch sang các ngôn ngữ yêu cầu xác định giới tính (Ví dụ: Tiếng Nga hoặc tiếng Pháp), cần có thêm ngữ cảnh.
+- Lừa đảo: Kẻ lừa đảo có thể trích xuất thông tin chi tiết từng phần qua nhiều tin nhắn. Nếu chỉ xét riêng lẻ, không tham chiếu đến các tin nhắn trước đó, sẽ rất khó hoặc không thể phát hiện ra thời điểm phạm tội.
 
-Tisane's long-term memory module addresses these challenges. It consists of three components (all optional):
+Mô-đun bộ nhớ dài hạn của Tisane giải quyết được những thách thức này. Mô-đun này bao gồm ba thành phần (tất cả đều là tùy chọn):
 
-- Reassignments - Reassigning meanings, attributes, and hypernyms for custom interpretation. 
-- Flags - To provide non-textual context.
-- Antecedents -  For accurate pronoun and reference tracking.
+- Gán lại - Gán lại ý nghĩa, thuộc tính và thượng vị để diễn giải theo ý muốn. 
+- Dấu hiệu - Để cung cấp ngữ cảnh phi văn bản.
+- Tiền đề - Để theo dõi đại từ và tham chiếu chính xác.
 
-This ensures more precise language understanding. The module helps detect hidden abuse, scams, and contextual nuances.
+Điều này đảm bảo khả năng hiểu ngôn ngữ chính xác hơn. Mô-đun này giúp phát hiện hành vi lạm dụng, lừa đảo và các sắc thái ngữ cảnh tiềm ẩn.
 
-#### What Is A hypernym?
+#### Thượng vị là gì?
 
-A hypernym is a word that serves as a broad category under which more specific words (called hyponyms) fall. For example, *color* is a hypernym of *pink*; *vehicle* is a hypernym of *truck*. In computational linguistics and natural language processing (NLP), hypernyms help categorize words hierarchically, which can be useful for filtering or refining content analysis.
+Thượng vị là một từ đóng vai trò như một danh mục rộng trong đó chứa những từ cụ thể hơn (gọi là hạ vị). Ví dụ: *color* là thượng vị của *pink*; *vehicle* là thượng vị của *truck*. Trong ngôn ngữ học tính toán và xử lý ngôn ngữ tự nhiên (NLP), thượng vị giúp phân loại các từ theo thứ bậc, có thể hữu ích cho việc lọc hoặc tinh chỉnh phân tích nội dung.
 
-####  Reassignments
+####  Gán lại
 
-Reassignments modify how text is analyzed by adjusting attributes and conditions based on context. 
+Gán lại sẽ thay đổi cách phân tích văn bản bằng cách điều chỉnh các thuộc tính và điều kiện dựa trên ngữ cảnh. 
 
-Examples:
+Ví dụ:
 
-- If a word is a verb in 1st or 2nd person, assign a specific gender. This will generate more accurate translations to a language where inflected forms may be different for a different gender.
+- Nếu một từ là động từ ở ngôi thứ nhất hoặc thứ hai thì sẽ được chỉ định giới tính cụ thể. Điều này sẽ tạo ra bản dịch sang ngôn ngữ mà các dạng biến cách có thể khác nhau đối với những giới tính khác nhau chính xác hơn.
 
-- Overwriting the original meaning of a group of words (including all inflected forms).  This allows detecting code-words and secret language.
+- Ghi đè lên nghĩa gốc của một nhóm từ (bao gồm tất cả các dạng biến cách).  Điều này cho phép phát hiện mật mã và ngôn ngữ bí mật.
 
-- Adding features or hypernyms. For example, we may want to mark a specific category of artifacts as `item_of_interest`, which will cause these artifacts to be extracted as an entity.  
+- Thêm các đặc điểm hoặc thượng vị. Ví dụ: chúng ta có thể muốn đánh dấu một danh mục hiện vật cụ thể là `item_of_interest`, việc này sẽ khiến các hiện vật này được trích xuất dưới dạng một thực thể.  
 
-##### How Reassignments Work
+##### Gán lại hoạt động như thế nào
 
-Reassignments are defined in the `assign` section as an array of structures with two main components: conditions (`if` )  and attributes (`then`). 
+Gán lại được định nghĩa trong phần `assign` là một mảng các cấu trúc với hai thành phần chính: điều kiện (`if` )  và thuộc tính (`then`). 
 
-- `if` - The condition that must match, based on a combination of:
+- `if` - Điều kiện phải phù hợp, dựa trên sự kết hợp của:
 
-  - `regex` - A regular expression (RE2 syntax)
-  - `family` - A family ID
-  - `features` - A list of feature values. For example: `[{"index":1, "value":"NOUN"}]`.
-  - `hypernym` - A hypernym's family ID
+  - `regex` - Một biểu thức chính quy (cú pháp RE2)
+  - `family` - Một ID họ
+  - `features` - Một danh sách các giá trị đặc điểm. Ví dụ: `[{"index":1, "value":"NOUN"}]`.
+  - `hypernym` - ID họ của một thượng vị
 
-- `then` -  The attributes to assign if all requirements in the condition match:
-     - `family` - a family ID
-     - `features` - A list of feature values. For example: `[{"index":5, "value":"F"}]`.
-     - `hypernym` - A hypernym's family ID
+- `then` -  Các thuộc tính cần gán nếu tất cả các yêu cầu trong điều kiện phù hợp:
+     - `family` - một ID họ
+     - `features` - Một danh sách các giá trị đặc điểm. Ví dụ: `[{"index":5, "value":"F"}]`.
+     - `hypernym` - ID họ của một thượng vị
      
 
- Examples:
+ Ví dụ:
 
-1. Assume the speaker is female (if 1st person, assign feminine gender):
+1. Giả sử người nói là nữ (nếu là ngôi thứ nhất, chỉ định giới tính nữ):
 
 ```json
  `"assign":[{"if":{"features":[{"index":9,"value":"1"}]},"then":{"features":[{"index":5,"value":"F"}]}}]`
 ```
 
-2. Assume any mention of a container refers to an illegal item: 
+2. Giả sử mọi trường hợp nhắc đến container đều đề cập đến một mặt hàng bất hợp pháp: 
 
 ```json
    `"assign":[{"if":{"family":26888},"then":{"hypernym":123078}}]`
 ```
 
-3. Mark attacks on specifically named 3rd parties as personal attacks (by redefining names as "discussion participants"):
+3. Đánh dấu các hành vi tấn công vào bên thứ 3 được nêu tên cụ thể là các hành vi tấn công cá nhân (bằng cách định nghĩa lại tên là "người tham gia thảo luận"):
 
  ```json
    `"assign":[{"if":{"features":[{"index":14,"value":"NA"},{"index":22,"value":"PERS"}]},"then":{"features":[{"index":33,"value":"DIPA"}],"hypernym":123887}}]`
  ```
 
-   #### Flags
+   #### Dấu hiệu
 
-Flags serve as contextual hints that either providing information beyond the current text input, or tweak the way analysis is done in a specific way. Each flag is represented as a string. (Some of these flags may be toggled automatically with specific textual input.) 
+Dấu hiệu đóng vai trò gợi ý theo ngữ cảnh, cung cấp thông tin ngoài nội dung văn bản hiện tại hoặc điều chỉnh cách phân tích theo một cách cụ thể. Mỗi dấu hiệu được biểu diễn dưới dạng một chuỗi. (Một vài trong số các dấu hiệu này có thể được bật/tắt tự động với đầu vào văn bản cụ thể.) 
 
-In addition to the flags returned in the `memory` section, the following flags can be set manually:
+Ngoài các dấu hiệu được trả về trong phần `memory`, các dấu hiệu sau đây có thể được đặt thủ công:
 
-| **Flag**                | **Meaning**                                                  |
+| **Dấu hiệu**                | **Nghĩa**                                                  |
 | ----------------------- | ------------------------------------------------------------ |
-| `agents_of_bad_things`  | A bad actor or was previously referred to.                  |
-| `aggressive_crime_scan` | When uncertain, assume crime-related intent.                 |
-| `bad_animal`            | Context involves an animal that symbolizes bad qualities. For example: pig, ape, snake. |
-| `bulk_message`          | The message was sent in bulk.                                |
-| `death_related`         | The context involves death.                                  |
-| `game_violence_ok`      | In gaming chats, allow calls to violence.                    |
-| `make_money`            | Context is about making money.                               |
-| `my_departure`          | The author mentioned leaving.                                |
-| `sexually_conservative` | Any photo-sharing or ambiguous interaction is assumed sexual. |
-| `trusted_party`         | The author claims to be a trusted individual. For example: Spouse, relative. |
-| `waste`                 | The topic is about waste (organic/inorganic).                |
-| `won_prize`             | Mentions or implications of winning money/prizes.            |
-| `work_from_home`        | Mentions working from home.                                  |
-| `organization`          | An organization was mentioned.                               |
-| `role`                  | A position or role was mentioned.                            |
+| `agents_of_bad_things`  | Một kẻ xấu hoặc đã từng được nhắc đến trước đó.                  |
+| `aggressive_crime_scan` | Khi không chắc chắn, cho rằng đó là chủ đích phạm tội.                 |
+| `bad_animal`            | Ngữ cảnh liên quan đến một loài động vật tượng trưng cho những phẩm chất xấu. Ví dụ: lợn, vượn, rắn. |
+| `bulk_message`          | Tin nhắn được gửi hàng loạt.                                |
+| `death_related`         | Ngữ cảnh liên quan đến cái chết.                                  |
+| `game_violence_ok`      | Trong các cuộc trò chuyện khi chơi game, cho phép kêu gọi bạo lực.                    |
+| `make_money`            | Ngữ cảnh nói về việc kiếm tiền.                               |
+| `my_departure`          | Tác giả nhắc đến việc rời đi.                                |
+| `sexually_conservative` | Mọi hành động chia sẻ ảnh hoặc tương tác mơ hồ đều bị coi là có liên quan đến tình dục. |
+| `trusted_party`         | Tác giả tự nhận mình là người đáng tin cậy. Ví dụ: Vợ/chồng, họ hàng. |
+| `waste`                 | Chủ đề nói về chất thải (hữu cơ/vô cơ).                |
+| `won_prize`             | Đề cập hoặc ngụ ý đến việc thắng tiền/giải thưởng.            |
+| `work_from_home`        | Đề cập đến việc làm việc tại nhà.                                  |
+| `organization`          | Một tổ chức được nhắc đến.                               |
+| `role`                  | Một vị trí hoặc vai trò được nhắc đến.                            |
 
-####    Antecedents
+####    Tiền đề
 
-Antecedents help with coreference resolution. 
+Tiền đề hỗ trợ phân giải đồng tham chiếu. 
 
-This provides context for pronouns or other references, that may impact analysis results.
+Quá trình này cung cấp ngữ cảnh cho đại từ hoặc các tham chiếu khác, điều này có thể ảnh hưởng đến kết quả phân tích.
 
-##### Structure
+##### Cấu trúc
 
-Each antecedent contains:
+Mỗi tiền đề chứa:
 
-- `family` - The family ID of the antecedent
- - `features` - A list of feature values. For example: `{"index":36, "value":"WFH"}`.
+- `family` - ID họ của tiền đề
+ - `features` - Một danh sách các giá trị đặc điểm. Ví dụ: `{"index":36, "value":"WFH"}`.
 
-##     Signal To Noise Ranking
+##     Xếp hạng tín hiệu trên nhiễu
 
-When analyzing posts that comment on an issue or article, it's useful to prioritize those that are most relevant and based on reason, rather than emotion. The signal-to-noise ranking helps achieve this by filtering content for relevance and logical quality.
+Khi phân tích các bài đăng bình luận về một vấn đề hoặc bài viết, điều hữu ích là ưu tiên những bài đăng có liên quan nhất và dựa trên lý trí thay vì cảm xúc. Xếp hạng tín hiệu trên nhiễu giúp thực hiện điều này bằng cách lọc nội dung theo mức độ liên quan và chất lượng logic.
 
-### How It Works
+### Cách thức hoạt động
 
-To calculate the signal to noise ranking:    
-1. Analyze the article headline using `keyword_features` and (optionally) `stop_hypernyms` in the settings. Extract the `relevant` attribute.
-2. Rank posts by relevance using the `relevant` attribute.
+Để tính toán xếp hạng tín hiệu trên nhiễu:    
+1. Phân tích tiêu đề bài viết bằng cách sử dụng `keyword_features` và (tùy chọn) `stop_hypernyms` trong phần cài đặt. Trích xuất thuộc tính `relevant`.
+2. Xếp hạng các bài đăng theo mức độ liên quan bằng cách sử dụng thuộc tính `relevant`.
 
-#### Step 1:  Identify Relevant Concepts
+#### Bước 1:  Xác định các khái niệm có liên quan
 
 (This step can be omitted, if we already know the relevant concepts.)
 
-To determine relevant concepts, we analyze the article's headline. This is usually sufficient.
+Để xác định các khái niệm có liên quan, ta phân tích tiêu đề của bài viết. Thông thường như vậy là đủ.
 
-Two key settings affect this analysis:
+Hai cài đặt chính ảnh hưởng đến phân tích này:
 
-- `keyword_features` (an object of strings with string values) - Defines the characteristics to look for in a word. If a match is found, the corresponding family ID is added to the set of potentially relevant family IDs.
-- `stop_hypernyms` (an array of integers) - Filters out unwanted generalizations, such as abstract terms or emotion. If a potentially relevant family ID has a hypernym listed in this setting, it will not be considered. For example: In the headline *Fear and Loathing in Las Vegas*, we might only want *Las Vegas*. This setting is optional.
+- `keyword_features` (một đối tượng chuỗi có giá trị chuỗi) - Xác định các đặc điểm cần tìm kiếm trong một từ. Nếu tìm thấy kết quả trùng khớp, ID họ tương ứng sẽ được thêm vào tập hợp các ID họ có liên quan.
+- `stop_hypernyms` (một mảng số nguyên) - Lọc ra những trường hợp khái quát không mong muốn, chẳng hạn như các thuật ngữ trừu tượng hoặc cảm xúc. Nếu một ID họ có khả năng liên quan có thượng vị được liệt kê trong cài đặt này, thì ID đó sẽ không được xem xét. Ví dụ: Trong tiêu đề *Fear and Loathing in Las Vegas*, ta có thể chỉ muốn *Las Vegas*. Cài đặt này là tùy chọn.
 
-If `keyword_features` is used, the response will include a `relevant` attribute, containing the identified family IDs.  
+Nếu sử dụng `keyword_features`, phản hồi sẽ bao gồm một thuộc tính `relevant`, chứa các ID họ đã xác định.  
 
-We recommend you include the `relevant` array in the settings when you do Step 2 ("Rank posts for relevance"). It helps prioritize posts that mention concepts related to those family IDs, ensuring the ranking process focuses on the most relevant content.
+Chúng tôi đề xuất nên bao gồm mảng `relevant` trong cài đặt khi bạn thực hiện Bước 2 ("Xếp hạng các bài đăng theo mức độ liên quan"). Thao tác này giúp ưu tiên các bài đăng đề cập đến các khái niệm liên quan đến các ID họ đó, đảm bảo quá trình xếp hạng tập trung vào nội dung có liên quan nhất.
 
-#### Step 2: Rank Posts For Relevance
+#### Bước 2: Xếp hạng các bài đăng theo mức độ liên quan
 
-Use the `relevant` attribute from step 1 to assess posts or comments. 
+Sử dụng thuộc tính `relevant` từ bước 1 để đánh giá các bài đăng và bình luận. 
 
-Ranking is boosted when:
+Xếp hạng được tăng cường khi:
 
-* Relevant domains, hypernyms, or related families appear in the post. 
-* Sentiment (positive or negative) is linked to specific aspects.
+* Các miền, thượng vị hoặc họ có liên quan xuất hiện trong bài đăng. 
+* Cảm xúc (tích cực hoặc tiêu cực) có liên quan đến những khía cạnh cụ thể.
 
-Ranking is penalized when:
+Xếp hạng bị phạt khi:
 
-- Negativity is not tied to specific aspects.
-- Abusive content is detected (unless looking for specific criminal content).
+- Sự tiêu cực không liên quan đến khía cạnh cụ thể nào.
+- Phát hiện nội dung lạm dụng (trừ trường hợp đang tìm kiếm nội dung tội phạm cụ thể).
 
-Note: The `abuse_not_noise` parameter (when set to `true`) prevents abuse from being penalized.
+Lưu ý: Tham số `abuse_not_noise` (khi được đặt thành `true`) ngăn việc phạt nội dung lạm dụng.
