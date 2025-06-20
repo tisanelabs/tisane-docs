@@ -311,7 +311,7 @@ void ActivateLazyLoading();
 ```
 Activates the lazy loading mode.
 
-Read mode: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
+Read more: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
 
 
 Parameters: 
@@ -469,7 +469,7 @@ See also:
 
 Return Value: 
 
-A `const char*` containing the translated or paraphrased text. You are responsible for freeing the memory allocated for this string.  Returns `nullptr` on failure.
+A `const char*` containing the translated or paraphrased text. No need to deallocate the memory. Returns `nullptr` on failure.
 
 Example:
 ```cpp
