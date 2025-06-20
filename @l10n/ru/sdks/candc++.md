@@ -1,12 +1,12 @@
-# Tisane Embedded C/C++ Reference
+# Справка Tisane Embedded C/C++
 
-## Overview
+## Обзор
 
-This guide provides a reference to the methods available in the Tisane Embedded SDK for C/C++ applications. 
+В этом руководстве содержится ссылка на методы, доступные в Tisane Embedded SDK для приложений C/C++. 
 
-### Components
+### Компоненты
 
-Under the hood, the Tisane runtime directly communicates with Tisane language models stored in RocksDB stores. No external database engines are involved or need to be installed.
+Внутри себя среда выполнения Tisane напрямую взаимодействует с языковыми моделями Tisane, хранящимися в хранилищах RocksDB. Никакие внешние механизмы баз данных не используются и не требуют установки.
 
 ```mermaid
 flowchart LR
@@ -15,109 +15,109 @@ flowchart LR
   library<--->rocksdb
 ```
 
-#### Binaries
+#### Двоичные файлы
 
 ##### Windows
 
-- Runtime libraries:
+- Библиотеки исполняющей системы:
 - 
-  - `libTisane.dll`: The core Tisane runtime.
-  - `libgcc_s_seh-1.dll`: Standard POSIX C/C++ library.
-  - `libstdc++-6.dll`: Standard POSIX C/C++ library.
-  - `libwinpthread-1.dll`: Standard POSIX C/C++ library.
+  - `libTisane.dll`: Основная среда выполнения Tisane.
+  - `libgcc_s_seh-1.dll`: Стандартная библиотека POSIX C/C++.
+  - `libstdc++-6.dll`: Стандартная библиотека POSIX C/C++.
+  - `libwinpthread-1.dll`: Стандартная библиотека POSIX C/C++.
 
 ##### Linux
 
-- tisane: The core Tisane executable.
+- tisane: Основной исполняемый файл Tisane.
 
-#### Language Models
+#### Языковые модели
 
-See: [Language Models Data Stores](./languagemodels.md) 
+Рекомендуем ознакомиться: [Хранилища данных языковых моделей](./languagemodels.md) 
 
-## Requirements
+## Требования
 
-### Platform
+### Платформа
 
 #### Windows
-Windows 10+ (64-bit)
+Windows 10+ (64-битная)
 
 {% admonition type="info" %}
 
-Earlier versions of Windows may work but are not officially supported 
+Более ранние версии Windows могут работать, но официально не поддерживаются. 
 
 {% /admonition %}
 
 #### Linux
 
-Kernel version 6.0.0+
+Версия ядра 6.0.0+
 
-### RAM
+### ОЗУ
 
-**Lazy loading**: 50 Mb fixed + 50 to 100 Mb per language model
+**Замедленная загрузка** : 50 МБ фиксированной квоты + 50–100 МБ на языковую модель
 
-**Fully loaded**: between 400 Mb and 2 Gb per language model
+**Полностью загружено** : от 400 МБ до 2 ГБ на языковую модель
 
-Read more: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
+Подробнее: [Сравнение режима замедленной загрузки с режимом полной загрузки](./lazyloading.md)
 
-## Integration
+## Интеграция
 
-### Basic Workflow
+### Базовый рабочий процесс
 
-1. `SetDbPath` – Set the data path.
-2. `LoadAnalysisLanguageModel` – Load the desired language model.
-3. `Parse` – Analyze the text.
+1. `SetDbPath` – установить путь к данным.
+2. `LoadAnalysisLanguageModel` – загрузить нужную языковую модель.
+3. `Parse` – проанализировать текст.
 
-### Setup And Use
+### Настройка и использование
 
-1. Include the header file:  
-  *  Ensure you include the necessary header file ([`tisane.h`](./tisane.h)) in your C/C++ project. 
-  *  This file will contain the function declarations.
+1. Включите заголовочный файл:  
+  *  Убедитесь, что вы включили необходимый заголовочный файл ([`tisane.h`](./tisane.h)) в вашем проекте C/C++. 
+  *  Этот файл будет содержать заявления функций.
 
-2. Link your application with the Tisane library (e.g., `tisane.so` or `libTisane.dll`).  
+2. Свяжите свое приложение с библиотекой Tisane (например, `tisane.so` или `libTisane.dll`).  
 
-3. Initialize:
+3. Инициализируйте:
 
-  * Set the data path: 
+  * Установите путь к данным: 
 
-      *   The *very first* call you *must* make is to `SetDbPath`.  
-      *   This tells the SDK where to find the language model data files.
+      *   *Самый первый* вызов, который вам *нужно * сделать, — это` SetDbPath`.  
+      *   Он сообщает SDK, где найти файлы данных языковой модели.
 
-  *   Load the language model:  
-      *   Call `LoadAnalysisLanguageModel` to load the desired language model.  
-      *   Call *after* `SetDbPath`
-      *   Loading the entire language model can take time, especially for large models.
-  *   If planning to transform (e.g. translate), load the generation language model:
-      *   Call `LoadGenerationLanguageModel` to load the desired language model for the target language. 
-4.   Process:
-  *   Parse the text: 
-    *   Use the `Parse` function to analyze text using specified settings: 
-        *   `language`: A standard ISO-639-1 language code (e.g., "en", "zh-CN"), a vertical-bar delimited list of language codes, or `*` for automatic detection.
-        *   `content`: UTF-8 text to parse.
-        *   `settings`: JSON string with settings. (See: [The response and configuration guide](../apis/tisane-api-response-guide.md)).`
-        *   `Returns`: JSON string (See: [The response and configuration guide](../apis/tisane-api-response-guide.md) Guide).
+  *   Загрузите языковую модель:  
+      *   Вызовите `LoadAnalysisLanguageModel` для загрузки желаемой языковой модели.  
+      *   Вызовите *после* `SetDbPath`
+      *   Загрузка всей языковой модели может занять некоторое время, особенно в случае с большими моделями.
+  *   Если вы планируете преобразовать (например, перевести), загрузите модель языка генерации:
+      *   Вызовите `LoadGenerationLanguageModel` для загрузки желаемой языковой модели для целевого языка. 
+4.   Процесс:
+  *   Выполните парсинг текста: 
+    *   Используйте функцию `Parse` для анализа текста с использованием заданных настроек: 
+        *   `language`: Стандартный код языка ISO-639-1 (например, «en», «zh-CN»), список кодов языков, разделенных вертикальной чертой, или`*` для автоматического обнаружения.
+        *   `content`: Текст UTF-8 для парсинга.
+        *   `settings`: Строка JSON с настройками. (Рекомендуем ознакомиться: [Руководство по реагированию и настройке](../apis/tisane-api-response-guide.md)).`
+        *   `Returns`: строка JSON (Рекомендуем ознакомиться: [Руководство по реагированию и настройке](../apis/tisane-api-response-guide.md)).
     
-  *   Detect language: 
-    *   Use  the `DetectLanguage` function to identify the language of a given text.
-        *   `content`: UTF-8 text.
-        *   `likelyLanguages`: (Optional) Expected languages.
-        *   `segmentDelimiter`: (Optional) Separates between sections of text to detect language for. While different languages may be detected without an explicitly specified delimiter, the delimiter allows more control over the results.
-        *   `Returns`: Detected language codes.
+  *   Определите язык: 
+    *   Используйте функцию `DetectLanguage` для определения языка данного текста.
+        *   `content`: текст в кодировке UTF-8.
+        *   `likelyLanguages`: (необязательно) ожидаемые языки.
+        *   `segmentDelimiter`: (необязательно) разделяет разделы текста для определения языка. Хотя различные языки могут быть обнаружены без явно указанного разделителя, разделитель обеспечивает больший контроль над результатами.
+        *   `Returns`: коды обнаруженного языка.
     
-  *   Transform text:  
-    *   Use the `Transform` function to translate or paraphrase a string from one language to another. 
-        *   `sourceLanguage`: A standard ISO-639-1 language code (e.g., "en", "zh-CN"), a vertical-bar delimited list of language codes, or `*` for automatic detection.
-        *   `targetLanguage`: A code of a language to translate to, or a vertical-bar delimited list of language codes.
-        *   `content`: UTF-8 text to transform.
-        *   `settings`: JSON string.
-        *   `Returns`: Transformed text, if one target language is specified; a JSON array containing translations, if multiple languages are specified.
+  *   Преобразуйте текст:  
+    *   Используйте функцию `Transform` для перевода или перефразирования строки с одного языка на другой. 
+        *   `sourceLanguage`: Стандартный код языка ISO-639-1 (например, «en», «zh-CN»), список кодов языков, разделенных вертикальной чертой, или`*` для автоматического обнаружения.
+        *   `targetLanguage`: код языка, на который необходимо выполнить перевод, или список кодов языков, разделенных вертикальной чертой.
+        *   `content`: текст в кодировке UTF-8 для преобразования.
+        *   `settings`: строка JSON.
+        *   `Returns`: преобразованный текст, если указан один целевой язык; массив JSON, содержащий переводы, если указано несколько языков.
 
 
-See also: 
+Смотрите также: 
 
-- [API response and configuration guide](../apis/tisane-api-response-guide.md)
+- [Руководство по настройке и ответу API](../apis/tisane-api-response-guide.md)
 
 
-## Function Reference
+## Ссылка на функцию
 
 ### SetDbPath
 
@@ -125,15 +125,15 @@ See also:
 __stdcall void SetDbPath(const char *dataRootPath);
 ```
 
-Defines the root path to the language model data files. This function must be called before any other Tisane SDK functions are used.
+Определяет корневой путь к файлам данных языковой модели. Эту функцию необходимо вызвать до использования любых других функций Tisane SDK.
 
-* `dataRootPath`: A null-terminated C-style string representing the absolute or relative path to the directory containing the language model data.
+* `dataRootPath`: Строка в стиле C с нулевым завершением, представляющая абсолютный или относительный путь к каталогу, содержащему данные языковой модели.
 
-Return Value: 
+Возвращаемое значение: 
 
-None.
+Нет.
 
-Example:
+Например:
 
 ```cpp
 SetDbPath("C:\\Tisane");
@@ -144,17 +144,17 @@ SetDbPath("C:\\Tisane");
 __stdcall void LoadAnalysisLanguageModel(const char *languageCode);
 ```
 
-Loads a language model to be used by `Parse` method or as a source language in `Transform` method.
+Загружает языковую модель для использования метода `Parse` или как исходный язык в методе `Transform`.
 
-Parameters:
+Параметры:
 
-* `languageCode`: A null-terminated C-style string representing the language code. For example: `"en"` for English, `"es"` for Spanish.
+* `languageCode`: Строка в стиле C с нулевым завершением, представляющая код языка. Например: `"en"` для английского, `"es"` для испанского.
 
-Return Value: 
+Возвращаемое значение: 
 
-None.
+Нет.
 
-Example:
+Например:
 
 ```cpp
 LoadAnalysisLanguageModel("en");
@@ -164,23 +164,23 @@ LoadAnalysisLanguageModel("en");
 __stdcall void LoadGenerationLanguageModel(const char *languageCode);
 ```
 
-Loads a language model to be used as a target language model for text generation tasks like translation and paraphrasing.
+Загружает языковую модель, которая будет использоваться в качестве модели целевого языка для задач генерации текста, таких как перевод и перефразирование.
 
 {% admonition type="info" %}
 
-Generation models are always loaded in lazy mode.
+Модели генерации всегда загружаются в ленивом режиме.
 
 {% /admonition %}
 
-Parameters:
+Параметры:
 
-* `languageCode`: A null-terminated C-style string representing the language code.
+* `languageCode`: Строка в стиле C с нулевым завершением, представляющая код языка.
 
-Return Value: 
+Возвращаемое значение: 
 
-None.
+Нет.
 
-Example:
+Например:
 
 ```cpp
 LoadGenerationLanguageModel("fr"); // Load French for translation
@@ -191,19 +191,19 @@ LoadGenerationLanguageModel("fr"); // Load French for translation
 __stdcall void LoadCustomizedAnalysisLanguageModel(const char *languageCode, const char *customizationSuffix);
 ```
 
-Loads a customized language model. This allows extending the base language model with domain-specific vocabulary or logic. The custom language model is run together with the main language model, and takes precedence over the main model's definitions.
+Загружает настроенную языковую модель. Это позволяет расширить базовую языковую модель с помощью предметно-специфического словаря или логики. Пользовательская языковая модель запускается вместе с основной языковой моделью и имеет приоритет над определениями основной модели.
 
-Parameters:
+Параметры:
 
-* `languageCode`: The language code of the base language model.
+* `languageCode`: Код языка базовой языковой модели.
 
-- `customizationSuffix`: A suffix that identifies the specific customization add-on model. The SDK will look for a folder with the specified name under the current root folder.
+- `customizationSuffix`: Суффикс, идентифицирующий конкретную модель надстройки. SDK будет искать папку с указанным именем в текущей корневой папке.
 
-Return Value: 
+Возвращаемое значение: 
 
-None.
+Нет.
 
-Example:
+Например:
 
 ```cpp
 SetDbPath("C:\\Tisane");
@@ -216,17 +216,17 @@ LoadCustomizedAnalysisLanguageModel("en", "medical"); // Load a customized Engli
 __stdcall void UnloadAnalysisLanguageModel(const char *languageCode);
 ```
 
-Unloads a previously loaded analysis language model from memory. 
+Выгружает из памяти ранее загруженную модель языка анализа. 
 
-Parameters:
+Параметры:
 
-* `languageCode`: The language code of the model to unload.
+* `languageCode`: Код языка выгружаемой модели.
 
-Return Value: 
+Возвращаемое значение: 
 
-None.
+Нет.
 
-Example:
+Например:
 
 ```cpp
 UnloadAnalysisLanguageModel("en");
@@ -237,17 +237,17 @@ UnloadAnalysisLanguageModel("en");
 void SetProgressCallback(void __stdcall ptrProgressCallback(double));
 ```
 
-Sets a callback function to receive progress updates during language model loading. This is useful for providing visual feedback to the user during the loading process, which can take a significant amount of time.
+Устанавливает функцию обратного вызова для получения обновлений хода выполнения во время загрузки языковой модели. Это полезно для предоставления визуальной обратной связи пользователю во время процесса загрузки, который может занять значительное время.
 
-Parameters:
+Параметры:
 
-* `ptrProgressCallback`: A pointer to a function that accepts a single double parameter. The double value will be in the range of 0.0 to 1.0, representing the loading progress (0.0 = 0%, 1.0 = 100%).
+* `ptrProgressCallback`: Указатель на функцию, которая принимает один двойной параметр. Двойное значение будет находиться в диапазоне от 0,0 до 1,0, представляя ход загрузки (0,0 = 0%, 1,0 = 100%).
 
-Return Value: 
+Возвращаемое значение: 
 
-None.
+Нет.
 
-Example:
+Например:
 
 ```cpp
 #include <iostream>
@@ -269,20 +269,20 @@ void SetParseProgressCallback(bool __stdcall ptrParseProgressCallback(double));
 ;
 ```
 
-Sets a callback function to receive progress updates during processing. This is useful for providing visual feedback to the user during long parsing, and allow the user to cancel the processing.
+Устанавливает функцию обратного вызова для получения уведомлений о прогрессе во время обработки. Это полезно для предоставления визуальной обратной связи пользователю во время длительного анализа и позволяет пользователю отменить обработку.
 
-When the processing is cancelled, partial results are returned, with an additional 
+При отмене обработки возвращаются частичные результаты с дополнительным 
 `interrupted` attribute set to `true` in the response JSON.
 
-Parameters:
+Параметры:
 
-* `ptrParseProgressCallback`: A pointer to a function that accepts a single double parameter and returns a boolean value. The double value will be in the range of 0.0 to 1.0, representing the loading progress (0.0 = 0%, 1.0 = 100%). The boolean value indicates whether the processing loop should be interrupted. Upon exiting, Tisane summarizes all the sentences so far and returns its response normally.
+* `ptrParseProgressCallback`: Указатель на функцию, которая принимает один двойной параметр и возвращает логическое значение. Двойное значение будет находиться в диапазоне от 0,0 до 1,0, представляя ход загрузки (0,0 = 0%, 1,0 = 100%). Логическое значение указывает, следует ли прерывать цикл обработки. При выходе Tisane суммирует все предложения на данный момент и возвращает свой обычный ответ.
 
-Return Value: 
+Возвращаемое значение: 
 
-None.
+Нет.
 
-Example:
+Например:
 
 ```cpp
 #include <iostream>
@@ -297,7 +297,7 @@ bool MyParseProgressCallback(double progress) {
 
 int main() {
     SetDbPath("C:\\Tisane");
-    ActivateLazyLoading(); // it's a test, we don't want to load the entire model for a tiny piece of text to be processed
+    ActivateLazyLoading(); // не нужно загружать всю модель для теста
     LoadAnalysisLanguageModel("en");
     SetParseProgressCallback(MyParseProgressCallback);
     cout << "\n" << Parse("en", "This is a test. This is a test. This is a test. This is a test. ", "{\"parses\":true, \"words\":true}" << std::endl);   
@@ -309,20 +309,20 @@ int main() {
 ```cpp
 void ActivateLazyLoading();
 ```
-Activates the lazy loading mode.
+Активирует режим отложенной загрузки.
 
-Read mode: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
+Режим чтения: [Сравнение режима замедленной загрузки с режимом полной загрузки](./lazyloading.md)
 
 
-Parameters: 
+Параметры: 
 
-None.
+Нет.
 
-Return Value: 
+Возвращаемое значение: 
 
-None.
+Нет.
 
-Example:
+Например:
 
 ```cpp
 ActivateLazyLoading();
@@ -333,18 +333,18 @@ ActivateLazyLoading();
 bool IsLazyLoadingActive();
 ```
 
-Checks whether lazy loading mode is currently active.
+Проверяет, активен ли в данный момент режим замедленной загрузки.
 
-Parameters: 
+Параметры: 
 
-None.
+Нет.
 
-Return Value:
+Возвращаемое значение:
 
-- `true` if lazy loading is active, 
-- `false` otherwise.
+- `true`, если замедленная загрузка активна, 
+- `false` в противном случае.
 
-Example:
+Например:
 
 ```cpp
 if (IsLazyLoadingActive()) {
@@ -357,60 +357,60 @@ if (IsLazyLoadingActive()) {
 const char* Parse(const char *language, const char *content, const char *settings);
 ```
 
-Parses the given text content using the specified language model and settings.
+Выполняет синтаксический анализ заданного текстового содержимого, используя указанную языковую модель и настройки.
 
-Parameters:
+Параметры:
 
-* `language`: The language code of the language to parse.
-* `content`: The text to parse (UTF-8 encoded).
-* `settings`: A JSON string that specifies the desired analysis features. See Settings Specification for details.
+* `language`: Код языка, который необходимо проанализировать.
+* `content`: Текст для анализа (в кодировке UTF-8).
+* `settings`: Строка JSON, определяющая желаемые функции анализа. Подробную информацию см. в разделе «Спецификация настроек».
 
-Return Value:  
+Возвращаемое значение:  
 
-A `const char*` containing a JSON string representing the analysis results. No need to deallocate the memory. Returns `nullptr` on failure.
+`const char*` со строкой JSON, представляющей результаты анализа. Нет необходимости освобождать память. При неудаче возвращает `nullptr`.
 
 
-Example code:
+Пример кода:
 
 ```cpp
   SetDbPath("C:\\Tisane");
-  ActivateLazyLoading(); // it's a test, we don't want to load the entire model for a tiny piece of text to be processed
+  ActivateLazyLoading(); // не нужно загружать всю модель для теста
   LoadAnalysisLanguageModel("en");
   cout << "\n" << Parse("en", "This is a test.", "{\"parses\":true, \"words\":true}");
 ```
 
 
-See: [Response](../apis/tisane-api-response-guide.md).
+Рекомендуем ознакомиться: [Ответ](../apis/tisane-api-response-guide.md) .
 
 ### ParseTextFile
 ```cpp
 const char* ParseTextFile(const char *language, const char *filename, uint32_t chunkSize, const char *settings);
 ```
 
-Parse the content from the specified text file in the specified language using the specified settings in chunks. Only loads the chunk being processed.
+Выполнить синтаксический анализ содержимого указанного текстового файла на указанном языке с использованием указанных настроек по фрагментам. Загружает только обрабатываемый фрагмент.
 
-Parameters:
+Параметры:
 
-* `language`: The language code of the language to parse.
-* `filename`: The text file to parse (UTF-8 encoded). Assumed to only contain text.
-* `chunkSize`: The size of chunks used to read the stream from the file. If 0, then 8192 bytes is assigned.
-* `settings`: A JSON string that specifies the desired analysis features. See Settings Specification for details.
+* `language`: код языка, который необходимо проанализировать.
+* `filename`: текстовый файл для анализа (в кодировке UTF-8). Предполагается, что содержит только текст.
+* `chunkSize`: Размер фрагментов, используемых для чтения потока из файла. Если 0, то выделяется 8192 байта.
+* `settings`: Строка JSON, определяющая желаемые функции анализа. Подробную информацию см. в разделе «Спецификация настроек».
 
-Return Value:  
+Возвращаемое значение:  
 
-A `const char*` containing a JSON string representing the analysis results. No need to deallocate the memory. Returns `nullptr` on failure.
+`const char*` со строкой JSON, представляющей результаты анализа. Нет необходимости освобождать память. При неудаче возвращает `nullptr`.
 
 {% admonition type="info" %}
 
-The text is omitted from the response for larger files for performance purposes.
+Для больших файлов текст в ответе опускается в целях повышения производительности.
 
 {% /admonition %}
 
-Example code:
+Пример кода:
 
 ```cpp
   SetDbPath("C:\\Tisane");
-  ActivateLazyLoading(); // it's a test, we don't want to load the entire model for a tiny piece of text to be processed
+  ActivateLazyLoading(); // не нужно загружать всю модель для теста
   LoadAnalysisLanguageModel("en");
   std::string result = ParseTextFile("en", "myinputfile.txt", 8192, "{}");
 ```
@@ -420,25 +420,25 @@ Example code:
 ```cpp
 __stdcall const char* DetectLanguage(const char *content, const char *likelyLanguages, const char* segmentDelimiter);
 ```
-Detects the language of the given text content.
+Определяет язык указанного текстового содержимого.
 
-Parameters:
+Параметры:
 
-* `content`: The text to analyze (UTF-8 encoded).
-* `likelyLanguages`: (Optional) A comma-separated list of language codes that are likely to be present in the text. This can improve detection accuracy. Pass nullptr if not needed.
-* `segmentDelimiter`: (Optional) A string used to delimit segments within the text. For every segment, detection will be invoked separately. Pass nullptr for default behavior.
+* `content`: Текст для анализа (в кодировке UTF-8).
+* `likelyLanguages`: (Необязательно) Список кодов языков, разделенных запятыми, которые, вероятно, будут присутствовать в тексте. Это может повысить точность обнаружения. Передайте nullptr, если не требуется.
+* `segmentDelimiter`: (Необязательно) Строка, используемая для разделения сегментов в тексте. Для каждого сегмента обнаружение будет вызываться отдельно. Передайте nullptr для поведения по умолчанию.
 
-Return Value: 
+Возвращаемое значение: 
 
-A `const char*` containing a JSON string representing the detected language(s). Returns `nullptr` on failure.
+`const char*` со строкой JSON, представляющей обнаруженный язык(и). При неудаче возвращает `nullptr`.
 
 {% admonition type="warning" %}
 
-Do not deallocate the memory. It is managed internally.
+Не освобождайте память. Управление ею осуществляется изнутри.
 
 {% /admonition %}
 
-Example:
+Например:
 ```cpp
 const char* detectedLanguage = DetectLanguage("Bonjour le monde!", nullptr, nullptr);
 if (detectedLanguage) {
@@ -451,30 +451,30 @@ if (detectedLanguage) {
 ```cpp
 __stdcall const char* Transform(const char * sourceLanguage, const char * targetLanguage,const char * content, const char * settings);
 ```
-Translates or paraphrases a string from one language to another. 
+Переводит или перефразирует строку с одного языка на другой. 
 
-Requires that both the source and target language models have been loaded using`LoadGenerationLanguageModel`.
+Требуется, чтобы модели исходного и целевого языков были загружены с использованием ` LoadGenerationLanguageModel` .
 
-Parameters:
+Параметры:
 
-* `sourceLanguage`: The language code of the source language.
-* `targetLanguage`: The language code of the target language.
-* `content`: The text to transform (UTF-8 encoded).
-* `settings`: A JSON string that specifies the desired transformation options. 
+* `sourceLanguage`: код исходного языка.
+* `targetLanguage`: код языка перевода.
+* `content`: текст для преобразования (в кодировке UTF-8).
+* `settings`: строка JSON, указывающая желаемые параметры преобразования. 
 
-See also: 
+Смотрите также: 
 
-- [API response and configuration guide](../apis/tisane-api-response-guide.md)
-- [Configuration and customization Guide](../apis/tisane-api-configuration.md)
+- [Руководство по настройке и ответу API](../apis/tisane-api-response-guide.md)
+- [Руководство по настройке и конфигурированию](../apis/tisane-api-configuration.md)
 
-Return Value: 
+Возвращаемое значение: 
 
-A `const char*` containing the translated or paraphrased text. You are responsible for freeing the memory allocated for this string.  Returns `nullptr` on failure.
+`const char*`, содержащий переведенный или перефразированный текст. Нет необходимости освобождать память. При неудаче возвращает `nullptr`.
 
-Example:
+Например:
 ```cpp
   SetDbPath("C:\\Tisane");
-  ActivateLazyLoading(); // it's a test, we don't want to load the entire model for a tiny piece of text to be processed
+  ActivateLazyLoading(); // не нужно загружать всю модель для теста
   LoadAnalysisLanguageModel("fr");
   LoadGenerationLanguageModel("en");
   const char* translatedText = Transform("fr", "en", "bonjour!", "{}");
