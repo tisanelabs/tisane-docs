@@ -1,12 +1,12 @@
-# Tisane Embedded C/C++ Reference
+# Tài liệu tham khảo C/C++ cho Tisane Embedded
 
-## Overview
+## Tổng quan
 
-This guide provides a reference to the methods available in the Tisane Embedded SDK for C/C++ applications. 
+Hướng dẫn này cung cấp tài liệu tham khảo về các phương pháp có sẵn trong Bộ công cụ phát triển phần mềm (SDK) Tisane Embedded cho các ứng dụng C/C++. 
 
-### Components
+### Thành phần
 
-Under the hood, the Tisane runtime directly communicates with Tisane language models stored in RocksDB stores. No external database engines are involved or need to be installed.
+Về cơ bản, Tisane runtime giao tiếp trực tiếp với các mô hình ngôn ngữ Tisane được lưu trữ trong kho lưu trữ RocksDB. Không cần sử dụng hoặc cài đặt hệ thống quản lý cơ sở dữ liệu bên ngoài.
 
 ```mermaid
 flowchart LR
@@ -15,109 +15,109 @@ flowchart LR
   library<--->rocksdb
 ```
 
-#### Binaries
+#### Các hệ điều hành nhị phân
 
 ##### Windows
 
-- Runtime libraries:
+- Thư viện runtime:
 - 
-  - `libTisane.dll`: The core Tisane runtime.
-  - `libgcc_s_seh-1.dll`: Standard POSIX C/C++ library.
-  - `libstdc++-6.dll`: Standard POSIX C/C++ library.
-  - `libwinpthread-1.dll`: Standard POSIX C/C++ library.
+  - `libTisane.dll`: Tisane runtime cốt lõi.
+  - `libgcc_s_seh-1.dll`: Thư viện POSIX C/C++ chuẩn.
+  - `libstdc++-6.dll`: Thư viện POSIX C/C++ chuẩn.
+  - `libwinpthread-1.dll`: Thư viện POSIX C/C++ chuẩn.
 
 ##### Linux
 
-- tisane: The core Tisane executable.
+- tisane: Chương trình thực thi cốt lõi của Tisane.
 
-#### Language Models
+#### Mô hình ngôn ngữ
 
-See: [Language Models Data Stores](./languagemodels.md) 
+Xem phần: [Kho dữ liệu mô hình ngôn ngữ](./languagemodels.md) 
 
-## Requirements
+## Yêu cầu
 
-### Platform
+### Nền tảng
 
 #### Windows
 Windows 10+ (64-bit)
 
 {% admonition type="info" %}
 
-Earlier versions of Windows may work but are not officially supported 
+Các phiên bản Windows cũ hơn có thể hoạt động nhưng không được hỗ trợ chính thức 
 
 {% /admonition %}
 
 #### Linux
 
-Kernel version 6.0.0+
+Kernel phiên bản 6.0.0 trở lên
 
 ### RAM
 
-**Lazy loading**: 50 Mb fixed + 50 to 100 Mb per language model
+**Tải chậm**: 50 Mb cố định + 50 đến 100 Mb cho mỗi mô hình ngôn ngữ
 
-**Fully loaded**: between 400 Mb and 2 Gb per language model
+**Tải đầy đủ**: từ 400 Mb đến 2 Gb cho mỗi mô hình ngôn ngữ
 
-Read more: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
+Đọc thêm: [Chế độ Tải chậm so với chế độ Tải đầy đủ](./lazyloading.md)
 
-## Integration
+## Tích hợp
 
-### Basic Workflow
+### Luồng công việc cơ bản
 
-1. `SetDbPath` – Set the data path.
-2. `LoadAnalysisLanguageModel` – Load the desired language model.
-3. `Parse` – Analyze the text.
+1. `SetDbPath` – Thiết lập đường dẫn dữ liệu.
+2. `LoadAnalysisLanguageModel` – Tải mô hình ngôn ngữ mong muốn.
+3. `Parse` – Phân tích văn bản
 
-### Setup And Use
+### Cài đặt và sử dụng
 
-1. Include the header file:  
-  *  Ensure you include the necessary header file ([`tisane.h`](./tisane.h)) in your C/C++ project. 
-  *  This file will contain the function declarations.
+1. Bao gồm tệp tiêu đề:  
+  *  Hãy đảm bảo bạn bao gồm tệp tiêu đề cần thiết ([`tisane.h`](./tisane.h)) trong dự án C/C++ của mình. 
+  *  Tệp này sẽ chứa các khai báo hàm.
 
-2. Link your application with the Tisane library (e.g., `tisane.so` or `libTisane.dll`).  
+2. Liên kết ứng dụng của bạn với thư viện Tisane (ví dụ: `tisane.so` hoặc `libTisane.dll`).  
 
-3. Initialize:
+3. Khởi tạo:
 
-  * Set the data path: 
+  * Thiết lập đường dẫn dữ liệu: 
 
-      *   The *very first* call you *must* make is to `SetDbPath`.  
-      *   This tells the SDK where to find the language model data files.
+      *   Lệnh *gọi* đầu tiên bạn *phải* thực hiện là đến `SetDbPath`.  
+      *   Thao tác này cho SDK biết nơi tìm tệp dữ liệu mô hình ngôn ngữ.
 
-  *   Load the language model:  
-      *   Call `LoadAnalysisLanguageModel` to load the desired language model.  
-      *   Call *after* `SetDbPath`
-      *   Loading the entire language model can take time, especially for large models.
-  *   If planning to transform (e.g. translate), load the generation language model:
-      *   Call `LoadGenerationLanguageModel` to load the desired language model for the target language. 
-4.   Process:
-  *   Parse the text: 
-    *   Use the `Parse` function to analyze text using specified settings: 
-        *   `language`: A standard ISO-639-1 language code (e.g., "en", "zh-CN"), a vertical-bar delimited list of language codes, or `*` for automatic detection.
-        *   `content`: UTF-8 text to parse.
-        *   `settings`: JSON string with settings. (See: [The response and configuration guide](../apis/tisane-api-response-guide.md)).`
-        *   `Returns`: JSON string (See: [The response and configuration guide](../apis/tisane-api-response-guide.md) Guide).
+  *   Tải mô hình ngôn ngữ:  
+      *   Gọi `LoadAnalysisLanguageModel` để tải mô hình ngôn ngữ mong muốn.  
+      *   Gọi *sau khi* `SetDbPath`
+      *   Việc tải toàn bộ mô hình ngôn ngữ có thể mất thời gian, đặc biệt là đối với các mô hình lớn.
+  *   Nếu có kế hoạch chuyển đổi (ví dụ: dịch), hãy tải mô hình ngôn ngữ tạo sinh:
+      *   Gọi `LoadGenerationLanguageModel` để tải mô hình ngôn ngữ mong muốn cho ngôn ngữ đích. 
+4.   Quy trình:
+  *   Phân tích cú pháp văn bản: 
+    *   Sử dụng hàm `Parse` để phân tích văn bản bằng các cài đặt được chỉ định: 
+        *   `language`: Mã ngôn ngữ chuẩn ISO-639-1 (ví dụ: "en", "zh-CN"), danh sách mã ngôn ngữ phân cách bằng gạch đứng hoặc dấu `*` để phát hiện tự động.
+        *   `content`: Văn bản UTF-8 để phân tích cú pháp.
+        *   `settings`: Chuỗi JSON với các cài đặt. (Xem phần: [Hướng dẫn phản hồi và cấu hình](../apis/tisane-api-response-guide.md)).`
+        *   `Returns`: Chuỗi JSON (Xem phần: [Hướng dẫn phản hồi và cấu hình](../apis/tisane-api-response-guide.md)).
     
-  *   Detect language: 
-    *   Use  the `DetectLanguage` function to identify the language of a given text.
-        *   `content`: UTF-8 text.
-        *   `likelyLanguages`: (Optional) Expected languages.
-        *   `segmentDelimiter`: (Optional) Separates between sections of text to detect language for. While different languages may be detected without an explicitly specified delimiter, the delimiter allows more control over the results.
-        *   `Returns`: Detected language codes.
+  *   Phát hiện ngôn ngữ: 
+    *   Sử dụng hàm `DetectLanguage` để xác định ngôn ngữ của một văn bản nhất định.
+        *   `content`: Văn bản UTF-8.
+        *   `likelyLanguages`: (Tùy chọn) Ngôn ngữ dự kiến.
+        *   `segmentDelimiter`: (Tùy chọn) Phân tách các phần của văn bản để phát hiện ngôn ngữ. Mặc dù có thể phát hiện nhiều ngôn ngữ khác nhau mà không cần chỉ định rõ ràng dấu phân cách, nhưng dấu phân cách cho phép kiểm soát kết quả tốt hơn.
+        *   `Returns`: Mã ngôn ngữ được phát hiện.
     
-  *   Transform text:  
-    *   Use the `Transform` function to translate or paraphrase a string from one language to another. 
-        *   `sourceLanguage`: A standard ISO-639-1 language code (e.g., "en", "zh-CN"), a vertical-bar delimited list of language codes, or `*` for automatic detection.
-        *   `targetLanguage`: A code of a language to translate to, or a vertical-bar delimited list of language codes.
-        *   `content`: UTF-8 text to transform.
-        *   `settings`: JSON string.
-        *   `Returns`: Transformed text, if one target language is specified; a JSON array containing translations, if multiple languages are specified.
+  *   Chuyển đổi văn bản:  
+    *   Sử dụng hàm `Transform` để dịch hoặc diễn giải một chuỗi từ ngôn ngữ này sang ngôn ngữ khác. 
+        *   `sourceLanguage`: Mã ngôn ngữ chuẩn ISO-639-1 (ví dụ: "en", "zh-CN"), danh sách mã ngôn ngữ phân cách bằng gạch đứng hoặc dấu `*` để phát hiện tự động.
+        *   `targetLanguage`: Mã ngôn ngữ cần dịch hoặc danh sách mã ngôn ngữ được phân cách bằng dấu gạch đứng.
+        *   `content`: Văn bản UTF-8 cần chuyển đổi.
+        *   `settings`: Chuỗi JSON.
+        *   `Returns`: Văn bản đã chuyển đổi, nếu một ngôn ngữ đích được chỉ định; một mảng JSON chứa bản dịch, nếu nhiều ngôn ngữ được chỉ định.
 
 
-See also: 
+Xem thêm phần: 
 
-- [API response and configuration guide](../apis/tisane-api-response-guide.md)
+- [Hướng dẫn cấu hình và phản hồi API](../apis/tisane-api-response-guide.md)
 
 
-## Function Reference
+## Tham chiếu hàm
 
 ### SetDbPath
 
@@ -125,15 +125,15 @@ See also:
 __stdcall void SetDbPath(const char *dataRootPath);
 ```
 
-Defines the root path to the language model data files. This function must be called before any other Tisane SDK functions are used.
+Xác định đường dẫn gốc đến các tệp dữ liệu mô hình ngôn ngữ. Phải gọi hàm này trước khi sử dụng bất kỳ hàm Tisane SDK nào khác.
 
-* `dataRootPath`: A null-terminated C-style string representing the absolute or relative path to the directory containing the language model data.
+* `dataRootPath`: Chuỗi kiểu C kết thúc bằng ký tự null biểu thị đường dẫn tuyệt đối hoặc tương đối đến thư mục chứa dữ liệu mô hình ngôn ngữ.
 
-Return Value: 
+Giá trị trả về: 
 
-None.
+Không có.
 
-Example:
+Ví dụ:
 
 ```cpp
 SetDbPath("C:\\Tisane");
@@ -144,17 +144,17 @@ SetDbPath("C:\\Tisane");
 __stdcall void LoadAnalysisLanguageModel(const char *languageCode);
 ```
 
-Loads a language model to be used by `Parse` method or as a source language in `Transform` method.
+Tải mô hình ngôn ngữ để sử dụng theo phương pháp `Parse` hoặc làm ngôn ngữ nguồn trong phương pháp `Transform`.
 
-Parameters:
+Tham số:
 
-* `languageCode`: A null-terminated C-style string representing the language code. For example: `"en"` for English, `"es"` for Spanish.
+* `languageCode`: Chuỗi kiểu C kết thúc bằng ký tự null biểu thị mã ngôn ngữ. Ví dụ: `"en"` là tiếng  Anh, `"es"` là tiếng Tây Ban Nha.
 
-Return Value: 
+Giá trị trả về: 
 
-None.
+Không có.
 
-Example:
+Ví dụ:
 
 ```cpp
 LoadAnalysisLanguageModel("en");
@@ -164,23 +164,23 @@ LoadAnalysisLanguageModel("en");
 __stdcall void LoadGenerationLanguageModel(const char *languageCode);
 ```
 
-Loads a language model to be used as a target language model for text generation tasks like translation and paraphrasing.
+Tải mô hình ngôn ngữ để sử dụng làm mô hình ngôn ngữ đích cho các tác vụ tạo văn bản như dịch và diễn giải.
 
 {% admonition type="info" %}
 
-Generation models are always loaded in lazy mode.
+Các mô hình tạo sinh luôn được tải ở chế độ chậm.
 
 {% /admonition %}
 
-Parameters:
+Tham số:
 
-* `languageCode`: A null-terminated C-style string representing the language code.
+* `languageCode`: Chuỗi kiểu C kết thúc bằng ký tự null biểu thị mã ngôn ngữ.
 
-Return Value: 
+Giá trị trả về: 
 
-None.
+Không có.
 
-Example:
+Ví dụ:
 
 ```cpp
 LoadGenerationLanguageModel("fr"); // Load French for translation
@@ -191,19 +191,19 @@ LoadGenerationLanguageModel("fr"); // Load French for translation
 __stdcall void LoadCustomizedAnalysisLanguageModel(const char *languageCode, const char *customizationSuffix);
 ```
 
-Loads a customized language model. This allows extending the base language model with domain-specific vocabulary or logic. The custom language model is run together with the main language model, and takes precedence over the main model's definitions.
+Tải một mô hình ngôn ngữ tùy chỉnh. Thao tác này cho phép mở rộng mô hình ngôn ngữ cơ sở với vốn từ vựng hoặc logic cụ thể theo từng lĩnh vực. Mô hình ngôn ngữ tùy chỉnh được chạy cùng với mô hình ngôn ngữ chính và được ưu tiên hơn các định nghĩa của mô hình chính.
 
-Parameters:
+Tham số:
 
-* `languageCode`: The language code of the base language model.
+* `languageCode`: Mã ngôn ngữ của mô hình ngôn ngữ cơ sở.
 
-- `customizationSuffix`: A suffix that identifies the specific customization add-on model. The SDK will look for a folder with the specified name under the current root folder.
+- `customizationSuffix`: Hậu tố xác định mô hình bổ sung tùy chỉnh cụ thể. SDK sẽ tìm kiếm thư mục có tên được chỉ định trong thư mục gốc hiện tại.
 
-Return Value: 
+Giá trị trả về: 
 
-None.
+Không có.
 
-Example:
+Ví dụ:
 
 ```cpp
 SetDbPath("C:\\Tisane");
@@ -216,17 +216,17 @@ LoadCustomizedAnalysisLanguageModel("en", "medical"); // Load a customized Engli
 __stdcall void UnloadAnalysisLanguageModel(const char *languageCode);
 ```
 
-Unloads a previously loaded analysis language model from memory. 
+Dỡ bỏ mô hình ngôn ngữ phân tích đã tải trước đó khỏi bộ nhớ. 
 
-Parameters:
+Tham số:
 
-* `languageCode`: The language code of the model to unload.
+* `languageCode`: Mã ngôn ngữ của mô hình cần dỡ bỏ.
 
-Return Value: 
+Giá trị trả về: 
 
-None.
+Không có.
 
-Example:
+Ví dụ:
 
 ```cpp
 UnloadAnalysisLanguageModel("en");
@@ -237,17 +237,17 @@ UnloadAnalysisLanguageModel("en");
 void SetProgressCallback(void __stdcall ptrProgressCallback(double));
 ```
 
-Sets a callback function to receive progress updates during language model loading. This is useful for providing visual feedback to the user during the loading process, which can take a significant amount of time.
+Đặt hàm gọi lại để nhận cập nhật tiến trình trong quá trình tải mô hình ngôn ngữ. Thao tác này hữu ích trong việc cung cấp phản hồi trực quan cho người dùng trong quá trình tải, có thể mất khá nhiều thời gian.
 
-Parameters:
+Tham số:
 
-* `ptrProgressCallback`: A pointer to a function that accepts a single double parameter. The double value will be in the range of 0.0 to 1.0, representing the loading progress (0.0 = 0%, 1.0 = 100%).
+* `ptrProgressCallback`: Con trỏ tới một hàm chấp nhận một tham số kiểu double. Giá trị double sẽ nằm trong khoảng từ 0,0 đến 1,0, biểu diễn tiến trình tải (0,0 = 0%, 1,0 = 100%).
 
-Return Value: 
+Giá trị trả về: 
 
-None.
+Không có.
 
-Example:
+Ví dụ:
 
 ```cpp
 #include <iostream>
@@ -269,20 +269,20 @@ void SetParseProgressCallback(bool __stdcall ptrParseProgressCallback(double));
 ;
 ```
 
-Sets a callback function to receive progress updates during processing. This is useful for providing visual feedback to the user during long parsing, and allow the user to cancel the processing.
+Đặt hàm gọi lại để nhận thông tin cập nhật tiến trình trong quá trình xử lý. Thao tác này hữu ích trong việc cung cấp phản hồi trực quan cho người dùng trong quá trình phân tích cú pháp dài và cho phép người dùng hủy quá trình xử lý.
 
-When the processing is cancelled, partial results are returned, with an additional 
+Khi quá trình xử lý bị hủy, kết quả một phần được trả về, với một phần bổ sung 
 `interrupted` attribute set to `true` in the response JSON.
 
-Parameters:
+Tham số:
 
-* `ptrParseProgressCallback`: A pointer to a function that accepts a single double parameter and returns a boolean value. The double value will be in the range of 0.0 to 1.0, representing the loading progress (0.0 = 0%, 1.0 = 100%). The boolean value indicates whether the processing loop should be interrupted. Upon exiting, Tisane summarizes all the sentences so far and returns its response normally.
+* `ptrParseProgressCallback`: Con trỏ tới một hàm chấp nhận một tham số kiểu double và trả về một giá trị boolean. Giá trị double sẽ nằm trong khoảng từ 0,0 đến 1,0, biểu diễn tiến trình tải (0,0 = 0%, 1,0 = 100%). Giá trị boolean cho biết liệu vòng lặp xử lý có nên bị gián đoạn hay không. Khi thoát ra, Tisane tóm tắt tất cả các câu cho đến thời điểm đó và trả về phản hồi như bình thường.
 
-Return Value: 
+Giá trị trả về: 
 
-None.
+Không có.
 
-Example:
+Ví dụ:
 
 ```cpp
 #include <iostream>
@@ -309,20 +309,20 @@ int main() {
 ```cpp
 void ActivateLazyLoading();
 ```
-Activates the lazy loading mode.
+Kích hoạt chế độ tải chậm.
 
-Read mode: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
+Đọc thêm: [Chế độ Tải chậm so với chế độ Tải đầy đủ](./lazyloading.md)
 
 
-Parameters: 
+Tham số: 
 
-None.
+Không có.
 
-Return Value: 
+Giá trị trả về: 
 
-None.
+Không có.
 
-Example:
+Ví dụ:
 
 ```cpp
 ActivateLazyLoading();
@@ -333,18 +333,18 @@ ActivateLazyLoading();
 bool IsLazyLoadingActive();
 ```
 
-Checks whether lazy loading mode is currently active.
+Kiểm tra xem chế độ tải chậm có đang hoạt động hay không.
 
-Parameters: 
+Tham số: 
 
-None.
+Không có.
 
-Return Value:
+Giá trị trả về:
 
-- `true` if lazy loading is active, 
-- `false` otherwise.
+- `true` nếu chế độ tải chậm đang hoạt động, 
+- `false` nếu ngược lại.
 
-Example:
+Ví dụ:
 
 ```cpp
 if (IsLazyLoadingActive()) {
@@ -352,25 +352,25 @@ if (IsLazyLoadingActive()) {
 }
 ```
 
-### Parse
+### Phân tích cú pháp
 ```cpp
 const char* Parse(const char *language, const char *content, const char *settings);
 ```
 
-Parses the given text content using the specified language model and settings.
+Phân tích cú pháp nội dung văn bản đã cho bằng cách sử dụng mô hình ngôn ngữ và cài đặt được chỉ định.
 
-Parameters:
+Tham số:
 
-* `language`: The language code of the language to parse.
-* `content`: The text to parse (UTF-8 encoded).
-* `settings`: A JSON string that specifies the desired analysis features. See Settings Specification for details.
+* `language`: Mã ngôn ngữ của ngôn ngữ cần phân tích cú pháp.
+* `content`: Văn bản cần phân tích cú pháp (được mã hóa UTF-8).
+* `settings`: Một chuỗi JSON xác định các tính năng phân tích mong muốn. Xem phần Thông số cài đặt để biết chi tiết.
 
-Return Value:  
+Giá trị trả về:  
 
-A `const char*` containing a JSON string representing the analysis results. No need to deallocate the memory. Returns `nullptr` on failure.
+Một `const char*` chứa chuỗi JSON biểu diễn kết quả phân tích. Không cần giải phóng bộ nhớ. Trả về `nullptr` nếu thất bại.
 
 
-Example code:
+Mã mẫu:
 
 ```cpp
   SetDbPath("C:\\Tisane");
@@ -380,33 +380,33 @@ Example code:
 ```
 
 
-See: [Response](../apis/tisane-api-response-guide.md).
+Xem phần: [Phản hồi](../apis/tisane-api-response-guide.md).
 
 ### ParseTextFile
 ```cpp
 const char* ParseTextFile(const char *language, const char *filename, uint32_t chunkSize, const char *settings);
 ```
 
-Parse the content from the specified text file in the specified language using the specified settings in chunks. Only loads the chunk being processed.
+Phân tích cú pháp nội dung từ tệp văn bản được chỉ định bằng ngôn ngữ được chỉ định bằng cách sử dụng các cài đặt được chỉ định theo từng khối. Chỉ tải khối đang được xử lý.
 
-Parameters:
+Tham số:
 
-* `language`: The language code of the language to parse.
-* `filename`: The text file to parse (UTF-8 encoded). Assumed to only contain text.
-* `chunkSize`: The size of chunks used to read the stream from the file. If 0, then 8192 bytes is assigned.
-* `settings`: A JSON string that specifies the desired analysis features. See Settings Specification for details.
+* `language`: Mã ngôn ngữ của ngôn ngữ cần phân tích cú pháp.
+* `filename`: Tệp văn bản cần phân tích cú pháp (được mã hóa UTF-8). Được giả định chỉ chứa văn bản.
+* `chunkSize`: Kích thước của các khối được sử dụng để đọc luồng từ tệp. Nếu bằng 0, thì 8192 byte sẽ được chỉ định.
+* `settings`: Một chuỗi JSON xác định các tính năng phân tích mong muốn. Xem phần Thông số cài đặt để biết chi tiết.
 
-Return Value:  
+Giá trị trả về:  
 
-A `const char*` containing a JSON string representing the analysis results. No need to deallocate the memory. Returns `nullptr` on failure.
+Một `const char*` chứa chuỗi JSON biểu diễn kết quả phân tích. Không cần giải phóng bộ nhớ. Trả về `nullptr` nếu thất bại.
 
 {% admonition type="info" %}
 
-The text is omitted from the response for larger files for performance purposes.
+Văn bản sẽ bị lược bỏ khỏi phản hồi đối với các tệp lớn hơn vì mục đích hiệu suất.
 
 {% /admonition %}
 
-Example code:
+Mã mẫu:
 
 ```cpp
   SetDbPath("C:\\Tisane");
@@ -420,25 +420,25 @@ Example code:
 ```cpp
 __stdcall const char* DetectLanguage(const char *content, const char *likelyLanguages, const char* segmentDelimiter);
 ```
-Detects the language of the given text content.
+Phát hiện ngôn ngữ của nội dung văn bản được cung cấp.
 
-Parameters:
+Tham số:
 
-* `content`: The text to analyze (UTF-8 encoded).
-* `likelyLanguages`: (Optional) A comma-separated list of language codes that are likely to be present in the text. This can improve detection accuracy. Pass nullptr if not needed.
-* `segmentDelimiter`: (Optional) A string used to delimit segments within the text. For every segment, detection will be invoked separately. Pass nullptr for default behavior.
+* `content`: Văn bản cần phân tích (được mã hóa UTF-8).
+* `likelyLanguages`: (Tùy chọn) Danh sách các mã ngôn ngữ được phân tách bằng dấu phẩy có khả năng xuất hiện trong văn bản. Điều này có thể cải thiện độ chính xác của việc phát hiện. Truyền nullptr nếu không cần thiết.
+* `segmentDelimiter`: (Tùy chọn) Một chuỗi được sử dụng để phân định các phân đoạn trong văn bản. Đối với mỗi phân đoạn, việc phát hiện sẽ được thực hiện riêng biệt. Truyền nullptr cho hành vi mặc định.
 
-Return Value: 
+Giá trị trả về: 
 
-A `const char*` containing a JSON string representing the detected language(s). Returns `nullptr` on failure.
+Một `const char*` chứa một chuỗi JSON biểu diễn (các) ngôn ngữ được phát hiện. Trả về `nullptr` nếu thất bại.
 
 {% admonition type="warning" %}
 
-Do not deallocate the memory. It is managed internally.
+Không giải phóng bộ nhớ. Bộ nhớ được quản lý nội bộ.
 
 {% /admonition %}
 
-Example:
+Ví dụ:
 ```cpp
 const char* detectedLanguage = DetectLanguage("Bonjour le monde!", nullptr, nullptr);
 if (detectedLanguage) {
@@ -447,31 +447,31 @@ if (detectedLanguage) {
 }
 ```
 
-### Transform
+### Chuyển đổi
 ```cpp
 __stdcall const char* Transform(const char * sourceLanguage, const char * targetLanguage,const char * content, const char * settings);
 ```
-Translates or paraphrases a string from one language to another. 
+Dịch hoặc diễn giải một chuỗi từ ngôn ngữ này sang ngôn ngữ khác. 
 
-Requires that both the source and target language models have been loaded using`LoadGenerationLanguageModel`.
+Yêu cầu cả mô hình ngôn ngữ nguồn và ngôn ngữ đích đều được tải bằng`LoadGenerationLanguageModel`.
 
-Parameters:
+Tham số:
 
-* `sourceLanguage`: The language code of the source language.
-* `targetLanguage`: The language code of the target language.
-* `content`: The text to transform (UTF-8 encoded).
-* `settings`: A JSON string that specifies the desired transformation options. 
+* `sourceLanguage`: Mã ngôn ngữ của ngôn ngữ nguồn.
+* `targetLanguage`: Mã ngôn ngữ của ngôn ngữ đích.
+* `content`: Văn bản cần chuyển đổi (được mã hóa UTF-8).
+* `settings`: Một chuỗi JSON xác định các tùy chọn chuyển đổi mong muốn. 
 
-See also: 
+Xem thêm phần: 
 
-- [API response and configuration guide](../apis/tisane-api-response-guide.md)
-- [Configuration and customization Guide](../apis/tisane-api-configuration.md)
+- [Hướng dẫn cấu hình và phản hồi API](../apis/tisane-api-response-guide.md)
+- [Hướng dẫn cấu hình và tùy chỉnh](../apis/tisane-api-configuration.md)
 
-Return Value: 
+Giá trị trả về: 
 
-A `const char*` containing the translated or paraphrased text. You are responsible for freeing the memory allocated for this string.  Returns `nullptr` on failure.
+Một `const char*` chứa văn bản đã được dịch hoặc diễn giải. Không cần giải phóng bộ nhớ.  Trả về `nullptr` nếu thất bại.
 
-Example:
+Ví dụ:
 ```cpp
   SetDbPath("C:\\Tisane");
   ActivateLazyLoading(); // it's a test, we don't want to load the entire model for a tiny piece of text to be processed
