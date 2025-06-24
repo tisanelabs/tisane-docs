@@ -1,22 +1,22 @@
-# Locating A Snippet Using Location Data
+﻿# Поиск фрагмента с использованием данных о местоположении
 
-Tisane provides structured location data to help pinpoint flagged text fragments.
+Tisane предоставляет структурированные данные о местоположении, помогающие точно определить помеченные фрагменты текста.
 
-The three key location attributes are:
+Три ключевых атрибута местоположения:
 
-- `sentence_index` : Zero-based index of the sentence containing the snippet.     
-- `offset`: Zero-based position of the first character in the snippet within the sentence.
-- `length` : Number of characters in the snippet.                         
+- `sentence_index` : Отсчитываемый от нуля индекс предложения, содержащего фрагмент.     
+- `offset`: Позиция первого символа во фрагменте предложения (отсчет ведется от нуля).
+- `length` : Количество символов во фрагменте.                         
 
-## How To Get The String
+## Как получить строку
 
-1. Find the sentence text containing the snippet:
-   - Navigate to the `sentence_list` node.
-   - Select a node where `index` = `sentence_index`.
-   - Alternatively, retrieve the sentence directly from the sentence list array.
-2. Get the substring:
-   - Use the `offset` and `length` values to get the substring from the sentence.
+1. Найдите текст предложения, содержащий фрагмент:
+   - Перейдите к узлу `sentence_list`.
+   - Выберите узел, где `index` = `sentence_index`.
+   - Либо извлеките предложение непосредственно из массива списка предложений.
+2. Получите подстроку:
+   - Используйте значения `offset` и `length`, чтобы получить подстроку из предложения.
 
-## Why Relative Offsets Instead Of Absolute Positions?
+## Почему относительные смещения используются вместо абсолютных позиций?
 
-We use sentence-based indexing instead of absolute offsets because many users need an actual sentence with the snippet for context.
+Мы используем индексацию на основе предложений вместо абсолютных смещений, поскольку многим пользователям необходимо фактическое предложение с фрагментом для контекста.

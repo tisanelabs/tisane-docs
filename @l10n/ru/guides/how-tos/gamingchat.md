@@ -1,69 +1,69 @@
-# Processing Competitive Language In Game And Sports Chats 
+# Обработка соревновательной лексики в игровых и спортивных чатах 
 
-## The Challenge Of Competitive Language
+## Проблема соревновательной лексики
 
 *“Kill him! Kill him NOW!”*
 *“I will kick your a*!”*
 *“Touch your chest. Then push the ball harder.”*
 
-When processing chat in computer games and sports-related communities, moderation APIs face a dilemma. 
+При обработке чата в компьютерных играх и спортивных сообществах API модерации сталкиваются с дилеммой. 
 
-On one hand, they can’t just ignore utterances that are normally considered policy violation. 
+С одной стороны, они не могут просто игнорировать высказывания, которые обычно считаются нарушением политики. 
 
-On the other, as Dr. Evil’s support group might say, *“We don’t actually want to kill each other in here.”*  Yet, real threats must still be taken seriously.
+С другой стороны, как могла бы сказать группа поддержки Доктора Зло, *«На самом деле мы не хотим здесь убивать друг друга».*  Однако к реальным угрозам все равно следует относиться серьезно.
 
-### The Problem With Using Severity Levels
+### Проблема с использованием уровней серьезности
 
-Some moderation APIs attempt to address this by assigning "severity levels" and advising users to ignore messages below a certain threshold.
+Некоторые API модерации пытаются решить эту проблему, назначая «уровни серьезности» и рекомендуя пользователям игнорировать сообщения ниже определенного порога.
 
-But game violence can be severe, and it’s still nothing to do with the real world.  This means even the most severe utterances should be ignored. At the same time, this severity-based approach risks filtering out genuine threats that should not be ignored.
+Однако насилие в играх может быть жестоким, и оно все равно не имеет ничего общего с реальным миром.  Это значит, что даже самые резкие высказывания следует игнорировать. В то же время такой подход, основанный на оценке серьезности, рискует отфильтровать реальные угрозы, которые нельзя игнорировать.
 
-## Tisane's Approach
+## Подход Tisane
 
-Tisane offers two methods of handling this dilemma:
+Tisane предлагает два метода решения этой дилеммы:
 
-- **Method 1**: Ignore all `criminal_activity` type occurrences that have tags like `violence` and `death` on the client app side.
+- **Метод 1**: Игнорировать все вхождения типа `criminal_activity`, которые имеют такие теги, как `violence` и `death` на стороне клиентского приложения.
 
-- **Method 2** (recommended): Use a special `game violence` flag to ignore game and sporting competitive language.
+- **Метод 2** (рекомендуется): Используйте специальный флаг `game violence`, позволяющий игнорировать игровую и спортивно-соревновательную лексику.
 
-Example:
+Например:
 
 ```
 
 {"language":"en","content":"Shoot him!!!","settings":{"snippets":true,"memory":{"flags":["game_violence_ok"]}}}
 
 ```
-The `game_violence_ok` flag ensures that all alerts related to sports competitive language and game violence are silenced. 
+Флаг `game_violence_ok` гарантирует, что все оповещения, связанные с ненормативной лексикой в спортивных соревнованиях и насилием в играх, будут отключены. 
 
-Note: The flag won’t silence actual threats like *“I know where you live”* or anything clearly not related to gaming.
+Примечание: Флаг не заглушит реальные угрозы, такие как *«Я знаю, где ты живешь»* или что-то явно не связанное с играми.
 
-### Output
+### Вывод
 
-Example without the `game violence` flag:
+Пример без флага `game violence`:
 
 ![tisaneShootHimNoGVOK.png](/images/tisaneShootHimNoGVOK.png)
 
-Example with the  `game violence` flag set:
+Пример с установленным флагом `game violence`:
 
 ![tisaneGvOk.png](/images/tisaneGvOk.png)
 
-Also see: [2-Factor Moderation](../abuse/whatis2fm.md)
+См. также: [2-факторная модерация](../abuse/whatis2fm.md)
 
-##  Using Tisane in an iGaming platform
+##  Использование Tisane на платформе iGaming
 
-Tisane’s iGaming clients usually use Tisane to moderate:
+Клиенты Tisane в сфере iGaming обычно используют Tisane для модерации:
 
-- Real-time chat
-- User names
+- Чат в реальном времени
+- Имена пользователей
 
-The logic may be different from the chat moderation. For example:  *BitcoinKing*, *Hitler*, *nakedsupermodels* etc. give a pretty good idea about the user’s intentions.
+Логика может отличаться от модерации чата. Например:  *BitcoinKing*, *Гитлер*, *голыесупермодели* и т. д. дают довольно хорошее представление о намерениях пользователя.
 
-The two moderation functions are handled by the same method (`POST /parse`). 
+Обе функции модерации обрабатываются одним и тем же методом (`POST /parse`). 
 
-The only difference is the `format` setting:
+Единственное отличие - настройка `format`:
 
-- For the chat, use `"format":"dialogue"`. 
-- For user names, use `"format":"alias"`.
+- Для чата используйте `"format":"dialogue"` . 
+- Для имен пользователей используйте `"format":"alias"` .
 
-Our partners at PubNub provide both chat infrastructure and a [seamlessly integrated open-source moderation dashboard for Tisane](https://www.pubnub.com/demos/moderation-dashboard/).
+Наши партнеры в PubNub предоставляют как инфраструктуру чата, так и [органично интегрируемую панель модерации с открытым исходным кодом для Tisane](https://www.pubnub.com/demos/moderation-dashboard/).
 

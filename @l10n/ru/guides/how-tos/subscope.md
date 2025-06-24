@@ -1,12 +1,12 @@
-# Tokenizing URL Slugs and Hashtags
+# Токенизация URL-слагов и хэштегов
 
-Tisane can analyze slugs and hashtags, treating them as sentences, tokenizing them into words, and extracting topics and entities like in normal text.
+Tisane может анализировать слаги и хэштеги, рассматривая их как предложения, разбивая их на слова и извлекая темы и сущности, как в обычном тексте.
 
-Set `subscope` to `true` to force tokenizing subscopes.
+Установите `subscope` на `true` для принудительной токенизации подобластей.
 
-## Example:
+## Например:
 
-Request:
+Запрос:
 
 ```json
 {
@@ -18,7 +18,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 
 ```json
 {

@@ -1,5 +1,5 @@
-## Can Tisane Be Embedded In My Application Deployed On A Standalone Machine?
+﻿## Можно ли встроить Tisane в мое приложение, развернутое на автономной машине?
 
-Yes. Tisane Embedded SDKs are available for C/C++ (Windows and Linux; other OSes available on request) and Core .NET.
+Да. Встроенные SDK Tisane доступны для C/C++ (Windows и Linux; другие ОС доступны по запросу) и Core .NET.
 
-See: [Tisane Embedded SDKs](/sdks)
+Рекомендуем ознакомиться: [Встроенные SDK Tisane](/sdks)

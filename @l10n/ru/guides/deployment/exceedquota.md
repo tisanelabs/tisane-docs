@@ -1,11 +1,11 @@
-# What Happens When My Monthly Quota Is Exceeded?
+﻿# Что произойдет, если моя месячная квота будет превышена?
 
-When the monthly quota is exceeded, all the requests are declined. There will be no additional charges or unwanted billing surprises.
+При превышении месячной квоты все запросы отклоняются. Никаких дополнительных расходов или нежелательных сюрпризов при выставлении счетов не будет.
 
-When 75% and 90% of the monthly allowance is spent, notifications are sent. 
+При расходовании 75% и 90% ежемесячной квоты направляются уведомления. 
 
-Upgrading the plan takes a couple of minutes, and if or when the monthly traffic goes down, it is possible to downgrade. 
+Повышение уровня плана занимает пару минут, а если ежемесячный трафик снизится, можно будет перейти на тарифный план более низкого уровня. 
 
-See our plans at the [Subscription plans](https://tisane.ai/subscription-plans/) page.
+Посмотрите наши планы на странице [Планы подписки](https://tisane.ai/subscription-plans/).
 
-Note: The monthly quota is different from the rate limits.
+Примечание: Месячная квота отличается от лимитов скорости.

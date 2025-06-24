@@ -1,87 +1,87 @@
-# Analyzing, Validating, and Comparing Names
+# Анализ, проверка и сравнение имен
 
-## Parsing Full Names
+## Синтаксический анализ полных имен
 
-Tisane can break down full names into key components:
+Tisane  может разбить полные имена на ключевые компоненты:
 
-| Attribute     | Description                         |
+| Атрибут     | Описание                         |
 | ------------- | ----------------------------------- |
-| `given_name`  | First name (e.g., *John*)           |
-| `middle_name` | Middle name (if applicable)         |
-| `surname`     | Last name (e.g., *Doe*)             |
-| `title`       | Honorifics (e.g., *Dr., Mr., Ms.*)  |
-| `suffix`      | Name suffix (e.g., *Jr., Sr., III*) |
-| `social_role` | Roles like *Haji* or *Dr.*          |
+| `given_name`  | Имя (например, *Джон*)           |
+| `middle_name` | среднее имя (если уместно)         |
+| `surname`     | Фамилия (например, * Доу*)             |
+| `title`       | Почтительные обращения (например, *доктор, господин, госпожа*)  |
+| `suffix`      | суффикс имени (например, *младший, старший, III* ) |
+| `social_role` | Роли, как *хаджи* или *доктор.*          |
 
-## How To Parse A Name
+## Как выполнить синтаксический анализ имени
 
-To parse a full name, send a `POST /parse` request with:
+Чтобы выполнить синтаксический анализ полного имени, отправьте запрос `POST/parse` с:
 
 * `"entity": "person"`
 * `"words": true`
 
 
-The response will categorize the name components under the `role` attribute.
+В ответе компоненты имени будут отнесены к атрибуту `role`.
 
-Example of Name Parsing:
+Пример синтаксического анализа имени:
 ![tisaneAliKilicoglu.png](/images/tisaneAliKilicoglu.png)
 
 
-## Validating Real Names
+## Проверка настоящих имен
 
-While Tisane cannot verify if a user’s provided name is real, it recognizes many names associated with:
+Хотя Tisane не может проверить, является ли указанное пользователем имя реальным, он распознает множество имен, связанных с:
 
-- Famous figures (`important_person`)
-- Fictional characters (`fictional_character`)
-- Spiritual beings (`spiritual_being`)
-- Names that don’t appear to be names (for example: User-13789026152908425434)
+- известными личностями (`important_person`);
+- вымышленными персонажами (`fictional_character`);
+- духовными существами (`spiritual_being`);
+- именами, которые не кажутся именами (например: User-13789026152908425434).
 
-For a list of common fake names, refer to [this Quora post](https://qr.ae/pNKxWl).
+Список распространенных поддельных имен см. в [этой публикации на Quora](https://qr.ae/pNKxWl).
 
 
-The `subtype` attribute in the `entity` structure indicates the type of name detected, with a Wikidata ID if available.
+Атрибут `subtype` в структуре `entity` указывает тип обнаруженного имени с идентификатором Wikidata, если он доступен.
 
-Example of Fictional Character Name Parsing:
+Пример синтаксического анализа имени вымышленного персонажа:
 
 ![tisaneFictionalCharacter.png](/images/tisaneFictionalCharacter.png)
 
 
 
-## Comparing Names
+## Сравнение имен
 
-The `/compare/entities` method allows comparing two names (even across languages) and detecting differences.
+Метод `/compare/entities` позволяет сравнить два имени (даже на разных языках) и обнаружить различия.
 
-### Example Comparisons
+### Примеры сравнений
 
-| Name 1           | Name 2                              | Result                                                 |
+| Имя 1           | Имя 2                              | Результат                                                 |
 | ---------------- | ----------------------------------- | ------------------------------------------------------ |
-| *William Smith*  | *Will Smith*                        | `{"result":"different","differences":["variation"]}`   |
-| *Musa Bin Osman* | *Haji Musa Bin Osman*               | `{"result":"different","differences":["social_role"]}` |
-| *William Smith*  | *Вилл Смит* (Will Smith in Russian) | `{"result":"different","differences":["variation"]}`   |
-| *Kevin Tan*      | *TAN Kevin*                         | `{"result":"same"}`                                    |
+| *Уильям Смит*  | *Уилл Смит*                        | `{"result":"different","differences":["variation"]}`   |
+| *Муса бин Осман* | *Хадж Муса бин Осман*               | `{"result":"different","differences":["social_role"]}` |
+| *Уильям Смит*  | *Вилл Смит* (т.е. Уилл Смит) | `{"result":"different","differences":["variation"]}`   |
+| *Кевин Тан*      | *ТАН Кевин*                         | `{"result":"same"}`                                    |
 
-### **How To Compare Names**
+### **Как сравнивать имена**
 
-Send a request to the `/compare/entities` endpoint with the names to compare, and the response will return differences in attributes like:
+Отправить запрос конечной точке `/compare/entities` с именами для сравнения, и ответ вернет различия в атрибутах, например:
 
-- `variation` (e.g., *William* vs *Will*)
-- `social_role` (e.g., *Haji Musa* vs *Musa*)
-- `case_difference` (e.g., *John Doe* vs *JOHN DOE*)
-- `same` (Identical names, even if the order differs)
+- `variation` (например, *Уильям* по сранвнию с *Уилл*)
+- `social_role` (например, *Хаджи Муса* по сравнению с *Муса*)
+- `case_difference` (например, *Джон Доу* по сравнению с *ДЖОН ДОУ*)
+- `same` (идентичные имена, даже если порядок разный)
 
 
-## Vetting Nicknames and Aliases
+## Проверка ников и псевдонимов
 
-Usernames and aliases can be misleading, offensive, or abusive. Tisane detects inappropriate usernames (e.g., *Hitler*, *UserJohn_is_liar*).
+Имена пользователей и псевдонимы могут быть вводящими в заблуждение, оскорбительными или непристойными. Tisane обнаруживает неподходящие имена пользователей (например, *Гитлер*, *Пользователь Джон_является_ лжецом*).
 
-### How To Vet A Nickname
+### Как проверить псевдоним
 
-Send a send a `POST /parse` request with:
+Отправьте запрос `POST /parse` вместе с:
 
 - ` "format": "alias"`
 
-- The `subscope` setting ensures names are properly segmented, even if written in camel case, with underscores, or without spaces.
+- Настройка `subscope` гарантирует правильную сегментацию имен, даже если они написаны слитно заглавными буквами, с подчеркиваниями или без пробелов.
 
-Example of nickname vetting:
+Пример проверки псевдонима:
 
 ![tisaneAliasCreep.png](/images/tisaneAliasCreep.png)

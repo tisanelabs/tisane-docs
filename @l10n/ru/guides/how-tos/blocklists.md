@@ -1,89 +1,89 @@
-# Filtering By Keyword Blocklists
+# Фильтрация по ключевым словам в списках блокировки
 
-While most users use Tisane for context-aware moderation, some users require simple keyword filtering for this or another reason. 
+Хотя большинство пользователей используют Tisane для контекстно-зависимой модерации, некоторым пользователям по той или иной причине требуется простая фильтрация по ключевым словам. 
 
-Tisane can be used to monitor lists of words, with options helping to avoid usual pitfalls of wordlist monitoring.
+Tisane можно использовать для мониторинга списков слов, при этом имеются опции, помогающие избежать обычных ошибок мониторинга списков слов.
 
-## Including Word Breakdown in the Response
+## Включение разбивки слов в ответ
 
-By default, Tisane outputs only the `abuse`, `sentiment`, and `entities_summary` sections in its response. However, Tisane can provide a breakdown of words making up every sentence.
+По умолчанию, Tisane выподит в ответе только разделы `abuse`, `sentiment` и `entities_summary`. Однако Tisane может предоставить разбивку слов, составляющих каждое предложение.
 
-To output the words, add `"words":true` to the `settings` parameter.
+Чтобы вывести слова, добавьте `"words":true` в параметр ` settings`.
 
-All words are tokenized (divided into chunks); the tokenization algorithm in use depends on the language. It is transparent to the user, whether the language uses spaces or not, has compounds (such as in German or Dutch), or has words that have spaces in between (for example: *kung fu* in English or *EE. UU.* in Spanish). 
+Все слова токенизированы (разделены на части); используемый алгоритм токенизации зависит от языка. Для пользователя очевидно, используются ли в языке пробелы или нет, есть ли в нем сложные слова (например, в немецком или голландском) или есть ли в нем слова, между которыми есть пробелы (например: *kung fu* на аглийском или *EE. UU.* на испанском). 
 
-The result is a structured array named `words`. It is located inside the `sentence_list` structure in the response. 
+Результатом является структурированный массив с именем `words`. Он расположен внутри структуры `sentence_list` в ответе. 
 
-Every word element contains:
+Каждый элемент слова содержит:
 
-- The actual string (`text`)
-- The `offset` where it starts
-- A `stopword` flag for stop words
-- Some internal Tisane IDs (see Option 2 below)
-- Associated features such as grammar or style
+- фактическую строку (`text`);
+- `offset`, где она начинается;
+- флаг `stopword` для стоп-слов;
+- некоторые внутренние идентификаторы Tisane (см. Вариант 2 ниже);
+- сопутствующие особенности, такие как грамматика или стиль.
 
-## Implementing Keyword Filtering
+## Реализация фильтрации ключевых слов
 
-There are two ways to implement keyword filtering with Tisane:
+Существует два способа реализации фильтрации ключевых слов с помощью Tisane:
 
-* Option 1: Simple (Not Recommended)
-* Option 2: More Powerful
+* Вариант 1. Простой (не рекомендуется)
+* Вариант 2. Более мощный
 
-Both approaches avoid false positive issues, known as a “[clbuttic problem](https://en.wikipedia.org/wiki/Scunthorpe_problem)”.
+Оба подхода позволяют избежать ложных срабатываний, известных как «[проблема clbuttic»](https://en.wikipedia.org/wiki/Scunthorpe_problem) (замена ругательств более допустимыми словами).
 
-## Option 1: Simple (Not Recommended)
+## Вариант 1. Простой (не рекомендуется)
 
-The simple and the obvious solution is:
+Простое и очевидное решение:
 
-1. Traverse the `words` array.
-2. For every element, check if the `text` attribute contains one of the prohibited words (or expressions, because the tokenization is logical, and *kung fu* or *power plant* is one word).
+1. Просмотр массива `words`.
+2. Для каждого элемента проверьте, содержит ли атрибут `text` содержит одно из запрещенных слов (или выражений, поскольку токенизация является логической, и *reyuae* или * электростанция* — это одно слово).
 
-### Limitations
+### Ограничения
 
-The simplicity comes with drawbacks:
+Простота имеет свои недостатки:
 
-- What happens if the word is inflected? Some people will say “we can use the stem”, but it’s not always possible to reduce it to a stem. 
-- How do we capture the word _bought_ in English based on the lemma _buy_? If you assume _b_ to be its stem, should you assume every word starting with _b_ is an inflected form of _buy_? 
-- More morphologically rich languages (French, German, Arabic, Russian, Hindi, etc.) have a lot more variety and numerous inflections.
-- What happens if the word is spelled slightly differently, e.g. *U.S.A.* instead of *USA* or *email* instead of *e-mail*?
-- What happens if the word is obfuscated or, in information security speak, employs “adversarial text manipulations”?
-- What if we want to screen any mention of *Alaska* (the state) but allow *Alaska Air* and *baked Alaska*? (For a recent real-life example, an article about [_Enola Gay_](https://en.wikipedia.org/wiki/Enola_Gay) was removed in the [2025 Pentagon cleanup](https://www.newsweek.com/military-remove-enola-gay-photos-dei-rules-2041029) because keyword matching flagged the word "gay".)
+- Что произойдет при склонении слова? Некоторые скажут: «Мы можем использовать корень», но не всегда возможно свести слово к корню. 
+- Как мы улавливаем слово _bought _ на английском языке на основе леммы_buy_ ? Если вы предположите, что _b_ является его основой, нужно ли вам предположить, что каждое слово, начинающееся с _b_ является склоняемой формой _buy_? 
+- Более морфологически богатые языки (французский, немецкий, арабский, русский, хинди и т. д.) имеют гораздо большее разнообразие и многочисленные склонения.
+- Что произойдет, если слово написать немного по-другому, например *U.S.A.* вместо *USA* или *email* вместо *e-mail* ?
+- Что произойдет, если слово будет запутано или, выражаясь языком информационной безопасности, будут использованы «конкурентные текстовые манипуляции»?
+- Что, если мы хотим отсеять любое упоминание об *Alaska* (штат), но разрешить *Alaska Air* и *запеченная аляска* ? (Недавний пример из реальной жизни — статья о [_Эноле Гей_](https://en.wikipedia.org/wiki/Enola_Gay) была удалена в ходе [Зачистки Пентагона в 2025 году](https://www.newsweek.com/military-remove-enola-gay-photos-dei-rules-2041029) (Поскольку при сопоставлении ключевых слов было отмечено слово «гей»).
 
-## Option 2: More Powerful
+## Вариант 2. Более мощный
 
-Option 2 relies on Tisane’s internal identifiers. This route allows solving all the shortcomings listed above, taking advantage of Tisane's algospeak and deciphering and morphological analysis capabilites.
+Вариант 2 основан на внутренних идентификаторах Tisane. Этот путь позволяет устранить все перечисленные выше недостатки, используя возможности алгоритмической речи Tisane, а также возможности дешифровки и морфологического анализа.
 
-The internal identifiers in the word entries are `lexeme` and `family`. 
+Внутренние идентификаторы в записях слов: `lexeme` и `family`. 
 
-### About lexeme ID
+### О лексемном идентификаторе
 
-A lexeme ID in Tisane is associated with a word and all its possible inflections. 
+Идентификатор лексемы в Tisane связывется со словом и всеми его возможными склонениями. 
 
-If the word is obfuscated (e.g. “br*k” instead of “break”) or misspelled, and Tisane manages to recognize the original word, then the lexeme ID of the original word is provided.
+Если слово запутано (например, «br*«k» вместо «break») или неправильно написано, и Tisane удается распознать исходное слово, то предоставляется идентификатор лексемы исходного слова.
 
-### About family ID
+### О семейном идентификаторе
 
-Family ID is another option, if we want to filter according to the word-sense. 
+Семейный идентификатор — еще один вариант, если мы хотим фильтровать по смыслу слова. 
 
-For example: A device called “elevator” in the US is called “lift” in the UK.  It’s the same real-world entity, just different terms. They both have the same family ID. However, “lift” in the sense of aerodynamic lift, has a different family ID. 
+Например: Устройство, которое в США называют «elevator», в Великобритании называют «lift».  Это одно и то же реальное явление, просто разные термины. У них обоих одинаковый семейный идентификатор. Однако lift в смысле аэродинамической подъемной силы имеет другое семейственное обозначение. 
 
-An added bonus here is that the family IDs are the same across languages. That is, you can create a “list of concepts” to capture, regardless of the language or the dialect. 
+Дополнительным бонусом является то, что семейные идентификаторы одинаковы на всех языках. То есть вы можете создать «список понятий», которые нужно зафиксировать, независимо от языка или диалекта. 
 
-Power users can even filter by categories. For example: Any kind of plane, any kind of car, any kind of bird while ignoring “clay pigeon” but capturing “pigeon”, etc.
+Опытные пользователи могут даже фильтровать по категориям. Например: Любой вид самолета, любой вид автомобиля, любой вид птицы, игнорируя «глиняного голубя», но поймав «голубя» и т. д.
 
-### Why We Recommend Using lexeme ID
+### Почему мы рекомендуем использовать идентификатор лексемы
 
-But, while Tisane is generally word-sense oriented, we came to realize that the difference between word-senses is not always obvious to the users. Also, the keyword filtering usually intentionally ignores the context. This is why we recommend using lexeme ID.
+Однако, хотя Tisane в целом ориентирован на смысл слова, мы пришли к выводу, что разница между смыслами слова не всегда очевидна для пользователей. Кроме того, фильтрация ключевых слов обычно намеренно игнорирует контекст. Вот почему мы рекомендуем использовать идентификатор лексемы.
 
-For every word or phrase in your list:
+Для каждого слова или фразы в вашем списке:
 
-1. Look up the lexeme ID, either by running a sample sentence and getting the lexeme ID from there, or by using our Language Model Direct Access API.
-2. Traverse the `words` array.
-3. For every word, compare the lexeme ID with the list of your lexeme IDs.
+1. Найдите идентификатор лексемы, либо запустив пример предложения и получив из него идентификатор лексемы, либо воспользовавшись нашим API прямого доступа к языковой модели.
+2. Просмотрите масссив `words`.
+3. Для каждого слова сравните идентификатор лексемы со списком ваших идентификаторов лексем.
 
-Example:
+Например:
 
-Request (`sentiment`, `topics`, and `entities` turned off to simplify the output):
+Запрос (`sentiment`, `topics`, и `entities` выключено для упрощения вывода):
 
 ```json
 {
@@ -100,7 +100,7 @@ Request (`sentiment`, `topics`, and `entities` turned off to simplify the output
 }
 ```
 
-Response:
+Ответ:
 ```json
 {
 	"text": "d/l star t*k for free",
@@ -149,12 +149,12 @@ Response:
 }
 ```
 
-In the response: 
+В ответе: 
 
-1. The obfuscated word _Star Trek_ is:
+1. Запутанное слово _Star Trek_:
 
- * chunked as one unit
- * assigned lexeme ID 317071
- * assigned family ID 152100
+ * представлено как единое целое
+ * ему присвоен идентификатор лексемы 317071
+ * ему присвоен семейный идентификатор 152100
 
-2. The *corrected_text* attribute contains de-obfuscated version of the sentence: _d/l star trek for free_.
+2. Атрибут *corrected_text* attribute содержит деобфусцированную версию предложения: _d/l star trek for free_.

@@ -1,12 +1,12 @@
-# Moderating Live Chat
+﻿# Модерирование чата в реальном времени
 
-Tisane is widely used to moderate live communications between users on group instant messaging platforms. Usually, in live chats Tisane runs in fully automatic mode. 
+Tisane широко используется для модерирования живого общения между пользователями на платформах группового обмена мгновенными сообщениями. Обычно в чатах Tisane работает в полностью автоматическом режиме. 
 
-If false positives is a sensitive issue, then an appeal procedure and human review (on request) can be established.
+Если ложные срабатывания представляют собой деликатный вопрос, можно установить процедуру апелляции и человеческого контроля (по запросу).
 
-## Standard Integration Architecture
+## Стандартная интеграционная архитектура
 
-As shown on the diagram below: a simple integration architecture scans every message and blacklists or sends the message to a special channel if it is deemed problematic and the policies do not allow the type of `abuse` that was detected.
+Как показано на схеме ниже: простая архитектура интеграции сканирует каждое сообщение и помещает его в черный список или отправляет на специальный канал, если оно считается проблемным и политики не допускают `abuse` такого типа, который был обнаружен.
 
 ```mermaid
 flowchart TD
@@ -25,20 +25,20 @@ flowchart TD
 ```
 
 
-1. The client application sends posts to Tisane for scanning.
-2. Tisane flags posts based on severity level and abuse type.
-3. The client application then must check if the types of entries logged in the `abuse` section are not allowed by the community policies.
-4. If there are restricted types, then the post is blacklisted. (Presumably, the post is sent to a special channel for moderators. For maintenance reasons, it is not recommended to discard messages without a trace.)
-5. If there are no restricted types or there is no `abuse` section in Tisane's response, the post is published.
+1. Клиентское приложение отправляет сообщения в Tisane для сканирования.
+2. Tisane помечает сообщения в зависимости от уровня серьезности и типа оскорбления.
+3. Затем клиентское приложение должно проверить, запрещены ли типы записей, зарегистрированных в разделе `abuse`, политикой сообщества.
+4. Если есть запрещенные типы, пост заносится в черный список. (Предположительно, сообщение отправлено на специальный канал для модераторов. В целях технического обслуживания не рекомендуется удалять сообщения без следа).
+5. Если нет запрещенных типов или в ответе Tisane нет раздела `abuse`, пост публикуется.
 
-## Open-Source Integrations
+## Интеграции с открытым исходным кодом
 
-Our partner PubNub built a content moderation demo seamlessly integrated with Tisane and published its source code in GitHub. The implementation allows the users dynamically set community moderation policies. 
+Наш партнер PubNub создал демоверсию модерации контента, беспроблемно интегрированную с Tisane, и опубликовал ее исходный код на GitHub. Реализация позволяет пользователям динамически устанавливать политику модерации сообщества. 
 
-- [PubNub Moderation Dashboard for Chat](https://www.pubnub.com/demos/moderation-dashboard/)
+- [Панель управления модерацией PubNub для чата](https://www.pubnub.com/demos/moderation-dashboard/)
 - [pubnub/moderation-dashboard on GitHub](https://github.com/pubnub/moderation-dashboard)
 
-## Integrations with Popular platforms
+## Интеграции с популярными платформами
 
-See: [Integrations - Tisane Labs](https://tisane.ai/integrations)
+Рекомендуем ознакомиться: [Интеграции — Tisane Labs](https://tisane.ai/integrations)
 

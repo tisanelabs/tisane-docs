@@ -1,35 +1,35 @@
-# Moderating Usernames
+# Модерирование имен пользователей
 
-Moderating aliases/usernames/nicknames works differently than moderating chats and messages.
+Модерирование псевдонимов/имен пользователей/никнеймов работает иначе, чем модерирование чатов и сообщений.
 
-URLs in an alias are a telltale sign of a spammer. If someone calls themselves _BtcKing111_, it's pretty obvious what they are here for. Mentioning _3rd reich_ in a chat is very different than adopting it as your username.
+URL-адреса в псевдониме являются явным признаком спамера. Если кто-то называет себя _BtcKing111_ , совершенно очевидно, для чего они здесь. Упоминание _3-й рейх_ в чате — это совсем не то же самое, что использовать его в качестве имени пользователя.
 
-Which is why Tisane has a special mode for aliases. To invoke alias moderation logic, specify **"format":"alias"** in your settings structure.
+Вот почему в Tisane есть специальный режим для псевдонимов. Чтобы вызвать логику модерации псевдонимов, укажите **"format":"alias"** в структуре ваших настроек.
 
-## Language Identification
+## Идентификация языка
 
-One common “gotcha” is the choice of language. As Tisane has a handy automatic language identification option, it is tempting to simply use that asterisk ("language":"*"). Don't do it!
+Одна из распространенных «подводных камней» — выбор языка. Поскольку в Tisane предусмотрена удобная функция автоматического определения языка, возникает соблазн просто использовать звездочку ("language":"*"). Не делайте этого!
 
-First, language identification does not work well with strings shorter than 30-50 characters. Sometimes, it is simply impossible to know what the language is. Consider a word like “status”. It is the same word in French, Spanish, English, and many other languages. If you were to identify the language judging by the word “status” alone, what is the right answer? There is simply no definite answer, that’s how languages work. (A developer asked whether adding digits or spaces to the end will solve the problem. The answer is no.)
+Во-первых, идентификация языка не работает должным образом со строками короче 30–50 символов. Иногда просто невозможно понять, какой это язык. Рассмотрим такое слово, как «статус». Это одно и то же слово во французском, испанском, английском и многих других языках. Если бы вам нужно было определить язык, основываясь только на слове «статус», какой ответ был бы правильным? Однозначного ответа просто нет, так устроены языки. (Разработчик спросил, решит ли проблему добавление цифр или пробелов в конце. Ответ — нет).
 
-With aliases, it’s even more complex: aliases are not necessarily legitimate words in any language. It may be a mix of characters based on other words. It may be different name components mashed together (which, again, may be legitimate in several languages: Peter, John, etc.).
+С псевдонимами все еще сложнее: псевдонимы не обязательно являются законными словами в каком-либо языке. Это может быть смесь символов, основанных на других словах. Это могут быть различные компоненты имени, смешанные вместе (что, опять же, может быть допустимо в нескольких языках: Питер, Джон и т. д.).
 
-How do we know the language of the alias? One way is to look at the user’s settings or IP, but it’s extremely unreliable. Moreover, in most cases, aliases are made to be understood by the other community members, which is today usually a global audience. English aliases do not only come from the US and UK. Add intentional obfuscation and mashing words together to the mix.
+Откуда мы знаем язык псевдонима? Один из способов — посмотреть настройки или IP пользователя, но это крайне ненадежно. Более того, в большинстве случаев псевдонимы создаются для того, чтобы их понимали другие члены сообщества, которое сегодня обычно представляет собой глобальную аудиторию. Английские псевдонимы встречаются не только в США и Великобритании. Добавьте к этому намеренное запутывание и смешивание слов.
 
-And then there is the issue of your audience. If one of your users created a name that is perfectly acceptable in German, it may be offensive in English. Goes without saying, it may be any combination of languages. Marketers are familiar with the issue all too well.
+И тут возникает вопрос вашей аудитории. Если один из ваших пользователей создал имя, которое вполне приемлемо на немецком языке, оно может оказаться оскорбительным на английском языке. Само собой разумеется, это может быть любая комбинация языков. Маркетологи хорошо знакомы с этой проблемой.
 
-Can Tisane just scan all languages until it finds anything offensive? We studied the option and decided not to go with it, because most communities oppose it.
+Может ли Tisane просто сканировать все языки, пока не найдет что-нибудь оскорбительное? Мы изучили этот вариант и решили не использовать его, поскольку большинство сообществ выступают против него.
 
-There are several routes we recommend:
+Мы рекомендуем несколько маршрутов:
 
-1. For Latin scripts, assume the alias is either in English or in one of the main languages in your community. For every language you need to validate, send a separate request. (Note that the vertical bar separated notation, e.g. en|fr|es is not the way to do it: its purpose is to invoke language identification.)
-2. For non-Latin scripts, scan the main language associated with the script.
+1. Для латинских алфавитов предположим, что псевдоним написан на английском или на одном из основных языков вашего сообщества. Для каждого языка, который необходимо проверить, отправьте отдельный запрос. (Обратите внимание, что вертикальная черта разделяет обозначения, например en|fr|es — не тот способ, с помощью которого это можно сделать: его цель — вызвать языковую идентификацию).
+2. Для нелатинских шрифтов сканируйте основной язык, связанный с этим шрифтом.
 
-Do not worry about filtering the URLs, emails, etc. These ones are included in every language. Automatic tokenization of nicknames into constituents (e.g. _cryptorajah1244_ -> _crypto|rajah_) is built in, too.
+Не беспокойтесь о фильтрации URL-адресов, электронных писем и т. д. Они включены на всех языках. Автоматическая токенизация псевдонимов также встроена в составляющие (например, _cryptorajah1244_ -> _crypto|rajah_).
 
-**Example**
+**Пример**
 
-Request:
+Запрос:
 ```json
 {
   "language": "en",
@@ -40,7 +40,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 ```json
 {
 	"text": "cryptorajah1244 ",

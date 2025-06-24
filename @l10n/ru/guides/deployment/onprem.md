@@ -1,71 +1,71 @@
-# On-premise Deployment
+# Локальное развертывание
 
-Tisane web service can be deployed outside of Tisane Labs' public cloud on customer's premises, in a private call center, or in a private cloud.
+Веб-служба Tisane может быть развернута за пределами публичного облака Tisane Labs на территории клиента, в частном центре обработки данных или в частном облаке.
 
-API methods on on-prem installations are the same as in our public cloud. (See: [Tisane API Reference](/apis/tisane-api-short).) Authentication headers are not required.
+Методы API в локальных установках такие же, как и в нашем публичном облаке. (Рекомендуем ознакомиться: [Справка по API Tisane](/apis/tisane-api-short)). Заголовки аутентификации не требуются.
 
-On-prem licenses are issued on a case-by-case basis. [Contact us to discuss your requirements](https://tisane.ai/on-prem).
+Локальные лицензии выдаются в индивидуальном порядке. [Свяжитесь с нами, чтобы обсудить ваши потребности](https://tisane.ai/on-prem).
 
-For integration of Tisane as an in-process component, see: [Tisane Embedded SDKs](/sdks)
+Для интеграции Tisane в качестве компонента в процессе см.: [Встроенные SDK Tisane](/sdks)
 
-## RAM Requirements
+## Требования к оперативной памяти
 
-**Lazy loading**: 50 Mb fixed + 50 to 100 Mb per language model
-**Fully loaded**: between 400 Mb and 2 Gb per language model
+**Замедленная загрузка**: 50 МБ фиксированной квоты + 50–100 МБ на языковую модель
+**Полная загрузка** : от 400 МБ до 2 ГБ на языковую модель
 
-Read more: [Lazy loading vs Fully Loaded Mode](/sdks/lazyloading.md)
+Подробнее: [Сравнение режима замедленной загрузки с режимом полной загрузки](/sdks/lazyloading.md)
 
 ## Linux
 
-Tisane Web Service for Linux is a self-hosted executable (`tisane`) running as a web service, optionally as a daemon. Multiple instances can run on the same language database, the same machine, and using the same configuration. Each instance requires a separate port. 
+Tisane Web Service для Linux — это исполняемый файл, размещенный на собственном сервере (`tisane`) работает как веб-служба, опционально как системная служба. Несколько экземпляров могут работать в одной и той же языковой базе данных, на одном и том же компьютере и с использованием одной и той же конфигурации. Для каждого экземпляра требуется отдельный порт. 
 
-### Requirements
+### Требования
 
-Kernel version 6.0.0+
+Версия ядра 6.0.0+
 
-### Command-line Parameters
+### Параметры командной строки
 
-**Without parameters**
+**Без параметров**
 
-Runs a simple test, outputs its result, and exits.
+Запускает простой тест, выводит его результат и завершает работу.
 
 **-port**
 
-Launches the service listening on the specified port with the following parameter(s):
+Запускает службу, прослушивающую указанный порт со следующими параметрами:
 
-* *Parameter 1*: valid port number
+* *Параметр 1*: действительный номер порта
 
 **-parse**
 
-Launches a single parse call and outputs its result with the following parameters:
+Запускает один вызов синтаксического анализа и выводит его результат со следующими параметрами:
 
-* *Parameter 1*: language code
-* *Parameter 2*: content
-* *Parameter 3*: settings (must be enclosed in `{}` )
+* *Параметр 1*: код языка
+* *Параметр 2*: содержание
+* *Параметр 3*: настройки (должны быть заключены в `{}` )
 
 **-transform**
 
-Launches a single transform call and outputs its result with the following parameters:
+Запускает одиночный вызов преобразования и выводит его результат со следующими параметрами:
 
-* *Parameter 1*: source language code
-* *Parameter 2*: target language code(s)
-* *Parameter 3*: content
-* *Parameter 4*: settings (must be enclosed in `{}` )
+* *Параметр 1*: исходный код языка
+* *Параметр 2*: код(ы) целевого языка
+* *Параметр 3*: содержание
+* *Параметр 4*: настройки (должны быть заключены в `{}` )
 
 **--version**
 
-Outputs the runtime version.
+Выводит версию среды выполнения.
 
-### Configuration
+### Конфигурация
 
-Tisane's Linux configuration files use [TOML format](https://en.wikipedia.org/wiki/TOML). All the settings are under *\[main\]* section. The settings are:
+Файлы конфигурации Linux от Tisane используют [формат TOML](https://en.wikipedia.org/wiki/TOML) . Все настройки находятся в разделе *\[main\]*. Настройки следующие:
 
-* *path* (string, required) - a folder where the Tisane data files are located. Relative path is OK, so if it’s in the same folder, `./` works.
-* *preload* (array of strings, optional) - language codes to load fully at the startup. The rest will use lazy loading (loading on demand). It is recommended to preload no more than one or two language models, unless the environment has multiple languages used very often. Also read: [Lazy loading vs Fully Loaded Mode](/sdks/lazyloading.md)
-* *daemon* (boolean, optional) - if *true*, Tisane will be launched as a daemon (service). 
-* *limit* (integer, optional) - the maximum length of the request in bytes.
+* *path* (строка, обязательно) — папка, в которой находятся файлы данных Tisane. Относительный путь допустим, поэтому, если он находится в той же папке, `./` работает.
+* *preload* (массив строк, необязательно) — коды языков для полной загрузки при запуске. Остальные будут использовать замедленную загрузку (загрузку по требованию). Рекомендуется предварительно загружать не более одной или двух языковых моделей, если только в среде очень часто не используется несколько языков. Читайте также: [Сравнение режима замедленной загрузки с режимом полной загрузки](/sdks/lazyloading.md)
+* *daemon* (логическое значение, необязательный) - если *true*, Tisane будет запущен как системная служба. 
+* *limit* (целое число, необязательно) - максимальная длина запроса в байтах.
 
-Example:
+Например:
 
 ```bash
 [main]
@@ -76,82 +76,82 @@ daemon = true
 
 {% admonition type="warning" %}
 
-Do not use the `daemon` option when using Docker.
+Не используйте опцию `daemon` при использовании Docker.
 
 {% /admonition %}
 
-### Installation
+### Установка
 
-Once started with `-port` parameter specified, `tisane` accepts and responds to HTTP requests. To install, simply make sure the executable is launched when the system starts. The simplest way is to use the `systemd` suite.
+После запуска с указанным параметром ` -port`, `tisane` принимает HTTP-запросы и отвечает на них. Для установки просто убедитесь, что исполняемый файл запускается при загрузке системы. Самый простой способ — использовать пакет `systemd`.
 
-We provide a Bash script to configure `systemd` to launch multiple instances of Tisane Web Service: [install.sh](/guides/sourcecode/install.sh)
+Мы предоставляем скрипт Bash для настройки `systemd` для запуска нескольких экземпляров веб-службы Tisane: [install.sh](/guides/sourcecode/install.sh)
 
-More helper Bash scripts:
+Еще больше вспомогательных скриптов Bash:
 
-* stop all running instances of Tisane: [stop.sh](/guides/sourcecode/stop.sh)
-* start instances of Tisane managed by `systemd`: [startall.sh](/guides/sourcecode/startall.sh)
+* остановите все запущенные экземпляры Tisane: [stop.sh](/guides/sourcecode/stop.sh)
+* запустите экземпляры Tisane, управляемые `systemd` : [startall.sh](/guides/sourcecode/startall.sh)
 
-#### install.sh Parameters
-Parameters
-- -f : Path to tisane zip file (install or update package)
-- -p : Comma separated list of ports where you want to start the service
-- -d : If you do not want to run tisane as a daemon , set this to "simple" and update your config file. (Suggested to not change this parameter , default is forking for daemon)
-- -u : If used this option, it will try to force install tisane , by clearing all older files and stopping all running services
+#### Параметры install.sh
+Параметры:
+- -f : Путь к zip-файлу tisane  (пакет установки или обновления)
+- -p : Список портов, разделенных запятыми, на которых вы хотите запустить службу
+- -d : Если вы не хотите запускать tisane как системную службу, установите значение «simple» (простой) и обновите файл конфигурации. (Рекомендуется не менять этот параметр, по умолчанию используется форкинг для системных служб)
+- -u : Если использовать эту опцию, будет предпринята попытка принудительной установки Tisane путем удаления всех старых файлов и остановки всех запущенных служб.
 
-### Updates
+### Обновления
 
-To update:
+Для обновления:
 
-1. Shut down any running instances of Tisane connected to the target linguistic database.
-2. Deploy the update.
-3. Start the instances again.
+1. Завершите работу всех запущенных экземпляров Tisane, подключенных к целевой лингвистической базе данных.
+2. Разверните обновление.
+3. Запустите экземпляры снова.
 
 {% admonition type="info" %}
 
-More Bash scripts for distribution and monitoring are available on request.
+Дополнительные скрипты Bash для распространения и мониторинга доступны по запросу.
 
 {% /admonition %}
 
 ## Windows
 
-Tisane Runtime is a Windows service ASP.NET application. Tisane Runtime runs as a service only. Several instances can run on the same machine on different ports. 
+Tisane Runtime — это приложение ASP.NET для Windows. Tisane Runtime работает только как служба. Несколько экземпляров могут работать на одной машине на разных портах. 
 
-Once installed, the instances are accessible in the Windows Services management console as shown on the screenshot below.
+После установки экземпляры становятся доступны в консоли управления службами Windows, как показано на снимке экрана ниже.
 
 ![Tisane Windows services](/guides/images/tisaneWindowsServices.png)
 
-Tisane Runtime is self-hosted and does not require an external web server (no IIS, Apache, nginx, etc.).
+Tisane Runtime размещается на собственном хостинге и не требует внешнего веб-сервера (IIS, Apache, nginx и т. д.).
 
-### Requirements
+### Требования
 
-ASP.NET Core Runtime 8+
+Среда выполнения ASP.NET Core 8+
 
 [Download .NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) (.NET Runtime package is required as well)
 
-### Installation
+### Установка
 
-1. Make sure ASP.NET Code 8+ and .NET Runtime 8+ are installed.
-2. Create a folder on the server (e.g. `C:\Tisane`).
-3. Create a subfolder for the binaries (e.g. `C:\Tisane\bin`).
-4. Copy the Tisane binaries and the configuration file (`Tisane.Runtime.Service.dll.config`) to the executable subfolder(s). Don't forget the `native` subfolder for the RocksDB libraries. Unlike with the Linux edition, every instance must have its own folder because we rely on the configuration file to set the port the service will run on.
-5. Execute `Tisane.Runtime.Service.exe -i` to install.
-6. Copy the language models to the folder specified in the configuration (e.g. `C:\Tisane` or `C:\Tisane\db`).
+1. Убедитесь, что установлены ASP.NET Code 8+ и .NET Runtime 8+.
+2. Создайте папку на сервере (например, `C:\Tisane` ).
+3. Создайте подпапку для двоичных файлов (например, `C:\Tisane\bin`).
+4. Скопируйте двоичные файлы Tisane и файл конфигурации (` Tisane.Runtime.Service.dll.config`) в исполняемую(-ые) подпапку(-и). Не забудьте подпапку `native` для библиотек RocksDB. В отличие от версии Linux, каждый экземпляр должен иметь свою собственную папку, поскольку мы полагаемся на файл конфигурации для установки порта, на котором будет работать служба.
+5. Выполните `Tisane.Runtime.Service.exe -i` для установки.
+6. Скопируйте языковые модели в папку, указанную в конфигурации (например, `C:\Tisane` или `C:\Tisane\db`).
 
-#### Command-Line Parameters
+#### Параметры командной строки
 
-* `-i` - install a new service for the binaries in the current folder
-* `-u` - uninstall the service linked to the current folder
-* `-r` - reinstall the service linked to the current folder
+* `-i` — установить новую службу для двоичных файлов в текущей папке
+* `-u` — удалить службу, связанную с текущей папкой
+* `-r` — переустановить службу, связанную с текущей папкой
 
-### Configuration
+### Конфигурация
 
-The configuration file (`Tisane.Runtime.Service.dll.config`) is a standard Configuration Manager format (XML) file that contains settings used by the Tisane service in its `appSettings` section:
+Файл конфигурации (`Tisane.Runtime.Service.dll.config`) — это стандартный файл формата Configuration Manager (XML), содержащий настройки, используемые службой Tisane в ее разделе `appSettings`:
 
-* `DbPath` - (required) a folder where the Tisane data files are located. Absolute path, must end with `\` or `/`.
-* `Port` - (required) a port to run the service on. Must not be in use.
-* `PreloadLanguages` - a comma-delimited list of language codes to load fully at the startup. The rest will use lazy loading (loading on demand). It is recommended to preload no more than one or two language models, unless the environment has multiple languages used very often. Also read: [Lazy loading vs Fully Loaded Mode](/sdks/lazyloading.md)
+* `DbPath` - (обязательно) папка, в которой находятся файлы данных Tisane. Абсолютный путь, должен заканчиваться на `\` или `/`.
+* `Port` - (обязательно) порт для запуска службы. Не должен использоваться чем-то другим.
+* `PreloadLanguages` - список кодов языков, разделенных запятыми, для полной загрузки при запуске. Остальные будут использовать замедленную загрузку (загрузку по требованию). Рекомендуется предварительно загружать не более одной или двух языковых моделей, если только в среде очень часто не используется несколько языков. Читайте также: [Сравнение режима замедленной загрузки с режимом полной загрузки](/sdks/lazyloading.md)
 
-Example: 
+Например: 
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -164,21 +164,21 @@ Example:
 </configuration>
 ```
 
-### Updates
+### Обновления
 
-1. Shut down all Tisane services. Make sure no external application is accessing the Tisane data files and binaries.
-2. Copy the new Tisane files over the existing files. 
-3. Start the services again.
+1. Завершите работу всех служб Tisane. Убедитесь, что никакие внешние приложения не получают доступ к файлам данных и двоичным файлам Tisane.
+2. Скопируйте новые файлы Tisane с заменой существующих файлов. 
+3. Запустите службы снова.
 
 {% admonition type="warning" %}
 
-Make sure you **do not overwrite the existing configuration file**.
+Ни в коем случае **не перезаписывайте существующий файл конфигурации**.
 
 {% /admonition %}
 
-## Recommended Practices
+## Рекомендуемые методы
 
-Tisane is thread-safe, so multiple callers can connect to the same instance. When multiple language models are loaded, keeping the number of instances low helps. Still, it is recommended to keep the number of simultaneous requests reasonable.
+Tisane является потокобезопасным, поэтому к одному и тому же экземпляру могут подключаться несколько вызывающих программ. При загрузке нескольких языковых моделей полезно поддерживать небольшое количество экземпляров. Тем не менее, рекомендуется поддерживать разумное количество одновременных запросов.
 
-From our experience, the best balance is 3 instances for a 4 core 8 Gb machine.
+По нашему опыту, оптимальным вариантом является 3 экземпляра для 4-ядерной машины 8 Гб.
 

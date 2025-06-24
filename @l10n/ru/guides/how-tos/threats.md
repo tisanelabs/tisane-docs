@@ -1,5 +1,5 @@
-# Detecting Threats
+# Обнаружение угроз
 
-Threats are logged as `criminal_activity` with `threat` under `tags`. 
+Угрозы регистрируются как `преступная_активность` с `угрозой` под` тегами` . 
 
-For more details on detecting criminal activity, see [Detecting criminal activity](../abuse/criminalactivity.md)
+Более подробную информацию об обнаружении преступной деятельности см. в [Выявление преступной деятельности](../abuse/criminalactivity.md)

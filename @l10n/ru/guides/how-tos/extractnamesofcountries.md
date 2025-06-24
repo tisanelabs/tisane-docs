@@ -1,11 +1,11 @@
-# Detecting Countries
+﻿# Обнаружение стран
 
-Tisane can extract country names, but we do not assign a special type exclusively for them. To avoid arguments over legitimacy of this or that geopolical entity, countries contain two elements in their `type` array:
+Tisane может извлекать названия стран, но мы не назначаем для них специальный тип. Чтобы избежать споров о легитимности того или иного геополитического образования, страны содержат в своих названиях два элемента а множестве `type`:
 
 * `organization`
 * `place`
 
-This approach:
+Этот подход:
 
-* helps avoid disputes over sovereignty or status
-* does not require making a special exception when a country is to be treated as an organization (e.g. for decision making) or as a place 
+* помогает избежать споров о суверенитете или статусе
+* не требует особого исключения, когда страна должна рассматриваться как организация (например, для принятия решений) или как место 
