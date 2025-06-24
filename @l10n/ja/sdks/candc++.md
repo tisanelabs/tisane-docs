@@ -1,12 +1,12 @@
-# Tisane Embedded C/C++ Reference
+# Tisane Embedded C/C++リファレンス
 
-## Overview
+## 概要
 
-This guide provides a reference to the methods available in the Tisane Embedded SDK for C/C++ applications. 
+本ガイドは、C/C++アプリケーション用のTisane Embedded SDKで利用可能なメソッドのリファレンスを提供します。 
 
-### Components
+### コンポーネント
 
-Under the hood, the Tisane runtime directly communicates with Tisane language models stored in RocksDB stores. No external database engines are involved or need to be installed.
+内部で、TisaneランタイムがRocksDBストアに格納されたTisane言語モデルと直接通信します。外部のデータベースエンジンを使用したり、インストールしたりする必要はありません。
 
 ```mermaid
 flowchart LR
@@ -15,109 +15,109 @@ flowchart LR
   library<--->rocksdb
 ```
 
-#### Binaries
+#### バイナリ
 
 ##### Windows
 
-- Runtime libraries:
+- ランタイムライブラリ：
 - 
-  - `libTisane.dll`: The core Tisane runtime.
-  - `libgcc_s_seh-1.dll`: Standard POSIX C/C++ library.
-  - `libstdc++-6.dll`: Standard POSIX C/C++ library.
-  - `libwinpthread-1.dll`: Standard POSIX C/C++ library.
+  - `libTisane.dll`: Tisaneのコアランタイム。
+  - `libgcc_s_seh-1.dll`: 標準POSIX C/C++ライブラリ。
+  - `libstdc++-6.dll`: 標準POSIX C/C++ライブラリ。
+  - `libwinpthread-1.dll`: 標準POSIX C/C++ライブラリ。
 
 ##### Linux
 
-- tisane: The core Tisane executable.
+- Tisane：Tisaneのコア実行可能ファイル。
 
-#### Language Models
+#### 言語モデル
 
-See: [Language Models Data Stores](./languagemodels.md) 
+参考：[言語モデルデータストア](./languagemodels.md) 
 
-## Requirements
+## 必要事項
 
-### Platform
+### プラットフォーム
 
 #### Windows
 Windows 10+ (64-bit)
 
 {% admonition type="info" %}
 
-Earlier versions of Windows may work but are not officially supported 
+それ以前のバージョンのWindowsでも動作する場合がありますが、公式にはサポートされていません。 
 
 {% /admonition %}
 
 #### Linux
 
-Kernel version 6.0.0+
+Kernel バージョン6.0.0+
 
 ### RAM
 
-**Lazy loading**: 50 Mb fixed + 50 to 100 Mb per language model
+**遅延読み込み**: 50 Mb固定 + 50～100 Mb（言語モデルあたり）
 
-**Fully loaded**: between 400 Mb and 2 Gb per language model
+**完全読み込み**: 400 Mbから2 Gbの間（言語モデルあたり）
 
-Read more: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
+もっと読む：[遅延読み込みと完全読み込みの比較](./lazyloading.md)
 
-## Integration
+## インテグレーション
 
-### Basic Workflow
+### 基本ワークフロー
 
-1. `SetDbPath` – Set the data path.
-2. `LoadAnalysisLanguageModel` – Load the desired language model.
-3. `Parse` – Analyze the text.
+1. `SetDbPath` – データパスを設定する。
+2. `LoadAnalysisLanguageModel` – 希望の言語モデルを読み込む。
+3. `Parse` – テキストをパースする。
 
-### Setup And Use
+### 設定と使用
 
-1. Include the header file:  
-  *  Ensure you include the necessary header file ([`tisane.h`](./tisane.h)) in your C/C++ project. 
-  *  This file will contain the function declarations.
+1. ヘッダーファイルを含める：  
+  *  C/C++プロジェクトに必要なヘッダーファイル（[`tisane.h`](./tisane.h)）を必ず含めてください。 
+  *  このファイルには関数宣言が含まれます。
 
-2. Link your application with the Tisane library (e.g., `tisane.so` or `libTisane.dll`).  
+2. アプリケーションをTisaneライブラリ（ `tisane.so`または`libTisane.dll`など）とリンクしてください。  
 
-3. Initialize:
+3. 初期化する：
 
-  * Set the data path: 
+  * データパスを設定する： 
 
-      *   The *very first* call you *must* make is to `SetDbPath`.  
-      *   This tells the SDK where to find the language model data files.
+      *   *最初に*行う呼び出しは*必ず*`SetDbPath`にしてください。  
+      *   これがSDKに言語モデルデータファイルの場所を指示します。
 
-  *   Load the language model:  
-      *   Call `LoadAnalysisLanguageModel` to load the desired language model.  
-      *   Call *after* `SetDbPath`
-      *   Loading the entire language model can take time, especially for large models.
-  *   If planning to transform (e.g. translate), load the generation language model:
-      *   Call `LoadGenerationLanguageModel` to load the desired language model for the target language. 
-4.   Process:
-  *   Parse the text: 
-    *   Use the `Parse` function to analyze text using specified settings: 
-        *   `language`: A standard ISO-639-1 language code (e.g., "en", "zh-CN"), a vertical-bar delimited list of language codes, or `*` for automatic detection.
-        *   `content`: UTF-8 text to parse.
-        *   `settings`: JSON string with settings. (See: [The response and configuration guide](../apis/tisane-api-response-guide.md)).`
-        *   `Returns`: JSON string (See: [The response and configuration guide](../apis/tisane-api-response-guide.md) Guide).
+  *   言語モデルを読み込む：  
+      *   `LoadAnalysisLanguageModel`を呼び出して、希望の言語モデルを読み込んでください。  
+      *   `SetDbPath`の*後*に呼び出します。
+      *   特に大きなモデルの場合、言語モデル全体の読み込みには時間がかかることがあります。
+  *   変換（翻訳など）を計画している場合は、生成言語モデルを読み込む：
+      *   `LoadGenerationLanguageModel`を呼び出して、ターゲット言語の希望の言語モデルを読み込んでください。 
+4.   処理：
+  *   テキストをパースする： 
+    *   `Parse`関数を使用して、指定した設定を使用するテキストをパースする： 
+        *   `language`: 標準ISO-639-1言語コード（例："en"、"zh-CN"）、バーティカルバーで区切られた言語コードのリスト、または`*`自動検出用。
+        *   `content`: パースするUTF-8テキスト。
+        *   `settings`: 設定を含むJSON文字列。（参考：[レスポンスおよびコンフィギュレーションガイド](../apis/tisane-api-response-guide.md)）。`
+        *   `Returns`: JSON文字列（参考：[レスポンスおよびコンフィギュレーション](../apis/tisane-api-response-guide.md)ガイド）。
     
-  *   Detect language: 
-    *   Use  the `DetectLanguage` function to identify the language of a given text.
-        *   `content`: UTF-8 text.
-        *   `likelyLanguages`: (Optional) Expected languages.
-        *   `segmentDelimiter`: (Optional) Separates between sections of text to detect language for. While different languages may be detected without an explicitly specified delimiter, the delimiter allows more control over the results.
-        *   `Returns`: Detected language codes.
+  *   言語の検知： 
+    *   `DetectLanguage`関数を使用して、与えられたテキストの言語を識別する。
+        *   `content`: UTF-8テキスト。
+        *   `likelyLanguages`：（オプション）予想される言語。
+        *   `segmentDelimiter`: （オプション）テキストセクションを区切り、言語を検出。デリミターを明示的に指定しなくても異なる言語を検出することはできますが、デリミターによって結果をさらに制御することができます。
+        *   `Returns`: 検知される言語コード。
     
-  *   Transform text:  
-    *   Use the `Transform` function to translate or paraphrase a string from one language to another. 
-        *   `sourceLanguage`: A standard ISO-639-1 language code (e.g., "en", "zh-CN"), a vertical-bar delimited list of language codes, or `*` for automatic detection.
-        *   `targetLanguage`: A code of a language to translate to, or a vertical-bar delimited list of language codes.
-        *   `content`: UTF-8 text to transform.
-        *   `settings`: JSON string.
-        *   `Returns`: Transformed text, if one target language is specified; a JSON array containing translations, if multiple languages are specified.
+  *   テキストを変換する：  
+    *   文字列をある言語から別の言語に翻訳したり言い換えたりするには、`Transform`関数を使用する。 
+        *   `sourceLanguage`: 標準ISO-639-1言語コード（例："en"、"zh-CN"）、バーティカルバーで区切られた言語コードのリスト、または`*`自動検出用。
+        *   `targetLanguage`: 翻訳する言語のコード、またはバーティカルバーで区切られた言語コードのリスト。
+        *   `content`: 変換する UTF-8 テキスト。
+        *   `settings`: JSON文字列。
+        *   `Returns`: 1つのターゲット言語が指定されている場合は、変換されたテキスト。複数の言語が指定されている場合は、翻訳を含むJSON配列。
 
 
-See also: 
+こちらも参照： 
 
-- [API response and configuration guide](../apis/tisane-api-response-guide.md)
+- [APIレスポンスおよびコンフィギュレーションガイド](../apis/tisane-api-response-guide.md)
 
 
-## Function Reference
+## 関数リファレンス
 
 ### SetDbPath
 
@@ -125,15 +125,15 @@ See also:
 __stdcall void SetDbPath(const char *dataRootPath);
 ```
 
-Defines the root path to the language model data files. This function must be called before any other Tisane SDK functions are used.
+言語モデルデータファイルのルートパスを定義します。この関数は、他のTisane SDK関数が使用される前に呼び出される必要があります。
 
-* `dataRootPath`: A null-terminated C-style string representing the absolute or relative path to the directory containing the language model data.
+* `dataRootPath`: 言語モデルデータを含むディレクトリへの絶対パスまたは相対パスを表すnull終端C文字列。
 
-Return Value: 
+戻り値： 
 
-None.
+なし。
 
-Example:
+例：
 
 ```cpp
 SetDbPath("C:\\Tisane");
@@ -144,17 +144,17 @@ SetDbPath("C:\\Tisane");
 __stdcall void LoadAnalysisLanguageModel(const char *languageCode);
 ```
 
-Loads a language model to be used by `Parse` method or as a source language in `Transform` method.
+`Parse`メソッドや`Transform`メソッドのソース言語として使用する言語モデルを読み込みます。
 
-Parameters:
+パラメータ：
 
-* `languageCode`: A null-terminated C-style string representing the language code. For example: `"en"` for English, `"es"` for Spanish.
+* `languageCode`: 言語コードを表すnull終端C文字列。例：`"en"`が英語、 `"es"`がスペイン語。
 
-Return Value: 
+戻り値： 
 
-None.
+なし。
 
-Example:
+例：
 
 ```cpp
 LoadAnalysisLanguageModel("en");
@@ -164,23 +164,23 @@ LoadAnalysisLanguageModel("en");
 __stdcall void LoadGenerationLanguageModel(const char *languageCode);
 ```
 
-Loads a language model to be used as a target language model for text generation tasks like translation and paraphrasing.
+翻訳や言い換えなどのテキスト生成タスクのターゲット言語モデルとして使用する言語モデルを読み込みます。
 
 {% admonition type="info" %}
 
-Generation models are always loaded in lazy mode.
+生成モデルは常に遅延モードで読み込まれます。
 
 {% /admonition %}
 
-Parameters:
+パラメータ：
 
-* `languageCode`: A null-terminated C-style string representing the language code.
+* `languageCode`: 言語コードを表すnull終端C文字列。
 
-Return Value: 
+戻り値： 
 
-None.
+なし。
 
-Example:
+例：
 
 ```cpp
 LoadGenerationLanguageModel("fr"); // Load French for translation
@@ -191,19 +191,19 @@ LoadGenerationLanguageModel("fr"); // Load French for translation
 __stdcall void LoadCustomizedAnalysisLanguageModel(const char *languageCode, const char *customizationSuffix);
 ```
 
-Loads a customized language model. This allows extending the base language model with domain-specific vocabulary or logic. The custom language model is run together with the main language model, and takes precedence over the main model's definitions.
+カスタマイズされた言語モデルを読み込みます。これにより、ベースとなる言語モデルをドメイン固有の語彙やロジックで拡張することができます。カスタム言語モデルはメイン言語モデルと一緒に実行され、メインモデルの定義よりも優先されます。
 
-Parameters:
+パラメータ：
 
-* `languageCode`: The language code of the base language model.
+* `languageCode`: 基本言語モデルの言語コード。
 
-- `customizationSuffix`: A suffix that identifies the specific customization add-on model. The SDK will look for a folder with the specified name under the current root folder.
+- `customizationSuffix`: 特定のカスタマイズアドオンモデルを識別する接尾辞。SDKは、現在のルートフォルダーの下にある指定された名前のフォルダーを探します。
 
-Return Value: 
+戻り値： 
 
-None.
+なし。
 
-Example:
+例：
 
 ```cpp
 SetDbPath("C:\\Tisane");
@@ -216,17 +216,17 @@ LoadCustomizedAnalysisLanguageModel("en", "medical"); // Load a customized Engli
 __stdcall void UnloadAnalysisLanguageModel(const char *languageCode);
 ```
 
-Unloads a previously loaded analysis language model from memory. 
+以前に読み込まれた解析言語モデルをメモリからアンロードします。 
 
-Parameters:
+パラメータ：
 
-* `languageCode`: The language code of the model to unload.
+* `languageCode`: アンロードするモデルの言語コード。
 
-Return Value: 
+戻り値： 
 
-None.
+なし。
 
-Example:
+例：
 
 ```cpp
 UnloadAnalysisLanguageModel("en");
@@ -237,17 +237,17 @@ UnloadAnalysisLanguageModel("en");
 void SetProgressCallback(void __stdcall ptrProgressCallback(double));
 ```
 
-Sets a callback function to receive progress updates during language model loading. This is useful for providing visual feedback to the user during the loading process, which can take a significant amount of time.
+言語モデルの読み込み中に進行状況の更新を受け取るコールバック関数を設定します。これは、かなりの時間を要する可能性のある読み込みプロセス中にユーザーに視覚的なフィードバックを提供するのに便利です。
 
-Parameters:
+パラメータ：
 
-* `ptrProgressCallback`: A pointer to a function that accepts a single double parameter. The double value will be in the range of 0.0 to 1.0, representing the loading progress (0.0 = 0%, 1.0 = 100%).
+* `ptrProgressCallback`: doubleパラメータを1つ受け取る関数へのポインタ。double値は0.0から1.0の範囲で、読み込みの進捗を表します（0.0 = 0%, 1.0 = 100%）。
 
-Return Value: 
+戻り値： 
 
-None.
+なし。
 
-Example:
+例：
 
 ```cpp
 #include <iostream>
@@ -269,20 +269,20 @@ void SetParseProgressCallback(bool __stdcall ptrParseProgressCallback(double));
 ;
 ```
 
-Sets a callback function to receive progress updates during processing. This is useful for providing visual feedback to the user during long parsing, and allow the user to cancel the processing.
+処理中に進行状況の更新を受け取るためのコールバック関数を設定します。これは、長い解析中にユーザーに視覚的なフィードバックを提供し、ユーザーが処理をキャンセルできるようにするのに便利です。
 
-When the processing is cancelled, partial results are returned, with an additional 
+処理がキャンセルされると、部分的な結果を返します。 
 `interrupted` attribute set to `true` in the response JSON.
 
-Parameters:
+パラメータ：
 
-* `ptrParseProgressCallback`: A pointer to a function that accepts a single double parameter and returns a boolean value. The double value will be in the range of 0.0 to 1.0, representing the loading progress (0.0 = 0%, 1.0 = 100%). The boolean value indicates whether the processing loop should be interrupted. Upon exiting, Tisane summarizes all the sentences so far and returns its response normally.
+* `ptrParseProgressCallback`: doubleパラメータを1つ受け取り、真偽値を返す関数へのポインタ。double値は0.0から1.0の範囲で、読み込みの進捗を表します（0.0 = 0%, 1.0 = 100%）。真偽値は、処理ループを中断すべきかどうかを示します。終了後、Tisaneはこれまでのすべての文章を要約し、通常のレスポンスを返します。
 
-Return Value: 
+戻り値： 
 
-None.
+なし。
 
-Example:
+例：
 
 ```cpp
 #include <iostream>
@@ -309,20 +309,20 @@ int main() {
 ```cpp
 void ActivateLazyLoading();
 ```
-Activates the lazy loading mode.
+遅延読み込みモードを有効にする。
 
-Read mode: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
+もっと読む：[遅延読み込みと完全読み込みの比較](./lazyloading.md)
 
 
-Parameters: 
+パラメータ： 
 
-None.
+なし。
 
-Return Value: 
+戻り値： 
 
-None.
+なし。
 
-Example:
+例：
 
 ```cpp
 ActivateLazyLoading();
@@ -333,18 +333,18 @@ ActivateLazyLoading();
 bool IsLazyLoadingActive();
 ```
 
-Checks whether lazy loading mode is currently active.
+遅延読み込みモードが現在有効かどうかをチェックします。
 
-Parameters: 
+パラメータ： 
 
-None.
+なし。
 
-Return Value:
+戻り値：
 
-- `true` if lazy loading is active, 
-- `false` otherwise.
+- 遅延読み込みが有効の場合`true`、 
+- それ以外は`false`。
 
-Example:
+例：
 
 ```cpp
 if (IsLazyLoadingActive()) {
@@ -352,25 +352,25 @@ if (IsLazyLoadingActive()) {
 }
 ```
 
-### Parse
+### パース
 ```cpp
 const char* Parse(const char *language, const char *content, const char *settings);
 ```
 
-Parses the given text content using the specified language model and settings.
+指定された言語モデルと設定を使用して、指定されたテキストコンテンツをパースします。
 
-Parameters:
+パラメータ：
 
-* `language`: The language code of the language to parse.
-* `content`: The text to parse (UTF-8 encoded).
-* `settings`: A JSON string that specifies the desired analysis features. See Settings Specification for details.
+* `language`: パースする言語の言語コード。
+* `content`: パースするテキスト（UTF-8 エンコード）。
+* `settings`: 必要な分析機能を指定するJSON文字列。詳細は設定仕様を参照。
 
-Return Value:  
+戻り値：  
 
-A `const char*` containing a JSON string representing the analysis results. No need to deallocate the memory. Returns `nullptr` on failure.
+分析結果を表すJSON文字列を含む`const char*`。メモリの割り当ての解除は不要です。失敗すると`nullptr`を返します。
 
 
-Example code:
+コード例：
 
 ```cpp
   SetDbPath("C:\\Tisane");
@@ -380,33 +380,33 @@ Example code:
 ```
 
 
-See: [Response](../apis/tisane-api-response-guide.md).
+参考：[レスポンス](../apis/tisane-api-response-guide.md)。
 
 ### ParseTextFile
 ```cpp
 const char* ParseTextFile(const char *language, const char *filename, uint32_t chunkSize, const char *settings);
 ```
 
-Parse the content from the specified text file in the specified language using the specified settings in chunks. Only loads the chunk being processed.
+指定されたテキストファイルから、指定されたチャンク内の指定された設定を使用して、指定された言語でコンテンツをパースします。処理中のチャンクのみを読み込みます。
 
-Parameters:
+パラメータ：
 
-* `language`: The language code of the language to parse.
-* `filename`: The text file to parse (UTF-8 encoded). Assumed to only contain text.
-* `chunkSize`: The size of chunks used to read the stream from the file. If 0, then 8192 bytes is assigned.
-* `settings`: A JSON string that specifies the desired analysis features. See Settings Specification for details.
+* `language`: パースする言語の言語コード。
+* `filename`: パースするテキストファイル（UTF-8エンコード）。テキストのみを含むと想定される。
+* `chunkSize`: ファイルからストリームを読み込むために使用されるチャンクのサイズ。0の場合、8192バイトが割り当てられる。
+* `settings`: 必要な分析機能を指定するJSON文字列。詳細は設定仕様を参照。
 
-Return Value:  
+戻り値：  
 
-A `const char*` containing a JSON string representing the analysis results. No need to deallocate the memory. Returns `nullptr` on failure.
+分析結果を表すJSON文字列を含む`const char*`。メモリの割り当ての解除は不要です。失敗すると`nullptr`を返します。
 
 {% admonition type="info" %}
 
-The text is omitted from the response for larger files for performance purposes.
+テキストは、パフォーマンス上、大きなファイルのレスポンスからは省略されます。
 
 {% /admonition %}
 
-Example code:
+コード例：
 
 ```cpp
   SetDbPath("C:\\Tisane");
@@ -420,25 +420,25 @@ Example code:
 ```cpp
 __stdcall const char* DetectLanguage(const char *content, const char *likelyLanguages, const char* segmentDelimiter);
 ```
-Detects the language of the given text content.
+与えられたテキストコンテンツの言語を検出。
 
-Parameters:
+パラメータ：
 
-* `content`: The text to analyze (UTF-8 encoded).
-* `likelyLanguages`: (Optional) A comma-separated list of language codes that are likely to be present in the text. This can improve detection accuracy. Pass nullptr if not needed.
-* `segmentDelimiter`: (Optional) A string used to delimit segments within the text. For every segment, detection will be invoked separately. Pass nullptr for default behavior.
+* `content`: 解析するテキスト（UTF-8エンコード）。
+* `likelyLanguages`：（オプション）テキスト内に存在しうる言語コードをカンマ区切りしたリスト。これにより、検出精度を向上させることができます。必要なければnullptrを渡します。
+* `segmentDelimiter`: （オプション）テキスト内のセグメントを区切るための文字列。セグメントごとに、別々に検出が行われます。デフォルトの動作にはnullptrを渡します。
 
-Return Value: 
+戻り値： 
 
-A `const char*` containing a JSON string representing the detected language(s). Returns `nullptr` on failure.
+検出された言語を表すJSON文字列を含む`const char*`。失敗すると`nullptr`を返します。
 
 {% admonition type="warning" %}
 
-Do not deallocate the memory. It is managed internally.
+メモリの割り当てを解除しないでください。これは内部で管理されます。
 
 {% /admonition %}
 
-Example:
+例：
 ```cpp
 const char* detectedLanguage = DetectLanguage("Bonjour le monde!", nullptr, nullptr);
 if (detectedLanguage) {
@@ -447,31 +447,31 @@ if (detectedLanguage) {
 }
 ```
 
-### Transform
+### 変換
 ```cpp
 __stdcall const char* Transform(const char * sourceLanguage, const char * targetLanguage,const char * content, const char * settings);
 ```
-Translates or paraphrases a string from one language to another. 
+文字列をある言語から別の言語に翻訳するか、または言い換えます。 
 
-Requires that both the source and target language models have been loaded using`LoadGenerationLanguageModel`.
+ソース言語モデルとターゲット言語モデルの両方が`LoadGenerationLanguageModel`を使用して読み込みされている必要があります。
 
-Parameters:
+パラメータ：
 
-* `sourceLanguage`: The language code of the source language.
-* `targetLanguage`: The language code of the target language.
-* `content`: The text to transform (UTF-8 encoded).
-* `settings`: A JSON string that specifies the desired transformation options. 
+* `sourceLanguage`: ソース言語の言語コード。
+* `targetLanguage`: ターゲット言語の言語コード。
+* `content`: 変換するテキスト（UTF-8 エンコード）。
+* `settings`: 希望する変換オプションを指定するJSON文字列。 
 
-See also: 
+こちらも参照： 
 
-- [API response and configuration guide](../apis/tisane-api-response-guide.md)
-- [Configuration and customization Guide](../apis/tisane-api-configuration.md)
+- [APIレスポンスおよびコンフィギュレーションガイド](../apis/tisane-api-response-guide.md)
+- [コンフィギュレーションおよびカスタマイズガイド](../apis/tisane-api-configuration.md)
 
-Return Value: 
+戻り値： 
 
-A `const char*` containing the translated or paraphrased text. You are responsible for freeing the memory allocated for this string.  Returns `nullptr` on failure.
+翻訳または言い換えられたテキストを含む`const char*`。この文字列に割り当てられたメモリは、ユーザーの責任で解放してください。  失敗すると`nullptr`を返します。
 
-Example:
+例：
 ```cpp
   SetDbPath("C:\\Tisane");
   ActivateLazyLoading(); // it's a test, we don't want to load the entire model for a tiny piece of text to be processed

@@ -1,25 +1,25 @@
-# Considering Previously Processed Messages
+# Рассмотрение ранее обработанных сообщений
 
-By default, Tisane calls are stateless. Which means, Tisane is only aware of the text it receives in the current request. (Within the text though, the context is tracked between sentences for the purposes of co-reference resolution.) This is a deliberate choice both for the simplicity of deployment, and to avoid legal issues with data retention. API call = session.
+По умолчанию вызовы Tisane не имеют статуса. Это означает, что Tisane знает только тот текст, который он получает в текущем запросе. (Однако в тексте контекст отслеживается между предложениями в целях разрешения кореферентов). Это осознанный выбор как для простоты развертывания, так и для избежания юридических проблем, связанных с хранением данных. Вызов API = сеанс.
 
-But what happens if we need to refer to previous messages? In context of problematic content, there are several relevant scenarios, most notably online grooming and fraud, in which the full picture only emerges when several utterances are put together.
+Но что делать, если нам нужно обратиться к предыдущим сообщениям? В контексте проблемного контента существует несколько соответствующих сценариев, в частности, онлайн-обман и мошенничество, в которых полная картина вырисовывается только при сложении нескольких высказываний.
 
-Consider the following utterance: “Where are your parents now?” On its own, we don’t have enough context to mark it as problematic. It can be anything: two kids talking about their parents or a repairman trying to locate the head of the household. Then consider another utterance: “Can you turn on your camera?” Once again, the utterance alone does not necessarily imply nefarious intent. It may be from a conversation between colleagues at work.
+Рассмотрим следующее высказывание: «Где сейчас твои родители?» У нас нет достаточного контекста, чтобы обозначить его как проблемное. Это может быть что угодно: двое детей, говорящих о своих родителях, или ремонтник, пытающийся найти главу семьи. Затем рассмотрим другое высказывание: «Ты можешь включить камеру?» Опять же, само по себе высказывание не обязательно подразумевает злонамеренность. Это может быть разговор коллег на работе.
 
-However, when the request to turn on the camera follows the inquiry about the location of the parents, it works like the binary explosives immortalized by action movies. It’s a very good reason to issue an alert.
+Однако когда просьба включить камеру следует за запросом о местонахождении родителей, это срабатывает подобно бинарным взрывчатым веществам, увековеченным в боевиках. Это очень веская причина объявить тревогу.
 
-To keep the context while keeping Tisane stateless, a module called “long-term memory” is used. The `memory` object in response contains the flags that store intermediate observations. The same portion of the response needs to be included in the subsequent requests under settings (`"memory":{...}`).
+Чтобы сохранить контекст и при этом сохранить Tisane в режиме без отслеживания состояния, используется модуль, называемый «долговременной памятью». Объект `memory` в ответе содержит флаги, хранящие промежуточные наблюдения. Эту же часть ответа необходимо включить в последующие запросы в настройках (`"memory":{...}`).
 
 {% admonition type="info" %}
 
-To display the content of the memory module, set `state` to `true` in the `settings` structure.
+Для отображения содержимого модуля памяти установите для `state` значение `true` в структуре `settings`.
 
 {% /admonition %}
 
-If it’s an ongoing dialogue, then the memory structure of every last processed message must be included in the next request as shown on the diagram below:
+Если это непрерывный диалог, то структура памяти каждого последнего обработанного сообщения должна быть включена в следующий запрос, как показано на схеме ниже:
 
 ![tisaneMemoryUse.png](/images/tisaneMemoryUse.png)
 
-Can these memories be changed and edited? Of course, so external context may be introduced as well. Note that the retention of the data is the responsibility of the caller.
+Можно ли изменить и отредактировать эти виды памяти? Конечно, может быть добавлен и внешний контекст. Обратите внимание, что ответственность за сохранение данных лежит на вызывающей стороне.
 
-See: [Context and Long-Term Memory](/apis/tisane-api-configuration#context-and-long-term-memory)
+Рекомендуем ознакомиться: [Контекст и долговременная память](/apis/tisane-api-configuration#context-and-long-term-memory)
