@@ -86,16 +86,16 @@ API работает через стандартный **запрос POST** .
 ```json
 {
 	"statusCode": 401,
-	"message": «Доступ запрещен из-за недействительного ключа подписки. Обязательно укажите действительный ключ для активной подписки».
+	"message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
 }
 ```
 - Убедитесь, что вы указали правильный ключ API в качестве значения заголовка `Ocp-Apim-Subscription-Key`. 
 
 {% admonition type="info" %}
 
-Чтобы использовать свой ключ API на этом портале документации, нажмите на кнопку _Security_ на странице _Try it_.
+Чтобы использовать свой ключ API на этом портале документации, нажмите на кнопку _ Security_ на странице _Try It_.
 
-(Портал разработчиков автоматически заполняет ключ API при входе в систему).
+(The Developer Portal automatically fills the API key when you sign in.)
 
 {% /admonition %}
 
