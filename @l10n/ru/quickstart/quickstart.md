@@ -1,27 +1,27 @@
-# Get Started With Tisane
-Kick off your journey by learning how to quickly set up and start using Tisane API.
+# Начало работы с Tisane
+Начните свое путешествие с изучения того, как быстро настроить и начать использовать API Tisane.
 
-## Step 1 – Create An Account
+## Шаг 1. Создайте аккаунт
 
 <a href="https://dev.tisane.ai/signup/" target="_blank">Sign up to Tisane API</a> 
 
-The free Community Plan supports up to 50,000 requests, with a limit of 10 requests per minute. (Or, you can purchase a paid plan, if you like.)
+Бесплатный тарифный план «Сообщество» поддерживает до 50 000 запросов с ограничением в 10 запросов в минуту. (Или, если хотите, вы можете приобрести платный тарифный план).
 
-## Step 2 - Obtain Your API Key
+## Шаг 2. Получите свой ключ API
 
-Tisane API uses API keys to authenticate requests. Go to your <a href="https://dev.tisane.ai/profile" target="_blank">Developer Profile</a> to view and manage your API keys.
+API Tisane использует ключи API для аутентификации запросов. Для просмотра ключей API и управления ими перейдите в свой <a href="https://dev.tisane.ai/profile" target="_blank">Профиль разработчика</a>.
 
-## Step 3 - Use the API
+## Шаг 3. Используйте API
 
- Invoke the `POST /parse` method. The method's request body requires three attributes:
+ Вызовите метод `POST/parse`. Тело запроса метода требует три атрибута:
 
-- `content` (string)
-- `language` (string)
-- `settings` (object)
+- `content` (строка)
+- `language` (строка)
+- `settings` (объект)
 
-**Example**:  
+**Пример** :  
 
-Request:
+Запрос:
  ```json
     {
       "language": "en", 
@@ -29,7 +29,7 @@ Request:
       "settings": {}
     }
  ```
- Response:
+ Ответ:
  ```json
  {
 	"text": "Hello Tisane API",
@@ -53,13 +53,13 @@ Request:
 }
 ```
 
-|In the public cloud, the maximum length of the JSON body is 2048 bytes. Longer requests are available in the on-prem version.|
+|В публичном облаке максимальная длина тела JSON составляет 2048 байт. Более длинные запросы доступны в локальной версии.|
 |-----------------------------------------|
 
-You can test your request on this portal or use the _Try It_ option in the <a href="https://dev.tisane.ai/api-details#api=5a3b6668a3511b11cc292655&operation=5a3b7177a3511b11cc29265c" target="_blank">Developer Portal</a>.
-You can also test using curl, Postman, Insomnia, or any other RESTful tool.
+Вы можете протестировать свой запрос на этом портале или использовать вариант _Попробовать это_ на <a href="https://dev.tisane.ai/api-details#api=5a3b6668a3511b11cc292655&operation=5a3b7177a3511b11cc29265c" target="_blank">Портале разработчиков</a>.
+Вы также можете протестировать его с помощью curl, Postman, Insomnia или любого другого инструмента RESTful.
 
-### Curl syntax 
+### Синтаксис curl 
 
 ```curl
 curl -V -X POST \
@@ -73,44 +73,44 @@ curl -V -X POST \
   }'
   ```
 
-## Troubleshooting
+## Устранение неполадок
 
-The API works via a standard **POST request**. 
+API работает через стандартный **запрос POST** . 
 
-If you are getting a timeout error:
-- Check your network connection.
+Если вы получаете ошибку тайм-аута:
+- Проверьте сетевое подключение.
 
 ---
 
-If you are getting a 401 (Unauthorized) error code:
+Если вы получаете код ошибки 401 (не разрешено):
 ```json
 {
 	"statusCode": 401,
-	"message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+	"message": «Доступ запрещен из-за недействительного ключа подписки. Обязательно укажите действительный ключ для активной подписки».
 }
 ```
-- Make sure you provided a correct API key as a value of the `Ocp-Apim-Subscription-Key` header. 
+- Убедитесь, что вы указали правильный ключ API в качестве значения заголовка `Ocp-Apim-Subscription-Key`. 
 
 {% admonition type="info" %}
 
-To use your API key on this Documentation Portal, click on the _Security_ button in the _Try It_ page.
+Чтобы использовать свой ключ API на этом портале документации, нажмите на кнопку _Security_ на странице _Try it_.
 
-(The Developer Portal automatically fills the API key when you sign in.)
+(Портал разработчиков автоматически заполняет ключ API при входе в систему).
 
 {% /admonition %}
 
 ---
 
-If you are getting a 400 (Bad Request) error code saying that a language is not found in the database:
-- Make sure you are specifying a correct ISO-639-1 language code, and that this language is supported by Tisane.
+Если вы получаете код ошибки 400 (неверный запрос), сообщающий о том, что язык не найден в базе данных:
+- Убедитесь, что вы указываете правильный код языка ISO-639-1 и что этот язык поддерживается Tisane.
 
-If you need more help:
+Если вам нужна дополнительная помощь:
 
-* [Contact Support](../support/support.md) and we'll see why it's not working for you.
-* [Troubleshooting tips](../support/troubleshooting.md)
+* [Свяжитесь со службой поддержки](../support/support.md), и мы посмотрим, почему это не работает для вас.
+* [Советы по устранению неполадок](../support/troubleshooting.md)
 
-Next:
+Далее:
 
-* [How to Detect Problematic Content](../guides/how-tos/detectabuse.md)
-* [List of Supported NLP Functions](../guides/features/functionality.md)
-* [List of Supported Languages](../guides/features/languages.md)
+* [Как обнаруживать проблемный контент](../guides/how-tos/detectabuse.md)
+* [Список поддерживаемых функций обработки естественного языка](../guides/features/functionality.md)
+* [Список поддерживаемых языков](../guides/features/languages.md)

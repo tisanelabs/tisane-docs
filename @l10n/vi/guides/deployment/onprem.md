@@ -1,71 +1,71 @@
-# On-premise Deployment
+# Triển khai tại chỗ
 
-Tisane web service can be deployed outside of Tisane Labs' public cloud on customer's premises, in a private call center, or in a private cloud.
+Dịch vụ web Tisane có thể được triển khai bên ngoài đám mây công cộng của Tisane Labs tại cơ sở của khách hàng, trong một trung tâm cuộc gọi riêng hoặc trong một đám mây riêng.
 
-API methods on on-prem installations are the same as in our public cloud. (See: [Tisane API Reference](/apis/tisane-api-short).) Authentication headers are not required.
+Các phương thức API trên các cài đặt tại chỗ tương tự như trong đám mây công cộng của chúng tôi. (Xem phần: [Tài liệu tham khảo về API Tisane](/apis/tisane-api-short).) Không yêu cầu tiêu đề xác thực.
 
-On-prem licenses are issued on a case-by-case basis. [Contact us to discuss your requirements](https://tisane.ai/on-prem).
+Giấy phép tại chỗ được cấp theo từng trường hợp cụ thể. [Liên hệ với chúng tôi để thảo luận về các yêu cầu của bạn](https://tisane.ai/on-prem).
 
-For integration of Tisane as an in-process component, see: [Tisane Embedded SDKs](/sdks)
+Để tích hợp Tisane như một thành phần trong quá trình, xem phần: [Các SDK của Tisane Embedded](/sdks)
 
-## RAM Requirements
+## Yêu cầu về RAM
 
-**Lazy loading**: 50 Mb fixed + 50 to 100 Mb per language model
-**Fully loaded**: between 400 Mb and 2 Gb per language model
+**Tải chậm**: 50 Mb cố định + 50 đến 100 Mb cho mỗi mô hình ngôn ngữ
+**Tải đầy đủ**: từ 400 Mb đến 2 Gb cho mỗi mô hình ngôn ngữ
 
-Read more: [Lazy loading vs Fully Loaded Mode](/sdks/lazyloading.md)
+Đọc thêm: [Chế độ Tải chậm so với chế độ Tải đầy đủ](/sdks/lazyloading.md)
 
 ## Linux
 
-Tisane Web Service for Linux is a self-hosted executable (`tisane`) running as a web service, optionally as a daemon. Multiple instances can run on the same language database, the same machine, and using the same configuration. Each instance requires a separate port. 
+Tisane Web Service cho Linux là một chương trình thực thi tự lưu trữ (`tisane`) chạy như một dịch vụ web, với tùy chọn là một daemon (trình nền). Nhiều phiên bản có thể chạy trên cùng một cơ sở dữ liệu ngôn ngữ, cùng một máy và sử dụng cùng một cấu hình. Mỗi phiên bản yêu cầu một cổng riêng. 
 
-### Requirements
+### Yêu cầu
 
-Kernel version 6.0.0+
+Kernel phiên bản 6.0.0 trở lên
 
-### Command-line Parameters
+### Tham số dòng lệnh
 
-**Without parameters**
+**Không có tham số**
 
-Runs a simple test, outputs its result, and exits.
+Chạy một thử nghiệm đơn giản, đưa ra kết quả và thoát.
 
 **-port**
 
-Launches the service listening on the specified port with the following parameter(s):
+Khởi chạy dịch vụ đang chờ trên cổng được chỉ định với (các) tham số sau:
 
-* *Parameter 1*: valid port number
+* *Tham số 1*: số cổng hợp lệ
 
 **-parse**
 
-Launches a single parse call and outputs its result with the following parameters:
+Khởi chạy một lệnh phân tích cú pháp duy nhất và đưa ra kết quả với các tham số sau:
 
-* *Parameter 1*: language code
-* *Parameter 2*: content
-* *Parameter 3*: settings (must be enclosed in `{}` )
+* *Tham số 1*: mã ngôn ngữ
+* *Tham số 2*: nội dung
+* *Tham số 3*: cài đặt (phải được đặt trong dấu `{}` )
 
 **-transform**
 
-Launches a single transform call and outputs its result with the following parameters:
+Khởi chạy một lệnh chuyển đổi duy nhất và đưa ra kết quả với các tham số sau:
 
-* *Parameter 1*: source language code
-* *Parameter 2*: target language code(s)
-* *Parameter 3*: content
-* *Parameter 4*: settings (must be enclosed in `{}` )
+* *Tham số 1*: mã ngôn ngữ nguồn
+* *Tham số 2*: (các) mã ngôn ngữ đích
+* *Tham số 3*: nội dung
+* *Tham số 4*: cài đặt (phải được đặt trong dấu `{}` )
 
 **--version**
 
-Outputs the runtime version.
+Đưa ra phiên bản thời gian chạy.
 
-### Configuration
+### Cấu hình
 
-Tisane's Linux configuration files use [TOML format](https://en.wikipedia.org/wiki/TOML). All the settings are under *\[main\]* section. The settings are:
+Các tệp cấu hình Linux của Tisane sử dụng [định dạng TOML](https://en.wikipedia.org/wiki/TOML). Tất cả các cài đặt đều nằm trong phần *\[main\]*. Các cài đặt gồm:
 
-* *path* (string, required) - a folder where the Tisane data files are located. Relative path is OK, so if it’s in the same folder, `./` works.
-* *preload* (array of strings, optional) - language codes to load fully at the startup. The rest will use lazy loading (loading on demand). It is recommended to preload no more than one or two language models, unless the environment has multiple languages used very often. Also read: [Lazy loading vs Fully Loaded Mode](/sdks/lazyloading.md)
-* *daemon* (boolean, optional) - if *true*, Tisane will be launched as a daemon (service). 
-* *limit* (integer, optional) - the maximum length of the request in bytes.
+* *path* (chuỗi, bắt buộc) - thư mục chứa các tệp dữ liệu Tisane. Có thể dùng đường dẫn tương đối, nếu nó nằm trong cùng một thư mục, `./` hợp lệ.
+* *preload* (mảng chuỗi, tùy chọn) - các mã ngôn ngữ sẽ tải đầy đủ khi khởi động. Phần còn lại sẽ sử dụng chế độ tải chậm (tải theo yêu cầu). Bạn chỉ nên tải trước không quá một hoặc hai mô hình ngôn ngữ, trừ trường hợp môi trường có nhiều ngôn ngữ được sử dụng thường xuyên. Đọc thêm phần: [Chế độ Tải chậm so với chế độ Tải đầy đủ](/sdks/lazyloading.md)
+* *daemon* (boolean, tùy chọn) - nếu có giá trị *true*, Tisane sẽ được khởi chạy như một daemon (dịch vụ). 
+* *limit* (số nguyên, tùy chọn) - độ dài tối đa của yêu cầu tính bằng byte.
 
-Example:
+Ví dụ:
 
 ```bash
 [main]
@@ -76,82 +76,82 @@ daemon = true
 
 {% admonition type="warning" %}
 
-Do not use the `daemon` option when using Docker.
+Không sử dụng tùy chọn `daemon` khi sử dụng Docker.
 
 {% /admonition %}
 
-### Installation
+### Cài đặt
 
-Once started with `-port` parameter specified, `tisane` accepts and responds to HTTP requests. To install, simply make sure the executable is launched when the system starts. The simplest way is to use the `systemd` suite.
+Khi bắt đầu với tham số `-port` được chỉ định, `tisane` sẽ chấp nhận và phản hồi các yêu cầu HTTP. Để cài đặt, chỉ cần đảm bảo tệp thực thi được khởi chạy khi hệ thống khởi động. Cách đơn giản nhất là sử dụng bộ `systemd`.
 
-We provide a Bash script to configure `systemd` to launch multiple instances of Tisane Web Service: [install.sh](/guides/sourcecode/install.sh)
+Chúng tôi cung cấp một tập lệnh Bash để cấu hình `systemd` để khởi chạy nhiều phiên bản của Tisane Web Service: [install.sh](/guides/sourcecode/install.sh)
 
-More helper Bash scripts:
+Các tập lệnh Bash hỗ trợ khác:
 
-* stop all running instances of Tisane: [stop.sh](/guides/sourcecode/stop.sh)
-* start instances of Tisane managed by `systemd`: [startall.sh](/guides/sourcecode/startall.sh)
+* dừng tất cả các phiên bản đang chạy của Tisane: [stop.sh](/guides/sourcecode/stop.sh)
+* bắt đầu các phiên bản Tisane được quản lý bởi `systemd`: [startall.sh](/guides/sourcecode/startall.sh)
 
-#### install.sh Parameters
-Parameters
-- -f : Path to tisane zip file (install or update package)
-- -p : Comma separated list of ports where you want to start the service
-- -d : If you do not want to run tisane as a daemon , set this to "simple" and update your config file. (Suggested to not change this parameter , default is forking for daemon)
-- -u : If used this option, it will try to force install tisane , by clearing all older files and stopping all running services
+#### Các tham số install.sh
+Tham số
+- -f : Đường dẫn đến tệp zip tisane (cài đặt hoặc cập nhật gói)
+- -p : Danh sách các cổng được phân tách bằng dấu phẩy nơi bạn muốn bắt đầu dịch vụ
+- -d : Nếu bạn không muốn chạy tisane như một daemon, hãy đặt tham số này thành "simple" và cập nhật tệp cấu hình của bạn. (Đề xuất không thay đổi tham số này, mặc định là fork cho daemon)
+- -u : Nếu sử dụng tùy chọn này, nó sẽ cố gắng cài đặt tisane bằng cách xóa tất cả các tệp cũ hơn và dừng tất cả các dịch vụ đang chạy
 
-### Updates
+### Cập nhật
 
-To update:
+Để cập nhật:
 
-1. Shut down any running instances of Tisane connected to the target linguistic database.
-2. Deploy the update.
-3. Start the instances again.
+1. Tắt mọi phiên bản Tisane đang chạy được kết nối với cơ sở dữ liệu ngôn ngữ đích.
+2. Triển khai bản cập nhật.
+3. Khởi chạy lại các phiên bản.
 
 {% admonition type="info" %}
 
-More Bash scripts for distribution and monitoring are available on request.
+Các tập lệnh Bash hỗ trợ phân phối và giám sát được cung cấp theo yêu cầu.
 
 {% /admonition %}
 
 ## Windows
 
-Tisane Runtime is a Windows service ASP.NET application. Tisane Runtime runs as a service only. Several instances can run on the same machine on different ports. 
+Tisane Runtime là ứng dụng dịch vụ ASP.NET của Windows. Tisane Runtime chỉ chạy dưới dạng dịch vụ. Nhiều phiên bản có thể chạy trên cùng một máy ở các cổng khác nhau. 
 
-Once installed, the instances are accessible in the Windows Services management console as shown on the screenshot below.
+Sau khi cài đặt, có thể truy cập các phiên bản trong bảng điều khiển quản lý Dịch vụ Windows như được hiển thị trên ảnh chụp màn hình bên dưới.
 
 ![Tisane Windows services](/guides/images/tisaneWindowsServices.png)
 
-Tisane Runtime is self-hosted and does not require an external web server (no IIS, Apache, nginx, etc.).
+Tisane Runtime tự lưu trữ và không yêu cầu máy chủ web bên ngoài (không cần IIS, Apache, nginx, v.v.).
 
-### Requirements
+### Yêu cầu
 
-ASP.NET Core Runtime 8+
+ASP.NET Core Runtime 8 trở lên
 
 [Download .NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) (.NET Runtime package is required as well)
 
-### Installation
+### Cài đặt
 
-1. Make sure ASP.NET Code 8+ and .NET Runtime 8+ are installed.
-2. Create a folder on the server (e.g. `C:\Tisane`).
-3. Create a subfolder for the binaries (e.g. `C:\Tisane\bin`).
-4. Copy the Tisane binaries and the configuration file (`Tisane.Runtime.Service.dll.config`) to the executable subfolder(s). Don't forget the `native` subfolder for the RocksDB libraries. Unlike with the Linux edition, every instance must have its own folder because we rely on the configuration file to set the port the service will run on.
-5. Execute `Tisane.Runtime.Service.exe -i` to install.
-6. Copy the language models to the folder specified in the configuration (e.g. `C:\Tisane` or `C:\Tisane\db`).
+1. Đảm bảo đã cài đặt ASP.NET Code 8 và .NET Runtime 8 trở lên.
+2. Tạo một thư mục trên máy chủ (ví dụ: `C:\Tisane`).
+3. Tạo một thư mục con cho các tệp nhị phân (ví dụ: `C:\Tisane\bin`).
+4. Sao chép các tệp nhị phân Tisane và tệp cấu hình (`Tisane.Runtime.Service.dll.config`) vào (các) thư mục con có thể thực thi. Đừng quên thư mục con `native` cho các thư viện RocksDB. Không giống như phiên bản Linux, mỗi phiên bản phải có thư mục riêng vì chúng tôi dựa vào tệp cấu hình để thiết lập cổng mà dịch vụ sẽ chạy.
+5. Chạy `Tisane.Runtime.Service.exe -i` để cài đặt.
+6. Sao chép các mô hình ngôn ngữ vào thư mục được chỉ định trong cấu hình (ví dụ: `C:\Tisane` hoặc `C:\Tisane\db`).
 
-#### Command-Line Parameters
+#### Tham số dòng lệnh
 
-* `-i` - install a new service for the binaries in the current folder
-* `-u` - uninstall the service linked to the current folder
-* `-r` - reinstall the service linked to the current folder
+* `-i` - cài đặt một dịch vụ mới cho các tệp nhị phân trong thư mục hiện tại
+* `-u` - gỡ cài đặt dịch vụ được liên kết với thư mục hiện tại
+* `-r` - cài đặt lại dịch vụ được liên kết với thư mục hiện tại
 
-### Configuration
+### Cấu hình
 
-The configuration file (`Tisane.Runtime.Service.dll.config`) is a standard Configuration Manager format (XML) file that contains settings used by the Tisane service in its `appSettings` section:
+Tệp cấu hình (`Tisane.Runtime.Service.dll.config`) là tệp định dạng Trình quản lý cấu hình (XML) chuẩn chứa các cài đặt được dịch vụ Tisane sử dụng trong phần `appSettings` của dịch vụ:
 
-* `DbPath` - (required) a folder where the Tisane data files are located. Absolute path, must end with `\` or `/`.
-* `Port` - (required) a port to run the service on. Must not be in use.
-* `PreloadLanguages` - a comma-delimited list of language codes to load fully at the startup. The rest will use lazy loading (loading on demand). It is recommended to preload no more than one or two language models, unless the environment has multiple languages used very often. Also read: [Lazy loading vs Fully Loaded Mode](/sdks/lazyloading.md)
+* `DbPath` - (bắt buộc) một thư mục chứa các tệp dữ liệu Tisane. Đường dẫn tuyệt đối phải kết thúc bằng `\` hoặc `/`.
+* `Port` - (bắt buộc) một cổng để chạy dịch vụ. Phải là cổng chưa được sử dụng.
+* `PreloadLanguages` - danh sách mã ngôn ngữ phân cách bằng dấu phẩy sẽ tải đầy đủ khi khởi động. Phần còn lại sẽ sử dụng chế độ tải chậm (tải theo yêu cầu). Bạn chỉ nên tải trước không quá một hoặc hai mô hình ngôn ngữ, trừ trường hợp môi trường có nhiều ngôn ngữ được sử dụng thường xuyên. Đọc thêm phần: [Chế độ Tải chậm so với chế độ Tải đầy đủ](/sdks/lazyloading.md)
 
-Example: 
+Ví dụ 
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -164,21 +164,21 @@ Example:
 </configuration>
 ```
 
-### Updates
+### Cập nhật
 
-1. Shut down all Tisane services. Make sure no external application is accessing the Tisane data files and binaries.
-2. Copy the new Tisane files over the existing files. 
-3. Start the services again.
+1. Tắt tất cả dịch vụ Tisane. Đảm bảo không có ứng dụng bên ngoài nào truy cập vào các tệp dữ liệu và tệp nhị phân của Tisane.
+2. Sao chép các tệp Tisane mới đè lên các tệp hiện có. 
+3. Khởi chạy lại dịch vụ.
 
 {% admonition type="warning" %}
 
-Make sure you **do not overwrite the existing configuration file**.
+Đảm bảo bạn **không ghi đè lên tệp cấu hình hiện có**.
 
 {% /admonition %}
 
-## Recommended Practices
+## Thực hành được khuyến nghị
 
-Tisane is thread-safe, so multiple callers can connect to the same instance. When multiple language models are loaded, keeping the number of instances low helps. Still, it is recommended to keep the number of simultaneous requests reasonable.
+Tisane là luồng an toàn, do đó nhiều người gọi có thể kết nối tới cùng một phiên bản. Khi nhiều mô hình ngôn ngữ được tải, việc giữ số lượng phiên bản ở mức thấp sẽ hữu ích. Tuy nhiên, nên giữ số lượng yêu cầu đồng thời ở mức hợp lý.
 
-From our experience, the best balance is 3 instances for a 4 core 8 Gb machine.
+Theo kinh nghiệm của chúng tôi, trạng thái cân bằng tốt nhất là 3 phiên bản cho một máy 4 lõi 8 Gb.
 

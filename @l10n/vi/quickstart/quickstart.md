@@ -1,27 +1,27 @@
-# Get Started With Tisane
-Kick off your journey by learning how to quickly set up and start using Tisane API.
+# Bắt đầu sử dụng Tisane
+Bắt đầu hành trình của bạn bằng cách tìm hiểu cách thiết lập và sử dụng nhanh Tisane API.
 
-## Step 1 – Create An Account
+## Bước 1 – Tạo tài khoản
 
 <a href="https://dev.tisane.ai/signup/" target="_blank">Sign up to Tisane API</a> 
 
-The free Community Plan supports up to 50,000 requests, with a limit of 10 requests per minute. (Or, you can purchase a paid plan, if you like.)
+Gói Cộng đồng miễn phí hỗ trợ tối đa 50.000 yêu cầu, với giới hạn 10 yêu cầu mỗi phút. (Hoặc nếu muốn thì bạn có thể mua gói trả phí.)
 
-## Step 2 - Obtain Your API Key
+## Bước 2 - Lấy khóa API
 
-Tisane API uses API keys to authenticate requests. Go to your <a href="https://dev.tisane.ai/profile" target="_blank">Developer Profile</a> to view and manage your API keys.
+Tisane API sử dụng khóa API để xác thực các yêu cầu. Truy cập vào <a href="https://dev.tisane.ai/profile" target="_blank">Hồ sơ nhà phát triển</a> của bạn để xem và quản lý khóa API.
 
-## Step 3 - Use the API
+## Bước 3 - Sử dụng API
 
- Invoke the `POST /parse` method. The method's request body requires three attributes:
+ Thực thi phương thức `POST/parse`. Phần nội dung yêu cầu của phương thức này cần có ba thuộc tính sau:
 
-- `content` (string)
-- `language` (string)
-- `settings` (object)
+- `content` (chuỗi)
+- `language` (chuỗi)
+- `settings` (đối tượng)
 
-**Example**:  
+**Ví dụ**:  
 
-Request:
+Yêu cầu:
  ```json
     {
       "language": "en", 
@@ -29,7 +29,7 @@ Request:
       "settings": {}
     }
  ```
- Response:
+ Phản hồi:
  ```json
  {
 	"text": "Hello Tisane API",
@@ -53,13 +53,13 @@ Request:
 }
 ```
 
-|In the public cloud, the maximum length of the JSON body is 2048 bytes. Longer requests are available in the on-prem version.|
+|Trên nền tảng đám mây công cộng, độ dài tối đa của phần nội dung JSON là 2048 byte. Yêu cầu dài hơn được hỗ trợ trong phiên bản triển khai tại chỗ.|
 |-----------------------------------------|
 
-You can test your request on this portal or use the _Try It_ option in the <a href="https://dev.tisane.ai/api-details#api=5a3b6668a3511b11cc292655&operation=5a3b7177a3511b11cc29265c" target="_blank">Developer Portal</a>.
-You can also test using curl, Postman, Insomnia, or any other RESTful tool.
+Bạn có thể thử gửi yêu cầu ngay trên cổng này hoặc sử dụng tùy chọn _Dùng thử_ trong <a href="https://dev.tisane.ai/api-details#api=5a3b6668a3511b11cc292655&operation=5a3b7177a3511b11cc29265c" target="_blank">Cổng thông tin dành cho nhà phát triển</a>.
+Bạn cũng có thể thử nghiệm bằng cách dùng curl, Postman, Insomnia hoặc bất kỳ công cụ RESTful nào khác.
 
-### Curl syntax 
+### Cú pháp curl 
 
 ```curl
 curl -V -X POST \
@@ -73,27 +73,27 @@ curl -V -X POST \
   }'
   ```
 
-## Troubleshooting
+## Khắc phục sự cố
 
-The API works via a standard **POST request**. 
+API hoạt động thông qua **yêu cầu POST** tiêu chuẩn. 
 
-If you are getting a timeout error:
-- Check your network connection.
+Nếu bạn gặp lỗi hết thời gian:
+- Hãy kiểm tra kết nối mạng của bạn.
 
 ---
 
-If you are getting a 401 (Unauthorized) error code:
+Nếu bạn gặp mã lỗi 401 (Không được phép):
 ```json
 {
 	"statusCode": 401,
 	"message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
 }
 ```
-- Make sure you provided a correct API key as a value of the `Ocp-Apim-Subscription-Key` header. 
+- Đảm bảo đã cung cấp đúng khóa API làm giá trị cho tiêu đề `Ocp-Apim-Subscription-Key`. 
 
 {% admonition type="info" %}
 
-To use your API key on this Documentation Portal, click on the _Security_ button in the _Try It_ page.
+Để sử dụng khóa API của bạn trên Cổng thông tin tài liệu này, hãy nhấp vào nút _Bảo mật_ trong trang _Dùng thử_.
 
 (The Developer Portal automatically fills the API key when you sign in.)
 
@@ -101,16 +101,16 @@ To use your API key on this Documentation Portal, click on the _Security_ button
 
 ---
 
-If you are getting a 400 (Bad Request) error code saying that a language is not found in the database:
-- Make sure you are specifying a correct ISO-639-1 language code, and that this language is supported by Tisane.
+Nếu bạn gặp mã lỗi 400 (Yêu cầu không hợp lệ) cho biết ngôn ngữ không có trong cơ sở dữ liệu:
+- Hãy đảm bảo rằng bạn đang chỉ định đúng mã ngôn ngữ theo chuẩn ISO-639-1 và ngôn ngữ đó được Tisane hỗ trợ.
 
-If you need more help:
+Nếu bạn cần thêm sự trợ giúp:
 
-* [Contact Support](../support/support.md) and we'll see why it's not working for you.
-* [Troubleshooting tips](../support/troubleshooting.md)
+* [Liên hệ hỗ trợ](../support/support.md) để chúng tôi giúp bạn tìm ra nguyên nhân sự cố.
+* [Mẹo khắc phục sự cố](../support/troubleshooting.md)
 
-Next:
+Tiếp theo:
 
-* [How to Detect Problematic Content](../guides/how-tos/detectabuse.md)
-* [List of Supported NLP Functions](../guides/features/functionality.md)
-* [List of Supported Languages](../guides/features/languages.md)
+* [Cách phát hiện nội dung có vấn đề](../guides/how-tos/detectabuse.md)
+* [Danh sách các chức năng NLP được hỗ trợ](../guides/features/functionality.md)
+* [Danh sách các ngôn ngữ được hỗ trợ](../guides/features/languages.md)
