@@ -109,6 +109,8 @@ If you need more help:
 * [Contact Support](../support/support.md) and we'll see why it's not working for you.
 * [Troubleshooting tips](../support/troubleshooting.md)
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/r7Y-w6MitkI?si=JDMEUFnZQN2nsl5M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 Next:
 
 * [How to Detect Problematic Content](../guides/how-tos/detectabuse.md)
