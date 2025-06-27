@@ -1,4 +1,4 @@
-# About 2-Factor Moderation
+﻿# About 2-Factor Moderation
 
 2-Factor Moderation is a crowdsourced moderation approach designed for high-traffic, real-time chats, such as in-game communication. It works similarly to [2-Factor Authentication](https://en.wikipedia.org/wiki/Multi-factor_authentication), (2FA) by requiring two independent inputs to make a moderation decision.
 

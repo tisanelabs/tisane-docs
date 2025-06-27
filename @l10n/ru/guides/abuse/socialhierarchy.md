@@ -1,4 +1,4 @@
-# Assertion of Hierarchy
+﻿# Assertion of Hierarchy
 
 Instances of forceful assertion of hierarchy in a community are logged under the `abuse` section, with the `type` attribute set to `social_hierarchy`.
 

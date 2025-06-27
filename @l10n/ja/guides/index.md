@@ -1,69 +1,69 @@
-# Guides
-This section provides guidance on features, solution walkthrus, and other topics. 
+﻿# ガイド
+このセクションでは、機能、ソリューションのウォークスルー、その他のトピックに関するガイダンスをご紹介します。 
 
-## Getting Started
-Kick off your journey with Tisane by learning how to quickly set up and start using Tisane:
+## 利用を開始する
+Tisaneの設定と利用開始を手早く行う方法を学び、最初のステップを踏み出しましょう。
 
-* [Get Started](../quickstart/quickstart.md)
+* [利用を開始する](../quickstart/quickstart.md)
 
-## Supported Features
+## サポートされている機能
 
-* [List of Supported Languages](./features/languages.md)
-* [Full List of Supported NLP Functions](./features/functionality.md)
-* [Feature: Entity Extraction](./features/entities.md)
-* [Feature: Topic Extraction](./features/topics.md)
-* [Feature: Sentiment Analysis](./features/sentiment.md)
-* [Feature: Built-in Translation](./features/translation.md)
-* [Does Tisane Support My Programming Language?](./features/programminglanguages.md)
-* [What does Tisane do when problematic content is detected?](./features/actupon.md)
-* [Algospeak and Adversarial Text Manipulations](./features/algospeak.md)
-* [Explainability and Transparency](./features/explainability.md)
+* [対応言語一覧](./features/languages.md)
+* [サポートされているNLP機能の一覧](./features/functionality.md)
+* [機能：エンティティの抽出](./features/entities.md)
+* [機能：トピックの抽出](./features/topics.md)
+* [機能：センチメント分析](./features/sentiment.md)
+* [機能：組み込み翻訳](./features/translation.md)
+* [Tisaneは私のプログラミング言語をサポートしていますか？](./features/programminglanguages.md)
+* [Tisaneは、問題のあるコンテンツが検出された場合、どのような対応を行いますか？](./features/actupon.md)
+* [スラングと敵対的文章操作](./features/algospeak.md)
+* [説明可能性と透明性](./features/explainability.md)
 
-## Types of Problematic Content
+## 問題のあるコンテンツの種類
 
-This section covers the concepts relevant to detection of concept of interest to moderators or, in law enforcement applications, of investigators.
+このセクションでは、モデレーターが関心を持つ概念の検出に関連する概念、または法執行機関での用途における捜査官が関心を持つ概念の検出に関連する概念について説明します。
 
-* [Personal Attacks/Insults/Cyberbullying](./abuse/personalattack.md)
-* [Bigotry and Hate Speech](./abuse/hatespeechandbigotry.md)
-* [Attempts to Establish External Contact](./abuse/externalcontact.md)
-* [Sexual Advances](./abuse/sexualadvances.md)
-* [Adult-Only Content](./abuse/adultonly.md)
-* [Allegations](./abuse/allegation.md)
-* [Criminal Activity](./abuse/criminalactivity.md)
-  - [Difference between Criminal Activity, Allegation, and Disturbing](./abuse/criminalallegationdisturbing.md)
-* [Mental Issues and Suicidal Ideation](./abuse/mental.md)
-* [Profanities](./abuse/profanity.md)
-* [Data Leaks](./abuse/dataleak.md)
-* [Contentious Content](./abuse/contentious.md)
-* [Disturbing Content](./abuse/disturbing.md)
-* [Meaningless Content](./abuse/nomeaningfulcontent.md)
-* [Assertion of Social Hierarchy](./abuse/socialhierarchy.md)
-* [Spam](./abuse/spam.md)
-* [Tags](./abuse/tags.md)
-* [2-Factor Moderation](./abuse/whatis2fm.md)
+* [Personal Attacks/Insults/Cyberbullying（個人攻撃／侮辱／ネットいじめ）](./abuse/personalattack.md)
+* [Bigotry and Hate Speech（偏見・ヘイトスピーチ）](./abuse/hatespeechandbigotry.md)
+* [Attempts to Establish External Contact（外部接触の試み）](./abuse/externalcontact.md)
+* [Sexual Advances（不適切な性的表現）](./abuse/sexualadvances.md)
+* [Adult-Only Content（成人向けコンテンツ）](./abuse/adultonly.md)
+* [Allegations（告発）](./abuse/allegation.md)
+* [Criminal Activity（犯罪行為）](./abuse/criminalactivity.md)
+  - [Difference between Criminal Activity, Allegation, and Disturbing（犯罪行為・告発・迷惑行為の違い ）](./abuse/criminalallegationdisturbing.md)
+* [Mental Issues and Suicidal Ideation（精神的問題・自殺念慮）](./abuse/mental.md)
+* [Profanity（卑猥な言葉）](./abuse/profanity.md)
+* [Data Leaks（データ漏洩）](./abuse/dataleak.md)
+* [Contentious Content（論争を招くコンテンツ）](./abuse/contentious.md)
+* [Disturbing Content（不安を引き起こす内容）](./abuse/disturbing.md)
+* [Meaningless Content（意味のないコンテンツ）](./abuse/nomeaningfulcontent.md)
+* [Assertion of Social Hierarchy（ヒエラルキーの主張）](./abuse/socialhierarchy.md)
+* [Spam（スパム）](./abuse/spam.md)
+* [Tags（タグ）](./abuse/tags.md)
+* [2-Factor Moderation（ユーザー参加型モデレーション ）](./abuse/whatis2fm.md)
 
-## How-to Topics
-Guides to help you implement and fine-tune Tisane for various content moderation scenarios:
+## ハウツートピック
+Tisaneをさまざまなコンテンツモデレーションのシナリオに実装し、最適化するためのガイド：
 
-* [Filtering By Keyword Blocklists](./how-tos/blocklists.md)
-* [Locating a Text Snippet Using Location Data](./how-tos/locateasnippet.md)
-* [Moderating Live Chat](./how-tos/liveusercontent.md)
-* [Moderating Usernames](./how-tos/aliases.md)
-* [Detecting Threats](./how-tos/threats.md)
-* [Detecting Problematic Content](./how-tos/detectabuse.md)
-* [Detecting Names of Countries](./how-tos/extractnamesofcountries.md)
-* [Processing Competitive Language In Game And Sports Chats](./how-tos/gamingchat.md) 
-* [Considering Previously Processed Messages](./how-tos/usingmemory.md)
+* [キーワードブロックリストによるフィルタリング](./how-tos/blocklists.md)
+* [位置情報を使用してテキストのスニペットを特定](./how-tos/locateasnippet.md)
+* [ライブチャットのモデレーション ](./how-tos/liveusercontent.md)
+* [ユーザー名のモデレーション](./how-tos/aliases.md)
+* [脅威の検出](./how-tos/threats.md)
+* [問題のあるコンテンツの検出](./how-tos/detectabuse.md)
+* [国名の検出](./how-tos/extractnamesofcountries.md)
+* [ゲームやスポーツのチャットにおける対戦で使用される言語の処理](./how-tos/gamingchat.md) 
+* [以前に処理されたメッセージの考慮](./how-tos/usingmemory.md)
 
-## Distribution and Deployment
+## 配布とデプロイメント
 
-* [What Happens When My Monthly Quota Is Exceeded?](./deployment/exceedquota.md)
-* [On-Premise Deployment](./deployment/onprem.md)
-* [Can Tisane Be Embedded In My Application Deployed On A Standalone Machine?](./deployment/embedded.md)
+* [月間クォータを超過した場合、どうなりますか？](./deployment/exceedquota.md)
+* [オンプレミスのデプロイメント](./deployment/onprem.md)
+* [Tisaneをスタンドアロンマシンにデプロイされたアプリケーションに組み込むことは可能ですか？](./deployment/embedded.md)
 
-## Design Philosophy
+## 設計哲学
 
-* [The Free Speech Debate](./features/freespeech.md)
-* [Why Deploy Automatic Moderation if it's not 100% accurate?](./features/why-deploy.md)
-* [Why Don't You Provide A Score On A Fixed Or Floating-Point Scale For Your Sentiment?](./features/score.md)
-* [Is There a Confidence Value?](./features/confidencevalue.md)
+* [言論の自由に関する議論](./features/freespeech.md)
+* [なぜ、100%正確でない自動モデレーションをデプロイするのでしょうか？](./features/why-deploy.md)
+* [なぜ、センチメントの評価に固定小数点または浮動小数点スケールでのスコアを提供しないのですか？](./features/score.md)
+* [信頼値は存在しますか？](./features/confidencevalue.md)

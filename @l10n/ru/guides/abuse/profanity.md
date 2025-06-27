@@ -1,4 +1,4 @@
-# Profanities
+﻿# Profanities
 
 Profanities are logged under the `abuse` section, with the `type` attribute set to `profanity`.
 

@@ -1,27 +1,27 @@
-# Get Started With Tisane
-Kick off your journey by learning how to quickly set up and start using Tisane API.
+# Tisaneの利用を開始する
+Tisane APIの設定と利用開始を手早く行う方法を学び、最初のステップを踏み出しましょう。
 
-## Step 1 – Create An Account
+## ステップ1 – アカウントを作成する
 
 <a href="https://dev.tisane.ai/signup/" target="_blank">Sign up to Tisane API</a> 
 
-The free Community Plan supports up to 50,000 requests, with a limit of 10 requests per minute. (Or, you can purchase a paid plan, if you like.)
+無料のコミュニティプランは、最大50,000件のリクエストに対応し、1分あたり10件のリクエストが上限です（ご希望の場合、有料プランをご購入いただけます）。
 
-## Step 2 - Obtain Your API Key
+## ステップ2 – APIキーを取得する
 
-Tisane API uses API keys to authenticate requests. Go to your <a href="https://dev.tisane.ai/profile" target="_blank">Developer Profile</a> to view and manage your API keys.
+Tisane APIは、リクエストの認証にAPIキーを使用します。<a href="https://dev.tisane.ai/profile" target="_blank">開発者プロファイル</a> にアクセスして、APIキーを確認および管理します。
 
-## Step 3 - Use the API
+## ステップ3 – APIを利用する
 
- Invoke the `POST /parse` method. The method's request body requires three attributes:
+ `POST /parse`メソッドを呼び出します。このメソッドのリクエスト本文には、3つの属性が必要です。
 
-- `content` (string)
-- `language` (string)
-- `settings` (object)
+- `content`（文字列）
+- `language`（文字列）
+- `settings`（オブジェクト）
 
-**Example**:  
+**例**：  
 
-Request:
+リクエスト：
  ```json
     {
       "language": "en", 
@@ -29,7 +29,7 @@ Request:
       "settings": {}
     }
  ```
- Response:
+ レスポンス：
  ```json
  {
 	"text": "Hello Tisane API",
@@ -53,13 +53,13 @@ Request:
 }
 ```
 
-|In the public cloud, the maximum length of the JSON body is 2048 bytes. Longer requests are available in the on-prem version.|
+|パブリッククラウドでは、JSON本文の長さは最大2048バイトです。オンプレミス版では、より長いリクエストが利用可能です。|
 |-----------------------------------------|
 
-You can test your request on this portal or use the _Try It_ option in the <a href="https://dev.tisane.ai/api-details#api=5a3b6668a3511b11cc292655&operation=5a3b7177a3511b11cc29265c" target="_blank">Developer Portal</a>.
-You can also test using curl, Postman, Insomnia, or any other RESTful tool.
+このポータルでリクエストをテストするか、 <a href="https://dev.tisane.ai/api-details#api=5a3b6668a3511b11cc292655&operation=5a3b7177a3511b11cc29265c" target="_blank">開発者向けポータル</a>の「 試してみる」オプションを使用します。__
+curl、Postman、Insomnia、またはその他のRESTfulツールを使用してテストすることもできます。
 
-### Curl syntax 
+### curl構文 
 
 ```curl
 curl -V -X POST \
@@ -73,27 +73,27 @@ curl -V -X POST \
   }'
   ```
 
-## Troubleshooting
+## トラブルシューティング
 
-The API works via a standard **POST request**. 
+APIは標準の**POSTリクエスト**経由で動作します。 
 
-If you are getting a timeout error:
-- Check your network connection.
+タイムアウトエラーが発生した場合：
+- ネットワーク接続を確認してください。
 
 ---
 
-If you are getting a 401 (Unauthorized) error code:
+401（Unauthorized）のエラーコードが表示される場合：
 ```json
 {
 	"statusCode": 401,
 	"message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
 }
 ```
-- Make sure you provided a correct API key as a value of the `Ocp-Apim-Subscription-Key` header. 
+- `Ocp-Apim-Subscription-Key`ヘッダーの値として正しいAPIキーが指定されていることを確認してください。 
 
 {% admonition type="info" %}
 
-To use your API key on this Documentation Portal, click on the _Security_ button in the _Try It_ page.
+このドキュメントポータルでAPIキーを使用するには、「試してみる」 ページの「セキュリティ」ボタンをクリックします。____
 
 (The Developer Portal automatically fills the API key when you sign in.)
 
@@ -101,16 +101,16 @@ To use your API key on this Documentation Portal, click on the _Security_ button
 
 ---
 
-If you are getting a 400 (Bad Request) error code saying that a language is not found in the database:
-- Make sure you are specifying a correct ISO-639-1 language code, and that this language is supported by Tisane.
+データベースに言語が見つからないという内容の400（Bad Request）のエラーコードが表示される場合：
+- ISO-639-1言語コードが正しく指定されていることを確認し、その言語がTisaneでサポートされていることを確認してください。
 
-If you need more help:
+さらにサポートが必要な場合：
 
-* [Contact Support](../support/support.md) and we'll see why it's not working for you.
-* [Troubleshooting tips](../support/troubleshooting.md)
+* [サポートへお問い合わせください。](../support/support.md)問題の原因を調査し、ご対応いたします。
+* [トラブルシューティングのヒント](../support/troubleshooting.md)
 
-Next:
+次の項目：
 
-* [How to Detect Problematic Content](../guides/how-tos/detectabuse.md)
-* [List of Supported NLP Functions](../guides/features/functionality.md)
-* [List of Supported Languages](../guides/features/languages.md)
+* [問題のあるコンテンツの検出方法](../guides/how-tos/detectabuse.md)
+* [サポートされているNLP機能の一覧](../guides/features/functionality.md)
+* [対応言語一覧](../guides/features/languages.md)

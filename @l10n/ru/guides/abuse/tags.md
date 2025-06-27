@@ -1,4 +1,4 @@
-# Tags
+﻿# Tags
 
 In addition to the abuse types, more detail on the context is provided as a `tags` string array. It may be a subtype of the identity being targeted, or a type of the illicit item being discussed, etc.
 

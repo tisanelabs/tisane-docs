@@ -1,4 +1,4 @@
-# Spam
+﻿# Spam
 
 Instances of spam are logged under the `abuse` section, with the `type` attribute set to `spam`. 
 

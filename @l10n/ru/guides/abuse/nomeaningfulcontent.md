@@ -1,4 +1,4 @@
-# Meaningless Content
+﻿# Meaningless Content
 
 Instances of content that has no meaning (e.g. words that appear to be gibberish) are logged under the `abuse` section, with the `type` attribute set to `no_meaninful_content`.
 
