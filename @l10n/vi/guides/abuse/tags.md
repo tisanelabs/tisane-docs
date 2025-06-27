@@ -1,8 +1,8 @@
-# Tags
+﻿# Thẻ
 
-In addition to the abuse types, more detail on the context is provided as a `tags` string array. It may be a subtype of the identity being targeted, or a type of the illicit item being discussed, etc.
+Bên cạnh các loại lạm dụng, thông tin chi tiết về ngữ cảnh được cung cấp qua một mảng chuỗi `tags`. Những thẻ này có thể là một phân loại phụ của đối tượng bị nhắm tới, hoặc là loại vật phẩm bất hợp pháp đang được đề cập,…
 
-The values of the tags usually correlate with the type of problematic content detected, but not necessarily. The tags are obtained by traversing the matching main clause, and collecting the `abuse/tags` values associated with the lexemes (or inner phrases) involved. For example, in an utterance like: "kill all immigrants", two types of `abuse` are detected: `criminal_activity` and `bigotry`. They both have the following tags: `call_for_violence`, `death`, and `xenophobia`.
+Giá trị của các thẻ thường tương quan với loại nội dung có vấn đề được phát hiện, nhưng không phải lúc nào cũng vậy. Các thẻ được thu thập bằng cách phân tích mệnh đề chính phù hợp, rồi trích xuất các giá trị `abuse/tags` liên quan đến các từ (hoặc cụm từ) liên quan. Ví dụ, trong câu sau: "kill all immigrants" (giết hết người nhập cư), có hai loại `abuse`được phát hiện: `criminal_activity` (hành động tội phạm) và `bigotry` (định kiến thù ghét). Cả hai đều có các thẻ sau: `call_for_violence` (kêu gọi bạo lực), `death` (chết chóc), và `xenophobia` (bài ngoại).
 
 ```json
 {
@@ -40,102 +40,102 @@ The values of the tags usually correlate with the type of problematic content de
 }
 ```
 
-That also means that even if some types are ignored purportedly, the tags can still be used.
+Điều này cũng có nghĩa là, ngay cả khi một số loại lạm dụng được chủ động bỏ qua, nhưng các thẻ vẫn có thể được sử dụng.
 
-The sections dedicated to the abuse types list most relevant tags. 
+Các phần mô tả từng loại lạm dụng sẽ liệt kê những thẻ liên quan nhất. 
 
-## Complete List of Tags
+## Danh sách đầy đủ các thẻ
 
-See the full listing of the tags below.
+Xem danh sách đầy đủ các thẻ bên dưới
 
-* `ableism`
-* `admission`
-* `ageism`
-* `anticatholicism`
-* `antisemitism`
-* `appearance`
-* `bodily_harm`
-* `bribery`
-* `call_for_violence`
-* `cannabis`
-* `cannibalism`
-* `caste`
-* `christianophobia`
-* `clickbait`
-* `cocaine`
-* `cold_weapons`
-* `conspiracy_theory`
-* `contraband`
-* `controlled_substance `
-* `credentials`
-* `crime`
-* `cryptocurrency`
-* `data`
-* `death`
-* `debt`
-* `doxing`
-* `ecstasy`
-* `endearment`
-* `escape`
-* `explosives`
-* `extortion`
-* `fake`
-* `firearms`
-* `for_sale`
-* `hacking_services`
-* `hallucination`
-* `hallucinogen`
-* `hard_drug`
-* `heroin`
-* `homophobia`
-* `human_trafficking`
-* `indigenous_sensitive`
-* `instructions`
-* `investment`
-* `islamophobia`
-* `khat`
-* `link`
-* `luxury`
-* `medication`
-* `meth`
-* `money_laundering`
-* `not personal`
-* `opioid`
-* `organ_trade`
-* `organized_crime`
-* `package`
-* `payment`
-* `pedophilia`
-* `pii`
-* `piracy`
-* `planning`
-* `privacy`
-* `promo`
-* `racism`
-* `relationship_status`
-* `religion`
-* `scam`
-* `sex`
-* `sex_work`
-* `sexism`
-* `soft_drug`
-* `sold_by_spammers`
-* `tax_evasion`
-* `terrorism`
-* `threat`
+* `ableism` (phân biệt đối xử với người khuyết tật)
+* `admission` (lời thừa nhận)
+* `ageism` (phân biệt tuổi tác)
+* `anticatholicism` (bài Công giáo)
+* `antisemitism` (bài Do thái)
+* `appearance` (ngoại hình)
+* `bodily_harm` (làm hại cơ thể)
+* `bribery` (hối lộ)
+* `call_for_violence` (kêu gọi bạo lực)
+* `cannabis` (cần sa)
+* `cannibalism` (ăn thịt người)
+* `caste` (phân biệt giai cấp)
+* `christianophobia` (bài Kitô giáo)
+* `clickbait` (mồi nhử)
+* `cocaine` (ma túy)
+* `cold_weapons` (vũ khí lạnh)
+* `conspiracy_theory` (thuyết âm mưu)
+* `contraband` (hàng lậu)
+* `controlled_substance ` (chất bị kiểm soát)
+* `credentials` (thông tin xác thực)
+* `crime` (tội phạm)
+* `cryptocurrency` (tiền mã hóa)
+* `data` (dữ liệu)
+* `death` (chết)
+* `debt` (nợ nần)
+* `doxing` (công khai thông tin cá nhân)
+* `ecstasy` (thuốc lắc)
+* `endearment` (sự thân mật)
+* `escape` (trốn thoát)
+* `explosives` (chất nô)
+* `extortion` (tống tiền)
+* `fake` (giả mạo)
+* `firearms` (súng ống)
+* `for_sale` (rao bán)
+* `hacking_services` (dịch vụ hack)
+* `hallucination` (ảo giác)
+* `hallucinogen` (chất gây ảo giác)
+* `hard_drug` (ma túy nặng)
+* `heroin` (ma túy heroin)
+* `homophobia` (kỳ thị người đồng tính)
+* `human_trafficking` (buôn người)
+* `indigenous_sensitive` (nhạy cảm với người bản địa)
+* `instructions` (hướng dẫn)
+* `investment` (đầu tư)
+* `islamophobia` (bài Hồi giáo)
+* `khat` (lá khát)
+* `link` (liên kết)
+* `luxury` (xa xỉ)
+* `medication` (thuốc)
+* `meth` (ma túy đá)
+* `money_laundering` (rửa tiền)
+* `not personal` (không cá nhân)
+* `opioid` (thuốc phiện)
+* `organ_trade` (buôn bán nội tạng)
+* `organized_crime` (tội phạm có tổ chức)
+* `package` (gói hàng)
+* `payment` (thanh toán)
+* `pedophilia` (ấu dâm)
+* `pii` (thông tin định danh cá nhân)
+* `piracy` (vi phạm bản quyền)
+* `planning` (lên kế hoạch)
+* `privacy` (quyền riêng tư)
+* `promo` (khuyến mãi )
+* `racism` (phân biệt chủng tộc)
+* `relationship_status` (tình trạng quan hệ)
+* `religion` (tôn giáo)
+* `scam` (lừa đảo)
+* `sex` (tình dụng)
+* `sex_work` (mại dâm)
+* `sexism` (phân biệt giới tính)
+* `soft_drug` (ma túy nhẹ)
+* `sold_by_spammers` (do spammer bán)
+* `tax_evasion` (trốn thuế)
+* `terrorism` (khủng bố)
+* `threat` (đe dọa)
 * `tisane`
-* `tobacco`
-* `transphobia`
-* `url`
-* `user-generated content`
-* `vehicle`
-* `violation`
-* `violence`
-* `weapon`
-* `weapons_of_mass_destruction`
-* `wildlife`
-* `workplace_bullying`
-* `xenophobia`
+* `tobacco` (thuốc lá)
+* `transphobia` (kỳ thị người chuyển giới)
+* `url` (địa chỉ liên kết)
+* `user-generated content` ( nội dung do người dùng tạo)
+* `vehicle` (phương tiện)
+* `violation` (vi phạm)
+* `violence` (bạo lực)
+* `weapon` (vũ khí)
+* `weapons_of_mass_destruction` (vũ khí hủy diệt hàng loạt)
+* `wildlife` (động vật hoang dã)
+* `workplace_bullying` (bắt nạt nơi làm việc)
+* `xenophobia` (bài ngoại)
 
 
 
