@@ -1,87 +1,87 @@
-# Analyzing, Validating, and Comparing Names
+# 名前の分析、検証、比較
 
-## Parsing Full Names
+## フルネームのパーシング
 
-Tisane can break down full names into key components:
+Tisaneは、フルネームを主要な構成要素に分解することができます。
 
-| Attribute     | Description                         |
+| 属性     | 説明                         |
 | ------------- | ----------------------------------- |
-| `given_name`  | First name (e.g., *John*)           |
-| `middle_name` | Middle name (if applicable)         |
-| `surname`     | Last name (e.g., *Doe*)             |
-| `title`       | Honorifics (e.g., *Dr., Mr., Ms.*)  |
-| `suffix`      | Name suffix (e.g., *Jr., Sr., III*) |
-| `social_role` | Roles like *Haji* or *Dr.*          |
+| `given_name`  | 名（*John*など）           |
+| `middle_name` | ミドルネーム（ある場合）         |
+| `surname`     | 姓（*Doe*など）             |
+| `title`       | 敬称（*Dr.、Mr.、Ms.*など）  |
+| `suffix`      | 名前に付ける称号（*Jr.、Sr.、III*など） |
+| `social_role` | *Haji*や*Dr.*などの役割          |
 
-## How To Parse A Name
+## 名前のパーシング方法
 
-To parse a full name, send a `POST /parse` request with:
+姓名をパーシングするには、以下とともに`POST /parse`リクエストを送信します。
 
 * `"entity": "person"`
 * `"words": true`
 
 
-The response will categorize the name components under the `role` attribute.
+レスポンスは、`role`属性の下の名前の構成要素を分類します。
 
-Example of Name Parsing:
+名前のパーシングの例：
 ![tisaneAliKilicoglu.png](/images/tisaneAliKilicoglu.png)
 
 
-## Validating Real Names
+## 本名を検証する
 
-While Tisane cannot verify if a user’s provided name is real, it recognizes many names associated with:
+Tisaneは、ユーザーの名前が本名かどうかを確認することはできませんが、以下に関連する多くの名前を認識することができます。
 
-- Famous figures (`important_person`)
-- Fictional characters (`fictional_character`)
-- Spiritual beings (`spiritual_being`)
-- Names that don’t appear to be names (for example: User-13789026152908425434)
+- 有名人（`important_person`）
+- 架空の人物（`fictional_character`）
+- 霊的存在（`spiritual_being`）
+- 名前らしくない名前（例：User-13789026152908425434）
 
-For a list of common fake names, refer to [this Quora post](https://qr.ae/pNKxWl).
+一般的な偽名のリストについては、[Quoraの投稿](https://qr.ae/pNKxWl)を参照してください。
 
 
-The `subtype` attribute in the `entity` structure indicates the type of name detected, with a Wikidata ID if available.
+`entity`構造の`subtype`属性は、検出された名前の種類を示し、ウィキデータIDがあればそれも示します。
 
-Example of Fictional Character Name Parsing:
+架空の人物の名前のパーシングの例：
 
 ![tisaneFictionalCharacter.png](/images/tisaneFictionalCharacter.png)
 
 
 
-## Comparing Names
+## 名前を比較する
 
-The `/compare/entities` method allows comparing two names (even across languages) and detecting differences.
+`/compare/entities`メソッドは、2つの名前を（複数の言語間でも）比較し、違いを検出することができます。
 
-### Example Comparisons
+### 比較例
 
-| Name 1           | Name 2                              | Result                                                 |
+| 名前1           | 名前2                              | 結果                                                 |
 | ---------------- | ----------------------------------- | ------------------------------------------------------ |
 | *William Smith*  | *Will Smith*                        | `{"result":"different","differences":["variation"]}`   |
 | *Musa Bin Osman* | *Haji Musa Bin Osman*               | `{"result":"different","differences":["social_role"]}` |
 | *William Smith*  | *Вилл Смит* (Will Smith in Russian) | `{"result":"different","differences":["variation"]}`   |
 | *Kevin Tan*      | *TAN Kevin*                         | `{"result":"same"}`                                    |
 
-### **How To Compare Names**
+### **名前の比較方法**
 
-Send a request to the `/compare/entities` endpoint with the names to compare, and the response will return differences in attributes like:
+`compare/entities`エンドポイントに比較したい名前を指定してリクエストを送ると、レスポンスとして以下のような属性の違いが返されます：
 
-- `variation` (e.g., *William* vs *Will*)
-- `social_role` (e.g., *Haji Musa* vs *Musa*)
-- `case_difference` (e.g., *John Doe* vs *JOHN DOE*)
-- `same` (Identical names, even if the order differs)
+- `variation`（例：*William*と*Will*）
+- `social_role`（例： *Haji Musa*と*Musa*）
+- `case_difference`（例：*John Doe*と*JOHN DOE*）
+- `same`（同姓同名（順番が異なっている場合でも））
 
 
-## Vetting Nicknames and Aliases
+## ニックネームとエイリアスの審査
 
-Usernames and aliases can be misleading, offensive, or abusive. Tisane detects inappropriate usernames (e.g., *Hitler*, *UserJohn_is_liar*).
+ユーザー名やエイリアスは、誤解を招いたり、攻撃的であったり、悪用されたりする可能性があります。Tisaneは不適切なユーザー名（例：*Hitler*（ヒットラー）、*UserJohn_is_liar*（ユーザージョンは嘘つき）など）を検出します。
 
-### How To Vet A Nickname
+### ニックネームの審査方法
 
-Send a send a `POST /parse` request with:
+次のものと一緒に`POST /parse`リクエストを送信します。
 
 - ` "format": "alias"`
 
-- The `subscope` setting ensures names are properly segmented, even if written in camel case, with underscores, or without spaces.
+- `subscope`設定は、キャメルケース、アンダースコア、スペースなしで書かれていても、名前が適切にセグメントされることを保証します。
 
-Example of nickname vetting:
+ニックネームの審査例：
 
 ![tisaneAliasCreep.png](/images/tisaneAliasCreep.png)

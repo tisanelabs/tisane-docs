@@ -1,17 +1,17 @@
-# Assertion of Hierarchy
+﻿# ヒエラルキーの主張
 
-Instances of forceful assertion of hierarchy in a community are logged under the `abuse` section, with the `type` attribute set to `social_hierarchy`.
+コミュニティ内でヒエラルキーを強く主張する行為は、`abuse`セクションに記録され、`type`属性が`social_hierarchy`に設定されます。
 
-These instances include:
+これらのインスタンスには、以下のものが含まれます。
 
-* being a control freak
-* workspace bullying (e.g. so-called [power harassment](https://en.wikipedia.org/wiki/Power_harassment) in Japan and South Korea)
-* forcing a particular group to "know their place" (e.g. new members of a community)
+* コントロールフリークであること
+* 職場でのいじめ（例：日本や韓国でいわゆる[パワーハラスメント](https://en.wikipedia.org/wiki/Power_harassment)と呼ばれる行為）
+* 特定の集団に「自分の立場を自覚させる」こと（例：コミュニティの新規メンバーなど）
 
 
-## Example
+## 例
 
-Request:
+リクエスト：
 
 ```json
 {
@@ -24,7 +24,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 
 ```json
 {

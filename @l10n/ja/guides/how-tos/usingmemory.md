@@ -1,25 +1,25 @@
-# Considering Previously Processed Messages
+# 過去に処理されたメッセージを考慮する
 
-By default, Tisane calls are stateless. Which means, Tisane is only aware of the text it receives in the current request. (Within the text though, the context is tracked between sentences for the purposes of co-reference resolution.) This is a deliberate choice both for the simplicity of deployment, and to avoid legal issues with data retention. API call = session.
+デフォルトでは、Tisaneの呼び出しはステートレスです。つまり、Tisaneは現在のリクエストで受け取ったテキストのみを把握します。（ただし、共参照の解決のため、テキスト内では文と文の間のコンテキストが追跡されます）。これは、デプロイを簡単にするため、そしてデータ保持に関する法的問題を避けるため意図的に選択されています。APIコール = セッション。
 
-But what happens if we need to refer to previous messages? In context of problematic content, there are several relevant scenarios, most notably online grooming and fraud, in which the full picture only emerges when several utterances are put together.
+しかし、以前のメッセージを参照する必要がある場合はどうするのでしょうか？問題のあるコンテンツのコンテキストでは、関連するシナリオがいくつかあります。特にネット上でのグルーミングや詐欺では、複数の発言を組み合わせて初めて全体像が見えてきます。
 
-Consider the following utterance: “Where are your parents now?” On its own, we don’t have enough context to mark it as problematic. It can be anything: two kids talking about their parents or a repairman trying to locate the head of the household. Then consider another utterance: “Can you turn on your camera?” Once again, the utterance alone does not necessarily imply nefarious intent. It may be from a conversation between colleagues at work.
+次のような発言を考えてみましょう。「両親は今どこにいるの？」これだけでは、問題視するほどの文脈はありません。子供同士でその両親について話している場合や、修理に来た人がその家の主がどこにいるのか知りたい場合など、いろいろと考えられます。別の発言も考えてみましょう。「カメラをオンにしてくれる？」これもまた、発言だけでは必ずしも悪意があるとは言えません。職場の同僚同士の会話のようにも聞こえます。
 
-However, when the request to turn on the camera follows the inquiry about the location of the parents, it works like the binary explosives immortalized by action movies. It’s a very good reason to issue an alert.
+しかし、両親がどこにいるのかを聞いた後に、カメラの電源を入れるよう要求された場合、これはアクション映画によくある、思いもよらない展開になることも考えられます。警告を発するには十分な理由と言えます。
 
-To keep the context while keeping Tisane stateless, a module called “long-term memory” is used. The `memory` object in response contains the flags that store intermediate observations. The same portion of the response needs to be included in the subsequent requests under settings (`"memory":{...}`).
+Tisaneをステートレスに保ちながらコンテキストを保持するために、「長期記憶」と呼ばれるモジュールが使われています。レスポンスの`memory`オブジェクトには、中間オブザベーションを格納するフラグが含まれます。レスポンスの同じ部分を、設定（`"memory":{...}`）の下にある後続のリクエストに含める必要があります。
 
 {% admonition type="info" %}
 
-To display the content of the memory module, set `state` to `true` in the `settings` structure.
+記憶モジュールの内容を表示するには、`settings`構造で`state`を`true`に設定します。
 
 {% /admonition %}
 
-If it’s an ongoing dialogue, then the memory structure of every last processed message must be included in the next request as shown on the diagram below:
+継続的な対話であれば、下図に示すように、最後に処理されたすべてのメッセージの記憶構造が次のリクエストに含まれなければなりません。
 
 ![tisaneMemoryUse.png](/images/tisaneMemoryUse.png)
 
-Can these memories be changed and edited? Of course, so external context may be introduced as well. Note that the retention of the data is the responsibility of the caller.
+これらの記憶は変更や編集が可能ですか？もちろん、外部的なコンテキストを導入することもできます。なお、データの保持は呼び出し側の責任です。
 
-See: [Context and Long-Term Memory](/apis/tisane-api-configuration#context-and-long-term-memory)
+参考：[コンテキストと長期記憶](/apis/tisane-api-configuration#context-and-long-term-memory)

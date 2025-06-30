@@ -1,23 +1,23 @@
-﻿# Personal Attack
+﻿# Личная нападка
 
-A personal attack is an insult, an ad hominem attack, an instance of cyberbullying, or any other kind of attack on a participant in a conversation. Instances of detected personal attacks are logged under the `abuse` section, with the `type` attribute set to `personal_attack`.
+Личная нападка — это оскорбление, переход на личности, случай кибербуллинга или любой другой вид нападок на участника беседы. Случаи обнаруженных личных нападок регистрируются в разделе `abuse`, и их атрибуту `type` присваивается значение `personal_attack`.
 
-## What Is Not Considered A Personal Attack?
+## Что не считается личной нападкой?
 
-- An attack on a social group
+- Нападка на социальную группу
 
-   - If the target is an ethnic, religious, or racial group, as this is categorized as `bigotry` (hate speech).
-   - Attacks on other social groups may not fall under any of the categories, or they can be marked as `contentious` (content likely to start disputes).
+   - Если целью является этническая, религиозная или расовая группа, как это классифицируется как `bigotry` (разжигание ненависти).
+   - Нападки на другие социальные группы могут не подпадать ни под одну из категорий или могут быть помечены как `contentious` (контент, который может вызвать споры).
 
-- An attack on a fictional character or public figure
+- Нападка на вымышленного персонажа или общественного деятеля
 
-   - Criticizing a fictional character or a public figure does not count as a personal attack.
-   - An attack on someone currently not part of the conversation. That means anyone who is not a 2nd person ("you"), and is not identified by a mention linked to a user handle (e.g. @user12345). 
-   - Negative sentiment that does not attack the person directly. For example, _"your music is bad"_ is not a personal attack.
+   - Критика вымышленного персонажа или общественного деятеля не считается личной нападкой.
+   - Нападка на человека, который в данный момент не участвует в разговоре. Она означает нападку на любого человека, который не является вторым лицом («ты») и не идентифицирован упоминанием, связанным с ником пользователя (например, @user12345). 
+   - Негативное отношение, которое не направлено непосредственно на человека. Например, _your music is bad_ («твоя музыка плохая») — это не личная нападка.
 
-## Example
+## Пример
 
-Request:
+Запрос:
 
 ```json
 {
@@ -30,7 +30,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 
 ```json
 {
@@ -58,13 +58,13 @@ Response:
 }
 ```
 
-## Redefining Default Policy
+## Переопределение политики по умолчанию
 
-The default policy of excluding 3rd parties can be modified using the `memory` module.
+Политику исключения третьих лиц по умолчанию можно изменить с помощью модуля `memory`.
 
-### Detecting Attacks on Named Parties
+### Обнаружение нападок на указанных лиц
 
-In order to detect attacks on people referenced by names, add the following memory setting:
+Для обнаружения нападок на людей, указанных по именам, добавьте следующую настройку памяти:
 
 ```json
 {
@@ -100,7 +100,7 @@ In order to detect attacks on people referenced by names, add the following memo
 }
 ```
 
-For example:
+Например:
 
 ```json
 {
@@ -143,9 +143,9 @@ For example:
 }
 ```
 
-### Detecting Attacks on all 3rd Parties
+### Обнаружение нападок на всех третьих лиц
 
-In order to detect attacks on all 3rd parties, add the following memory setting:
+Для обнаружения нападок на всех третих лиц добавьте следующую настройку памяти:
 
 ```json
 {
@@ -181,7 +181,7 @@ In order to detect attacks on all 3rd parties, add the following memory setting:
 }
 ```
 
-For example:
+Например:
 
 ```json
 {

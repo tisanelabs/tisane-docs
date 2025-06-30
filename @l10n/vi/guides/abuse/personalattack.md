@@ -1,23 +1,23 @@
-# Personal Attack
+﻿# Tấn công cá nhân
 
-A personal attack is an insult, an ad hominem attack, an instance of cyberbullying, or any other kind of attack on a participant in a conversation. Instances of detected personal attacks are logged under the `abuse` section, with the `type` attribute set to `personal_attack`.
+Tấn công cá nhân là hành vi xúc phạm, công kích mang tính cá nhân, bắt nạt trên mạng hoặc bất kỳ hình thức công kích nào nhắm vào người tham gia trò chuyện. Các trường hợp tấn công cá nhân được phát hiện sẽ được ghi nhận trong mục `abuse`, với thuộc tính `type` được đặt là `personal_attack`.
 
-## What Is Not Considered A Personal Attack?
+## Những gì không được xem là tấn công cá nhân?
 
-- An attack on a social group
+- Tấn công một nhóm xã hội
 
-   - If the target is an ethnic, religious, or racial group, as this is categorized as `bigotry` (hate speech).
-   - Attacks on other social groups may not fall under any of the categories, or they can be marked as `contentious` (content likely to start disputes).
+   - Nếu mục tiêu là một nhóm dân tộc, tôn giáo hoặc chủng tộc, thì hành vi này được phân loại là `bigotry` (ngôn từ thù ghét).
+   - Tấn công các nhóm xã hội khác có thể không thuộc bất kỳ danh mục nào, hoặc có thể được đánh dấu là `contentious` (nội dung dễ gây tranh cãi).
 
-- An attack on a fictional character or public figure
+- Tấn công nhân vật hư cấu hoặc người của công chúng
 
-   - Criticizing a fictional character or a public figure does not count as a personal attack.
-   - An attack on someone currently not part of the conversation. That means anyone who is not a 2nd person ("you"), and is not identified by a mention linked to a user handle (e.g. @user12345). 
-   - Negative sentiment that does not attack the person directly. For example, _"your music is bad"_ is not a personal attack.
+   - Chỉ trích một nhân vật hư cấu hoặc người nổi tiếng không được xem là tấn công cá nhân.
+   - Tấn công người không tham gia vào cuộc trò chuyện hiện tại. Tức là bất kỳ ai không phải là người được xưng hô trực tiếp (ngôi thứ hai – “bạn”) và không được nhắc đến qua tên người dùng có gắn thẻ (ví dụ: @user12345). 
+   - Thái độ tiêu cực nhưng không nhắm trực tiếp vào con người. Ví dụ, câu _"your music is bad"_ (nhạc của bạn dở quá) không được xem là tấn công cá nhân.
 
-## Example
+## Ví dụ
 
-Request:
+Yêu cầu:
 
 ```json
 {
@@ -30,7 +30,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 
 ```json
 {
@@ -58,13 +58,13 @@ Response:
 }
 ```
 
-## Redefining Default Policy
+## Điều chỉnh chính sách mặc định
 
-The default policy of excluding 3rd parties can be modified using the `memory` module.
+Chính sách mặc định loại trừ các bên thứ ba, nhưng bạn có thể thay đổi bằng cách sử dụng mô-đun `memory` (bộ nhớ).
 
-### Detecting Attacks on Named Parties
+### Phát hiện tấn công vào bên được nhắc tên
 
-In order to detect attacks on people referenced by names, add the following memory setting:
+Để phát hiện các cuộc tấn công nhắm vào người được gọi tên, hãy thêm thiết lập sau vào bộ nhớ:
 
 ```json
 {
@@ -100,7 +100,7 @@ In order to detect attacks on people referenced by names, add the following memo
 }
 ```
 
-For example:
+Ví dụ:
 
 ```json
 {
@@ -143,9 +143,9 @@ For example:
 }
 ```
 
-### Detecting Attacks on all 3rd Parties
+### Phát hiện tấn công nhắm vào mọi bên thứ ba
 
-In order to detect attacks on all 3rd parties, add the following memory setting:
+Để phát hiện tấn công nhắm vào mọi bên thứ ba, hãy thêm thiết lập sau vào bộ nhớ:
 
 ```json
 {
@@ -181,7 +181,7 @@ In order to detect attacks on all 3rd parties, add the following memory setting:
 }
 ```
 
-For example:
+Ví dụ:
 
 ```json
 {

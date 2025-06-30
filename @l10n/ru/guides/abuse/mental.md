@@ -1,25 +1,25 @@
-# Mental Issues
+# Психические проблемы
 
-Detected utterances indicating mental issues, self-harm, suicidal thoughts, or plans to commit suicide are logged under the `abuse` section, with the `type` attribute set to `mental_issues`.
+Обнаруженные высказывания, указывающие на психические проблемы, членовредительство, мысли о самоубийстве или планы совершить самоубийство, регистрируются в разделе `abuse` с присвоением атрибуту `type` значения `mental_issues`.
 
-## Relevant Tags
+## Соответствующие теги
 
-* `bodily_harm` - self-harm
-* `death` - thoughts about death or suicide
-* `threat` - threatening suicide
+* `bodily_harm` — причинение себе вреда
+* `death` — мысли о смерти или самоубийстве
+* `threat` — угроза самоубийством
 
-## Severity Levels
+## Уровни серьезности
 
-The severity levels are as following:
+Уровни серьезности следующие:
 
-* `low` - non-threatening utterances
-* `medium` - utterances indicative of depression or mental illness
-* `high` - severe depression, thoughts about death, or bodily harm
-* `extreme` - planning suicide
+* `low` — неугрожающие высказывания
+* `medium` — высказывания, указывающие на депрессию или психическое заболевание
+* `high` — тяжелая депрессия, мысли о смерти или телесных повреждениях
+* `extreme` — планирование самоубийства
 
-## Example
+## Например:
 
-Request:
+Запрос:
 
 ```json
 {
@@ -31,7 +31,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 
 ```json
 {

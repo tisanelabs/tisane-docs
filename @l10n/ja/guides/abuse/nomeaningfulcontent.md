@@ -1,20 +1,20 @@
-# Meaningless Content
+﻿# 意味のないコンテンツ
 
-Instances of content that has no meaning (e.g. words that appear to be gibberish) are logged under the `abuse` section, with the `type` attribute set to `no_meaninful_content`.
+意味のないコンテンツのインスタンス（例：意味不明な言葉）は、`abuse`セクションに記録され、`type`属性は`no_meaninful_content`に設定されます。
 
-This functionality is used to detect hacker-initiated flooding with meaningless content, or nonsensical sign-ups. 
+この機能は、ハッカーによる意味のないコンテンツの大量送信や、意味のない登録を検出するために使用されます。 
 
 {% admonition type="warning" %}
 
-If the `format` is set to `alias`, content is analyzed differently, and may look for portions that have meaning even if the entire piece of text appears meaningless.
+`format`が`alias`に設定されている場合、コンテンツは異なる方法で分析され、全体として意味のないテキストであっても、意味のある部分を検索する可能性があります。
 
-Likewise, characters often used for obfuscation (e.g. asterisk) may result in a different interpretation.
+同様に、難読化に頻繁に使用される文字（例：アスタリスク）は、異なる解釈を引き起こす可能性があります。
 
 {% /admonition %}
 
-## Example
+## 例
 
-Request:
+リクエスト：
 ```json
 {
   "language":"en",
@@ -26,7 +26,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 ```json
 {
 	"text": "asdkjasldkasdaasa",

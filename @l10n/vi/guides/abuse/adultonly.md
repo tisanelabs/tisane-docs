@@ -1,15 +1,15 @@
-# Adult-only Content
+﻿# Nội dung chỉ dành cho người lớn
 
-Adult-only content is content usually restricted in communities for children, but acceptable in adult communities. Instances of detected adult-only content are logged under the `abuse` section, with the `type` attribute set to `adult_only`. 
+Nội dung chỉ dành cho người lớn là những nội dung thường bị giới hạn trong các cộng đồng dành cho trẻ em, nhưng có thể chấp nhận được trong các cộng đồng người lớn. Các trường hợp phát hiện nội dung chỉ dành cho người lớn sẽ được ghi nhận trong phần `abuse` với thuộc tính `type` được đặt là `adult_only`. 
 
-That includes:
+Bao gồm:
 
-* erotic material or references to sex-related topics. Relevant tag: `sex`
-* references to consumption of drugs and alcohol. Relevant tag: `controlled_substance`. Tags associated with the drugs mentioned are also used. Read more: [Criminal Activity](./criminalactivity.md).
+* tài liệu khiêu dâm hoặc các đề cập đến chủ đề liên quan đến tình dục. Thẻ liên quan: `sex`
+* các đề cập đến việc sử dụng ma túy và rượu bia. Thẻ liên quan: `controlled_substance`. Các thẻ liên quan đến loại ma túy được đề cập cũng sẽ được sử dụng. Đọc thêm: [Hoạt động tội phạm](./criminalactivity.md).
 
-## Example
+## Ví dụ
 
-Request:
+Yêu cầu:
 ```json
 {
   "language":"en",
@@ -21,7 +21,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 ```json
 {
 	"text": "we drank so much beer last week",

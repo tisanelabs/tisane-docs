@@ -1,25 +1,25 @@
-# Mental Issues
+﻿# Vấn đề về tâm thần
 
-Detected utterances indicating mental issues, self-harm, suicidal thoughts, or plans to commit suicide are logged under the `abuse` section, with the `type` attribute set to `mental_issues`.
+Các phát ngôn cho thấy dấu hiệu vấn đề tâm thần, tự hại, ý nghĩ tự sát hoặc có kế hoạch tự sát khi bị phát hiện sẽ được ghi nhận trong mục `abuse`, với thuộc tính `type` được đặt là `mental_issues`.
 
-## Relevant Tags
+## Thẻ liên quan
 
-* `bodily_harm` - self-harm
-* `death` - thoughts about death or suicide
-* `threat` - threatening suicide
+* `bodily_harm` - tự gây hại cơ thể
+* `death` -  ý nghĩ về cái chết hoặc tự sát
+* `threat` - đe dọa tự sát
 
-## Severity Levels
+## Các mức độ nghiêm trọng
 
-The severity levels are as following:
+Các mức độ nghiêm trọng được phân loại như sau:
 
-* `low` - non-threatening utterances
-* `medium` - utterances indicative of depression or mental illness
-* `high` - severe depression, thoughts about death, or bodily harm
-* `extreme` - planning suicide
+* `low` (thấp) - phát ngôn không mang tính đe dọa
+* `medium` (trung bình) -  phát ngôn cho thấy dấu hiệu trầm cảm hoặc rối loạn tâm thần
+* `high` (cao) -  trầm cảm nặng, có ý nghĩ về cái chết hoặc làm hại bản thân
+* `extreme` (rất cao) - có kế hoạch tự sát
 
-## Example
+## Ví dụ
 
-Request:
+Yêu cầu:
 
 ```json
 {
@@ -31,7 +31,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 
 ```json
 {

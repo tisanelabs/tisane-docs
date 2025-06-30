@@ -1,25 +1,25 @@
-# Allegations
+﻿# 告発
 
-Allegation is claimed knowledge or accusation of a misconduct. The misconduct may not be a crime, but something potentially damaging to one's reputation. Instances of detected allegations are logged under the `abuse` section, with the `type` attribute set to `allegation`. 
+告発とは、不正行為に関する主張または非難を指します。その不適切な行為は犯罪に該当しないかもしれませんが、人物の評判を損なってしまう可能性があります。検出された告発のインスタンスは、`abuse`セクションに記録され、`type`属性は`allegation`に設定されます。 
 
-Allegation detection is used to:
+告発の検出は、以下の目的で使用されます。
 
-* prevent [review bombing](https://en.wikipedia.org/wiki/Review_bomb) on review sites and marketplaces
-* block mass troll attacks, especially on public figure accounts (must be combined with `personal_attack` detection)
-* prevent lawsuits over alleged libel posted in a community or an account
-* prevent reputational damage
+* レビューサイトやマーケットプレイスでの[レビュー爆撃](https://en.wikipedia.org/wiki/Review_bomb)の防止
+* 大規模な荒らし、特に著名人のアカウントに対する攻撃をブロック（`personal_attack`の検出機能と組み合わせて使用する必要があります）。
+* コミュニティやアカウントに投稿された名誉毀損の申し立てに基づく訴訟を防止
+* 評判を損なうことを防止
 
-Relevant tags: nearly all tags apply, as the scope of allegations is broad.
+関連タグ：ほぼすべてのタグが該当します。これは、告発の範囲が広範であるためです。
 
 {% admonition type="warning" %}
 
-Tisane makes no assumptions as for the authenticity or inauthenticity of the allegations made. Determining if the claim is true is out of our scope.
+Tisaneは、提起された告発の真偽について推測しません。申し立ての真偽を判断することは、Tisaneの業務範囲外です。
 
 {% /admonition %}
 
-## Example
+## 例
 
-Request:
+リクエスト：
 ```json
 {
   "language":"en",
@@ -32,7 +32,7 @@ Request:
 ```
 
 
-Response:
+レスポンス：
 ```json
 {
 	"text": "He is a pickpocket",
@@ -50,4 +50,4 @@ Response:
 }
 ```
 
-Also see: [Difference between Criminal Activity, Allegation, and Disturbing](./criminalallegationdisturbing.md)
+こちらも参考：[犯罪行為・告発・迷惑行為の違い](./criminalallegationdisturbing.md)

@@ -1,16 +1,16 @@
-# Spam
+﻿# Spam
 
-Instances of spam are logged under the `abuse` section, with the `type` attribute set to `spam`. 
+Các trường hợp spam được ghi nhận trong mục `abuse`, với thuộc tính `type` được đặt là `spam`. 
 
 {% admonition type="warning" %}
 
-Currently, our spam detection capabilities are limited. We mostly focus on spam in the reviews, profiles, and usernames.
+Hiện tại, khả năng phát hiện spam của chúng tôi còn hạn chế. Chúng tôi chủ yếu tập trung vào việc phát hiện spam trong phần đánh giá, hồ sơ cá nhân và tên người dùng.
 
 {% /admonition %}
 
-## Example
+## Ví dụ:
 
-Request:
+Yêu cầu:
 ```json
 {
   "language":"en",
@@ -23,7 +23,7 @@ Request:
 ```
 
 
-Response:
+Phản hồi:
 ```json
 {
 	"text": "Luxury watches are affordable in Antarctica!",

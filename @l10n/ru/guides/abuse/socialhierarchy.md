@@ -1,17 +1,17 @@
-﻿# Assertion of Hierarchy
+﻿# Утверждение иерархии
 
-Instances of forceful assertion of hierarchy in a community are logged under the `abuse` section, with the `type` attribute set to `social_hierarchy`.
+Случаи насильственного утверждения иерархии в сообществе регистрируются в разделе `abuse` с присвоением атрибуту `type` значения `social_hierarchy`.
 
-These instances include:
+К таким случаям относятся:
 
-* being a control freak
-* workspace bullying (e.g. so-called [power harassment](https://en.wikipedia.org/wiki/Power_harassment) in Japan and South Korea)
-* forcing a particular group to "know their place" (e.g. new members of a community)
+* помешанность на контроле
+* издевательства на рабочем месте (например, так называемое [ притеснение с помощью власти](https://en.wikipedia.org/wiki/Power_harassment) в Японии и Южной Корее)
+* принуждение определенной группы «знать свое место» (например, новых членов сообщества)
 
 
-## Example
+## Например:
 
-Request:
+Запрос:
 
 ```json
 {
@@ -24,7 +24,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 
 ```json
 {

@@ -1,16 +1,16 @@
-﻿# Spam
+﻿# Спам
 
-Instances of spam are logged under the `abuse` section, with the `type` attribute set to `spam`. 
+Случаи спама регистрируются в разделе `abuse` с присвоением атрибуту `type` значения `spam`. 
 
 {% admonition type="warning" %}
 
-Currently, our spam detection capabilities are limited. We mostly focus on spam in the reviews, profiles, and usernames.
+В настоящее время наши возможности обнаружения спама ограничены. Мы в основном фокусируемся на спаме в отзывах, профилях и именах пользователей.
 
 {% /admonition %}
 
-## Example
+## Например:
 
-Request:
+Запрос:
 ```json
 {
   "language":"en",
@@ -23,7 +23,7 @@ Request:
 ```
 
 
-Response:
+Ответ:
 ```json
 {
 	"text": "Luxury watches are affordable in Antarctica!",

@@ -1,69 +1,69 @@
-# Guides
-This section provides guidance on features, solution walkthrus, and other topics. 
+# Hướng dẫn
+Phần này cung cấp hướng dẫn về các tính năng, quy trình giải pháp và những chủ đề khác. 
 
-## Getting Started
-Kick off your journey with Tisane by learning how to quickly set up and start using Tisane:
+## Bắt đầu
+Bắt đầu hành trình của bạn với Tisane bằng cách tìm hiểu cách thiết lập và sử dụng nhanh Tisane:
 
-* [Get Started](../quickstart/quickstart.md)
+* [Bắt đầu](../quickstart/quickstart.md)
 
-## Supported Features
+## Các tính năng được hỗ trợ
 
-* [List of Supported Languages](./features/languages.md)
-* [Full List of Supported NLP Functions](./features/functionality.md)
-* [Feature: Entity Extraction](./features/entities.md)
-* [Feature: Topic Extraction](./features/topics.md)
-* [Feature: Sentiment Analysis](./features/sentiment.md)
-* [Feature: Built-in Translation](./features/translation.md)
-* [Does Tisane Support My Programming Language?](./features/programminglanguages.md)
-* [What does Tisane do when problematic content is detected?](./features/actupon.md)
-* [Algospeak and Adversarial Text Manipulations](./features/algospeak.md)
-* [Explainability and Transparency](./features/explainability.md)
+* [Danh sách các ngôn ngữ được hỗ trợ](./features/languages.md)
+* [Danh sách đầy đủ các chức năng NLP được hỗ trợ](./features/functionality.md)
+* [Tính năng: Trích xuất thực thể](./features/entities.md)
+* [Tính năng: Trích xuất chủ đề](./features/topics.md)
+* [Tính năng: Phân tích cảm xúc](./features/sentiment.md)
+* [Tính năng: Dịch tích hợp](./features/translation.md)
+* [Tisane có hỗ trợ ngôn ngữ lập trình của tôi không?](./features/programminglanguages.md)
+* [Tisane xử lý thế nào khi phát hiện nội dung có vấn đề?](./features/actupon.md)
+* [Ngôn ngữ lách thuật toán và thao túng văn bản đối kháng](./features/algospeak.md)
+* [Khả năng giải thích và tính minh bạch](./features/explainability.md)
 
-## Types of Problematic Content
+## Các loại nội dung có vấn đề
 
-This section covers the concepts relevant to detection of concept of interest to moderators or, in law enforcement applications, of investigators.
+Phần này trình bày các khái niệm liên quan đến việc phát hiện những nội dung mà người kiểm duyệt quan tâm hoặc, trong các ứng dụng thực thi pháp luật, là mối quan tâm của các nhà điều tra.
 
-* [Personal Attacks/Insults/Cyberbullying](./abuse/personalattack.md)
-* [Bigotry and Hate Speech](./abuse/hatespeechandbigotry.md)
-* [Attempts to Establish External Contact](./abuse/externalcontact.md)
-* [Sexual Advances](./abuse/sexualadvances.md)
-* [Adult-Only Content](./abuse/adultonly.md)
-* [Allegations](./abuse/allegation.md)
-* [Criminal Activity](./abuse/criminalactivity.md)
-  - [Difference between Criminal Activity, Allegation, and Disturbing](./abuse/criminalallegationdisturbing.md)
-* [Mental Issues and Suicidal Ideation](./abuse/mental.md)
-* [Profanities](./abuse/profanity.md)
-* [Data Leaks](./abuse/dataleak.md)
-* [Contentious Content](./abuse/contentious.md)
-* [Disturbing Content](./abuse/disturbing.md)
-* [Meaningless Content](./abuse/nomeaningfulcontent.md)
-* [Assertion of Social Hierarchy](./abuse/socialhierarchy.md)
-* [Spam](./abuse/spam.md)
-* [Tags](./abuse/tags.md)
-* [2-Factor Moderation](./abuse/whatis2fm.md)
+* [Tấn công cá nhân/ lăng mạ/bắt nạt trên mạng](./abuse/personalattack.md)
+* [Cố chấp và phát ngôn thù hận](./abuse/hatespeechandbigotry.md)
+* [Hành vi thiết lập liên lạc bên ngoài](./abuse/externalcontact.md)
+* [Gạ gẫm tình dục](./abuse/sexualadvances.md)
+* [Nội dung chỉ dành cho người lớn](./abuse/adultonly.md)
+* [Cáo buộc](./abuse/allegation.md)
+* [Hoạt động tội phạm](./abuse/criminalactivity.md)
+  - [Sự khác biệt giữa Hoạt động tội phạm, cáo buộc và gây rối](./abuse/criminalallegationdisturbing.md)
+* [Các vấn đề về tâm thần và ý định tự tử](./abuse/mental.md)
+* [Tục tĩu](./abuse/profanity.md)
+* [Rò rỉ dữ liệu](./abuse/dataleak.md)
+* [Nội dung gây tranh cãi](./abuse/contentious.md)
+* [Nội dung gây khó chịu](./abuse/disturbing.md)
+* [Nội dung vô nghĩa](./abuse/nomeaningfulcontent.md)
+* [Khẳng định về thứ bậc xã hội](./abuse/socialhierarchy.md)
+* [Làm phiền](./abuse/spam.md)
+* [Thẻ](./abuse/tags.md)
+* [Kiểm duyệt 2 lớp](./abuse/whatis2fm.md)
 
-## How-to Topics
-Guides to help you implement and fine-tune Tisane for various content moderation scenarios:
+## Chủ đề hướng dẫn
+Hướng dẫn giúp bạn triển khai và tinh chỉnh Tisane cho các tình huống kiểm duyệt nội dung khác nhau:
 
-* [Filtering By Keyword Blocklists](./how-tos/blocklists.md)
-* [Locating a Text Snippet Using Location Data](./how-tos/locateasnippet.md)
-* [Moderating Live Chat](./how-tos/liveusercontent.md)
-* [Moderating Usernames](./how-tos/aliases.md)
-* [Detecting Threats](./how-tos/threats.md)
-* [Detecting Problematic Content](./how-tos/detectabuse.md)
-* [Detecting Names of Countries](./how-tos/extractnamesofcountries.md)
-* [Processing Competitive Language In Game And Sports Chats](./how-tos/gamingchat.md) 
-* [Considering Previously Processed Messages](./how-tos/usingmemory.md)
+* [Lọc theo danh sách từ khóa bị chặn](./how-tos/blocklists.md)
+* [Định vị đoạn văn bản bằng dữ liệu vị trí](./how-tos/locateasnippet.md)
+* [Kiểm duyệt trò chuyện trực tiếp](./how-tos/liveusercontent.md)
+* [ Kiểm duyệt tên người dùng](./how-tos/aliases.md)
+* [Phát hiện mối đe dọa](./how-tos/threats.md)
+* [Phát hiện nội dung có vấn đề](./how-tos/detectabuse.md)
+* [Phát hiện tên các quốc gia](./how-tos/extractnamesofcountries.md)
+* [Xử lý ngôn từ mang tính cạnh tranh trong trò chuyện game và thể thao](./how-tos/gamingchat.md) 
+* [Xem xét các tin nhắn đã được xử lý trước đó](./how-tos/usingmemory.md)
 
-## Distribution and Deployment
+## Phân phối và triển khai
 
-* [What Happens When My Monthly Quota Is Exceeded?](./deployment/exceedquota.md)
-* [On-Premise Deployment](./deployment/onprem.md)
-* [Can Tisane Be Embedded In My Application Deployed On A Standalone Machine?](./deployment/embedded.md)
+* [Sẽ thế nào khi tôi vượt quá hạn mức hàng tháng?](./deployment/exceedquota.md)
+* [Triển khai tại chỗ](./deployment/onprem.md)
+* [Tôi có thể nhúng Tisane vào ứng dụng của tôi được triển khai trên máy độc lập không?](./deployment/embedded.md)
 
-## Design Philosophy
+## Triết lý thiết kế
 
-* [The Free Speech Debate](./features/freespeech.md)
-* [Why Deploy Automatic Moderation if it's not 100% accurate?](./features/why-deploy.md)
-* [Why Don't You Provide A Score On A Fixed Or Floating-Point Scale For Your Sentiment?](./features/score.md)
-* [Is There a Confidence Value?](./features/confidencevalue.md)
+* [Tranh luận về tự do ngôn luận](./features/freespeech.md)
+* [ Tại sao lại triển khai kiểm duyệt tự động nếu độ chính xác không đạt 100%?](./features/why-deploy.md)
+* [Tại sao bạn không cung cấp điểm số theo thang điểm cố định hoặc thang điểm thập phân cho cảm xúc?](./features/score.md)
+* [Có giá trị độ tin cậy không?](./features/confidencevalue.md)

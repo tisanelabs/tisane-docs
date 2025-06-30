@@ -1,27 +1,27 @@
-# Criminal Activity
+﻿# Hoạt động tội phạm
 
-Tisane logs instances of detected criminal activity under the `abuse` section, with the `type` attribute set to `criminal_activity`. 
+Tisane ghi lại các trường hợp hoạt động tội phạm được phát hiện trong phần `abuse`, với thuộc tính `type` được đặt thành `criminal_activity`. 
 
-## What We Detect
+## Chúng tôi phát hiện những gì
 
-We identify and flag text related to:
+Chúng tôi xác định và đánh dấu văn bản liên quan đến:
 
-- Planning and coordination of transportation, distribution, and manufacturing of illicit items such as narcotics, arms, explosives, and poached wildlife.
-- Human trafficking and the sale of human organs.
-- Inquiries and instructions on creating, manufacturing, distributing, or operating weapons (including chemical and biological weapons), narcotics, and explosives.
-- Threats of violence and criminal activity.
-- Searches for restricted items, For example: Firearms, ammunition, explosive precursors). To analyze search queries, set the `format` parameter to `search`.
+- Lập kế hoạch và điều phối vận chuyển, phân phối và sản xuất các mặt hàng bất hợp pháp như ma túy, vũ khí, thuốc nổ và động vật hoang dã bị săn trộm.
+- Buôn bán người và mua bán nội tạng người.
+- Các yêu cầu và hướng dẫn về việc chế tạo, sản xuất, phân phối hoặc vận hành vũ khí (bao gồm vũ khí hóa học và sinh học), ma túy và chất nổ.
+- Các mối đe dọa bạo lực và hoạt động tội phạm.
+- Hành vi tìm kiếm các mặt hàng bị hạn chế, ví dụ: Súng, đạn dược, chất nổ). Để phân tích truy vấn tìm kiếm, hãy đặt tham số `format` thành `search`.
 
 {% admonition type="warning" %}
 
-1. The criminal activity type does not capture conversations about crime committed by someone else or allegations. The purpose of the `criminal_activity` type is to capture either crime in progress or admission of criminal activity. To capture conversations about crime, use topic extraction. See: [Topic Extraction](../features/topics.md). To capture allegations about someone else committing crimes, see: [Allegations](./allegation.md)
-2. As the legislation varies from jurisdiction to jurisdiction, inspect `tags` to determine if the instance is to be ignored. For example, `cannabis` or `soft_drug` may be used to ignore the references to use of marijuana.
+1. Loại hoạt động tội phạm không bao gồm các cuộc trò chuyện về tội phạm do người khác thực hiện hoặc các cáo buộc. Mục đích của loại `criminal_activity` là phát hiện hành vi phạm tội đang diễn ra hoặc sự thừa nhận hành vi phạm tội. Để phát hiện các cuộc trò chuyện về tội phạm, hãy sử dụng trích xuất chủ đề. Xem phần: [Trích xuất chủ đề](../features/topics.md). Để phát hiện những cáo buộc về việc người khác phạm tội, xem phần: [Cáo buộc](./allegation.md)
+2. Vì luật pháp khác nhau tùy theo khu vực pháp lý, hãy kiểm tra `tags` để xác định xem có thể bỏ qua trường hợp đó hay không. Ví dụ: `cannabis` hoặc `soft_drug` có thể được sử dụng để bỏ qua các tham chiếu về việc sử dụng cần sa.
 
 {% /admonition %}
 
-### Example
+### Ví dụ
 
-Request:
+Yêu cầu:
 
 ```json
 {
@@ -34,7 +34,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 ```json
 {
 	"text": "we sell elephant tusks. Great prices and top notch quality!",
@@ -55,11 +55,11 @@ Response:
 }
 ```
 
-## Relevant Tags
+## Thẻ liên quan
 
-The `tags` array may contain the following tags.
+Mảng `tags` có thể chứa các thẻ sau.
 
-### Crimes
+### Tội phạm
 
 * `bodily_harm`
 * `bribery`
@@ -67,7 +67,7 @@ The `tags` array may contain the following tags.
 * `crime`
 * `death`
 * `doxing`
-* `escape` (correctional institutions)
+* `escape` (cơ sở cải tạo)
 * `extortion`
 * `hacking_services`
 * `human_trafficking`
@@ -81,9 +81,9 @@ The `tags` array may contain the following tags.
 * `terrorism`
 * `threat`
 * `violence`
-* `wildlife` (poaching)
+* `wildlife` (săn trộm)
 
-### Controlled Substances
+### Chất bị kiểm soát
 
 * `controlled_substance`
 * `soft_drug`
@@ -98,28 +98,28 @@ The `tags` array may contain the following tags.
 * `medication`
 * `opioid`
 
-### Other Restricted Items
+### Các mặt hàng bị hạn chế khác
 
 * `cold_weapons`
 * `explosives`
 * `firearms`
 * `weapon`
-* `contraband` (depends on the context)
+* `contraband` (tùy thuộc vào ngữ cảnh)
 
-### Miscellaneous
+### Khác
 
-* `admission` - admission in a crime
+* `admission` - thừa nhận phạm tội
 * `credentials`
 * `cryptocurrency`
 * `debt`
 * `payment`
 
-## Relevant Entity types
+## Các loại Thực thể có liên quan
 
 `item_of_interest` entity type detects items potentially of interest to the investigation: luxury items, drugs, medications, vehicles.
 
-## Offline and Law Enforcement Use
+## Sử dụng ngoại tuyến và phục vụ mục đích thực thi pháp luật
 
-Law enforcement applications often have to operate in air-gapped environments. To accommodate this need, [Tisane Embedded](../../sdks/index.md) is available. Tisane Embedded allows running Tisane as an in-process library. [On-prem installations](/guides/deployment/onprem) are are available as well. 
+Các ứng dụng thực thi pháp luật thường phải hoạt động trong môi trường cô lập. [Tisane Embedded](../../sdks/index.md) có thể đáp ứng nhu cầu này. Tisane Embedded cho phép chạy Tisane như một thư viện đang xử lý. Cũng có thể [Cài đặt tại chỗ](/guides/deployment/onprem). 
 
 

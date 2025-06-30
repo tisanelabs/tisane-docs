@@ -1,16 +1,16 @@
-# Disturbing Content
+﻿# 不安を引き起こす内容
 
-Detected graphic descriptions of violence or injuries are logged under the `abuse` section, with the `type` attribute set to `disturbing`.
+暴力や負傷の生々しい描写が検出された場合、`abuse`セクションに記録され、`type`属性は`disturbing`に設定されます。
 
 {% admonition type="warning" %}
 
-Disturbing content may or may not constitute criminal activity. See: [Difference between Criminal Activity, Allegation, and Disturbing](./criminalallegationdisturbing.md)
+不快なコンテンツが犯罪行為に該当するかどうかは状況によります。参考：[犯罪行為・告発・迷惑行為の違い](./criminalallegationdisturbing.md)
 
 {% /admonition %}
 
-## Example
+## 例
 
-Request:
+リクエスト：
 
 ```json
 {
@@ -23,7 +23,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 
 ```json
 {

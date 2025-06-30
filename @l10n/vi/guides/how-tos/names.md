@@ -1,87 +1,87 @@
-# Analyzing, Validating, and Comparing Names
+# Phân tích, Xác thực và So sánh tên
 
-## Parsing Full Names
+## Phân tách Họ tên đầy đủ
 
-Tisane can break down full names into key components:
+Tisane có thể phân tích họ tên đầy đủ thành các thành phần chính:
 
-| Attribute     | Description                         |
+| Thuộc tính     | Mô tả                         |
 | ------------- | ----------------------------------- |
-| `given_name`  | First name (e.g., *John*)           |
-| `middle_name` | Middle name (if applicable)         |
-| `surname`     | Last name (e.g., *Doe*)             |
-| `title`       | Honorifics (e.g., *Dr., Mr., Ms.*)  |
-| `suffix`      | Name suffix (e.g., *Jr., Sr., III*) |
-| `social_role` | Roles like *Haji* or *Dr.*          |
+| `given_name`  | Tên gọi (ví dụ *John*)           |
+| `middle_name` | Tên đệm (nếu có)         |
+| `surname`     | Họ (ví dụ *Doe*)             |
+| `title`       | Danh xưng (ví dụ: *Dr., Mr., Ms.*)  |
+| `suffix`      | Hậu tố tên (ví dụ *Jr., Sr., III*) |
+| `social_role` | Vai trò như *Haji* hoặc *Dr.*          |
 
-## How To Parse A Name
+## Cách phân tách tên
 
-To parse a full name, send a `POST /parse` request with:
+Để phân tách một tên đầy đủ, gửi yêu cầu `POST /parse` với:
 
 * `"entity": "person"`
 * `"words": true`
 
 
-The response will categorize the name components under the `role` attribute.
+Phản hồi sẽ phân loại các thành phần của tên theo thuộc tính `role`.
 
-Example of Name Parsing:
+Ví dụ về phân tích tên:
 ![tisaneAliKilicoglu.png](/images/tisaneAliKilicoglu.png)
 
 
-## Validating Real Names
+## Xác thực tên thật
 
-While Tisane cannot verify if a user’s provided name is real, it recognizes many names associated with:
+Mặc dù Tisane không thể xác minh liệu tên người dùng cung cấp có thật hay không, nhưng hệ thống có thể nhận biết nhiều tên liên quan đến:
 
-- Famous figures (`important_person`)
-- Fictional characters (`fictional_character`)
-- Spiritual beings (`spiritual_being`)
-- Names that don’t appear to be names (for example: User-13789026152908425434)
+- Nhân vật nổi tiếng (`important_person`)
+- Nhân vật hư cấu (`fictional_character`)
+- Thực thể tâm linh (`spiritual_being`)
+- Những tên không giống tên người (ví dụ: User-13789026152908425434)
 
-For a list of common fake names, refer to [this Quora post](https://qr.ae/pNKxWl).
+Có thể tham khảo danh sách các tên giả phổ biến tại bài viết trên [Quora](https://qr.ae/pNKxWl).
 
 
-The `subtype` attribute in the `entity` structure indicates the type of name detected, with a Wikidata ID if available.
+Thuộc tính `subtype` trong cấu trúc `entity` thể hiện loại tên được phát hiện, kèm theo ID Wikidata nếu có.
 
-Example of Fictional Character Name Parsing:
+Ví dụ về phân tích tên nhân vật hư cấu:
 
 ![tisaneFictionalCharacter.png](/images/tisaneFictionalCharacter.png)
 
 
 
-## Comparing Names
+## So sánh tên
 
-The `/compare/entities` method allows comparing two names (even across languages) and detecting differences.
+Phương thức `/compare/entities` cho phép so sánh hai tên (kể cả khác ngôn ngữ) và phát hiện các điểm khác biệt.
 
-### Example Comparisons
+### Ví dụ so sánh
 
-| Name 1           | Name 2                              | Result                                                 |
+| Tên 1           | Tên 2                              | Kết quả                                                 |
 | ---------------- | ----------------------------------- | ------------------------------------------------------ |
 | *William Smith*  | *Will Smith*                        | `{"result":"different","differences":["variation"]}`   |
 | *Musa Bin Osman* | *Haji Musa Bin Osman*               | `{"result":"different","differences":["social_role"]}` |
-| *William Smith*  | *Вилл Смит* (Will Smith in Russian) | `{"result":"different","differences":["variation"]}`   |
+| *William Smith*  | *Вилл Смит* (Will Smith trong tiếng Nga) | `{"result":"different","differences":["variation"]}`   |
 | *Kevin Tan*      | *TAN Kevin*                         | `{"result":"same"}`                                    |
 
-### **How To Compare Names**
+### **Cách so sánh tên**
 
-Send a request to the `/compare/entities` endpoint with the names to compare, and the response will return differences in attributes like:
+Gửi yêu cầu đến endpoint `/compare/entities` với hai tên cần so sánh. Phản hồi sẽ trả về sự khác biệt dựa trên các thuộc tính như:
 
-- `variation` (e.g., *William* vs *Will*)
-- `social_role` (e.g., *Haji Musa* vs *Musa*)
-- `case_difference` (e.g., *John Doe* vs *JOHN DOE*)
-- `same` (Identical names, even if the order differs)
+- `variation` (ví dụ *William* vs *Will*)
+- `social_role` (ví dụ *Haji Musa* vs *Musa*)
+- `case_difference` (ví dụ *John Doe* vs *JOHN DOE*)
+- `same` (Tên giống nhau, kể cả khi thứ tự khác nhau)
 
 
-## Vetting Nicknames and Aliases
+## Kiểm tra biệt danh và tên thay thế
 
-Usernames and aliases can be misleading, offensive, or abusive. Tisane detects inappropriate usernames (e.g., *Hitler*, *UserJohn_is_liar*).
+Tên người dùng và biệt danh có thể gây hiểu nhầm, xúc phạm hoặc mang tính lạm dụng. Tisane phát hiện các tên không phù hợp  (ví dụ *Hitler*, *UserJohn_is_liar*).
 
-### How To Vet A Nickname
+### Cách kiểm tra biệt danh
 
-Send a send a `POST /parse` request with:
+Gửi yêu cầu `POST /parse` với:
 
 - ` "format": "alias"`
 
-- The `subscope` setting ensures names are properly segmented, even if written in camel case, with underscores, or without spaces.
+- Cài đặt `subscope` giúp phân tách tên một cách chính xác, kể cả khi viết liền, dùng dấu gạch dưới hoặc không có dấu cách.
 
-Example of nickname vetting:
+Ví dụ về kiểm tra biệt danh:
 
 ![tisaneAliasCreep.png](/images/tisaneAliasCreep.png)

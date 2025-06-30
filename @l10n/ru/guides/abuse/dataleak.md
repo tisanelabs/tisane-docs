@@ -1,18 +1,18 @@
-# Data Leaks
+﻿# Утечки данных
 
-Instances of leaked data etc. are logged under the `abuse` section, with the `type` attribute set to `data_leak`.
+Случаи утечки данных и т.п. регистрируются в разделе `abuse` с присвоением атрибуту `type` значения `data_leak`.
 
-## Relevant Tags
+## Соответствующие теги
 
-The following tags are often associated with the `data_leak` type:
+Следующие теги часто связываются с типом `data_leak`:
 
-* `pii` - personally identified information (PII)
-* `credentials` - electronic credentials, such as usernames, accounts, passwords
-* `payment` - data related to payments
+* `pii` — персональная идентифицируемая информация (ПИИ).
+* `credentials` — электронные учетные данные, такие как имена пользователей, учетные записи, пароли.
+* `payment` — данные, связанные с платежами.
 
-## Example
+## Например:
 
-Request:
+Запрос:
 
 ```json
 {
@@ -25,7 +25,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 ```json
 {
 	"text": "List of paypal accounts and ready for use",

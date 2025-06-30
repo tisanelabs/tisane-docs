@@ -1,11 +1,11 @@
-# What Happens When My Monthly Quota Is Exceeded?
+﻿# 1ヶ月の割り当てを超えるとどうなりますか？
 
-When the monthly quota is exceeded, all the requests are declined. There will be no additional charges or unwanted billing surprises.
+1ヶ月の割り当てを超えると、すべてのリクエストが拒否されます。追加料金や請求が発生することはありません。
 
-When 75% and 90% of the monthly allowance is spent, notifications are sent. 
+毎月の割当量の75％および90％が使用された際に、通知が送信されます。 
 
-Upgrading the plan takes a couple of minutes, and if or when the monthly traffic goes down, it is possible to downgrade. 
+プランのアップグレードは数分で完了します。毎月のトラフィックが減少した場合は、ダウングレードすることも可能です。 
 
-See our plans at the [Subscription plans](https://tisane.ai/subscription-plans/) page.
+[サブスクリプション](https://tisane.ai/subscription-plans/)プランのページでプランをご覧ください。
 
-Note: The monthly quota is different from the rate limits.
+注：1ヶ月の割り当ては料金制限とは異なります。

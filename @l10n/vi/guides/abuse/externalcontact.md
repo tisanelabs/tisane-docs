@@ -1,40 +1,40 @@
-# Attempts to Establish External Contact
+﻿# Hành vi thiết lập liên lạc bên ngoài
 
-Attempts to establish external contact include:
+Các hành vi thiết lập liên lạc bên ngoài bao gồm:
 
-* exchange of contact details such as emails, phone numbers, usernames, payment instrument identifiers like crypto addresses or IBANs
-* solicitation of contact details (e.g. "What's your WhatsApp?")
-* arranging meetings or encouragement to communicate off the platform (e.g. _"Let's just talk off the website"_)
+* trao đổi thông tin liên lạc như email, số điện thoại, tên người dùng, thông tin phương thức thanh toán như địa chỉ ví tiền mã hóa hoặc số tài khoản IBAN
+* yêu cầu cung cấp thông tin liên lạc (ví dụ: “WhatsApp của bạn là gì?”)
+* sắp xếp cuộc gặp hoặc khuyến khích giao tiếp bên ngoài nền tảng (ví dụ: _“Mình ra ngoài trang web này nói chuyện riêng đi”_)
 
-Detected attempts to establish external contact are logged under the `abuse` section, with the `type` attribute set to `external_contact`.
+Các hành vi thiết lập liên lạc bên ngoài khi bị phát hiện sẽ được ghi nhận trong mục `abuse`, với thuộc tính `type` được đặt là `external_contact`.
 
-## Use Case Scenarios
+## Tình huống sử dụng
 
-These are some scenarios when detection of attempts to establish external contact is required:
+Dưới đây là một số tình huống cần phát hiện hành vi thiết lập liên lạc bên ngoài:
 
-* scammers on a platform, trying to lure people away
-* sex predators
-* otherwise legitimate users attempting to violate the terms of the platform. For example, vendors offering the users get off the platform and cut a better deal without paying a commission
-* covert advertising in reviews
-* sex workers advertising their services in their profiles on dating apps and other online communities
-* advertising in usernames, e.g. URLs, directing users to look for contact details in the profile, etc.
-* mapping connections between persons of interest in an investigation
+* kẻ lừa đảo trên nền tảng cố gắng dụ người dùng rời khỏi hệ thống
+* kẻ quấy rối tình dục
+* người dùng tuy hợp lệ nhưng cố tình vi phạm điều khoản sử dụng của nền tảng Ví dụ: người bán rủ người mua giao dịch riêng để có giá tốt hơn mà không phải trả hoa hồng
+* quảng cáo trá hình trong phần đánh giá
+* gái mại dâm quảng bá dịch vụ của họ trên hồ sơ cá nhân trong các ứng dụng hẹn hò và cộng đồng trực tuyến khác
+* quảng cáo trong tên người dùng, chẳng hạn như chèn đường dẫn URL, hoặc gợi ý người dùng tìm thông tin liên lạc trong hồ sơ cá nhân,…
+* truy vết và kết nối những người liên quan trong quá trình điều tra
 
 {% admonition type="info" %}
 
-For more aggressive scan and finding URLs in usernames and reviews, set `format` to `review` or `alias`.
+Để quét mạnh hơn và phát hiện đường dẫn URL trong tên người dùng và phần đánh giá, hãy đặt `format` là `review` hoặc `alias`.
 
 {% /admonition %}
 
-## Relevant Tags
+## Thẻ liên quan
 
-  * `payment` - anything payment-related
-  * `pii` - personally identifiable information (PII)
-  * `sex_work` - advertising of sexual services
+  * `payment` - mọi nội dung liên quan đến thanh toán
+  * `pii` - thông tin nhận dạng cá nhân (PII)
+  * `sex_work` - quảng bá dịch vụ tình dục
 
-## Example
+## Ví dụ
 
-Request:
+Yêu cầu:
 
 ```json
 {
@@ -46,7 +46,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 
 ```json
 {

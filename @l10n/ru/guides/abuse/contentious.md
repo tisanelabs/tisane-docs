@@ -1,28 +1,28 @@
-# Contentious Content
+﻿# Спорный контент
 
-Instances of contentious content that is likely to start an adversarial argument are logged under the `abuse` section, with the `type` attribute set to `contentious`. 
+Случаи спорного контента, который может спровоцировать конфликтную дискуссию, регистрируются в разделе `abuse` с присвоением атрибуту `type` значения `contentious`. 
 
-These instances include:
+К таким случаям относятся:
 
-* assertion that a geopolitical entity is a country or not a country or belongs to another geopolitical entity
-* assertion or generalization about a social group that is not a protected class
-* negativity toward a geopolitical entity
-* calls for a political action, especially if controversial
-* assertion that a universally notorious historical figure is/was positive
-* provocative aliases, designed to start fights
+* утверждение, что геополитическое образование является страной или не является страной или принадлежит другому геополитическому образованию;
+* утверждение или обобщение о социальной группе, которая не является защищенным классом;
+* негативные высказывания в отношении геополитического субъекта;
+* призывы к политическим действиям, особенно если они спорны;
+* утверждение, что общеизвестная историческая личность является или была положительной;
+* провокационные псевдонимы, призванные разжигать споры.
 
 {% admonition type="info" %}
 
-The concept may be contentious itself. It was created to address two opposite concerns:
+Концепция сама по себе может быть спорной. Она была создана для решения двух противоположных проблем:
 
-1. Cases when a community wants to allow political discussions, even if adversarial, but not hate speech (or bigotry).
-2. Cases when a community wants to ban any type of activism (e.g. a lifestyle community related to knitting, travel, etc.).
+1. Случаи, когда сообщество хочет разрешить политические дискуссии, даже если они враждебные, но не допустить разжигания ненависти (или проявления нетерпимости).
+2. Случаи, когда сообщество хочет запретить какой-либо вид активизма (например, сообщество, посвященное образу жизни, связанному с вязанием, путешествиями и т. д.).
 
 {% /admonition %}
 
-## Example
+## Например:
 
-Request:
+Запрос:
 ```json
 {
   "language":"en",
@@ -35,7 +35,7 @@ Request:
 ```
 
 
-Response:
+Ответ:
 ```json
 {
 	"text": "Voldermort is a loser",

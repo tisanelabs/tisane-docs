@@ -1,11 +1,11 @@
-# Detecting Countries
+# Phát hiện quốc gia
 
-Tisane can extract country names, but we do not assign a special type exclusively for them. To avoid arguments over legitimacy of this or that geopolical entity, countries contain two elements in their `type` array:
+Tisane có thể trích xuất tên các quốc gia, nhưng chúng tôi không gán loại đặc biệt riêng cho các tên đó. Để tránh tranh cãi về tính hợp pháp của các thực thể chính trị khác nhau, mỗi quốc gia sẽ bao gồm hai thành phần trong mảng `type`:
 
 * `organization`
 * `place`
 
-This approach:
+Cách tiếp cận này:
 
-* helps avoid disputes over sovereignty or status
-* does not require making a special exception when a country is to be treated as an organization (e.g. for decision making) or as a place 
+* giúp tránh các tranh cãi liên quan đến chủ quyền hoặc vị thế
+* không cần tạo ngoại lệ đặc biệt khi một quốc gia được xem như một tổ chức (ví dụ: trong việc ra quyết định) hoặc như một địa điểm 

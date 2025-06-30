@@ -1,38 +1,38 @@
-# Sexual Advances
+﻿# Gạ gẫm tình dục
 
-Sexual advances are defined as attempts to gain some sort of sexual favor or gratification. These attempts can be welcome or unwelcome; Tisane does not aim to determine that. 
+Gạ gẫm tình dục được định nghĩa là những nỗ lực nhằm đạt được một dạng ân huệ hoặc khoái cảm tình dục nào đó. Những hành vi này có thể được chấp nhận hoặc không; Tisane không có mục đích phân định điều đó. 
 
-Sexual advances are recorded as instances of abuse under the type `sexual_advances` in the response. Like other types of abuse, each detected instance is assigned a severity level, with more explicit advances receiving a higher severity rating.
+Các hành vi gạ gẫm tình dục được ghi nhận là các trường hợp lạm dụng với loại là `sexual_advances` trong phần phản hồi. Như các hình thức lạm dụng khác, mỗi trường hợp phát hiện sẽ được gán mức nghiêm trọng; các hành vi gợi dục rõ ràng hơn sẽ bị đánh giá mức nghiêm trọng cao hơn.
 
-## Relevant tags
+## Thẻ liên quan
 
 * `endearment`
 * `pedophilia`
-* `relationship_status` (e.g. questions whether the other person is married or single)
+* `relationship_status` (ví dụ: hỏi người kia đã kết hôn hay chưa)
 * `sex`
-* `sex_work` (helps detecting references to sex workers)
+* `sex_work` (giúp phát hiện các đề cập đến người hành nghề mại dâm)
 
-## Sexual Advances vs Adult Only Content
+## Gạ gẫm tình dục vs Nội dung chỉ dành cho người lớn
 
-Note that not all conversations on sexual topics constitute sexual advances. Only actual attempts to gain sexual favors or gratification are.
+Lưu ý rằng không phải mọi cuộc trò chuyện liên quan đến chủ đề tình dục đều là gạ gẫm tình dục. Chỉ những nỗ lực thực sự nhằm đạt được ân huệ hay khoái cảm tình dục mới được tính là gạ gẫm.
 
-While there is a significant overlap between `sexual_advances` and `adult_only`, these two types are not the same. Mentioning body parts related to sexual activities without context is not qualified as sexual advances, for example.
+Mặc dù có sự chồng chéo đáng kể giữa hai loại `sexual_advances` và `adult_only`, nhưng chúng không hoàn toàn giống nhau. Ví dụ, việc đề cập đến các bộ phận cơ thể liên quan đến tình dục mà không có ngữ cảnh rõ ràng thì không được xem là gạ gẫm tình dục.
 
-To track all sexual content, watch for:
+Để theo dõi tất cả nội dung tình dục, hãy chú ý:
 
-* instances with the `sexual_advances` type
-* instances with the `adult_only` type and `sex` as one of the tags.
+* các trường hợp có loại là `sexual_advances`
+* các trường hợp có loại là `adult_only` và có thẻ `sex`.
 
-See: [Adult Only Content](./adultonly.md)
+Xem phần: [Nội dung chỉ dành cho người lớn](./adultonly.md)
 
-## Key Considerations
+## Lưu ý quan trọng
 
-- The API does not enforce rules; it only detects and categorizes content.
-- Community moderators and administrators determine whether flagged content violates platform guidelines. For example, sexual advances do not violate terms and conditions in dating apps.
+- API không đưa ra quyết định thực thi; nó chỉ phát hiện và phân loại nội dung.
+- Việc nội dung bị gắn cờ có vi phạm quy định cộng đồng hay không sẽ do người điều hành hoặc quản trị viên nền tảng quyết định. Ví dụ, hành vi gạ gẫm tình dục không vi phạm điều khoản sử dụng trong các ứng dụng hẹn hò.
 
-## Example
+## Ví dụ:
 
-Request:
+Yêu cầu:
 ```json
 {
   "language":"en",
@@ -44,7 +44,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 ```json
 {
 	"text": "do u hv a bf",

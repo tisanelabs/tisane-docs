@@ -1,12 +1,12 @@
-# Moderating Live Chat
+# Kiểm duyệt trò chuyện trực tiếp
 
-Tisane is widely used to moderate live communications between users on group instant messaging platforms. Usually, in live chats Tisane runs in fully automatic mode. 
+Tisane được sử dụng rộng rãi để kiểm duyệt các cuộc trò chuyện trực tiếp giữa người dùng trên các nền tảng nhắn tin nhóm. Thông thường, trong các cuộc trò chuyện trực tiếp, Tisane hoạt động ở chế độ hoàn toàn tự động. 
 
-If false positives is a sensitive issue, then an appeal procedure and human review (on request) can be established.
+Nếu việc phát hiện sai là một vấn đề nhạy cảm, thì có thể thiết lập quy trình khiếu nại và xem xét thủ công (theo yêu cầu).
 
-## Standard Integration Architecture
+## Kiến trúc tích hợp tiêu chuẩn
 
-As shown on the diagram below: a simple integration architecture scans every message and blacklists or sends the message to a special channel if it is deemed problematic and the policies do not allow the type of `abuse` that was detected.
+Như thể hiện trong sơ đồ bên dưới: một kiến trúc tích hợp đơn giản quét mọi tin nhắn và đưa vào danh sách đen hoặc chuyển tin nhắn đó đến một kênh đặc biệt nếu bị coi là có vấn đề và chính sách không cho phép loại hành vi `abuse` đã được phát hiện.
 
 ```mermaid
 flowchart TD
@@ -25,20 +25,20 @@ flowchart TD
 ```
 
 
-1. The client application sends posts to Tisane for scanning.
-2. Tisane flags posts based on severity level and abuse type.
-3. The client application then must check if the types of entries logged in the `abuse` section are not allowed by the community policies.
-4. If there are restricted types, then the post is blacklisted. (Presumably, the post is sent to a special channel for moderators. For maintenance reasons, it is not recommended to discard messages without a trace.)
-5. If there are no restricted types or there is no `abuse` section in Tisane's response, the post is published.
+1. Ứng dụng phía khách gửi các bài đăng đến Tisane để quét.
+2. Tisane gắn cờ bài đăng dựa trên mức độ nghiêm trọng và loại hành vi lạm dụng.
+3. Sau đó, ứng dụng khách cần kiểm tra xem các loại hành vi được ghi nhận trong phần `abuse` có bị cấm theo chính sách cộng đồng hay không.
+4. Nếu có các loại bị cấm, bài đăng sẽ bị đưa vào danh sách đen. (Thông thường, bài đăng sẽ được chuyển đến một kênh riêng cho quản trị viên. Vì lý do bảo trì, không nên xóa hoàn toàn tin nhắn mà không để lại dấu vết.)
+5. Nếu không có loại bị cấm, hoặc phần phản hồi của Tisane không có phần `abuse`, thì bài đăng sẽ được công bố.
 
-## Open-Source Integrations
+## Tích hợp mã nguồn mở
 
-Our partner PubNub built a content moderation demo seamlessly integrated with Tisane and published its source code in GitHub. The implementation allows the users dynamically set community moderation policies. 
+Đối tác PubNub của chúng tôi đã xây dựng bản demo kiểm duyệt nội dung tích hợp mượt mà với Tisane và công khai mã nguồn trên GitHub. Triển khai này cho phép người dùng thiết lập chính sách kiểm duyệt cộng đồng một cách linh hoạt. 
 
-- [PubNub Moderation Dashboard for Chat](https://www.pubnub.com/demos/moderation-dashboard/)
-- [pubnub/moderation-dashboard on GitHub](https://github.com/pubnub/moderation-dashboard)
+- [Bảng điều khiển kiểm duyệt cho trò chuyện của PubNub](https://www.pubnub.com/demos/moderation-dashboard/)
+- [pubnub/moderation-dashboard trên GitHub](https://github.com/pubnub/moderation-dashboard)
 
-## Integrations with Popular platforms
+## Tích hợp với các nền tảng phổ biến
 
-See: [Integrations - Tisane Labs](https://tisane.ai/integrations)
+Xem phần: [Tích hợp - Tisane Labs](https://tisane.ai/integrations)
 

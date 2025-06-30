@@ -1,89 +1,89 @@
-# Filtering By Keyword Blocklists
+# キーワードブロックリストによるフィルタリング
 
-While most users use Tisane for context-aware moderation, some users require simple keyword filtering for this or another reason. 
+ほとんどのユーザーはTisaneを使用してコンテキストを考慮したモデレーションを行いますが、中には別の理由から単純なキーワードフィルタリングが必要になる場合もあります。 
 
-Tisane can be used to monitor lists of words, with options helping to avoid usual pitfalls of wordlist monitoring.
+Tisaneは、単語リストモニタリング時にありがちな落とし穴を避けるためのオプションを備えており、単語リストのモニタリングに使用することができます。
 
-## Including Word Breakdown in the Response
+## レスポンスに単語の詳細を含める
 
-By default, Tisane outputs only the `abuse`, `sentiment`, and `entities_summary` sections in its response. However, Tisane can provide a breakdown of words making up every sentence.
+デフォルトでは、Tisaneは `abuse`、`sentiment`、`entities_summary`セクションのみをレスポンスに出力します。しかし、Tisaneはすべての文章を構成する単語の内訳を提供することもできます。
 
-To output the words, add `"words":true` to the `settings` parameter.
+単語を出力するには、`settings`パラメータに`"words":true`を追加します。
 
-All words are tokenized (divided into chunks); the tokenization algorithm in use depends on the language. It is transparent to the user, whether the language uses spaces or not, has compounds (such as in German or Dutch), or has words that have spaces in between (for example: *kung fu* in English or *EE. UU.* in Spanish). 
+すべての単語はトークン化（チャンクに分割）されます。トークン化のアルゴリズムは言語によって異なります。その言語がスペースを使うか使わないか、複合語があるか（例：ドイツ語やオランダ語）、単語の間にスペースを取るか（例：英語の*kung fu*、またはスペイン語の*EE.UU.*）どうかは、ユーザーに対して透過的です。 
 
-The result is a structured array named `words`. It is located inside the `sentence_list` structure in the response. 
+結果は、`words`という名前の構造化された配列になります。これはレスポンス内の`sentence_list`構造内にあります。 
 
-Every word element contains:
+すべての単語要素には以下のものが含まれます。
 
-- The actual string (`text`)
-- The `offset` where it starts
-- A `stopword` flag for stop words
-- Some internal Tisane IDs (see Option 2 below)
-- Associated features such as grammar or style
+- 実際の文字列（`text`）
+- スタート位置である`offset`
+- ストップワード用の`stopword`フラグ
+- Tisane内部IDの一部（下記オプション2を参照）
+- 文法や文体などの関連する特徴
 
-## Implementing Keyword Filtering
+## キーワードフィルタリングの実装
 
-There are two ways to implement keyword filtering with Tisane:
+Tisaneでキーワードフィルタリングを行うには2つの方法があります。
 
-* Option 1: Simple (Not Recommended)
-* Option 2: More Powerful
+* オプション1：シンプル（非推奨）
+* オプション2：強力
 
-Both approaches avoid false positive issues, known as a “[clbuttic problem](https://en.wikipedia.org/wiki/Scunthorpe_problem)”.
+どちらのアプローチも、「[スカンソープ問題](https://en.wikipedia.org/wiki/Scunthorpe_problem)」として知られる偽陽性の問題を防ぐことができます。
 
-## Option 1: Simple (Not Recommended)
+## オプション1：シンプル（非推奨）
 
-The simple and the obvious solution is:
+シンプルかつ明確なソリューションは以下の通りです。
 
-1. Traverse the `words` array.
-2. For every element, check if the `text` attribute contains one of the prohibited words (or expressions, because the tokenization is logical, and *kung fu* or *power plant* is one word).
+1. `words`の配列を走査する。
+2. すべての要素について、`text`属性に禁止語（または表現。トークン化はロジカルであり、*kung fu*や *power plant*は1つの単語であるため）が含まれているかどうかを確認する。
 
-### Limitations
+### 制限
 
-The simplicity comes with drawbacks:
+シンプルさに伴う欠点：
 
-- What happens if the word is inflected? Some people will say “we can use the stem”, but it’s not always possible to reduce it to a stem. 
-- How do we capture the word _bought_ in English based on the lemma _buy_? If you assume _b_ to be its stem, should you assume every word starting with _b_ is an inflected form of _buy_? 
-- More morphologically rich languages (French, German, Arabic, Russian, Hindi, etc.) have a lot more variety and numerous inflections.
-- What happens if the word is spelled slightly differently, e.g. *U.S.A.* instead of *USA* or *email* instead of *e-mail*?
-- What happens if the word is obfuscated or, in information security speak, employs “adversarial text manipulations”?
-- What if we want to screen any mention of *Alaska* (the state) but allow *Alaska Air* and *baked Alaska*? (For a recent real-life example, an article about [_Enola Gay_](https://en.wikipedia.org/wiki/Enola_Gay) was removed in the [2025 Pentagon cleanup](https://www.newsweek.com/military-remove-enola-gay-photos-dei-rules-2041029) because keyword matching flagged the word "gay".)
+- 単語が語形変化するとどうなるでしょうか？「語幹を使えばいい」と言う人もいますが、必ずしも語幹に還元できるとは限りません。 
+- 英語で_bought_という単語を_buy_というレンマをもとにどう捉えるのでしょうか？_b_を語幹と仮定した場合、_b_で始まる単語はすべて_buy_の活用形と仮定するのでしょうか？ 
+- 形態論的に豊かな言語（フランス語、ドイツ語、アラビア語、ロシア語、ヒンディー語など）には、より多くの種類があり、多くの語形変化があります。
+- 例えば、*USA*の代わりに*U.S.A.*、*e-mail*の代わりに*email*など、単語のスペルが微妙に違う場合はどうなるでしょうか？
+- その言葉が難読化されていたり、情報セキュリティー用語で言うところの「敵対的なテキスト操作」が施されていたらどうなるでしょうか？
+- *Alaska*（州）に関する言及を一切排除したいが、*Alaska Air*や*baked Alaska*は認めるとしたらどうでしょうか？（最近の実例では、キーワード照合で「ゲイ」という単語にフラグが立ったため、[2025年のペンタゴン・クリーンアップ](https://www.newsweek.com/military-remove-enola-gay-photos-dei-rules-2041029)で、[_エノラ・ゲイ_](https://en.wikipedia.org/wiki/Enola_Gay)に関する記事が削除されました。）
 
-## Option 2: More Powerful
+## オプション2：強力
 
-Option 2 relies on Tisane’s internal identifiers. This route allows solving all the shortcomings listed above, taking advantage of Tisane's algospeak and deciphering and morphological analysis capabilites.
+オプション2は、Tisaneの内部識別子に依存します。このルートは、Tisaneのアルゴスピークと解読能力、形態素解析能力を活用することで、上記の欠点をすべて解決することができます。
 
-The internal identifiers in the word entries are `lexeme` and `family`. 
+単語エントリーの内部識別子は `lexeme`と`family`です。 
 
-### About lexeme ID
+### 語彙素IDについて
 
-A lexeme ID in Tisane is associated with a word and all its possible inflections. 
+Tisaneの語彙素IDは、単語とその可能なすべての語形変化に関連付けられています。 
 
-If the word is obfuscated (e.g. “br*k” instead of “break”) or misspelled, and Tisane manages to recognize the original word, then the lexeme ID of the original word is provided.
+単語が難読化されていたり（たとえば、「break」ではなく「br*k」）、スペルミスがあった場合でも、Tisaneが元の単語を認識できた場合は、元の単語の語彙素IDが提供されます。
 
-### About family ID
+### ファミリーIDについて
 
-Family ID is another option, if we want to filter according to the word-sense. 
+ファミリーIDは、語義に従ってフィルターをかけたい場合の別のオプションです。 
 
-For example: A device called “elevator” in the US is called “lift” in the UK.  It’s the same real-world entity, just different terms. They both have the same family ID. However, “lift” in the sense of aerodynamic lift, has a different family ID. 
+例：米国で「elevator」（エレベータ）と呼ばれる装置は、英国では「lift」と呼ばれます。  用語が違うだけで、現実世界では同じ存在となります。つまり、2つとも同じファミリーIDを持っていることになります。しかし、Aerodynamic lift（空力的揚力）という意味での 「lift」は、別のファミリーIDです。 
 
-An added bonus here is that the family IDs are the same across languages. That is, you can create a “list of concepts” to capture, regardless of the language or the dialect. 
+さらに、ファミリーIDは言語が違っても同じです。つまり、言語や方言に関係なく、捉えるべき「概念のリスト」を作ることができます。 
 
-Power users can even filter by categories. For example: Any kind of plane, any kind of car, any kind of bird while ignoring “clay pigeon” but capturing “pigeon”, etc.
+パワーユーザーであれば、カテゴリー別にフィルタリングすることもできます。例：どんな飛行機でも、どんな車でも、どんな鳥でも「clay pigeon」（クレーピジョン）は無視しますが、「ハト」（pigeon）は取得します。
 
-### Why We Recommend Using lexeme ID
+### 語彙素IDの使用を勧める理由
 
-But, while Tisane is generally word-sense oriented, we came to realize that the difference between word-senses is not always obvious to the users. Also, the keyword filtering usually intentionally ignores the context. This is why we recommend using lexeme ID.
+Tisaneは一般的に語感を重視していますが、語感の違いはユーザーにとって必ずしも明確ではないことがわかりました。また、キーワードフィルタリングは通常、意図的にコンテキストを無視します。そのため、当社は語彙素IDを使用することをお勧めします。
 
-For every word or phrase in your list:
+リスト内のすべての単語またはフレーズについて：
 
-1. Look up the lexeme ID, either by running a sample sentence and getting the lexeme ID from there, or by using our Language Model Direct Access API.
-2. Traverse the `words` array.
-3. For every word, compare the lexeme ID with the list of your lexeme IDs.
+1. 語彙素IDを調べるには、サンプル文章を実行してそこから語彙IDを取得するか、言語モデル直接アクセスAPIを使用します。
+2. `words`の配列を走査する。
+3. すべての単語について、語彙素IDをユーザーの語彙素IDのリストと比較します。
 
-Example:
+例：
 
-Request (`sentiment`, `topics`, and `entities` turned off to simplify the output):
+リクエスト（出力を簡略化するため、`sentiment`、`topics`、`entities`はオフ）：
 
 ```json
 {
@@ -100,7 +100,7 @@ Request (`sentiment`, `topics`, and `entities` turned off to simplify the output
 }
 ```
 
-Response:
+レスポンス：
 ```json
 {
 	"text": "d/l star t*k for free",
@@ -149,12 +149,12 @@ Response:
 }
 ```
 
-In the response: 
+レスポンス内： 
 
-1. The obfuscated word _Star Trek_ is:
+1. _Star Trek_という難解な言葉は、
 
- * chunked as one unit
- * assigned lexeme ID 317071
- * assigned family ID 152100
+ * 1つのユニットとしてまとめられる
+ * 割り当てられた語彙素ID 317071
+ * 割り当てられたファミリーID 152100
 
-2. The *corrected_text* attribute contains de-obfuscated version of the sentence: _d/l star trek for free_.
+2. *corrected_text*属性は、_d/l star trek for free_という文の難読化解除バージョンを含みます。

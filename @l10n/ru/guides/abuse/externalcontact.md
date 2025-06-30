@@ -1,40 +1,40 @@
-# Attempts to Establish External Contact
+﻿# Попытки установить внешний контакт
 
-Attempts to establish external contact include:
+Попытки установить внешний контакт включают:
 
-* exchange of contact details such as emails, phone numbers, usernames, payment instrument identifiers like crypto addresses or IBANs
-* solicitation of contact details (e.g. "What's your WhatsApp?")
-* arranging meetings or encouragement to communicate off the platform (e.g. _"Let's just talk off the website"_)
+* обмен контактными данными, такими как адреса электронной почты, номера телефонов, имена пользователей, идентификаторы платежных инструментов, такие как криптоадреса или IBAN;
+* запрос контактных данных (например, «Какой у вас WhatsApp?»);
+* организация встреч или поощрение общения вне платформы (например,_Let's just talk off the website_ («Давайте поговорим не только на сайте»)).
 
-Detected attempts to establish external contact are logged under the `abuse` section, with the `type` attribute set to `external_contact`.
+Обнаруженные попытки установить внешний контакт регистрируются в разделе `abuse` с присвоением атрибуту `type` значения `external_contact`.
 
-## Use Case Scenarios
+## Сценарии использования
 
-These are some scenarios when detection of attempts to establish external contact is required:
+Вот некоторые сценарии, когда требуется обнаружение попыток установления внешнего контакта:
 
-* scammers on a platform, trying to lure people away
-* sex predators
-* otherwise legitimate users attempting to violate the terms of the platform. For example, vendors offering the users get off the platform and cut a better deal without paying a commission
-* covert advertising in reviews
-* sex workers advertising their services in their profiles on dating apps and other online communities
-* advertising in usernames, e.g. URLs, directing users to look for contact details in the profile, etc.
-* mapping connections between persons of interest in an investigation
+* мошенники на платформе, пытающиеся обмануть пользователей;
+* сексуальные маньяки;
+* пользователи, которые обычно соблюдают правила, но в конкретном случае пытаются нарушить условия платформы (например, продавцы, предлагающие пользователям уйти с платформы и заключить более выгодную сделку, чтобы избежать уплаты комиссии);
+* скрытая реклама в отзывах;
+* работники секс-индустрии, рекламирующие свои услуги в своих профилях в приложениях для знакомств и других онлайн-сообществах;
+* реклама в именах пользователей, например, URL-адреса, направление пользователей на поиск контактных данных в профиле и т. д.;
+* прослеживание связей между лицами, представляющими интерес в ходе расследования
 
 {% admonition type="info" %}
 
-For more aggressive scan and finding URLs in usernames and reviews, set `format` to `review` or `alias`.
+Для более агрессивного сканирования и поиска URL-адресов в именах пользователей и отзывах задайте для атрибута `format` значение `review` или `alias`.
 
 {% /admonition %}
 
-## Relevant Tags
+## Соответствующие теги
 
-  * `payment` - anything payment-related
-  * `pii` - personally identifiable information (PII)
-  * `sex_work` - advertising of sexual services
+  * `payment` — все, что связано с платежами
+  * `pii` — персональная идентифицируемая информация (ПИИ);
+  * `sex_work` — реклама сексуальных услуг.
 
-## Example
+## Например:
 
-Request:
+Запрос:
 
 ```json
 {
@@ -46,7 +46,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 
 ```json
 {

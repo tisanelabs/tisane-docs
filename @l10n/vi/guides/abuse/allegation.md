@@ -1,25 +1,25 @@
-# Allegations
+﻿# Cáo buộc
 
-Allegation is claimed knowledge or accusation of a misconduct. The misconduct may not be a crime, but something potentially damaging to one's reputation. Instances of detected allegations are logged under the `abuse` section, with the `type` attribute set to `allegation`. 
+Cáo buộc là việc tuyên bố hoặc tố cáo một hành vi sai trái nào đó. Hành vi sai trái này có thể không phải là tội phạm, nhưng vẫn có khả năng gây tổn hại đến danh tiếng của một người. Các trường hợp phát hiện cáo buộc được ghi nhận trong mục `abuse`, với thuộc tính `type` được đặt là `allegation`. 
 
-Allegation detection is used to:
+Phát hiện cáo buộc được sử dụng để:
 
-* prevent [review bombing](https://en.wikipedia.org/wiki/Review_bomb) on review sites and marketplaces
-* block mass troll attacks, especially on public figure accounts (must be combined with `personal_attack` detection)
-* prevent lawsuits over alleged libel posted in a community or an account
-* prevent reputational damage
+* ngăn chặn tình trạng [ném đá đồng loạt](https://en.wikipedia.org/wiki/Review_bomb) trên các trang đánh giá và sàn giao dịch
+* chặn các cuộc tấn công troll hàng loạt, đặc biệt là nhắm vào tài khoản của người nổi tiếng (cần kết hợp với phát hiện `personal_attack`)
+* ngăn chặn các vụ kiện tụng liên quan đến nội dung phỉ báng bị cáo buộc được đăng trên cộng đồng hoặc tài khoản
+* ngăn ngừa tổn hại danh tiếng
 
-Relevant tags: nearly all tags apply, as the scope of allegations is broad.
+Thẻ liên quan: hầu hết tất cả các thẻ đều áp dụng vì phạm vi của cáo buộc rất rộng.
 
 {% admonition type="warning" %}
 
-Tisane makes no assumptions as for the authenticity or inauthenticity of the allegations made. Determining if the claim is true is out of our scope.
+Tisane không đưa ra giả định nào về tính xác thực hay không xác thực của các cáo buộc được nêu ra. Việc xác định cáo buộc đó có đúng sự thật hay không nằm ngoài phạm vi xử lý của chúng tôi.
 
 {% /admonition %}
 
-## Example
+## Ví dụ
 
-Request:
+Yêu cầu:
 ```json
 {
   "language":"en",
@@ -32,7 +32,7 @@ Request:
 ```
 
 
-Response:
+Phản hồi:
 ```json
 {
 	"text": "He is a pickpocket",
@@ -50,4 +50,4 @@ Response:
 }
 ```
 
-Also see: [Difference between Criminal Activity, Allegation, and Disturbing](./criminalallegationdisturbing.md)
+Xem thêm phần: [Sự khác biệt giữa Hoạt động tội phạm, cáo buộc và gây rối](./criminalallegationdisturbing.md)

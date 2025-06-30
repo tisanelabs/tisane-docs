@@ -1,8 +1,8 @@
-﻿# Tags
+﻿# Теги
 
-In addition to the abuse types, more detail on the context is provided as a `tags` string array. It may be a subtype of the identity being targeted, or a type of the illicit item being discussed, etc.
+В дополнение к типам злоупотреблений, более подробная информация о контексте предоставляется в виде массива строк `tags`. Это может быть подтип личности, являющейся целью, или тип обсуждаемого незаконного предмета и т. д.
 
-The values of the tags usually correlate with the type of problematic content detected, but not necessarily. The tags are obtained by traversing the matching main clause, and collecting the `abuse/tags` values associated with the lexemes (or inner phrases) involved. For example, in an utterance like: "kill all immigrants", two types of `abuse` are detected: `criminal_activity` and `bigotry`. They both have the following tags: `call_for_violence`, `death`, and `xenophobia`.
+Значения тегов обычно коррелируют с типом обнаруженного проблемного контента, но необязательно. Теги получаются путем обхода соответствующего главного предложения и сбора значений `abuse/tags`, связанных с используемыми лексемами (или внутренними фразами). Например, в таком высказывании: «убить всех иммигрантов», обнаруживаются два типа `abuse`: ` criminal_activity` и `bigotry`. Они оба имеют следующие теги: `call_for_violence`, `death` и `xenophobia`.
 
 ```json
 {
@@ -40,13 +40,13 @@ The values of the tags usually correlate with the type of problematic content de
 }
 ```
 
-That also means that even if some types are ignored purportedly, the tags can still be used.
+Это также означает, что даже если некоторые типы якобы игнорируются, теги все равно можно использовать.
 
-The sections dedicated to the abuse types list most relevant tags. 
+В разделах, посвященных типам злоупотреблений, перечислены наиболее релевантные теги. 
 
-## Complete List of Tags
+## Полный список тегов
 
-See the full listing of the tags below.
+Полный список тегов смотрите ниже.
 
 * `ableism`
 * `admission`

@@ -1,38 +1,38 @@
-﻿# Sexual Advances
+﻿# Сексуальные домогательства
 
-Sexual advances are defined as attempts to gain some sort of sexual favor or gratification. These attempts can be welcome or unwelcome; Tisane does not aim to determine that. 
+Сексуальные домогательства определяются как попытки получить какую-либо сексуальную благосклонность или удовлетворение. Эти попытки могут быть желательными или нежелательными; Tisane не ставит своей целью это определить. 
 
-Sexual advances are recorded as instances of abuse under the type `sexual_advances` in the response. Like other types of abuse, each detected instance is assigned a severity level, with more explicit advances receiving a higher severity rating.
+Сексуальные домогательства регистрируются как случаи насилия типа `sexual_advances` в ответе. Как и в случае с другими видами злоупотреблений, каждому выявленному случаю присваивается уровень серьезности, причем более явные нарушения получают более высокий рейтинг серьезности.
 
-## Relevant tags
+## Соответствующие теги
 
 * `endearment`
 * `pedophilia`
-* `relationship_status` (e.g. questions whether the other person is married or single)
+* `relationship_status` (например, вопрос о том, женат ли другой человек или холост)
 * `sex`
-* `sex_work` (helps detecting references to sex workers)
+* `sex_work` (помогает обнаружить упоминания о секс-работниках)
 
-## Sexual Advances vs Adult Only Content
+## Сексуальные домогательства по сравнению с контентом только для взрослых
 
-Note that not all conversations on sexual topics constitute sexual advances. Only actual attempts to gain sexual favors or gratification are.
+Обратите внимание, что не все разговоры на сексуальные темы представляют собой сексуальные домогательства. Имеют значение только реальные попытки получить сексуальные услуги или удовлетворение.
 
-While there is a significant overlap between `sexual_advances` and `adult_only`, these two types are not the same. Mentioning body parts related to sexual activities without context is not qualified as sexual advances, for example.
+Хотя существует значительное совпадение между типами `sexual_advances` и `adult_only`, эти два типа не являются одинаковыми. Например, упоминание частей тела, связанных с сексуальными действиями, без контекста не считается сексуальным домогательством.
 
-To track all sexual content, watch for:
+Чтобы отслеживать весь сексуальный контент, обращайте внимание на:
 
-* instances with the `sexual_advances` type
-* instances with the `adult_only` type and `sex` as one of the tags.
+* случаи с типом `sexual_advances`;
+* случаи с одним из следующих тегов: `adult_only` и `sex`.
 
-See: [Adult Only Content](./adultonly.md)
+Рекомендуем ознакомиться: [Контент только для взрослых](./adultonly.md)
 
-## Key Considerations
+## Основные соображения
 
-- The API does not enforce rules; it only detects and categorizes content.
-- Community moderators and administrators determine whether flagged content violates platform guidelines. For example, sexual advances do not violate terms and conditions in dating apps.
+- API не применяет правила; он только обнаруживает и классифицирует контент.
+- Модераторы и администраторы сообщества определяют, нарушает ли помеченный контент правила платформы. Например, сексуальные домогательства не являются нарушением положений и условий приложений для знакомств.
 
-## Example
+## Пример
 
-Request:
+Запрос:
 ```json
 {
   "language":"en",
@@ -44,7 +44,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 ```json
 {
 	"text": "do u hv a bf",

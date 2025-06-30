@@ -1,20 +1,20 @@
-# Meaningless Content
+﻿# Nội dung vô nghĩa
 
-Instances of content that has no meaning (e.g. words that appear to be gibberish) are logged under the `abuse` section, with the `type` attribute set to `no_meaninful_content`.
+Các trường hợp nội dung không mang ý nghĩa (ví dụ: những từ ngữ có vẻ như là vô nghĩa) sẽ được ghi nhận trong phần `abuse`, với thuộc tính `type` được đặt là `no_meaninful_content`.
 
-This functionality is used to detect hacker-initiated flooding with meaningless content, or nonsensical sign-ups. 
+Chức năng này được dùng để phát hiện các hành vi phát tán nội dung vô nghĩa do hacker thực hiện hoặc các lượt đăng ký tài khoản không hợp lệ, vô lý. 
 
 {% admonition type="warning" %}
 
-If the `format` is set to `alias`, content is analyzed differently, and may look for portions that have meaning even if the entire piece of text appears meaningless.
+Nếu `format` được đặt là `alias`, nội dung sẽ được phân tích theo cách khác, và hệ thống có thể tìm kiếm những phần có ý nghĩa ngay cả khi toàn bộ đoạn văn bản trông có vẻ vô nghĩa.
 
-Likewise, characters often used for obfuscation (e.g. asterisk) may result in a different interpretation.
+Tương tự, các ký tự thường được dùng để làm rối (ví dụ: dấu hoa thị *) cũng có thể dẫn đến cách diễn giải khác.
 
 {% /admonition %}
 
-## Example
+## Ví dụ
 
-Request:
+Yêu cầu:
 ```json
 {
   "language":"en",
@@ -26,7 +26,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 ```json
 {
 	"text": "asdkjasldkasdaasa",

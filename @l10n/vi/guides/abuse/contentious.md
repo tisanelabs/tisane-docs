@@ -1,28 +1,28 @@
-# Contentious Content
+﻿# Nội dung gây tranh cãi
 
-Instances of contentious content that is likely to start an adversarial argument are logged under the `abuse` section, with the `type` attribute set to `contentious`. 
+Các trường hợp nội dung gây tranh cãi có khả năng dẫn đến tranh luận đối kháng sẽ được ghi nhận trong phần `abuse`, với thuộc tính `type` được đặt là `contentious`. 
 
-These instances include:
+Những trường hợp này bao gồm:
 
-* assertion that a geopolitical entity is a country or not a country or belongs to another geopolitical entity
-* assertion or generalization about a social group that is not a protected class
-* negativity toward a geopolitical entity
-* calls for a political action, especially if controversial
-* assertion that a universally notorious historical figure is/was positive
-* provocative aliases, designed to start fights
+* khẳng định rằng một thực thể địa chính trị là hoặc không phải là một quốc gia, hoặc thuộc về một thực thể địa chính trị khác.
+* khẳng định hoặc khái quát hóa về một nhóm xã hội không thuộc tầng lớp được bảo vệ
+* thái độ tiêu cực đối với một thực thể địa chính trị
+* kêu gọi hành động chính trị, đặc biệt nếu gây tranh cãi
+* khẳng định rằng một nhân vật lịch sử khét tiếng được nhìn nhận là tích cực
+* kử dụng biệt danh khiêu khích, nhằm châm ngòi cho xung đột
 
 {% admonition type="info" %}
 
-The concept may be contentious itself. It was created to address two opposite concerns:
+Bản thân khái niệm này cũng có thể là gây tranh cãi. Nó được tạo ra nhằm giải quyết hai mối quan tâm trái ngược nhau:
 
-1. Cases when a community wants to allow political discussions, even if adversarial, but not hate speech (or bigotry).
-2. Cases when a community wants to ban any type of activism (e.g. a lifestyle community related to knitting, travel, etc.).
+1. Trường hợp một cộng đồng muốn cho phép thảo luận chính trị, dù có tính đối kháng, nhưng không chấp nhận ngôn từ thù ghét (hoặc thành kiến).
+2. Trường hợp một cộng đồng muốn cấm mọi hình thức hoạt động vận động (ví dụ: một cộng đồng về đan len, du lịch, v.v.).
 
 {% /admonition %}
 
-## Example
+## Ví dụ
 
-Request:
+Yêu cầu:
 ```json
 {
   "language":"en",
@@ -35,7 +35,7 @@ Request:
 ```
 
 
-Response:
+Phản hồi:
 ```json
 {
 	"text": "Voldermort is a loser",

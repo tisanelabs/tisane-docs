@@ -1,15 +1,15 @@
-# Adult-only Content
+﻿# 成人向けコンテンツ
 
-Adult-only content is content usually restricted in communities for children, but acceptable in adult communities. Instances of detected adult-only content are logged under the `abuse` section, with the `type` attribute set to `adult_only`. 
+成人向けコンテンツは、通常はお子様向けのコミュニティでは制限されていますが、成人向けのコミュニティでは許容されます。検出された成人向けコンテンツのインスタンスは、`abuse`セクションに記録され、`type`属性は`adult_only`に設定されます。 
 
-That includes:
+これには以下のものが含まれます。
 
-* erotic material or references to sex-related topics. Relevant tag: `sex`
-* references to consumption of drugs and alcohol. Relevant tag: `controlled_substance`. Tags associated with the drugs mentioned are also used. Read more: [Criminal Activity](./criminalactivity.md).
+* 性的内容または性に関する話題への言及。関連タグ：`sex`
+* 薬物やアルコールの摂取に関する言及。関連タグ：`controlled_substance`。言及された薬物に関連するタグも使用されます。詳細はこちら：[犯罪行為](./criminalactivity.md)
 
-## Example
+## 例
 
-Request:
+リクエスト：
 ```json
 {
   "language":"en",
@@ -21,7 +21,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 ```json
 {
 	"text": "we drank so much beer last week",

@@ -1,25 +1,25 @@
-# Mental Issues
+﻿# メンタルヘルスに関する内容
 
-Detected utterances indicating mental issues, self-harm, suicidal thoughts, or plans to commit suicide are logged under the `abuse` section, with the `type` attribute set to `mental_issues`.
+メンタルヘルスに関する内容、自傷行為、自殺念慮、または自殺計画を示す発言は、`abuse`セクションに記録され、`type`属性は`mental_issues`に設定されます。
 
-## Relevant Tags
+## 関連タグ
 
-* `bodily_harm` - self-harm
-* `death` - thoughts about death or suicide
-* `threat` - threatening suicide
+* `bodily_harm` - 自傷行為
+* `death` - 死や自殺に関する考え
+* `threat` - 自殺の恐れ
 
-## Severity Levels
+## 重大度
 
-The severity levels are as following:
+重大度は以下の通りです。
 
-* `low` - non-threatening utterances
-* `medium` - utterances indicative of depression or mental illness
-* `high` - severe depression, thoughts about death, or bodily harm
-* `extreme` - planning suicide
+* `low` - 非脅迫的な発言
+* `medium` - 抑うつ状態や精神疾患を示す発言
+* `high` - 深刻な抑うつ状態、死について考える、または身体的な危害を加える発言
+* `extreme` - 自殺計画
 
-## Example
+## 例
 
-Request:
+リクエスト：
 
 ```json
 {
@@ -31,7 +31,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 
 ```json
 {

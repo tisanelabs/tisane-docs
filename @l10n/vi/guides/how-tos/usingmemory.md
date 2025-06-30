@@ -1,25 +1,25 @@
-# Considering Previously Processed Messages
+# Xem xét các tin nhắn đã được xử lý trước đó
 
-By default, Tisane calls are stateless. Which means, Tisane is only aware of the text it receives in the current request. (Within the text though, the context is tracked between sentences for the purposes of co-reference resolution.) This is a deliberate choice both for the simplicity of deployment, and to avoid legal issues with data retention. API call = session.
+Theo mặc định, các lệnh gọi Tisane không có trạng thái. Nghĩa là Tisane chỉ nhận thức được văn bản mà nó nhận được trong yêu cầu hiện tại. (Tuy nhiên, trong văn bản, ngữ cảnh được theo dõi giữa các câu để phục vụ mục đích giải quyết tham chiếu chung). Đây là một lựa chọn có chủ đích để đảm bảo sự đơn giản của việc triển khai và tránh các vấn đề pháp lý liên quan đến việc lưu giữ dữ liệu. Lệnh gọi API = phiên.
 
-But what happens if we need to refer to previous messages? In context of problematic content, there are several relevant scenarios, most notably online grooming and fraud, in which the full picture only emerges when several utterances are put together.
+Nhưng sẽ thế nào nếu chúng ta cần tham chiếu đến các tin nhắn trước đó? Trong bối cảnh nội dung có vấn đề, có một số tình huống liên quan, đáng chú ý nhất là dụ dỗ và gian lận trực tuyến, trong đó bức tranh toàn cảnh chỉ xuất hiện khi một số phát ngôn được liên hệ với nhau.
 
-Consider the following utterance: “Where are your parents now?” On its own, we don’t have enough context to mark it as problematic. It can be anything: two kids talking about their parents or a repairman trying to locate the head of the household. Then consider another utterance: “Can you turn on your camera?” Once again, the utterance alone does not necessarily imply nefarious intent. It may be from a conversation between colleagues at work.
+Hãy xem xét phát ngôn sau đây: “Bố mẹ bạn hiện giờ đang ở đâu vậy?” Nếu chỉ xét riêng câu hỏi này, chúng ta không có đủ bối cảnh để coi nó là có vấn đề. Nó có thể là bất cứ điều gì: hai đứa trẻ nói chuyện về cha mẹ chúng hoặc một người thợ sửa chữa đang cố gắng tìm gặp chủ nhà. Tiếp theo hãy xem xét một phát ngôn khác: "Bạn bật camera lên được không?" Một lần nữa, phát ngôn này không nhất thiết là ngầm thể hiện ý đồ xấu. Nó có thể đến từ cuộc trò chuyện giữa các đồng nghiệp tại nơi làm việc.
 
-However, when the request to turn on the camera follows the inquiry about the location of the parents, it works like the binary explosives immortalized by action movies. It’s a very good reason to issue an alert.
+Tuy nhiên, khi yêu cầu bật camera tiếp nối câu hỏi về vị trí của phụ huynh, nó trở nên đáng sợ như những thứ chất nổ tự chế từ các nguyên liệu vô hại mà ta hay thấy trong phim vậy. Một lý do rất chính đáng để đưa ra cảnh báo.
 
-To keep the context while keeping Tisane stateless, a module called “long-term memory” is used. The `memory` object in response contains the flags that store intermediate observations. The same portion of the response needs to be included in the subsequent requests under settings (`"memory":{...}`).
+Để duy trì ngữ cảnh trong khi vẫn giữ cho Tisane không có trạng thái, một mô-đun có tên gọi “bộ nhớ dài hạn” được sử dụng. Đối tượng `memory` phản hồi chứa các dấu hiệu lưu trữ các quan sát trung gian. Phần tương tự của phản hồi cần được đưa vào các yêu cầu tiếp theo trong cài đặt (`"memory":{...}`).
 
 {% admonition type="info" %}
 
-To display the content of the memory module, set `state` to `true` in the `settings` structure.
+Để hiển thị nội dung của mô-đun bộ nhớ, hãy đặt `state` thành `true` trong cấu trúc `settings`.
 
 {% /admonition %}
 
-If it’s an ongoing dialogue, then the memory structure of every last processed message must be included in the next request as shown on the diagram below:
+Nếu đó là một cuộc đối thoại đang diễn ra, thì cấu trúc bộ nhớ của mọi tin nhắn được xử lý cuối cùng phải được đưa vào yêu cầu tiếp theo như thể hiện trong sơ đồ bên dưới:
 
 ![tisaneMemoryUse.png](/images/tisaneMemoryUse.png)
 
-Can these memories be changed and edited? Of course, so external context may be introduced as well. Note that the retention of the data is the responsibility of the caller.
+Có thể thay đổi và chỉnh sửa các bộ nhớ này không? Tất nhiên, bối cảnh bên ngoài cũng có thể được thêm vào. Xin lưu ý rằng việc lưu giữ dữ liệu là trách nhiệm của người gọi.
 
-See: [Context and Long-Term Memory](/apis/tisane-api-configuration#context-and-long-term-memory)
+Xem phần: [Bối cảnh và Bộ nhớ dài hạn](/apis/tisane-api-configuration#context-and-long-term-memory)

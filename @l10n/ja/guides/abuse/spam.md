@@ -1,16 +1,16 @@
-# Spam
+﻿# スパム
 
-Instances of spam are logged under the `abuse` section, with the `type` attribute set to `spam`. 
+スパムのインスタンスは`abuse`セクションで記録され、`type`属性は`spam`に設定されます。 
 
 {% admonition type="warning" %}
 
-Currently, our spam detection capabilities are limited. We mostly focus on spam in the reviews, profiles, and usernames.
+現在、Tisaneのスパム検出機能は限定的です。Tisaneは、レビュー、プロフィール、ユーザー名におけるスパム対策に注力しています。
 
 {% /admonition %}
 
-## Example
+## 例
 
-Request:
+リクエスト：
 ```json
 {
   "language":"en",
@@ -23,7 +23,7 @@ Request:
 ```
 
 
-Response:
+レスポンス：
 ```json
 {
 	"text": "Luxury watches are affordable in Antarctica!",

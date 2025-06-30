@@ -1,58 +1,58 @@
-# Bigotry and Hate Speech
+# Cố chấp và Phát ngôn thù hận
 
-This type covers hate speech or expression of bigoted opinions; adversarial remarks targetting [protected groups](https://en.wikipedia.org/wiki/Protected_group) (in other terms, a group that may be targeted for discrimination). This includes not just racial slurs but any hostile statements directed at the group as a whole. 
+Loại này bao gồm phát ngôn thù hận hoặc thể hiện quan điểm cố chấp; những phát biểu đối đầu nhắm vào [các nhóm được bảo vệ](https://en.wikipedia.org/wiki/Protected_group) (nói cách khác, một nhóm có thể là mục tiêu của việc phân biệt đối xử). Các phát ngôn này không chỉ bao gồm những lời lẽ phân biệt chủng tộc mà còn bao gồm bất kỳ phát biểu thù địch nào nhắm vào toàn thể nhóm. 
 
-Currently, we detect references to:
+Hiện tại, chúng tôi phát hiện các tham chiếu tới:
 
-- Ethniticies or race
-- Religious and [ethnoreligious](https://en.wikipedia.org/wiki/Ethnoreligious_group) groups
-- Sexual minorities, except those illegal in most countries (e.g. pedophiles)
-- Foreigners / immigrants
-- Nonreligious people
-- People with disabilities
-- Castes (e.g. in India)
-- Obese people
-- Either of the genders
+- Dân tộc hoặc chủng tộc
+- Các nhóm tôn giáo và [sắc tộc tôn giáo](https://en.wikipedia.org/wiki/Ethnoreligious_group)
+- Những người thiểu số tình dục, ngoại trừ những trường hợp được quy định là bất hợp pháp ở hầu hết các quốc gia (ví dụ: ấu dâm)
+- Người nước ngoài/người nhập cư
+- Người không theo tôn giáo
+- Người khuyết tật
+- Đẳng cấp xã hội (ví dụ như ở Ấn Độ)
+- Người béo phì
+- Bất kỳ giới tính nào
 
-Every detected instance of bigotry is logged as a form of abuse. The type assigned is `bigotry`, and like other types of problematic content, it includes a severity level for context.
+Mọi trường hợp cố chấp được phát hiện đều được ghi lại như một hình thức lạm dụng. Loại được chỉ định là `bigotry` và giống như các loại nội dung có vấn đề khác, nó bao gồm mức độ nghiêm trọng tùy theo bối cảnh.
 
-## What Qualifies As Bigotry Or Hate Speech?
+## Thế nào được coi là cố chấp hoặc phát ngôn thù hận?
 
-We define bigotry as hostility, negative opinions, or calls for discrimination and/or violence directed at an entire demographic group - or individuals - solely because of their association with that group.
+Chúng tôi định nghĩa cố chấp là thái độ thù địch, ý kiến ​​tiêu cực hoặc kêu gọi phân biệt đối xử và/hoặc bạo lực nhắm vào toàn bộ một nhóm nhân khẩu học - hoặc các cá nhân - chỉ vì họ có mối liên hệ với nhóm đó.
 
-An association between one’s feelings and being a member is a group will also be tagged as an instance of bigotry.
+Mối liên hệ giữa cảm xúc của một người và việc trở thành thành viên của một nhóm cũng sẽ được coi là một trường hợp cố chấp.
 
-### Implicit Bigotry
-Implicit bigotry towards one of the targeted groups without naming it (e.g. “get out of my country”) is also in the scope of recognition, although is significantly more difficult to recognize.
+### Cố chấp ngầm
+Thái độ cố chấp ngầm đối với một trong những nhóm mục tiêu mà không gọi tên (ví dụ: “cút khỏi đất nước của tao”) cũng nằm trong phạm vi nhận dạng, mặc dù khó nhận biết hơn đáng kể.
 
-### Not Bigotry
+### Không phải cố chấp
 
-- Attacks on:
-  - Public figures
-  - People of particular occupation
-  - People who underwent specific experience, even if the experience was traumatic
-- A statement about a group member committing a wrongdoing. 
+- Các hành vi công kích hướng tới:
+  - Nhân vật công chúng
+  - Người có nghề nghiệp đặc biệt
+  - Những người đã trải qua những trải nghiệm cụ thể, ngay cả khi trải nghiệm đó để lại sang chấn
+- Phát ngôn về một thành viên trong nhóm đã thực hiện hành vi sai trái. 
 
-Some of these attacks may be flagged as `contentious`. See: [Contentious Content](./contentious.md)
+Một vài trong số các hành vi công kích này có thể được đánh dấu là `contentious`. Xem phần: [Nội dung gây tranh cãi](./contentious.md)
 
-## Severity Levels
+## Mức độ nghiêm trọng
 
-The severity levels are as following:
+Các mức độ nghiêm trọng như sau:
 
-* `low` - bigoted opinion or generalization that may not be particularly offensive
-* `medium` - a bigoted opinion or expression, including most slurs
-* `high` - an extremely offensive slur or denying the group basic rights or the right to exist
-* `extreme` - a call to violence against the target group or actively trying to bring its demise
+* `low` - quan điểm ​​hoặc sự khái quát hóa mang tính cố chấp có thể không đặc biệt gây khó chịu
+* `medium` - một ý kiến ​​hoặc biểu hiện cố chấp, bao gồm hầu hết các lời lăng mạ
+* `high` - một lời lăng mạ cực kỳ xúc phạm hoặc phủ nhận các quyền cơ bản hoặc quyền tồn tại của nhóm
+* `extreme` - lời kêu gọi bạo lực chống lại nhóm mục tiêu hoặc tích cực cố gắng tiêu diệt nhóm đó
 
-## Relevant Tags
+## Thẻ liên quan
 
-The following tags are relevant to the `bigotry` type:
+Các thẻ sau đây có liên quan đến loại `bigotry`:
 
 * `ableism`
 * `ageism`
 * `anticatholicism`
 * `antisemitism`
-* `caste` (caste-based discrimination)
+* `caste` (phân biệt đối xử dựa trên đẳng cấp xã hội)
 * `christianophobia`
 * `homophobia`
 * `islamophobia`
@@ -62,9 +62,9 @@ The following tags are relevant to the `bigotry` type:
 * `transphobia`
 * `xenophobia`
 
-## Example
+## Ví dụ
 
-Request:
+Yêu cầu:
 
 ```json
 {
@@ -77,7 +77,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 
 ```json
 {

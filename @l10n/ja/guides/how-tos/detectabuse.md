@@ -1,59 +1,59 @@
-# Detecting Problematic Content
+# 問題のあるコンテンツの検出
 
-Instances of problematic content are logged under the `abuse` section. 
+問題のあるコンテンツは、`abuse`セクションに記録されます。 
 
-This section appears if:
+このセクションは、以下の場合に表示されます。
 
-1. Problematic types of content are found, and;
-2. The `abuse` setting is set to `true` (or omitted).
+1. 問題のあるタイプのコンテンツが発見され、かつ
+2. `abuse`設定が`true`に設定（または省略）されている。
 
-An member of the `abuse` array contains:
+`abuse`配列のメンバーには以下が含まれます。
 
-* location data
-  * `offset` - a zero-based position where the fragment starts 
-  * `length` - the length of the fragment
-  * `sentence_index` - the sentence where the fragment is located
-* `type` - the type of the problematic content
-* `severity` - the severity of the issue, which can be used to prioritize the detected instances
-* `explanation` - a human-readable explanation why the system believes the content is problematic. (If the `explain` setting is set to `true`)
-* `text` - the problematic fragment. (If the `snippets` setting is set to `true`) 
+* ロケーションデータ
+  * `offset` - フラグメントが始まるゼロベースの位置 
+  * `length` - フラグメントの長さ
+  * `sentence_index` - フラグメントがある文章
+* `type` - 問題のあるコンテンツのタイプ
+* `severity` - 検出されたインスタンスの優先順位付けに使用できる問題の重大度
+* `explanation` - コンテンツに問題があるとシステムが考える理由を、人間が読める形で説明したもの。（`explain`設定が`true`に設定されている場合）
+* `text` - 問題のあるフラグメント。`snippets`設定が`true`に設定されている場合のみ表示される。 
 
 {% admonition type="warning" %}
 
-**Do not act upon all types of entries** under the `abuse` section without distinction. 
+**abuse**セクションに`記載されたすべての種類の項目を`区別なく扱わない。 
 
-It is the responsibility of moderators or policy creators to decide whether the flagged content is indeed problematic in the context of the community. For example: It might not be appropriate to restrict sexual advances in a dating app, or censor profanity in communities where it's commonly accepted.
+フラグが付けられたコンテンツがコミュニティのコンテキストにおいて本当に問題があるかどうかを判断するのは、モデレーターやポリシー作成者の責任です。例：出会い系アプリで性的な誘いを制限すること、広く受け入れられるコミュニティで暴言を検閲すること、または外部との接触が許されている場合にそれを制限することは適切ではないかもしれません。
 
-Different types of problematic content require different action. For example, detected suicidal behavior certainly should not result in banning the user. 
+問題のあるコンテンツの種類によって、必要な措置は異なります。例えば、自殺行為を検出した場合、そのユーザーを利用停止にするべきではありません。 
 
-For applications like investigation suites, it's yet another type of extracted information. Still, for the sake of usability, it is recommended to consider the actual needs and not flood the users with data they may not need.
+調査スイートのようなアプリケーションの場合、これは別のタイプの抽出された情報です。それでも、ユーザビリティのためには、実際のニーズを考慮し、ユーザーが必要としないデータだらけにならないようにすることが推奨されます。
 
 {% /admonition %}
 
-For the reference on types of problematic content, see: [Problematic Content](/apis/tisane-api-response-guide#supported-types).
+問題のあるコンテンツの種類については、[問題のあるコンテンツ](/apis/tisane-api-response-guide#supported-types)を参照してください。
 
-## If You Don't Want Problematic Content Detected
+## 問題のあるコンテンツを検出したくない場合
 
-If the problematic content is not relevant, either explicitly set the `abuse` setting to `false`, or simply ignore the section.
+問題のあるコンテンツに関連がない場合、明示的に`不正使用`設定を`false`に設定するか、単にそのセクションを無視します。
 
-## Locating Relevant Fragment In Text
+## テキストから適切なフラグメントを探し出す
 
-To extract the exact text fragment containing the abusive content, use the **location data** provided in the response.
+悪用されたコンテンツを含む正確なテキストフラグメントを抽出するには、レスポンスで提供された**ロケーションデータ**を使用します。
 
-For further details, see: [How to Locate a Snippet Based on Location Data](./locateasnippet.md)
+詳しくは、[ロケーションデータに基づいてスニペットの場所を特定するには](./locateasnippet.md)を参照してください。
 
 {% admonition type="info" %}
 
-If all you need is the text fragment itself, simply add `"snippets":true` to the `settings` object, and use the `text` attribute at the level of an individual `abuse` object.
+テキストフラグメント自体が必要な場合は、`設定`オブジェクトに `"snippets":true`を追加し、個々の`不正使用`オブジェクトのレベルで`text`属性を使用します。
 
 {% /admonition %}
 
-## Is The Detection Of Abusive Content The Same As Sentiment Analysis?
+## 不正なコンテンツの検出はセンチメント分析と同じか？
 
-Abusive content and sentiment analysis are two different things.
+不正なコンテンツとセンチメント分析は異なるものです。
 
-Indeed, abusive and problematic content often overlaps with negative sentiment. But it's not always the case. For example, when someone is advertising “high-quality cocaine”, the sentiment is clearly positive, but it's criminal activity that needs to be tagged as `abuse`.
+実際、不正かつ問題のあるコンテンツは、否定的な感情と重なることが多くあります。しかし、必ずしもそうとは限りません。例えば、誰かが「高品質のコカイン」を宣伝しているとき、センチメントは明らかに肯定的ですが、これは犯罪行為であり、`不正使用`としてタグ付けされなければなりません。
 
-When someone is exchanging contact details, the sentiment is neutral; however, it still can be marked as `external_contact`. Racial slurs can easily be used in utterances with positive sentiment, too.
+誰かが連絡先の詳細を交換している場合、そのセンチメントは中立ではありますが、`外部的な_接触`としてマークされます。人種差別的な中傷は、肯定的なセンチメントを込めた発言でも簡単に使われることがあります。
 
-On the other hand, “very negative sentiment” does not necessarily mean cyberbullying or hate speech. Even utterances like "I hate him" are not personal attacks, as they are not aimed at someone participating in the current conversation.  See: [Personal Attacks](../abuse/personalattack.md)
+逆に言うと、「非常に否定的なセンチメント」は必ずしもネットいじめやヘイトスピーチを意味するものではありません。「私は彼が嫌いだ」というような発言も、現在の会話に参加している誰かに向けられたものではなければ、個人攻撃にはなりません。  参考：[個人攻撃](../abuse/personalattack.md)

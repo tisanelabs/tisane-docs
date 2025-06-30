@@ -1,20 +1,20 @@
-﻿# Meaningless Content
+﻿# Ѕессмысленный контент
 
-Instances of content that has no meaning (e.g. words that appear to be gibberish) are logged under the `abuse` section, with the `type` attribute set to `no_meaninful_content`.
+‘рагменты контента, не имеющего смысла (например, слова, которые кажутс¤ бессмысленными), регистрируютс¤ в разделе `abuse` с присвоением атрибуту `type` значени¤ `no_meaningful_content`.
 
-This functionality is used to detect hacker-initiated flooding with meaningless content, or nonsensical sign-ups. 
+Ёта функци¤ используетс¤ дл¤ обнаружени¤ инициированных хакерами атак с бессмысленным контентом или бессмысленных регистраций. 
 
 {% admonition type="warning" %}
 
-If the `format` is set to `alias`, content is analyzed differently, and may look for portions that have meaning even if the entire piece of text appears meaningless.
+≈сли `format` установлен на `alias`, контент анализируетс¤ по-другому, и может производитьс¤ поиск частей, имеющих смысл, даже если текст в целом кажетс¤ бессмысленным.
 
-Likewise, characters often used for obfuscation (e.g. asterisk) may result in a different interpretation.
+јналогичным образом символы, часто используемые дл¤ запутывани¤ (например, звездочка), могут привести к различной интерпретации.
 
 {% /admonition %}
 
-## Example
+## Ќапример:
 
-Request:
+«апрос:
 ```json
 {
   "language":"en",
@@ -26,7 +26,7 @@ Request:
 }
 ```
 
-Response:
+ќтвет:
 ```json
 {
 	"text": "asdkjasldkasdaasa",

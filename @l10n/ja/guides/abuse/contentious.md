@@ -1,28 +1,28 @@
-# Contentious Content
+﻿# 論争を招くコンテンツ
 
-Instances of contentious content that is likely to start an adversarial argument are logged under the `abuse` section, with the `type` attribute set to `contentious`. 
+論争を招く可能性のあるコンテンツのインスタンスは、`abuse`セクションに記録され、`type`属性は`contentious`に設定されます。 
 
-These instances include:
+これらのインスタンスには、以下のものが含まれます。
 
-* assertion that a geopolitical entity is a country or not a country or belongs to another geopolitical entity
-* assertion or generalization about a social group that is not a protected class
-* negativity toward a geopolitical entity
-* calls for a political action, especially if controversial
-* assertion that a universally notorious historical figure is/was positive
-* provocative aliases, designed to start fights
+* ある地政学的存在が国家であるか否か、または他の地政学的存在に属するという主張
+* 保護対象に該当しない社会集団に関する主張または一般論
+* 地政学的存在に対する否定的な態度
+* 政治的な行動の呼びかけ（特に、議論を呼ぶようなものの場合）
+* 国際的に悪名高い歴史的人物に賛同する主張
+* 争いを引き起こすために作成した挑発的な偽名
 
 {% admonition type="info" %}
 
-The concept may be contentious itself. It was created to address two opposite concerns:
+こうした概念そのものが議論の的となる可能性があります。これは、以下の2つの相反する懸念に対応するために作成されました。
 
-1. Cases when a community wants to allow political discussions, even if adversarial, but not hate speech (or bigotry).
-2. Cases when a community wants to ban any type of activism (e.g. a lifestyle community related to knitting, travel, etc.).
+1. コミュニティが、対立的な議論（ヘイトスピーチ（や偏見）ではない）であっても政治的な議論を許可したい場合。
+2. コミュニティが、あらゆる種類の活動（例：編み物や旅行などに関連するライフスタイルコミュニティ）を禁止したい場合。
 
 {% /admonition %}
 
-## Example
+## 例
 
-Request:
+リクエスト：
 ```json
 {
   "language":"en",
@@ -35,7 +35,7 @@ Request:
 ```
 
 
-Response:
+レスポンス：
 ```json
 {
 	"text": "Voldermort is a loser",

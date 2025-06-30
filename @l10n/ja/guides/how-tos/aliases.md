@@ -1,35 +1,35 @@
-# Moderating Usernames
+# ユーザー名をモデレートする
 
-Moderating aliases/usernames/nicknames works differently than moderating chats and messages.
+エイリアス、ユーザー名、ニックネームのモデレートは、チャットやメッセージのモデレートとは異なります。
 
-URLs in an alias are a telltale sign of a spammer. If someone calls themselves _BtcKing111_, it's pretty obvious what they are here for. Mentioning _3rd reich_ in a chat is very different than adopting it as your username.
+エイリアスに含まれるURLは、スパマーであることを明らかに表しています。_BtcKing111_という名前だとしたら、その目的が何であるのかはとても明確です。_第三帝国_についてチャットで言及することと、それをユーザー名として使用することは別物です。
 
-Which is why Tisane has a special mode for aliases. To invoke alias moderation logic, specify **"format":"alias"** in your settings structure.
+そのため、Tisaneはエイリアス用の特別なモードを備えています。エイリアスのモデレーション・ロジックを起動するには、設定構造で **"format":"alias"**を指定してください。
 
-## Language Identification
+## 言語判定
 
-One common “gotcha” is the choice of language. As Tisane has a handy automatic language identification option, it is tempting to simply use that asterisk ("language":"*"). Don't do it!
+よく使われる「gotcha」を例にとってみましょう。Tisaneには便利な自動言語識別オプションがあるため、アスタリスク（"language":"*"）を使いたくなるかもしれません。しかし、これはしないでください。
 
-First, language identification does not work well with strings shorter than 30-50 characters. Sometimes, it is simply impossible to know what the language is. Consider a word like “status”. It is the same word in French, Spanish, English, and many other languages. If you were to identify the language judging by the word “status” alone, what is the right answer? There is simply no definite answer, that’s how languages work. (A developer asked whether adding digits or spaces to the end will solve the problem. The answer is no.)
+第一に、言語判定は30～50文字より短い文字列ではうまく機能しません。何の言語であるか理解できないこともあります。「status」（地位）という言葉を考えてみましょう。これは、フランス語、スペイン語、英語、その他多くの言語で同じ単語が使われています。「status」という言葉だけで判断して言語を判定するとしたら、正解は何でしょうか。言語とはそういうものであり、明確な答えはありません。（ある開発者から、数字やスペースを末尾に加えることで問題が解決するか、という質問がありましたが、答えはノーです。）
 
-With aliases, it’s even more complex: aliases are not necessarily legitimate words in any language. It may be a mix of characters based on other words. It may be different name components mashed together (which, again, may be legitimate in several languages: Peter, John, etc.).
+エイリアスの場合はさらに複雑で、エイリアスはどの言語でも必ずしも正当な言葉であるとは限りません。他の単語をベースにした文字がミックスされている場合もあります。異なる名前の構成要素が混ざっていることもあります（言語によっては、Peter、Johnなど、正当であるかもしれません）。
 
-How do we know the language of the alias? One way is to look at the user’s settings or IP, but it’s extremely unreliable. Moreover, in most cases, aliases are made to be understood by the other community members, which is today usually a global audience. English aliases do not only come from the US and UK. Add intentional obfuscation and mashing words together to the mix.
+それでは、エイリアスの言語をどうやって知ることができるのでしょうか？一つに、ユーザーの設定やIPを見る方法があります。しかし、この信頼性は極めて低いものです。さらに、ほとんどの場合、エイリアスは他のコミュニティメンバー（今日ではたいていグローバルなオーディエンス）に理解されるように作られています。英語のエイリアスがアメリカやイギリスのものであるとは限りません。意図的な難読用語や言葉の混ぜ合わせなども加わっています。
 
-And then there is the issue of your audience. If one of your users created a name that is perfectly acceptable in German, it may be offensive in English. Goes without saying, it may be any combination of languages. Marketers are familiar with the issue all too well.
+そして、オーディエンスの問題もあります。たとえばユーザーが、ドイツ語では問題ない名前を付けた場合でも、これが英語では不快に取られることもあります。言うまでもなく、言語の組み合わせは自由です。マーケティング担当者はこの問題を嫌というほど把握しています。
 
-Can Tisane just scan all languages until it finds anything offensive? We studied the option and decided not to go with it, because most communities oppose it.
+Tisaneは、すべての言語をスキャンして攻撃的なものを見つけることができるのでしょうか？当社はこのオプションを検討しましたが、多くの地域の反対を受け、実施しないことにしました。
 
-There are several routes we recommend:
+推奨する方法は以下の通りです。
 
-1. For Latin scripts, assume the alias is either in English or in one of the main languages in your community. For every language you need to validate, send a separate request. (Note that the vertical bar separated notation, e.g. en|fr|es is not the way to do it: its purpose is to invoke language identification.)
-2. For non-Latin scripts, scan the main language associated with the script.
+1. ラテン文字であれば、エイリアスは英語か、所属コミュニティの主要言語のいずれかであるのかを仮定します。承認が必要な言語にはすべて、個別のリクエストを送信してください。（en fr esなどのバーティカルバーで区切られた表記法はその方法ではありませんのでご注意|ください。|その目的は言語判定を呼び出すことです。）
+2. ラテン文字以外であれば、その文字に関連する主な言語をスキャンします。
 
-Do not worry about filtering the URLs, emails, etc. These ones are included in every language. Automatic tokenization of nicknames into constituents (e.g. _cryptorajah1244_ -> _crypto|rajah_) is built in, too.
+URLやEメールなどのフィルタリングを心配する必要はありません。これらはどの言語にも含まれています。ニックネームを構成要素に自動トークン化（例：_cryptorajah1244_ -> _crypto|rajah_）する機能も搭載されています。
 
-**Example**
+**例**
 
-Request:
+リクエスト：
 ```json
 {
   "language": "en",
@@ -40,7 +40,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 ```json
 {
 	"text": "cryptorajah1244 ",

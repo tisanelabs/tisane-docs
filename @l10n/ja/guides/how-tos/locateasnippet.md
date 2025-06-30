@@ -1,22 +1,22 @@
-# Locating A Snippet Using Location Data
+﻿# ロケーションデータを使用してスニペットの場所を特定する
 
-Tisane provides structured location data to help pinpoint flagged text fragments.
+Tisaneは、フラグが付けられたテキストフラグメントを特定するのに役立つ、構造化されたロケーションデータを提供します。
 
-The three key location attributes are:
+主な3つのロケーション属性は以下の通りです。
 
-- `sentence_index` : Zero-based index of the sentence containing the snippet.     
-- `offset`: Zero-based position of the first character in the snippet within the sentence.
-- `length` : Number of characters in the snippet.                         
+- `sentence_index` : スニペットを含む文章のゼロベースのインデックス。     
+- `offset`: 文章中のスニペットの最初の文字のゼロベースの位置。
+- `length` : スニペットの文字数。                         
 
-## How To Get The String
+## 文字列の入手方法
 
-1. Find the sentence text containing the snippet:
-   - Navigate to the `sentence_list` node.
-   - Select a node where `index` = `sentence_index`.
-   - Alternatively, retrieve the sentence directly from the sentence list array.
-2. Get the substring:
-   - Use the `offset` and `length` values to get the substring from the sentence.
+1. スニペットを含む文章を見つける：
+   - `sentence_list`ノードに移動する。
+   - `index` = `sentence_index`のノードを選択する。
+   - あるいは、文章リストの配列から文章を直接取得する。
+2. サブストリングを取得する：
+   - `offset`と`length`の値を使用して、文章からサブストリングを取得する。
 
-## Why Relative Offsets Instead Of Absolute Positions?
+## 絶対位置ではなく相対オフセットである理由
 
-We use sentence-based indexing instead of absolute offsets because many users need an actual sentence with the snippet for context.
+当社は、絶対的なオフセットではなく文章ベースのインデックスを使用しています。これは、多くのユーザーがコンテキストのためにスニペットのある実際の文章を必要とするからです。

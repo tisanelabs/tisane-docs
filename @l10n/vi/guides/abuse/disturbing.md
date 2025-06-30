@@ -1,16 +1,16 @@
-# Disturbing Content
+# Nội dung gây khó chịu
 
-Detected graphic descriptions of violence or injuries are logged under the `abuse` section, with the `type` attribute set to `disturbing`.
+Các mô tả hình ảnh chi tiết mang tính bạo lực hoặc thương tích khi bị phát hiện sẽ được ghi nhận trong mục `abuse`, với `type` thuộc tính được đặt là `disturbing`.
 
 {% admonition type="warning" %}
 
-Disturbing content may or may not constitute criminal activity. See: [Difference between Criminal Activity, Allegation, and Disturbing](./criminalallegationdisturbing.md)
+Nội dung gây khó chịu có thể là, hoặc không phải là hành vi tội phạm. Xem: [Sự khác biệt giữa Hoạt động phạm tội, Cáo buộc và Nội dung gây khó chịu](./criminalallegationdisturbing.md)
 
 {% /admonition %}
 
-## Example
+## Ví dụ
 
-Request:
+Yêu cầu:
 
 ```json
 {
@@ -23,7 +23,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 
 ```json
 {

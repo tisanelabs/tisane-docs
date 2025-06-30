@@ -1,12 +1,12 @@
-# Tokenizing URL Slugs and Hashtags
+﻿# URLスラッグとハッシュタグのトークン化
 
-Tisane can analyze slugs and hashtags, treating them as sentences, tokenizing them into words, and extracting topics and entities like in normal text.
+Tisaneはスラッグやハッシュタグを分析し、それらを文章として扱い、単語にトークン化し、通常のテキストと同様にトピックやエンティティを抽出することができます。
 
-Set `subscope` to `true` to force tokenizing subscopes.
+サブスコープのトークン化を強制するには`subscope`を`true`に設定します。
 
-## Example:
+## 例：
 
-Request:
+リクエスト：
 
 ```json
 {
@@ -18,7 +18,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 
 ```json
 {

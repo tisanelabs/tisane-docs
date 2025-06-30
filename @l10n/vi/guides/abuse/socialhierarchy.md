@@ -1,17 +1,17 @@
-# Assertion of Hierarchy
+﻿# Khẳng định về thứ bậc
 
-Instances of forceful assertion of hierarchy in a community are logged under the `abuse` section, with the `type` attribute set to `social_hierarchy`.
+Các trường hợp khẳng định thứ bậc một cách cưỡng ép trong cộng đồng sẽ được ghi nhận trong mục `abuse`, với loại `type` thuộc tính được đặt là `social_hierarchy`.
 
-These instances include:
+Các trường hợp này bao gồm:
 
-* being a control freak
-* workspace bullying (e.g. so-called [power harassment](https://en.wikipedia.org/wiki/Power_harassment) in Japan and South Korea)
-* forcing a particular group to "know their place" (e.g. new members of a community)
+* hành vi kiểm soát thái quá
+* bắt nạt nơi làm việc (ví dụ: hiện tượng [quấy rối quyền lực](https://en.wikipedia.org/wiki/Power_harassment) tại Nhật Bản và Hàn Quốc)
+* ép buộc một nhóm người cụ thể phải “biết thân phận” của mình (chẳng hạn như các thành viên mới trong cộng đồng)
 
 
-## Example
+## Ví dụ
 
-Request:
+Yêu cầu:
 
 ```json
 {
@@ -24,7 +24,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 
 ```json
 {

@@ -1,15 +1,15 @@
-# Adult-only Content
+# Контент только для взрослых
 
-Adult-only content is content usually restricted in communities for children, but acceptable in adult communities. Instances of detected adult-only content are logged under the `abuse` section, with the `type` attribute set to `adult_only`. 
+Контент только для взрослых — это контент, который обычно ограничен в сообществах для детей, но приемлем в сообществах для взрослых. Случаи обнаружения контента только для взрослых регистрируются в разделе `abuse` с присвоением `type` атрибута `adult_only`. 
 
-That includes:
+К такому контенту относятся:
 
-* erotic material or references to sex-related topics. Relevant tag: `sex`
-* references to consumption of drugs and alcohol. Relevant tag: `controlled_substance`. Tags associated with the drugs mentioned are also used. Read more: [Criminal Activity](./criminalactivity.md).
+* эротические материалы или упоминания тем, связанных с сексом. Соответствующий тег: `sex`
+* упоминания употребления наркотиков и алкоголя. Соответствующий тег: `controlled_substance`. Также используются теги, связанные с упоминанием наркотиков. Подробнее: [Преступная деятельность](./criminalactivity.md).
 
-## Example
+## Например:
 
-Request:
+Запрос:
 ```json
 {
   "language":"en",
@@ -21,7 +21,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 ```json
 {
 	"text": "we drank so much beer last week",

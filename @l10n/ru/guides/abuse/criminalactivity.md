@@ -1,27 +1,27 @@
-# Criminal Activity
+﻿# Преступная деятельность
 
-Tisane logs instances of detected criminal activity under the `abuse` section, with the `type` attribute set to `criminal_activity`. 
+Tisane регистрирует случаи обнаруженной преступной деятельности в разделе `abuse` с присвоением атрибуту `type` значения `criminal_activity`. 
 
-## What We Detect
+## Что мы обнаруживаем
 
-We identify and flag text related to:
+Мы идентифицируем и помечаем текст, связанный со следующим:
 
-- Planning and coordination of transportation, distribution, and manufacturing of illicit items such as narcotics, arms, explosives, and poached wildlife.
-- Human trafficking and the sale of human organs.
-- Inquiries and instructions on creating, manufacturing, distributing, or operating weapons (including chemical and biological weapons), narcotics, and explosives.
-- Threats of violence and criminal activity.
-- Searches for restricted items, For example: Firearms, ammunition, explosive precursors). To analyze search queries, set the `format` parameter to `search`.
+- Планирование и координация транспортировки, распространения и производства незаконных товаров, таких как наркотики, оружие, взрывчатые вещества, и контрабанда диких животных.
+- Торговля людьми и продажа человеческих органов.
+- Запросы и инструкции по созданию, производству, распространению или использованию оружия (включая химическое и биологическое оружие), наркотиков и взрывчатых веществ.
+- Угрозы насилия и преступной деятельности.
+- Поиск запрещенных предметов, например, огнестрельного оружия, боеприпасов, взрывчатых веществ. Для анализа поисковых запросов задайте для параметра `format` значение `search`.
 
 {% admonition type="warning" %}
 
-1. The criminal activity type does not capture conversations about crime committed by someone else or allegations. The purpose of the `criminal_activity` type is to capture either crime in progress or admission of criminal activity. To capture conversations about crime, use topic extraction. See: [Topic Extraction](../features/topics.md). To capture allegations about someone else committing crimes, see: [Allegations](./allegation.md)
-2. As the legislation varies from jurisdiction to jurisdiction, inspect `tags` to determine if the instance is to be ignored. For example, `cannabis` or `soft_drug` may be used to ignore the references to use of marijuana.
+1. Тип преступной деятельности не охватывает разговоры о преступлениях, совершенных кем-то другим, или обвинения. Цель типа `criminal_activity` — фиксация данных о совершаемом преступлении или признания преступной деятельности. Чтобы зафиксировать разговоры о преступной деятельности, используйте функцию извлечения темы. Рекомендуем ознакомиться: [Извлечение темы](../features/topics.md) . Чтобы собрать информацию о преступлениях, совершенных кем-то другим, см.: [Обвинения](./allegation.md)
+2. Поскольку законодательство различается в зависимости от юрисдикции, ознакомьтесь с `тегами` чтобы определить, следует ли игнорировать данный экземпляр. Например, теги `cannabis` («каннабис») или `soft_drug` («слабый наркотик») могут использоваться для игнорирования упоминаний об употреблении марихуаны.
 
 {% /admonition %}
 
-### Example
+### Например:
 
-Request:
+Запрос:
 
 ```json
 {
@@ -34,7 +34,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 ```json
 {
 	"text": "we sell elephant tusks. Great prices and top notch quality!",
@@ -55,11 +55,11 @@ Response:
 }
 ```
 
-## Relevant Tags
+## Соответствующие теги
 
-The `tags` array may contain the following tags.
+Массив `tags` может содержать следующие теги.
 
-### Crimes
+### Преступления
 
 * `bodily_harm`
 * `bribery`
@@ -67,7 +67,7 @@ The `tags` array may contain the following tags.
 * `crime`
 * `death`
 * `doxing`
-* `escape` (correctional institutions)
+* `escape` (исправительные учреждения)
 * `extortion`
 * `hacking_services`
 * `human_trafficking`
@@ -81,9 +81,9 @@ The `tags` array may contain the following tags.
 * `terrorism`
 * `threat`
 * `violence`
-* `wildlife` (poaching)
+* `wildlife` (браконьерство)
 
-### Controlled Substances
+### Контролируемые вещества
 
 * `controlled_substance`
 * `soft_drug`
@@ -98,28 +98,28 @@ The `tags` array may contain the following tags.
 * `medication`
 * `opioid`
 
-### Other Restricted Items
+### Другие ограниченные предметы
 
 * `cold_weapons`
 * `explosives`
 * `firearms`
 * `weapon`
-* `contraband` (depends on the context)
+* `contraband` (зависит от контекста)
 
-### Miscellaneous
+### Прочие
 
-* `admission` - admission in a crime
+* `admission` — признание в преступлении
 * `credentials`
 * `cryptocurrency`
 * `debt`
 * `payment`
 
-## Relevant Entity types
+## Соответствующие типы сущностей
 
 `item_of_interest` entity type detects items potentially of interest to the investigation: luxury items, drugs, medications, vehicles.
 
-## Offline and Law Enforcement Use
+## Использование в офлайн-режиме и правоохранительными органами
 
-Law enforcement applications often have to operate in air-gapped environments. To accommodate this need, [Tisane Embedded](../../sdks/index.md) is available. Tisane Embedded allows running Tisane as an in-process library. [On-prem installations](/guides/deployment/onprem) are are available as well. 
+Приложениям правоохранительных органов часто приходится работать в изолированных средах. Чтобы удовлетворить эту потребность, доступен инструмент [Tisane Embedded](../../sdks/index.md). Tisane Embedded позволяет запускать Tisane как внутрипроцессную библиотеку. Также досупны [On-prem installations](/guides/deployment/onprem) («Локальные установки»). 
 
 

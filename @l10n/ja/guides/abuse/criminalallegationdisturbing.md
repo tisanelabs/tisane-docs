@@ -1,47 +1,47 @@
-# Difference between Criminal Activity, Allegation, and Disturbing
+# 犯罪行為・告発・迷惑行為の違い
 
-These types of problematic content capture similar scenarios:
+これらの問題のあるコンテンツのタイプには、以下の類似するシナリオが含まれます。
 
 - `criminal_activity`
 - `allegation`
 - `disturbing`
 
-They do have differences between them.
+これらには明確な違いがあります。
 
-## Criminal Activity
+## 犯罪行為
 
-The `criminal_activity` type detects actual ongoing activity. For example: Attempts to sell illicit items online, death threats, and more. 
+`criminal_activity`のタイプは、実際の進行中のアクティビティを検出します。例オンラインでの違法な物品の販売・脅迫などの試み。 
 
-The purpose of this type is to detect foul play going in the content. Nothing else.
+このタイプの唯一の目的は、コンテンツ内の不正行為を検出することです。
 
-It is not the same as *conversations* about alleged criminal acts. For example, if an article describes a sting raid on a meth lab, it is not tagged as abuse. 
+これは、犯罪行為の告発に関するやり取りとは異なります。**例えば、覚醒剤製造工場への強制捜索に関する記事の場合、その記事は「中傷」としてタグ付けされません。 
 
-If you are looking to locate conversations about crimes, look at the `topics` section.
+犯罪に関するやり取りを探している場合は、`topics`セクションをご覧ください。
 
-Also see: [Criminal Activity](./criminalactivity.md)
+こちらも参考：[犯罪行為](./criminalactivity.md)
 
-## Allegation
+## 告発
 
-What happens if someone talks about a crime that allegedly happened to them? This is what `allegation` is meant to tackle. 
+自分に起こったとされる犯罪について話した場合、どうなるでしょうか？これが、`allegation`が対処すべき問題です。 
 
-The difference between `allegation` and `criminal_activity` is similar to the venerable [*This is not a pipe*](https://en.wikipedia.org/wiki/The_Treachery_of_Images) by René Magritte.
+`allegation`と`criminal_activity`の違いは、ルネ・マグリットの『[*これはパイプではない*](https://en.wikipedia.org/wiki/The_Treachery_of_Images)』という有名な作品に似ています。
 
-We don’t know if it’s true and it’s not happening right now, but we should not ignore it. 
+それが真実であり、現在進行中のものであるかは分かりませんが、無視すべきではありません。 
 
-On the other hand, we can’t lump it together with the *criminal activity* type, because it would create false positives in communities of survivors of abuse, for example. 
+一方、これを犯罪行為のタイプと一括りにすることはできません。例えば、中傷の被害者コミュニティにおいて誤検知が生じる可能性があるからです。** 
 
-For law enforcement needs, the distinction must be clear, too: an allegation is not the same as actual activity. And even if it’s a real crime is to be reported, the procedures are very different.
+法的処置を目的とする場合、この区別も明確でなければならず、告発は実際の行為とは異なるものです。たとえそれが報告すべき実際の犯罪であっても、手続きは全く異なります。
 
-Also see: [Allegations](./allegation.md)
+こちらも参考：[告発](./allegation.md)
 
-## Disturbing
+## 迷惑行為
 
-The third type, `disturbing`, flags graphic depictions of death, injury, etc. whether they are crime-related, or not. 
+3つ目のタイプの`disturbing`は、犯罪関連かどうかに関わらず、死亡や負傷などの描写にフラグを立てます。 
 
-In most cases, these depictions do not overlap with the `criminal_activity` type. 
+ほとんどのケースにおいて、これらの描写は`criminal_activity`のタイプとは重複しません。 
 
-They may or may not overlap with the `allegation` type. 
+`allegation`のタイプと重複する場合もあれば、重複しない場合もあります。 
 
-Not all death or injury are considered disturbing, too.
+死亡や負傷がすべて不快なものとみなされるわけではありません。
 
-Also see: [Disturbing Content](./disturbing.md)
+こちらも参考：[不安を引き起こす内容](./disturbing.md)

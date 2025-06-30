@@ -1,26 +1,26 @@
-# About 2-Factor Moderation
+﻿# ユーザー参加型モデレーションについて
 
-2-Factor Moderation is a crowdsourced moderation approach designed for high-traffic, real-time chats, such as in-game communication. It works similarly to [2-Factor Authentication](https://en.wikipedia.org/wiki/Multi-factor_authentication), (2FA) by requiring two independent inputs to make a moderation decision.
+ユーザー参加型モデレーションは、ゲーム内のコミュニケーションなど、通信量の多い、リアルタイムなチャット向けに設計されたクラウドソーシング型モデレーションの手法です。これは2要素認証（2FA）と同様に、モデレーションの判断を下すために2つの独立した入力を要求します。 
 
-## Why Is It Needed?
-- Real-time chats often become toxic, driving users away.
-- Hiring dedicated human moderators for real-time chats is expensive and often impractical.
-- Moderating chat manually is an unpopular and mentally exhausting task for moderators.
-- On the other hand, automatic moderation may have false positives.
+## ユーザー参加型モデレーションの必要性とは
+- リアルタイムチャットはしばしば有害なものになり、ユーザーを離脱させます。
+- リアルタイムチャット専任の人間のモデレーターを雇用することは、コストが高く、多くの場合現実的ではありません。
+- 手動でチャットのモデレーションを行うことは、モデレーターにとって不評で精神的に疲弊する作業です。
+- 一方、自動モデレーションには誤検出が発生するおそれがあります。
 
-Note that 2-factor moderation only works for moderation types when another user is targeted, e.g. personal attacks (insults, cyberbullying).
+注意：ユーザー参加型モデレーションは、他のユーザーを標的としたモデレーションタイプ（例：個人攻撃（侮辱、ネットいじめ））の場合にのみ動作します。
 
-## How 2-Factor Moderation Works
-1. Tisane flags a message as containing a personal attack targeting another user.
-2. The targeted user is granted temporary moderation privileges to approve a punitive action against the offender (e.g., muting or banning them).
-3. If Tisane's detection misfired, and the message, in fact, is not an insult, the targeted user will likely choose to abort. If it is indeed an insult, the attacker will be punished.
+## ユーザー参加型モデレーションの仕組み
+1. Tisaneは、他のユーザーを標的とした個人攻撃を含むメッセージにフラグを立てました。
+2. 対象ユーザーには、違反者に対する罰則措置（例：ミュートまたはBAN）を承認するための一時的なモデレーション権限が付与されます。
+3. Tisaneが誤検出し、メッセージが実際には侮辱的なものでない場合、対象ユーザーは中止を選択する可能性が高いです。実際に侮辱なものである場合、攻撃者にはペナルティが与えられます。
 
 
-Since personal attacks make up 90%+ of abuse, this approach significantly reduces human moderation workload. This system also acts as a deterrent. Trolls are less likely to attack others when they know their victim can immediately punish them.
+個人攻撃が中傷の90%以上を占めるため、このアプローチは人間によるモデレーションの作業量を大幅に削減します。このシステムはまた、抑止力としての役割も果たします。荒らしを行う者は、被害者がすぐに報復できることを知っている場合、他人を攻撃する可能性が低くなります。
 
-For content that is not a personal attack, standard moderation workflow applies. 
+個人攻撃に該当しないコンテンツに対しては、通常のモデレーションフローが適用されます。 
 
-## 2-Factor Moderation Process
+## ユーザー参加型モデレーションのプロセス
 
 ```mermaid
 flowchart TD
@@ -41,33 +41,33 @@ flowchart TD
   isAnotherAbuse-- no -->publish
 ```
 
-## Possible Scenarios And Outcomes
+## 考えられるシナリオと結果
 
-#### Scenario 1: Successful Moderation
+#### シナリオ1：モデレーションの成功
 
-1. User 1 insults User 2.
+1. ユーザー1がユーザー2を侮辱します。
 
-2. Tisane flags it as a personal attack.
-3. User 2 is granted temporary moderation privileges and bans User 1.
+2. Tisaneはこれを個人攻撃としてフラグを立てます。
+3. ユーザー2に一時的なモデレーション権限が付与され、ユーザー1をBANします。
 
-#### Scenario 2: False Positive Handling
+#### シナリオ2：誤検出への対応
 
-1. User 1 posts a comment that is mistakenly flagged as abusive.
+1. ユーザー1が投稿したコメントが誤って中傷的なものとしてフラグが立てられました。
 
-2. User 2 is given moderation privileges but chooses not to take action since no real attack occurred.
+2. ユーザー2はモデレーション権限を付与されましたが、実際の攻撃が発生しなかったため、措置を講じることを選択しませんでした。
 
-#### Scenario 3: Hate Speech Or Other Violations
+#### シナリオ3：ヘイトスピーチまたはその他の違反行為
 
-1. User 1 posts bigoted or otherwise broad-targeted abusive content.
+1. ユーザー1が差別的または広範な対象を標的とした中傷的なコンテンツを投稿しました。
 
-2. Tisane classifies it as bigotry.
-3. Standard moderation processes apply, such as sending the content to human moderators.
+2. Tisaneはそれを偏見と分類します。
+3. 標準的なモデレーションプロセス（当該コンテンツを人間のモデレーターに送信など）が適用されます。
 
-## Benefits Of 2-Factor Moderation
+## ユーザー参加型モデレーションのメリット
 
-- Reduces reliance on human moderators while maintaining effective enforcement.
-- Encourages self-policing, discouraging trolls from attacking others.
-- Minimizes false positives, as the targeted user ultimately decides whether to act.
+- 人間のモデレーターへの依存度を低減しつつ、効果的なモデレーションの実施を維持します。
+- 自主規制を促進し、他人を攻撃する荒らしを抑制します。
+- 最終的に行動するかどうかは対象ユーザーが判断するため、誤検出を最小限に抑えます。
 
 
 

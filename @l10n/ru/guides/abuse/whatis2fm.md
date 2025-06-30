@@ -1,37 +1,37 @@
-﻿# About 2-Factor Moderation
+﻿# О двухфакторной модерации
 
-2-Factor Moderation is a crowdsourced moderation approach designed for high-traffic, real-time chats, such as in-game communication. It works similarly to [2-Factor Authentication](https://en.wikipedia.org/wiki/Multi-factor_authentication), (2FA) by requiring two independent inputs to make a moderation decision.
+Двухфакторная модерация — это способ модерации, используемый в чатах в режиме реального времени, например, общение внутри игр. Двухфакторная модерация походит на двухфакторную аутентификацию (2FA), требуя два независимых ввода, чтобы вынести решение.
 
-## Why Is It Needed?
-- Real-time chats often become toxic, driving users away.
-- Hiring dedicated human moderators for real-time chats is expensive and often impractical.
-- Moderating chat manually is an unpopular and mentally exhausting task for moderators.
-- On the other hand, automatic moderation may have false positives.
+## Зачем она нужна?
+- Общение в чатах в реальном времени часто становится токсичным и отпугивает пользователей.
+- Нанимать специальных модераторов-людей для контроля чатов в реальном времени — дорогое и зачастую непрактичное занятие.
+- Модерирование чата вручную — непопулярная и морально утомительная задача для модераторов.
+- С другой стороны, автоматическая модерация может давать ложные срабатывания.
 
-Note that 2-factor moderation only works for moderation types when another user is targeted, e.g. personal attacks (insults, cyberbullying).
+Обратите внимание, что двухфакторная модерация работает только в тех случаях, когда объектом становится другой пользователь, например, личные нападки (оскорбления, кибербуллинг).
 
-## How 2-Factor Moderation Works
-1. Tisane flags a message as containing a personal attack targeting another user.
-2. The targeted user is granted temporary moderation privileges to approve a punitive action against the offender (e.g., muting or banning them).
-3. If Tisane's detection misfired, and the message, in fact, is not an insult, the targeted user will likely choose to abort. If it is indeed an insult, the attacker will be punished.
+## Как работает двухфакторная модерация
+1. Tisane помечает сообщение как содержащее личные нападки на другого пользователя.
+2. Пользователю, на которого направлено действие, предоставляются временные привилегии модератора для одобрения санкций в отношении нарушителя (например, отключение возможности высказываться или бан).
+3. Если обнаружение Tisane дало сбой и сообщение на самом деле не является оскорблением, целевой пользователь, скорее всего, решит не принимать ответных мер. Если это действительно оскорбление, виновный в нападках будет наказан.
 
 
-Since personal attacks make up 90%+ of abuse, this approach significantly reduces human moderation workload. This system also acts as a deterrent. Trolls are less likely to attack others when they know their victim can immediately punish them.
+Поскольку более 90% оскорблений являются личными нападками, такой подход значительно снижает нагрузку на модераторов. Эта система также действует как сдерживающий фактор. Тролли менее склонны нападать на других, когда знают, что жертва может немедленно применить санкции в ответ.
 
-For content that is not a personal attack, standard moderation workflow applies. 
+Для контента, который не является личной нападкой, применяется стандартная процедура модерации. 
 
-## 2-Factor Moderation Process
+## Прцесс двухфакторной модерации
 
 ```mermaid
 flowchart TD
-  input[/Incoming message from User 1/]
+  input[/Входящее сообщение пользователя 1/]
   tisane{{Tisane}}
-  isPersonalAttack{Personal attack?}
-  isResponseToUser2{Response to User 2?}
-  isAnotherAbuse{Another type of abuse?}
-  normalModeration[[Normal moderation]]
-  grantPrivileges[[Grant moderation privileges to User 2 over User 1]]
-  publish((Publish))
+  isPersonalAttack{Нападки?}
+  isResponseToUser2{Ответ пользователю 2?}
+  isAnotherAbuse{Другой тип проблемного контента?}
+  normalModeration[[Обычная модерации]]
+  grantPrivileges[[Дать разрешение пользователю 2 модерировать пользователя 1]]
+  publish((Опубликовать))
   input---->tisane
   tisane-- result -->isPersonalAttack
   isPersonalAttack-- yes -->isResponseToUser2
@@ -41,33 +41,33 @@ flowchart TD
   isAnotherAbuse-- no -->publish
 ```
 
-## Possible Scenarios And Outcomes
+## Возможные сценарии и результаты
 
-#### Scenario 1: Successful Moderation
+#### Сценарий 1. Успешная модерация
 
-1. User 1 insults User 2.
+1. Пользователь 1 оскорбляет Пользователя 2.
 
-2. Tisane flags it as a personal attack.
-3. User 2 is granted temporary moderation privileges and bans User 1.
+2. Tisane расценивает это как личную напалку.
+3. Пользователю 2 предоставляются временные права модератора, и он блокирует Пользователя 1.
 
-#### Scenario 2: False Positive Handling
+#### Сценарий 2. Обработка ложных срабатываний
 
-1. User 1 posts a comment that is mistakenly flagged as abusive.
+1. Пользователь 1 публикует комментарий, который ошибочно помечен как оскорбительный.
 
-2. User 2 is given moderation privileges but chooses not to take action since no real attack occurred.
+2. Пользователю 2 предоставлены права модератора, но он решает не предпринимать никаких действий, поскольку реальной нападки не было.
 
-#### Scenario 3: Hate Speech Or Other Violations
+#### Сценарий 3. Разжигание ненависти или другие нарушения
 
-1. User 1 posts bigoted or otherwise broad-targeted abusive content.
+1. Пользователь 1 публикует нетерпимый или иным образом оскорбительный контент, обращенный к широкому кругу лиц.
 
-2. Tisane classifies it as bigotry.
-3. Standard moderation processes apply, such as sending the content to human moderators.
+2. Tisane классифицирует это как нетерпимость.
+3. Применяются стандартные процессы модерации, такие как отправка контента модераторам.
 
-## Benefits Of 2-Factor Moderation
+## Преимущества двухфакторной модерации
 
-- Reduces reliance on human moderators while maintaining effective enforcement.
-- Encourages self-policing, discouraging trolls from attacking others.
-- Minimizes false positives, as the targeted user ultimately decides whether to act.
+- Снижает зависимость от модераторов-людей, сохраняя при этом эффективность контроля.
+- Поощряет самоконтроль, предотвращая нападения троллей на других пользователей.
+- Минимизирует количество ложных срабатываний, поскольку в конечном итоге решение о совершении действия принимает целевой пользователь.
 
 
 

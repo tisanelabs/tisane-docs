@@ -1,12 +1,12 @@
-# Moderating Live Chat
+﻿# ライブチャットをモデレートする
 
-Tisane is widely used to moderate live communications between users on group instant messaging platforms. Usually, in live chats Tisane runs in fully automatic mode. 
+Tisaneは、グループインスタントメッセージプラットフォームでのユーザー間のライブコミュニケーションをモデレートするために広く使用されています。通常、ライブチャットでは、Tisaneは完全自動モードで動作します。 
 
-If false positives is a sensitive issue, then an appeal procedure and human review (on request) can be established.
+偽陽性が微妙な問題である場合は、申し立て手続きと（要求に応じて）人による審査を行うことができます。
 
-## Standard Integration Architecture
+## 標準統合アーキテクチャ
 
-As shown on the diagram below: a simple integration architecture scans every message and blacklists or sends the message to a special channel if it is deemed problematic and the policies do not allow the type of `abuse` that was detected.
+下図に示すように、単純な統合アーキテクチャでは、問題があると判断された場合や、ポリシーで検出された`不正使用`のタイプが許可されていない場合に、すべてのメッセージをスキャンし、メッセージをブラックリストに登録するか、特別なチャネルに送信します。
 
 ```mermaid
 flowchart TD
@@ -25,20 +25,20 @@ flowchart TD
 ```
 
 
-1. The client application sends posts to Tisane for scanning.
-2. Tisane flags posts based on severity level and abuse type.
-3. The client application then must check if the types of entries logged in the `abuse` section are not allowed by the community policies.
-4. If there are restricted types, then the post is blacklisted. (Presumably, the post is sent to a special channel for moderators. For maintenance reasons, it is not recommended to discard messages without a trace.)
-5. If there are no restricted types or there is no `abuse` section in Tisane's response, the post is published.
+1. クライアントアプリケーションが、投稿をスキャンするようTisaneに送信します。
+2. Tisaneは、重大度レベルと不正使用のタイプに基づいて投稿にフラグを付けます。
+3. 次に、クライアントアプリケーションは、 `abuse`セクションに記録されたエントリーのタイプがコミュニティポリシーによって許可されているかどうかをチェックします。
+4. 制限されたタイプがある場合、その投稿はブラックリストに登録されます。（おそらく、投稿はモデレーター用の特別なチャネルに送られます。保守上の理由から、トレースなしでメッセージを破棄することは推奨しません。）
+5. 制限されたタイプがない場合、またはTisaneからのレスポンスに`abuse`セクションがない場合、その投稿は公開されます。
 
-## Open-Source Integrations
+## オープンソースインテグレーション
 
-Our partner PubNub built a content moderation demo seamlessly integrated with Tisane and published its source code in GitHub. The implementation allows the users dynamically set community moderation policies. 
+当社のパートナーであるPubNubは、Tisaneとシームレスに統合されたコンテンツモデレーションデモを構築し、そのソースコードをGitHubで公開しました。この実装により、ユーザーはコミュニティのモデレーションポリシーを動的に設定できます。 
 
-- [PubNub Moderation Dashboard for Chat](https://www.pubnub.com/demos/moderation-dashboard/)
-- [pubnub/moderation-dashboard on GitHub](https://github.com/pubnub/moderation-dashboard)
+- [チャット用PubNubモデレーションダッシュボード](https://www.pubnub.com/demos/moderation-dashboard/)
+- [GitHub上のpubnub/モデレーションダッシュボード](https://github.com/pubnub/moderation-dashboard)
 
-## Integrations with Popular platforms
+## 人気の高いプラットフォームとの統合
 
-See: [Integrations - Tisane Labs](https://tisane.ai/integrations)
+参考：[統合 - Tisaneラボ](https://tisane.ai/integrations)
 

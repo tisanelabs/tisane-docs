@@ -1,58 +1,58 @@
-# Bigotry and Hate Speech
+# Нетерпимость и разжигание ненависти
 
-This type covers hate speech or expression of bigoted opinions; adversarial remarks targetting [protected groups](https://en.wikipedia.org/wiki/Protected_group) (in other terms, a group that may be targeted for discrimination). This includes not just racial slurs but any hostile statements directed at the group as a whole. 
+Этот тип охватывает разжигание ненависти или выражение нетерпимых мнений; враждебные высказывания, направленные против [защищенных групп](https://en.wikipedia.org/wiki/Protected_group) (другими словами, групп, которые могут подвергаться дискриминации). Сюда относятся не только расовые оскорбления, но и любые враждебные высказывания, направленные против группы в целом. 
 
-Currently, we detect references to:
+В настоящее время мы обнаруживаем упоминания о следующем:
 
-- Ethniticies or race
-- Religious and [ethnoreligious](https://en.wikipedia.org/wiki/Ethnoreligious_group) groups
-- Sexual minorities, except those illegal in most countries (e.g. pedophiles)
-- Foreigners / immigrants
-- Nonreligious people
-- People with disabilities
-- Castes (e.g. in India)
-- Obese people
-- Either of the genders
+- этническая принадлежность или раса;
+- религиозные и [этнорелигиозные](https://en.wikipedia.org/wiki/Ethnoreligious_group) группы;
+- сексуальные меньшинства, за исключением тех, которые запрещены в большинстве стран (например, педофилы);
+- Иностранцы/иммигранты;
+- нерелигиозные люди (атеисты);
+- люди с ограниченными возможностями;
+- касты (например, в Индии);
+- люди, страдающие ожирением;
+- любой из полов.
 
-Every detected instance of bigotry is logged as a form of abuse. The type assigned is `bigotry`, and like other types of problematic content, it includes a severity level for context.
+Каждый выявленный случай нетерпимости регистрируется как форма нарушений. Такому контенрту присваивается тип `bigotry` и, как и другие типы проблемного контента, он включает в себя уровень серьезности контекста.
 
-## What Qualifies As Bigotry Or Hate Speech?
+## Что считается проявлением нетерпимости или разжиганием ненависти?
 
-We define bigotry as hostility, negative opinions, or calls for discrimination and/or violence directed at an entire demographic group - or individuals - solely because of their association with that group.
+Мы определяем нетерпимость как враждебность, негативные мнения или призывы к дискриминации и/или насилию, направленные против целой демографической группы или отдельных лиц исключительно из-за их принадлежности к этой группе.
 
-An association between one’s feelings and being a member is a group will also be tagged as an instance of bigotry.
+Связь между чувствами человека и его принадлежностью к группе также будет расценена как пример нетерпимости.
 
-### Implicit Bigotry
-Implicit bigotry towards one of the targeted groups without naming it (e.g. “get out of my country”) is also in the scope of recognition, although is significantly more difficult to recognize.
+### Скрытая нетерпимость
+Скрытая нетерпимость по отношению к одной из целевых групп без ее прямого указания (например, «убирайтесь из моей страны») также входит в сферу распознавания, хотя ее значительно сложнее распознать.
 
-### Not Bigotry
+### Что не является нетерпимостью
 
-- Attacks on:
-  - Public figures
-  - People of particular occupation
-  - People who underwent specific experience, even if the experience was traumatic
-- A statement about a group member committing a wrongdoing. 
+- Нападки на:
+  - общественных деятелей;
+  - людей определенной профессии;
+  - людей, которые полуычили определенный опыт, даже если этот опыт был травматичным;
+- заявление о совершении правонарушения членом группы. 
 
-Some of these attacks may be flagged as `contentious`. See: [Contentious Content](./contentious.md)
+Некоторые из этих нападок могут быть помечены как `contentious`. Рекомендуем ознакомиться: [Спорный контент](./contentious.md)
 
-## Severity Levels
+## Уровни серьезности
 
-The severity levels are as following:
+Используются следующие уровни серьезности:
 
-* `low` - bigoted opinion or generalization that may not be particularly offensive
-* `medium` - a bigoted opinion or expression, including most slurs
-* `high` - an extremely offensive slur or denying the group basic rights or the right to exist
-* `extreme` - a call to violence against the target group or actively trying to bring its demise
+* `low` — нетерпимое мнение или обобщение, которое может и не быть особенно оскорбительным;
+* `medium` — нетерпимое мнение или выражение, включая большинство оскорблений;
+* `high` — крайне обидное оскорбление или отрицание основных прав группы или права на существование;
+* `extreme` — призыв к насилию в отношении целевой группы или активная попытка ее уничтожения.
 
-## Relevant Tags
+## Соответствующие теги
 
-The following tags are relevant to the `bigotry` type:
+К типу `bigotry` относятся следующие теги:
 
 * `ableism`
 * `ageism`
 * `anticatholicism`
 * `antisemitism`
-* `caste` (caste-based discrimination)
+* `caste` (дискриминация по кастовому признаку)
 * `christianophobia`
 * `homophobia`
 * `islamophobia`
@@ -62,9 +62,9 @@ The following tags are relevant to the `bigotry` type:
 * `transphobia`
 * `xenophobia`
 
-## Example
+## Например:
 
-Request:
+Запрос:
 
 ```json
 {
@@ -77,7 +77,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 
 ```json
 {

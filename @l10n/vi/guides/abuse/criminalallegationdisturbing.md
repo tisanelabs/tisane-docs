@@ -1,47 +1,47 @@
-# Difference between Criminal Activity, Allegation, and Disturbing
+# Phân biệt giữa Hoạt động phạm tội, Cáo buộc và Nội dung gây khó chịu
 
-These types of problematic content capture similar scenarios:
+Các loại nội dung có vấn đề sau đây liên quan đến các tình huống tương tự:
 
-- `criminal_activity`
-- `allegation`
-- `disturbing`
+- `criminal_activity` (hoạt động tội phạm)
+- `allegation` (cáo buộc)
+- `disturbing` (gây khó chịu)
 
-They do have differences between them.
+Tuy nhiên, giữa chúng vẫn có sự khác biệt rõ ràng.
 
-## Criminal Activity
+## Hoạt động tội phạm
 
-The `criminal_activity` type detects actual ongoing activity. For example: Attempts to sell illicit items online, death threats, and more. 
+Loại `criminal_activity` phát hiện hành vi vi phạm pháp luật đang diễn ra. Ví dụ: Cố bán hàng cấm trực tuyến, đe dọa giết người,… 
 
-The purpose of this type is to detect foul play going in the content. Nothing else.
+Mục đích là để phát hiện các hành vi sai trái có trong nội dung. Chỉ nhằm mục đích như vậy.
 
-It is not the same as *conversations* about alleged criminal acts. For example, if an article describes a sting raid on a meth lab, it is not tagged as abuse. 
+Nó không tương tự như *các cuộc trò chuyện* về hành vi tội phạm bị cáo buộc. Ví dụ: nếu một bài viết mô tả một cuộc bố ráp vào một phòng thí nghiệm sản xuất ma túy đá, nội dung đó sẽ không bị gắn nhãn abuse (lạm dụng). 
 
-If you are looking to locate conversations about crimes, look at the `topics` section.
+Nếu bạn muốn tìm các cuộc trò chuyện về tội phạm, hãy xem phần `topics`.
 
-Also see: [Criminal Activity](./criminalactivity.md)
+Xem thêm phần: [Hoạt động tội phạm](./criminalactivity.md)
 
-## Allegation
+## Cáo buộc
 
-What happens if someone talks about a crime that allegedly happened to them? This is what `allegation` is meant to tackle. 
+Vậy nếu ai đó nói về một tội ác được cho là đã xảy ra với họ thì sao? Đó là phạm vi mà loại `allegation` xử lý. 
 
-The difference between `allegation` and `criminal_activity` is similar to the venerable [*This is not a pipe*](https://en.wikipedia.org/wiki/The_Treachery_of_Images) by René Magritte.
+Sự khác biệt giữa `allegation` và `criminal_activity` có thể so sánh với bức tranh nổi tiếng [*This is not a pipe*](https://en.wikipedia.org/wiki/The_Treachery_of_Images) (Đây không phải là cái tẩu thuốc) của René Magritte.
 
-We don’t know if it’s true and it’s not happening right now, but we should not ignore it. 
+Chúng ta không biết điều đó có thật không, và nó cũng không đang xảy ra tại thời điểm hiện tại — nhưng ta không nên bỏ qua. 
 
-On the other hand, we can’t lump it together with the *criminal activity* type, because it would create false positives in communities of survivors of abuse, for example. 
+Mặt khác, cũng không thể gộp nó vào loại *hành vi phạm tội*, bởi như vậy sẽ gây ra báo lỗi sai, đặc biệt trong các cộng đồng những người từng bị lạm dụng, bạo hành. 
 
-For law enforcement needs, the distinction must be clear, too: an allegation is not the same as actual activity. And even if it’s a real crime is to be reported, the procedures are very different.
+Với nhu cầu của cơ quan thực thi pháp luật, sự phân biệt này cũng rất quan trọng: một cáo buộc không phải là một hành vi thực tế. Ngay cả khi đó là tội phạm thực sự phải báo cáo, quy trình xử lý cũng hoàn toàn khác.
 
-Also see: [Allegations](./allegation.md)
+Xem thêm phần: [Cáo buộc](./allegation.md)
 
-## Disturbing
+## Gây khó chịu
 
-The third type, `disturbing`, flags graphic depictions of death, injury, etc. whether they are crime-related, or not. 
+Loại thứ ba, `disturbing`, gắn cờ những mô tả sống động, gây sốc về cái chết, thương tích,… dù có liên quan đến tội phạm hay không. 
 
-In most cases, these depictions do not overlap with the `criminal_activity` type. 
+Trong phần lớn trường hợp, những mô tả này không trùng với loại `criminal_activity`. 
 
-They may or may not overlap with the `allegation` type. 
+Chúng có thể hoặc không trùng với loại `allegation`. 
 
-Not all death or injury are considered disturbing, too.
+Không phải mọi nội dung về cái chết hay thương tích đều được xem là gây khó chịu.
 
-Also see: [Disturbing Content](./disturbing.md)
+Xem thêm phần: [Nội dung gây khó chịu](./disturbing.md)

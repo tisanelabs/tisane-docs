@@ -1,38 +1,38 @@
-# Sexual Advances
+﻿# 不適切な性的表現
 
-Sexual advances are defined as attempts to gain some sort of sexual favor or gratification. These attempts can be welcome or unwelcome; Tisane does not aim to determine that. 
+不適切な性的表現とは、何らかの性的な行為や性的満足を得ようとする行為を指します。これらの試みは歓迎されることもあれば、歓迎されないこともありますが、Tisaneは、そのような判断を目的としていません。 
 
-Sexual advances are recorded as instances of abuse under the type `sexual_advances` in the response. Like other types of abuse, each detected instance is assigned a severity level, with more explicit advances receiving a higher severity rating.
+不適切な性的表現は、レスポンスで`sexual_advances`タイプにおいて中傷のインスタンスとして記録されます。他のタイプの中傷と同様に、検出された各インスタンスには重大度が割り当てられ、より明確な表現が認められるほど重大度が高くなります。
 
-## Relevant tags
+## 関連タグ
 
 * `endearment`
 * `pedophilia`
-* `relationship_status` (e.g. questions whether the other person is married or single)
+* `relationship_status`（例：相手が結婚しているか独身であるかといった質問）
 * `sex`
-* `sex_work` (helps detecting references to sex workers)
+* `sex_work`（セックスワーカーに関する発言を検出するのに有効）
 
-## Sexual Advances vs Adult Only Content
+## 不適切な性的表現と成人向けコンテンツの比較
 
-Note that not all conversations on sexual topics constitute sexual advances. Only actual attempts to gain sexual favors or gratification are.
+注意：性的な話題に関するすべての会話が不適切な性的表現というわけではありません。性的な行為や性的満足を得るための実際の試みのみが該当します。
 
-While there is a significant overlap between `sexual_advances` and `adult_only`, these two types are not the same. Mentioning body parts related to sexual activities without context is not qualified as sexual advances, for example.
+`sexual_advances`と`adult_only`には大きな重複がありますが、これらの2つのタイプは同じものではありません。例えば、性行為に関連する身体の部位を文脈なしに言及することは、不適切な性的表現とはみなされません。
 
-To track all sexual content, watch for:
+すべての性的コンテンツを追跡するには、以下の点に注意してください。
 
-* instances with the `sexual_advances` type
-* instances with the `adult_only` type and `sex` as one of the tags.
+* `sexual_advances`のタイプを含むインスタンス
+* `adult_only`タイプで、タグの一つとして`sex`が含まれるインスタンス。
 
-See: [Adult Only Content](./adultonly.md)
+参考：[成人向けコンテンツ](./adultonly.md)
 
-## Key Considerations
+## 主な考慮事項
 
-- The API does not enforce rules; it only detects and categorizes content.
-- Community moderators and administrators determine whether flagged content violates platform guidelines. For example, sexual advances do not violate terms and conditions in dating apps.
+- APIはルールを強制せず、コンテンツを検出・分類するのみです。
+- コミュニティのモデレーターと管理者は、フラグが立てられたコンテンツがプラットフォームのガイドラインに違反しているかどうかを判断します。例えば、マッチングアプリにおける不適切な性的表現は、利用規約に違反しません。
 
-## Example
+## 例
 
-Request:
+リクエスト：
 ```json
 {
   "language":"en",
@@ -44,7 +44,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 ```json
 {
 	"text": "do u hv a bf",

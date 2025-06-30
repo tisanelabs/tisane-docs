@@ -1,18 +1,18 @@
-# Data Leaks
+﻿# Rò rỉ dữ liệu
 
-Instances of leaked data etc. are logged under the `abuse` section, with the `type` attribute set to `data_leak`.
+Các trường hợp rò rỉ dữ liệu, v.v. sẽ được ghi nhận trong phần `abuse` với thuộc tính `type` được đặt là `data_leak`.
 
-## Relevant Tags
+## Các thẻ liên quan
 
-The following tags are often associated with the `data_leak` type:
+Các thẻ sau đây thường được gắn với loại  `data_leak`:
 
-* `pii` - personally identified information (PII)
-* `credentials` - electronic credentials, such as usernames, accounts, passwords
-* `payment` - data related to payments
+* `pii` -  thông tin nhận dạng cá nhân (PII)
+* `credentials` - thông tin xác thực điện tử, như tên người dùng, tài khoản, mật khẩu
+* `payment` - dữ liệu liên quan đến thanh toán
 
-## Example
+## Ví dụ
 
-Request:
+Yêu cầu:
 
 ```json
 {
@@ -25,7 +25,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 ```json
 {
 	"text": "List of paypal accounts and ready for use",

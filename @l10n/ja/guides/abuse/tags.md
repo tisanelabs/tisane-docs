@@ -1,8 +1,8 @@
-# Tags
+﻿# タグ
 
-In addition to the abuse types, more detail on the context is provided as a `tags` string array. It may be a subtype of the identity being targeted, or a type of the illicit item being discussed, etc.
+中傷のタイプに加え、文脈に関する詳細情報が`tags`の文字列配列として提供されます。標的対象の個人情報のサブタイプである可能性があれば、議論されている不正な項目のタイプである可能性もあります。
 
-The values of the tags usually correlate with the type of problematic content detected, but not necessarily. The tags are obtained by traversing the matching main clause, and collecting the `abuse/tags` values associated with the lexemes (or inner phrases) involved. For example, in an utterance like: "kill all immigrants", two types of `abuse` are detected: `criminal_activity` and `bigotry`. They both have the following tags: `call_for_violence`, `death`, and `xenophobia`.
+タグの値は通常、検出された問題のあるコンテンツのタイプと相関関係がありますが、必ずしもそうとは限りません。タグは、一致する主節のトラバーサルを行い、関与する語彙素（または内部句）に付随する`abuse/tags`の値を収集することで取得されます。例えば、例えば、「すべての移民を殺せ」という発言では、2種類の`abuse`（`criminal_activity`と`bigotry`）が検出されます。これらには`call_for_violence`、`death`、`xenophobia`というタグが含まれます。
 
 ```json
 {
@@ -40,13 +40,13 @@ The values of the tags usually correlate with the type of problematic content de
 }
 ```
 
-That also means that even if some types are ignored purportedly, the tags can still be used.
+つまり、一部のタイプが意図的に無視された場合でも、これらのタグは使用可能です。
 
-The sections dedicated to the abuse types list most relevant tags. 
+中傷のタイプに関するセクションでは、最も関連性の高いタグが一覧表示されます。 
 
-## Complete List of Tags
+## タグの一覧
 
-See the full listing of the tags below.
+以下のタグの一覧をご覧ください。
 
 * `ableism`
 * `admission`

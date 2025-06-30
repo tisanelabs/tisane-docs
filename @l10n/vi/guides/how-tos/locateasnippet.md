@@ -1,22 +1,22 @@
-# Locating A Snippet Using Location Data
+# Xác định đoạn văn bằng dữ liệu vị trí
 
-Tisane provides structured location data to help pinpoint flagged text fragments.
+Tisane cung cấp dữ liệu vị trí có cấu trúc nhằm giúp xác định chính xác các đoạn văn bản bị gắn cờ.
 
-The three key location attributes are:
+Ba thuộc tính vị trí chính là:
 
-- `sentence_index` : Zero-based index of the sentence containing the snippet.     
-- `offset`: Zero-based position of the first character in the snippet within the sentence.
-- `length` : Number of characters in the snippet.                         
+- `sentence_index` : Chỉ số câu, đánh số từ 0, chứa đoạn văn bản.     
+- `offset`: Vị trí bắt đầu, tính từ 0, của ký tự đầu tiên trong đoạn văn bản trong phạm vi câu.
+- `length` : Số ký tự của đoạn văn bản.                         
 
-## How To Get The String
+## Cách để lấy chuỗi
 
-1. Find the sentence text containing the snippet:
-   - Navigate to the `sentence_list` node.
-   - Select a node where `index` = `sentence_index`.
-   - Alternatively, retrieve the sentence directly from the sentence list array.
-2. Get the substring:
-   - Use the `offset` and `length` values to get the substring from the sentence.
+1. Xác định văn bản câu chứa đoạn văn bản:
+   - Truy cập vào nút `sentence_list`.
+   - Chọn nút có `index` = `sentence_index`.
+   - Hoặc có thể lấy trực tiếp câu đó từ mảng danh sách câu.
+2. Lấy chuỗi con:
+   - Sử dụng giá trị `offset` và `length` để lấy ra chuỗi con từ câu đã chọn.
 
-## Why Relative Offsets Instead Of Absolute Positions?
+## Vì sao dùng vị trí tương đối thay vì vị trí tuyệt đối?
 
-We use sentence-based indexing instead of absolute offsets because many users need an actual sentence with the snippet for context.
+Chúng tôi sử dụng chỉ mục theo câu thay vì vị trí ký tự tuyệt đối vì phần lớn người dùng cần lấy cả câu chứa đoạn bị gắn cờ để hiểu được ngữ cảnh.

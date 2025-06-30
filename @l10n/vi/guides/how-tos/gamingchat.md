@@ -1,69 +1,69 @@
-# Processing Competitive Language In Game And Sports Chats 
+# Xử lý ngôn ngữ mang tính ganh đua trong nội dung trò chuyện về game và thể thao 
 
-## The Challenge Of Competitive Language
+## Thách thức của ngôn ngữ mang tính ganh đua
 
 *“Kill him! Kill him NOW!”*
 *“I will kick your a*!”*
 *“Touch your chest. Then push the ball harder.”*
 
-When processing chat in computer games and sports-related communities, moderation APIs face a dilemma. 
+Khi xử lý nội dung trò chuyện trong các game trên máy tính và cộng đồng liên quan đến thể thao, API kiểm duyệt phải đối mặt với một tình huống khó xử. 
 
-On one hand, they can’t just ignore utterances that are normally considered policy violation. 
+Một mặt, chúng không thể bỏ qua những phát ngôn mà thông thường sẽ được coi là vi phạm chính sách. 
 
-On the other, as Dr. Evil’s support group might say, *“We don’t actually want to kill each other in here.”*  Yet, real threats must still be taken seriously.
+Mặt khác, như nhóm ủng hộ Dr. Evil có thể sẽ nói: *“Thực ra chúng tôi không muốn giết nhau ở đây.”*  Tuy nhiên, những mối đe dọa thực sự vẫn phải được xem xét một cách nghiêm túc.
 
-### The Problem With Using Severity Levels
+### Vấn đề khi sử dụng mức độ nghiêm trọng
 
-Some moderation APIs attempt to address this by assigning "severity levels" and advising users to ignore messages below a certain threshold.
+Một số API kiểm duyệt cố gắng giải quyết vấn đề này bằng cách chỉ định "mức độ nghiêm trọng" và khuyên người dùng bỏ qua các tin nhắn ở dưới một ngưỡng nhất định.
 
-But game violence can be severe, and it’s still nothing to do with the real world.  This means even the most severe utterances should be ignored. At the same time, this severity-based approach risks filtering out genuine threats that should not be ignored.
+Nhưng tính bạo lực trong game có thể rất nghiêm trọng và không liên quan gì đến thế giới thực.  Điều này có nghĩa là ta nên mặc kệ ngay cả những phát ngôn nghiêm trọng nhất. Đồng thời, cách tiếp cận dựa trên mức độ nghiêm trọng này có nguy cơ bỏ sót những mối đe dọa thực sự không nên bỏ qua.
 
-## Tisane's Approach
+## Cách tiếp cận của Tisane
 
-Tisane offers two methods of handling this dilemma:
+Tisane đưa ra hai phương thức để giải quyết tình huống khó xử này:
 
-- **Method 1**: Ignore all `criminal_activity` type occurrences that have tags like `violence` and `death` on the client app side.
+- **Phương thức 1**: Bỏ qua mọi trường hợp thuộc loại `criminal_activity` và có những thẻ như `violence` và `death` trên ứng dụng máy khách.
 
-- **Method 2** (recommended): Use a special `game violence` flag to ignore game and sporting competitive language.
+- **Phương thức 2** (khuyến nghị): Sử dụng một cờ `game violence` đặc biệt để bỏ qua ngôn ngữ mang tính ganh đua liên quan đến game và thể thao.
 
-Example:
+Ví dụ:
 
 ```
 
 {"language":"en","content":"Shoot him!!!","settings":{"snippets":true,"memory":{"flags":["game_violence_ok"]}}}
 
 ```
-The `game_violence_ok` flag ensures that all alerts related to sports competitive language and game violence are silenced. 
+Cờ `game_violence_ok` đảm bảo rằng mọi cảnh báo liên quan đến ngôn ngữ mang tính ganh đua liên quan đến thể thao và bạo lực trong game đều bị bỏ qua. 
 
-Note: The flag won’t silence actual threats like *“I know where you live”* or anything clearly not related to gaming.
+Lưu ý: Cờ này sẽ không bỏ qua những lời đe dọa thực sự như *“Tao biết mày sống ở đâu đấy”* hay bất cứ điều gì rõ ràng không liên quan đến game.
 
-### Output
+### Đầu ra
 
-Example without the `game violence` flag:
+Ví dụ không có cờ `game violence`:
 
 ![tisaneShootHimNoGVOK.png](/images/tisaneShootHimNoGVOK.png)
 
-Example with the  `game violence` flag set:
+Ví dụ có bộ cờ  `game violence`:
 
 ![tisaneGvOk.png](/images/tisaneGvOk.png)
 
-Also see: [2-Factor Moderation](../abuse/whatis2fm.md)
+Xem thêm phần: [Kiểm duyệt 2 yếu tố](../abuse/whatis2fm.md)
 
-##  Using Tisane in an iGaming platform
+##  Sử dụng Tisane trong một nền tảng iGaming
 
-Tisane’s iGaming clients usually use Tisane to moderate:
+Các khách hàng iGaming của Tisane thường sử dụng Tisane để kiểm duyệt:
 
-- Real-time chat
-- User names
+- Trò chuyện thời gian thực
+- Tên người dùng
 
-The logic may be different from the chat moderation. For example:  *BitcoinKing*, *Hitler*, *nakedsupermodels* etc. give a pretty good idea about the user’s intentions.
+Logic có thể khác với quy trình kiểm duyệt trò chuyện. Ví dụ:  *BitcoinKing*, *Hitler*, *nakedsupermodels* v.v. thể hiện khá rõ ý định của người dùng.
 
-The two moderation functions are handled by the same method (`POST /parse`). 
+Hai chức năng kiểm duyệt được xử lý theo cùng một phương thức (`POST /parse`). 
 
-The only difference is the `format` setting:
+Điểm khác biệt duy nhất là cài đặt `format`:
 
-- For the chat, use `"format":"dialogue"`. 
-- For user names, use `"format":"alias"`.
+- Với trò chuyện, sử dụng `"format":"dialogue"`. 
+- Với tên người dùng, sử dụng `"format":"alias"`.
 
-Our partners at PubNub provide both chat infrastructure and a [seamlessly integrated open-source moderation dashboard for Tisane](https://www.pubnub.com/demos/moderation-dashboard/).
+Các đối tác của chúng tôi tại PubNub cung cấp cả cơ sở hạ tầng trò chuyện và [bảng điều khiển kiểm duyệt mã nguồn mở được tích hợp liền mạch cho Tisane.](https://www.pubnub.com/demos/moderation-dashboard/).
 

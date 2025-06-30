@@ -1,69 +1,69 @@
-# Processing Competitive Language In Game And Sports Chats 
+# ゲームやスポーツのチャットにおける競争的な言葉の処理 
 
-## The Challenge Of Competitive Language
+## 競争的な言葉の課題
 
 *“Kill him! Kill him NOW!”*
 *“I will kick your a*!”*
 *“Touch your chest. Then push the ball harder.”*
 
-When processing chat in computer games and sports-related communities, moderation APIs face a dilemma. 
+コンピュータゲームやスポーツ関連のコミュニティでチャットを処理する場合、モデレーションAPIはジレンマに直面します。 
 
-On one hand, they can’t just ignore utterances that are normally considered policy violation. 
+通常、ポリシー違反とみなされる発言を無視することはできません。 
 
-On the other, as Dr. Evil’s support group might say, *“We don’t actually want to kill each other in here.”*  Yet, real threats must still be taken seriously.
+しかし、悪のカリスマ「ドクター・イーブル」の支持者が言うように、*「ここで本当に殺し合いをしたいわけではない」*のです。  それでも、現実にある脅迫は真剣に受け止めなければなりません。
 
-### The Problem With Using Severity Levels
+### 重大度レベルを使用することの問題点
 
-Some moderation APIs attempt to address this by assigning "severity levels" and advising users to ignore messages below a certain threshold.
+モデレーションAPIには、「重大度レベル」を割り当て、ある閾値以下のメッセージは無視するようユーザーに助言することで、これに対処しようとするものもあります。
 
-But game violence can be severe, and it’s still nothing to do with the real world.  This means even the most severe utterances should be ignored. At the same time, this severity-based approach risks filtering out genuine threats that should not be ignored.
+ゲームの暴力は重大なものである可能性がありますが、それでも現実世界とは何の関係もありません。  つまり、最も厳しい発言であっても無視すべきだということになります。同時に、この重大度ベースのアプローチは、無視すべきではない本物の脅威をフィルタリングしてしまう危険性があります。
 
-## Tisane's Approach
+## Tisaneのアプローチ
 
-Tisane offers two methods of handling this dilemma:
+Tisaneは、このジレンマに対処する2つの方法を提示します。
 
-- **Method 1**: Ignore all `criminal_activity` type occurrences that have tags like `violence` and `death` on the client app side.
+- **方法1**：クライアントアプリ側で、 `violence` and `death`といったタグを持つ`criminal_activity`タイプの発生をすべて無視します。
 
-- **Method 2** (recommended): Use a special `game violence` flag to ignore game and sporting competitive language.
+- **方法2**（推奨）：特別な`game violence`フラグを使用し、ゲームやスポーツの競争的な言葉を無視します。
 
-Example:
+例：
 
 ```
 
 {"language":"en","content":"Shoot him!!!","settings":{"snippets":true,"memory":{"flags":["game_violence_ok"]}}}
 
 ```
-The `game_violence_ok` flag ensures that all alerts related to sports competitive language and game violence are silenced. 
+`game_violence_ok`フラグは、スポーツの競争的な言葉やゲームの暴力に関連するすべての警告を止めます。 
 
-Note: The flag won’t silence actual threats like *“I know where you live”* or anything clearly not related to gaming.
+注：このフラグは、*「どこに住んでいるか知っている」*といった実際の脅迫や、明らかにゲームとは関係のないものは止めません。
 
-### Output
+### 出力
 
-Example without the `game violence` flag:
+`game violence`フラグがない場合の例：
 
 ![tisaneShootHimNoGVOK.png](/images/tisaneShootHimNoGVOK.png)
 
-Example with the  `game violence` flag set:
+`game violence`フラグセットがある場合の例：
 
 ![tisaneGvOk.png](/images/tisaneGvOk.png)
 
-Also see: [2-Factor Moderation](../abuse/whatis2fm.md)
+こちらも参考：[2要素モデレーション](../abuse/whatis2fm.md)
 
-##  Using Tisane in an iGaming platform
+##  iGamingプラットフォームでTisaneを使用
 
-Tisane’s iGaming clients usually use Tisane to moderate:
+TisaneのiGamingのクライアントは通常、以下をモデレートするためにTisaneを使用します。
 
-- Real-time chat
-- User names
+- リアルタイムチャット
+- ユーザー名
 
-The logic may be different from the chat moderation. For example:  *BitcoinKing*, *Hitler*, *nakedsupermodels* etc. give a pretty good idea about the user’s intentions.
+ロジックはチャットモデレーションとは異なります。例：  *BitcoinKing*、*Hitler*、*nakedsupermodels*などは、ユーザーの意図について大体の見当はつきます。
 
-The two moderation functions are handled by the same method (`POST /parse`). 
+2つのモデレーション機能は、同じ方法（`POST /parse`）で処理されます。 
 
-The only difference is the `format` setting:
+唯一の違いは、`format`設定です。
 
-- For the chat, use `"format":"dialogue"`. 
-- For user names, use `"format":"alias"`.
+- チャットには `"format":"dialogue"`を使用する。 
+- ユーザー名には`"format":"alias"`を使用する。
 
-Our partners at PubNub provide both chat infrastructure and a [seamlessly integrated open-source moderation dashboard for Tisane](https://www.pubnub.com/demos/moderation-dashboard/).
+PubNubのパートナーはチャットインフラと[Tisane向けのシームレスに統合されたオープンソースのモデレーションダッシュボード](https://www.pubnub.com/demos/moderation-dashboard/)の両方を提供しています。
 

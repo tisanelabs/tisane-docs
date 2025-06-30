@@ -1,11 +1,11 @@
-# Detecting Countries
+﻿# 国の検出
 
-Tisane can extract country names, but we do not assign a special type exclusively for them. To avoid arguments over legitimacy of this or that geopolical entity, countries contain two elements in their `type` array:
+Tisaneは国名を抽出できますが、それらに専用のタイプを割り当てることはありません。地政学的エンティティの正当性をめぐる論争を避けるため、国は`タイプ`の配列に次の2つの要素を含みます。
 
-* `organization`
-* `place`
+* `organization`（組織）
+* `place`（場所）
 
-This approach:
+このアプローチでは、
 
-* helps avoid disputes over sovereignty or status
-* does not require making a special exception when a country is to be treated as an organization (e.g. for decision making) or as a place 
+* 主権や地位をめぐる争いを避けることができます
+* ある国を組織（意思決定のための）や場所として扱う場合、特例を設ける必要はありません 

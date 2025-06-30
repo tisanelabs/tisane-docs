@@ -1,23 +1,23 @@
-# Personal Attack
+﻿# 個人攻撃
 
-A personal attack is an insult, an ad hominem attack, an instance of cyberbullying, or any other kind of attack on a participant in a conversation. Instances of detected personal attacks are logged under the `abuse` section, with the `type` attribute set to `personal_attack`.
+個人攻撃とは、侮辱、個人攻撃（人身攻撃）、ネットいじめ、または会話の参加者に対するその他のいかなる種類の攻撃を指します。検出された個人攻撃のインスタンスは、`abuse`セクションに記録され、`type`属性は`personal_attack`に設定されます。
 
-## What Is Not Considered A Personal Attack?
+## 個人攻撃とみなされないものは何ですか？
 
-- An attack on a social group
+- 社会集団に対する攻撃
 
-   - If the target is an ethnic, religious, or racial group, as this is categorized as `bigotry` (hate speech).
-   - Attacks on other social groups may not fall under any of the categories, or they can be marked as `contentious` (content likely to start disputes).
+   - 対象が民族的、宗教的、または人種的な集団である場合、これは`bigotry`（ヘイトスピーチ）に分類されます。
+   - 他の社会集団に対する攻撃は、いずれのカテゴリーにも該当しない場合があります。または、`contentious`（争いを引き起こす可能性のあるコンテンツ）としてマークされる場合があります。
 
-- An attack on a fictional character or public figure
+- 架空のキャラクターまたは著名人に対する攻撃
 
-   - Criticizing a fictional character or a public figure does not count as a personal attack.
-   - An attack on someone currently not part of the conversation. That means anyone who is not a 2nd person ("you"), and is not identified by a mention linked to a user handle (e.g. @user12345). 
-   - Negative sentiment that does not attack the person directly. For example, _"your music is bad"_ is not a personal attack.
+   - 架空のキャラクターや著名人に対する批判は、個人攻撃には該当しません。
+   - 現在、会話に参加していない人物に対する攻撃。つまり、2人称（「あなた」）ではなく、ユーザーのハンドル名（例：@user12345）に紐付けられた発言で特定されていないすべてのユーザーを指します。 
+   - 個人を直接攻撃しない否定的な感情。例えば、「お前の音楽はひどい」は個人的な攻撃ではありません。__
 
-## Example
+## 例
 
-Request:
+リクエスト：
 
 ```json
 {
@@ -30,7 +30,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 
 ```json
 {
@@ -58,13 +58,13 @@ Response:
 }
 ```
 
-## Redefining Default Policy
+## デフォルトポリシーの再定義
 
-The default policy of excluding 3rd parties can be modified using the `memory` module.
+デフォルトのポリシー（第三者を除外する設定）は、`memory`モジュールを使用して変更可能です。
 
-### Detecting Attacks on Named Parties
+### 指定された当事者に対する攻撃の検出
 
-In order to detect attacks on people referenced by names, add the following memory setting:
+名前で参照されている人物に対する攻撃を検出するため、以下のメモリ設定を追加してください。
 
 ```json
 {
@@ -100,7 +100,7 @@ In order to detect attacks on people referenced by names, add the following memo
 }
 ```
 
-For example:
+例：
 
 ```json
 {
@@ -143,9 +143,9 @@ For example:
 }
 ```
 
-### Detecting Attacks on all 3rd Parties
+### すべての第三者に対する攻撃の検出
 
-In order to detect attacks on all 3rd parties, add the following memory setting:
+すべての第三者に対する攻撃を検出するため、以下のメモリ設定を追加してください。
 
 ```json
 {
@@ -181,7 +181,7 @@ In order to detect attacks on all 3rd parties, add the following memory setting:
 }
 ```
 
-For example:
+例：
 
 ```json
 {

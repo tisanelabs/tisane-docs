@@ -1,5 +1,5 @@
-# Detecting Threats
+# Phát hiện mối đe dọa
 
-Threats are logged as `criminal_activity` with `threat` under `tags`. 
+Các mối đe dọa được ghi lại là `hoạt động_tội phạm` và được gắn `thẻ` `đe dọa`. 
 
-For more details on detecting criminal activity, see [Detecting criminal activity](../abuse/criminalactivity.md)
+Để biết thêm thông tin chi tiết về phát hiện hoạt động tội phạm, hãy xem [Phát hiện hoạt động tội phạm](../abuse/criminalactivity.md)

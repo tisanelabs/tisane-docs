@@ -1,12 +1,12 @@
-# Tokenizing URL Slugs and Hashtags
+# Tách từ trong đường dẫn URL và hashtag
 
-Tisane can analyze slugs and hashtags, treating them as sentences, tokenizing them into words, and extracting topics and entities like in normal text.
+Tisane có thể phân tích các đường dẫn và hashtag bằng cách xử lý chúng như các câu, tách thành từng từ và trích xuất chủ đề cũng như thực thể giống như với văn bản thông thường.
 
-Set `subscope` to `true` to force tokenizing subscopes.
+Đặt `subscope` thành `true` để buộc hệ thống tách các phạm vi con.
 
-## Example:
+## Ví dụ:
 
-Request:
+Yêu cầu:
 
 ```json
 {
@@ -18,7 +18,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 
 ```json
 {

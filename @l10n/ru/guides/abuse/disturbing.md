@@ -1,16 +1,16 @@
-# Disturbing Content
+# Беспокоящий контент
 
-Detected graphic descriptions of violence or injuries are logged under the `abuse` section, with the `type` attribute set to `disturbing`.
+Обнаруженные графические описания насилия или травм регистрируются в разделе `abuse` с присвоением атрибуту `type` значения `disturbing`.
 
 {% admonition type="warning" %}
 
-Disturbing content may or may not constitute criminal activity. See: [Difference between Criminal Activity, Allegation, and Disturbing](./criminalallegationdisturbing.md)
+Беспокоящий контент может быть как связан с преступной деятельностью, так и не связан с ней. Рекомендуем ознакомиться: [Разница между преступной деятельностью, обвинением и нарушением порядка](./criminalallegationdisturbing.md)
 
 {% /admonition %}
 
-## Example
+## Например:
 
-Request:
+Запрос:
 
 ```json
 {
@@ -23,7 +23,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 
 ```json
 {

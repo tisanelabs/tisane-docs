@@ -1,18 +1,18 @@
-# Data Leaks
+﻿# データ漏洩
 
-Instances of leaked data etc. are logged under the `abuse` section, with the `type` attribute set to `data_leak`.
+データ漏洩などのインスタンスは、`abuse`セクションに記録され、`type`属性が`data_leak`に設定されます。
 
-## Relevant Tags
+## 関連タグ
 
-The following tags are often associated with the `data_leak` type:
+以下のタグは、`data_leak`のタイプとよく関連付けられています。
 
-* `pii` - personally identified information (PII)
-* `credentials` - electronic credentials, such as usernames, accounts, passwords
-* `payment` - data related to payments
+* `pii` - 個人を特定できる情報（PII）
+* `credentials` - 電子認証情報（ユーザー名、アカウント、パスワードなど）
+* `payment` - 支払いに関するデータ
 
-## Example
+## 例
 
-Request:
+リクエスト：
 
 ```json
 {
@@ -25,7 +25,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 ```json
 {
 	"text": "List of paypal accounts and ready for use",

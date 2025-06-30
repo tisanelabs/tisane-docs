@@ -1,25 +1,25 @@
-# Allegations
+﻿# Обвинения
 
-Allegation is claimed knowledge or accusation of a misconduct. The misconduct may not be a crime, but something potentially damaging to one's reputation. Instances of detected allegations are logged under the `abuse` section, with the `type` attribute set to `allegation`. 
+Обвинение — это предполагаемое знание или обвинение в неправомерном поведении. Проступок может не являться преступлением, но потенциально наносить ущерб репутации человека. Случаи обнаруженных обвинений регистрируются в разделе `abuse` с присвоением атрибуту `type` значения `allegation`. 
 
-Allegation detection is used to:
+Обнаружение обвинений используется для:
 
-* prevent [review bombing](https://en.wikipedia.org/wiki/Review_bomb) on review sites and marketplaces
-* block mass troll attacks, especially on public figure accounts (must be combined with `personal_attack` detection)
-* prevent lawsuits over alleged libel posted in a community or an account
-* prevent reputational damage
+* предотвращения [бомбардировки отзывами](https://en.wikipedia.org/wiki/Review_bomb) на сайтах отзывов и торговых площадках;
+* блокировки массовых атак троллей, особенно на аккаунты общественных деятелей (необходимо сочетать с обнаружением `personal_attack`);
+* предотвращения судебных исков по поводу предполагаемой клеветы, размещенной в сообществе или аккаунте;
+* предотвращения ущерба репутации.
 
-Relevant tags: nearly all tags apply, as the scope of allegations is broad.
+Соответствующие теги: применимы почти все теги, поскольку сфера обвинений является обширной.
 
 {% admonition type="warning" %}
 
-Tisane makes no assumptions as for the authenticity or inauthenticity of the allegations made. Determining if the claim is true is out of our scope.
+Tisane не делает никаких предположений относительно подлинности или недостоверности выдвинутых обвинений. Определение истинности конкретного утверждения выходит за рамки нашей компетенции.
 
 {% /admonition %}
 
-## Example
+## Например:
 
-Request:
+Запрос:
 ```json
 {
   "language":"en",
@@ -32,7 +32,7 @@ Request:
 ```
 
 
-Response:
+Ответ:
 ```json
 {
 	"text": "He is a pickpocket",
@@ -50,4 +50,4 @@ Response:
 }
 ```
 
-Also see: [Difference between Criminal Activity, Allegation, and Disturbing](./criminalallegationdisturbing.md)
+См. также: [Разница между преступной деятельностью, обвинением и беспокоящими действиями](./criminalallegationdisturbing.md)

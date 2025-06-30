@@ -1,89 +1,89 @@
-# Filtering By Keyword Blocklists
+# Lọc nội dung theo danh sách từ khóa bị chặn
 
-While most users use Tisane for context-aware moderation, some users require simple keyword filtering for this or another reason. 
+Dù đa số người dùng sử dụng Tisane để kiểm duyệt theo ngữ cảnh, một số người dùng lại cần lọc từ khóa vì những lý do khác nhau. 
 
-Tisane can be used to monitor lists of words, with options helping to avoid usual pitfalls of wordlist monitoring.
+Có thể dùng Tisane để giám sát danh sách từ khóa, với các tùy chọn giúp tránh những sai sót phổ biến trong việc giám sát danh sách từ.
 
-## Including Word Breakdown in the Response
+## Bao gồm phân tách từ trong phản hồi
 
-By default, Tisane outputs only the `abuse`, `sentiment`, and `entities_summary` sections in its response. However, Tisane can provide a breakdown of words making up every sentence.
+Theo mặc định, Tisane chỉ xuất ra các phần `abuse`, `sentiment`, và `entities_summary` trong phản hồi. Tuy nhiên, Tisane cũng có thể cung cấp chi tiết về các từ tạo nên mỗi câu.
 
-To output the words, add `"words":true` to the `settings` parameter.
+Để xuất ra các từ, hãy thêm  `"words":true` vào tham số `settings`.
 
-All words are tokenized (divided into chunks); the tokenization algorithm in use depends on the language. It is transparent to the user, whether the language uses spaces or not, has compounds (such as in German or Dutch), or has words that have spaces in between (for example: *kung fu* in English or *EE. UU.* in Spanish). 
+Tất cả các từ được tách (thành từng đơn vị nhỏ); thuật toán tách từ được sử dụng phụ thuộc vào ngôn ngữ. Quá trình này rõ ràng đối với người dùng, dù ngôn ngữ có dùng khoảng trắng hay không, có dùng từ ghép (như tiếng Đức hoặc Hà Lan), hoặc có những từ bao gồm nhiều phần cách nhau bằng khoảng trắng (ví dụ: *kung fu* trong tiếng Anh hoặc *EE. UU.* trong tiếng Tây Ban Nha). 
 
-The result is a structured array named `words`. It is located inside the `sentence_list` structure in the response. 
+Kết quả tạo được mảng cấu trúc tên là `words`. Được đặt trong cấu trúc `sentence_list` ở trong phản hồi. 
 
-Every word element contains:
+Mỗi phần tử từ bao gồm:
 
-- The actual string (`text`)
-- The `offset` where it starts
-- A `stopword` flag for stop words
-- Some internal Tisane IDs (see Option 2 below)
-- Associated features such as grammar or style
+- Chuỗi thực tế (`text`)
+- `offset` vị trí bắt đầu
+- Cờ `stopword` để đánh dấu từ dừng
+- Một số ID nội bộ của Tisane (xem Tùy chọn 2 bên dưới)
+- Các đặc điểm liên quan đến ngữ pháp hoặc văn phong
 
-## Implementing Keyword Filtering
+## Triển khai lọc từ khóa
 
-There are two ways to implement keyword filtering with Tisane:
+Có hai cách để triển khai lọc từ khóa với Tisane:
 
-* Option 1: Simple (Not Recommended)
-* Option 2: More Powerful
+* Tùy chọn 1: Đơn giản (Không khuyến khích)
+* Tùy chọn 2: Mạnh hơn
 
-Both approaches avoid false positive issues, known as a “[clbuttic problem](https://en.wikipedia.org/wiki/Scunthorpe_problem)”.
+Cả hai cách đều giúp tránh các lỗi dò từ sai, còn gọi là “[clbuttic problem](https://en.wikipedia.org/wiki/Scunthorpe_problem)”.
 
-## Option 1: Simple (Not Recommended)
+## Tùy chọn 1: Đơn giản (Không khuyến khích)
 
-The simple and the obvious solution is:
+Giải pháp đơn giản và dễ hiểu nhất là:
 
-1. Traverse the `words` array.
-2. For every element, check if the `text` attribute contains one of the prohibited words (or expressions, because the tokenization is logical, and *kung fu* or *power plant* is one word).
+1. Duyệt qua mảng `words`.
+2. Đối với mỗi phần tử, hãy kiểm tra xem thuộc tính `text` có chứa một trong những từ bị cấm (hoặc cụm từ, vì việc tách từ là theo logic và *kung fu* hoặc *power plant* cũng được xem là một từ).
 
-### Limitations
+### Hạn chế
 
-The simplicity comes with drawbacks:
+Phương pháp đơn giản này đi kèm với những bất cập:
 
-- What happens if the word is inflected? Some people will say “we can use the stem”, but it’s not always possible to reduce it to a stem. 
-- How do we capture the word _bought_ in English based on the lemma _buy_? If you assume _b_ to be its stem, should you assume every word starting with _b_ is an inflected form of _buy_? 
-- More morphologically rich languages (French, German, Arabic, Russian, Hindi, etc.) have a lot more variety and numerous inflections.
-- What happens if the word is spelled slightly differently, e.g. *U.S.A.* instead of *USA* or *email* instead of *e-mail*?
-- What happens if the word is obfuscated or, in information security speak, employs “adversarial text manipulations”?
-- What if we want to screen any mention of *Alaska* (the state) but allow *Alaska Air* and *baked Alaska*? (For a recent real-life example, an article about [_Enola Gay_](https://en.wikipedia.org/wiki/Enola_Gay) was removed in the [2025 Pentagon cleanup](https://www.newsweek.com/military-remove-enola-gay-photos-dei-rules-2041029) because keyword matching flagged the word "gay".)
+- Nếu từ bị biến đổi hình thức thì sao? Một số người sẽ nói “có thể dùng dạng gốc”, nhưng không phải lúc nào cũng dễ dàng quy về dạng gốc. 
+- Làm sao để nhận diện từ _bought_ (đã mua) trong tiếng Anh dựa trên từ gốc _buy_ (mua)? Nếu cho rằng _b_ là gốc của từ, thì có nên xem mọi từ bắt đầu bằng _b_ là biến thể của _buy_ (mua)? 
+- Những ngôn ngữ giàu hình thái học (tiếng Pháp, Đức, Ả Rập, Nga, Hindi...) có rất nhiều biến thể đa dạng và phức tạp.
+- Nếu từ được viết khác đi một chút thì sao, ví dụ *U.S.A.* thay vì *USA* hoặc *email* thay vì *e-mail*?
+- Nếu từ bị viết méo mó, theo cách nói trong lĩnh vực bảo mật thông tin — sử dụng các "kỹ thuật thao túng văn bản đối kháng" thì sao?
+- Nếu muốn chặn mọi đề cập đến *Alaska* (tiểu bang) nhưng vẫn cho phép *Alaska Air* và *baked Alaska* (món tráng miệng Alaska nướng) thì sao? (Một ví dụ thực tế gần đây: một bài viết về [_Enola Gay_](https://en.wikipedia.org/wiki/Enola_Gay) đã bị gỡ bỏ trong [đợt rà soát của Lầu Năm Góc năm 2025](https://www.newsweek.com/military-remove-enola-gay-photos-dei-rules-2041029) vì hệ thống lọc từ khóa phát hiện từ "gay".)
 
-## Option 2: More Powerful
+## Tùy chọn 2: Mạnh hơn
 
-Option 2 relies on Tisane’s internal identifiers. This route allows solving all the shortcomings listed above, taking advantage of Tisane's algospeak and deciphering and morphological analysis capabilites.
+Tùy chọn 2 dựa vào mã định danh nội bộ của Tisane Phương pháp này giúp khắc phục tất cả các hạn chế ở trên bằng cách tận dụng khả năng phân tích hình thái học và thuật toán giải mã văn bản nhiễu.
 
-The internal identifiers in the word entries are `lexeme` and `family`. 
+Hai mã định danh trong mỗi phần tử từ là `lexeme` và `family`. 
 
-### About lexeme ID
+### Về ID lexeme
 
-A lexeme ID in Tisane is associated with a word and all its possible inflections. 
+ID lexeme trong Tisane được gán cho một từ và tất cả các biến thể có thể có của từ đó. 
 
-If the word is obfuscated (e.g. “br*k” instead of “break”) or misspelled, and Tisane manages to recognize the original word, then the lexeme ID of the original word is provided.
+Nếu từ bị viết sai hoặc làm nhiễu (ví dụ: “br*k” thay vì “break”) mà Tisane vẫn nhận diện đúng từ gốc, thì hệ thống sẽ gán ID lexeme của từ gốc.
 
-### About family ID
+### Về ID family
 
-Family ID is another option, if we want to filter according to the word-sense. 
+ID family là một tùy chọn khác dùng để lọc theo nghĩa của từ. 
 
-For example: A device called “elevator” in the US is called “lift” in the UK.  It’s the same real-world entity, just different terms. They both have the same family ID. However, “lift” in the sense of aerodynamic lift, has a different family ID. 
+Ví dụ: Một thiết bị được gọi là “elevator” (thang máy) ở Mỹ, nhưng ở Anh lại được gọi là “lift” (thang máy).  Đó là cùng một vật thể ngoài đời thực, chỉ khác nhau về cách gọi. Cả hai đều có cùng một ID family. Tuy nhiên, từ “lift” (nâng) theo nghĩa nâng khí động học thì có  ID family khác. 
 
-An added bonus here is that the family IDs are the same across languages. That is, you can create a “list of concepts” to capture, regardless of the language or the dialect. 
+Một điểm cộng nữa là các ID family đều giống nhau trong các ngôn ngữ. Nghĩa là bạn có thể tạo một “danh sách khái niệm” để nhận diện, bất kể ngôn ngữ hay phương ngữ. 
 
-Power users can even filter by categories. For example: Any kind of plane, any kind of car, any kind of bird while ignoring “clay pigeon” but capturing “pigeon”, etc.
+Người dùng nâng cao thậm chí có thể lọc theo danh mục. Ví dụ: Bất kỳ máy bay, bất kỳ ô tô, bất kỳ loài chim trong khi bỏ qua “clay pigeon” (đĩa bay đất sét dùng trong bắn súng) nhưng vẫn nhận diện “pigeon” (bồ câu), v.v.
 
-### Why We Recommend Using lexeme ID
+### Vì sao chúng tôi khuyến nghị sử dụng ID lexeme
 
-But, while Tisane is generally word-sense oriented, we came to realize that the difference between word-senses is not always obvious to the users. Also, the keyword filtering usually intentionally ignores the context. This is why we recommend using lexeme ID.
+Tuy Tisane nhìn chung được thiết kế theo định hướng nghĩa của từ, nhưng chúng tôi nhận ra rằng không phải lúc nào người dùng cũng dễ phân biệt được các nghĩa khác nhau của một từ. Ngoài ra, việc lọc từ khóa thường cố tình bỏ qua ngữ cảnh. Đó là lý do vì sao chúng tôi khuyến nghị sử dụng ID lexeme.
 
-For every word or phrase in your list:
+Với mỗi từ hoặc cụm từ trong danh sách của bạn:
 
-1. Look up the lexeme ID, either by running a sample sentence and getting the lexeme ID from there, or by using our Language Model Direct Access API.
-2. Traverse the `words` array.
-3. For every word, compare the lexeme ID with the list of your lexeme IDs.
+1. Tìm ID lexeme bằng cách chạy một câu mẫu để lấy ID lexeme từ đó, hoặc sử dụng API Language Model Direct Access của chúng tôi.
+2. Duyệt qua mảng `words`.
+3. Với mỗi từ, hãy so sánh ID lexeme của từ đó với danh sách ID lexeme của bạn.
 
-Example:
+Ví dụ:
 
-Request (`sentiment`, `topics`, and `entities` turned off to simplify the output):
+Yêu cầu (tắt `sentiment`, `topics` và `entities` để đơn giản hóa đầu ra):
 
 ```json
 {
@@ -100,7 +100,7 @@ Request (`sentiment`, `topics`, and `entities` turned off to simplify the output
 }
 ```
 
-Response:
+Phản hồi:
 ```json
 {
 	"text": "d/l star t*k for free",
@@ -149,12 +149,12 @@ Response:
 }
 ```
 
-In the response: 
+Trong phản hồi: 
 
-1. The obfuscated word _Star Trek_ is:
+1. Từ bị làm nhiễu _Star Trek_ được:
 
- * chunked as one unit
- * assigned lexeme ID 317071
- * assigned family ID 152100
+ * phân tách như một đơn vị
+ * ID lexeme được gán là 317071
+ * ID family được gán là 152100
 
-2. The *corrected_text* attribute contains de-obfuscated version of the sentence: _d/l star trek for free_.
+2. Thuộc tính *corrected_text* chứa phiên bản đã được khôi phục của câu: _d/l star trek for free_ (star trek miễn phí).

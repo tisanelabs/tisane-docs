@@ -1,47 +1,47 @@
-# Difference between Criminal Activity, Allegation, and Disturbing
+# Разница между преступной деятельностью, обвинением и беспокоящими действиями
 
-These types of problematic content capture similar scenarios:
+Эти типы проблемного контента отражают схожие сценарии:
 
 - `criminal_activity`
 - `allegation`
 - `disturbing`
 
-They do have differences between them.
+Между ними есть различия.
 
-## Criminal Activity
+## Criminal Activity (Преступная деятельность)
 
-The `criminal_activity` type detects actual ongoing activity. For example: Attempts to sell illicit items online, death threats, and more. 
+Тип `criminal_activity` определяет фактическую текущую активность. Например: Попытки продажи незаконных товаров через Интернет, угрозы убийством и многое другое. 
 
-The purpose of this type is to detect foul play going in the content. Nothing else.
+Целью этого типа является обнаружение фактов нечестного поведения в контенте. Ничего больше.
 
-It is not the same as *conversations* about alleged criminal acts. For example, if an article describes a sting raid on a meth lab, it is not tagged as abuse. 
+Это не то же самое, что *разговоры* о предполагаемых преступных деяниях. Например, если в статье описывается контрольная закупка правоохранительных органов в лаборатории по производству метамфетамина, она не помечается как злоупотребление. 
 
-If you are looking to locate conversations about crimes, look at the `topics` section.
+Если вы хотите найти разговоры о преступлениях, посмотрите раздел `topics`.
 
-Also see: [Criminal Activity](./criminalactivity.md)
+См. также: [Преступная деятельность](./criminalactivity.md)
 
-## Allegation
+## Allegation (Обвинение)
 
-What happens if someone talks about a crime that allegedly happened to them? This is what `allegation` is meant to tackle. 
+Что произойдет, если кто-то расскажет о преступлении, которое якобы с ним произошло? Для этого спользуется атрибут `allegation` предназначен для решения. 
 
-The difference between `allegation` and `criminal_activity` is similar to the venerable [*This is not a pipe*](https://en.wikipedia.org/wiki/The_Treachery_of_Images) by René Magritte.
+Разница между `allegation` и `criminal_activity` похожа на известную картину [*«Вероломство образов»*](https://en.wikipedia.org/wiki/The_Treachery_of_Images) Рене Магритта.
 
-We don’t know if it’s true and it’s not happening right now, but we should not ignore it. 
+Мы не знаем, правда ли это, и не происходит ли это прямо сейчас, но мы не должны это игнорировать. 
 
-On the other hand, we can’t lump it together with the *criminal activity* type, because it would create false positives in communities of survivors of abuse, for example. 
+С другой стороны, мы не можем смешивать это с типом *criminal activity*, поскольку это может привести к ложным срабатываниям, например, в сообществах жертв насилия. 
 
-For law enforcement needs, the distinction must be clear, too: an allegation is not the same as actual activity. And even if it’s a real crime is to be reported, the procedures are very different.
+Для нужд правоохранительных органов различие также должно быть четким: обвинение — это не то же самое, что фактические действия. И даже если речь идет о реальном преступлении, о котором необходимо сообщить, процедуры сильно отличаются.
 
-Also see: [Allegations](./allegation.md)
+См. также: [Обвинения](./allegation.md)
 
-## Disturbing
+## Disturbing (Беспокоящее)
 
-The third type, `disturbing`, flags graphic depictions of death, injury, etc. whether they are crime-related, or not. 
+Третий тип `disturbing` используется для пометки графических изображений смерти, травм и т. д., независимо от того, связаны ли они с преступлением или нет. 
 
-In most cases, these depictions do not overlap with the `criminal_activity` type. 
+В большинстве случаев эти изображения не пересекаются с типом `criminal_activity`. 
 
-They may or may not overlap with the `allegation` type. 
+Они могут совпадать или не совпадать с типом `allegation`. 
 
-Not all death or injury are considered disturbing, too.
+Не все случаи смерти или травм считаются беспокоящими.
 
-Also see: [Disturbing Content](./disturbing.md)
+См. также: [Беспокоящий контент](./disturbing.md)

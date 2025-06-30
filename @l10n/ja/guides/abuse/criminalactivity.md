@@ -1,27 +1,27 @@
-# Criminal Activity
+# 犯罪行為
 
-Tisane logs instances of detected criminal activity under the `abuse` section, with the `type` attribute set to `criminal_activity`. 
+Tisaneは、検出された犯罪行為のインスタンスを`abuse`セクションに記録し、`type`属性を`criminal_activity`に設定します。 
 
-## What We Detect
+## 検出する内容
 
-We identify and flag text related to:
+以下の内容に関連するテキストを特定し、フラグを立てます。
 
-- Planning and coordination of transportation, distribution, and manufacturing of illicit items such as narcotics, arms, explosives, and poached wildlife.
-- Human trafficking and the sale of human organs.
-- Inquiries and instructions on creating, manufacturing, distributing, or operating weapons (including chemical and biological weapons), narcotics, and explosives.
-- Threats of violence and criminal activity.
-- Searches for restricted items, For example: Firearms, ammunition, explosive precursors). To analyze search queries, set the `format` parameter to `search`.
+- 違法な物品（麻薬、武器、爆発物、密猟された野生生物など）の輸送、配送、製造に関する計画立案と調整。
+- 人身取引と人体臓器の売買。
+- 武器（化学兵器および生物兵器を含む）、麻薬、爆発物の作成、流通に関する問い合わせや指示。
+- 暴力や犯罪行為の脅威。
+- 規制品目の検索（例：銃器、弾薬、爆発性前駆物質）。検索クエリを分析するには、`format`パラメータを`search`に設定します。
 
 {% admonition type="warning" %}
 
-1. The criminal activity type does not capture conversations about crime committed by someone else or allegations. The purpose of the `criminal_activity` type is to capture either crime in progress or admission of criminal activity. To capture conversations about crime, use topic extraction. See: [Topic Extraction](../features/topics.md). To capture allegations about someone else committing crimes, see: [Allegations](./allegation.md)
-2. As the legislation varies from jurisdiction to jurisdiction, inspect `tags` to determine if the instance is to be ignored. For example, `cannabis` or `soft_drug` may be used to ignore the references to use of marijuana.
+1. 犯罪行為の種類には、他人が犯した犯罪に関する会話や告発は含まれません。`criminal_activity`の種類は、進行中の犯罪または犯罪行為の自白を検出することを目的としています。犯罪に関する会話を検出するには、トピック抽出を使用します。参考：[トピックの抽出](../features/topics.md)。他人が犯罪を犯したとの告発を検出するには、[告発](./allegation.md)をご覧ください。
+2. 法規制は管轄によって異なるため、`tags`を確認して該当するインスタンスを無視するかどうかを判断してください。例えば、`cannabis`や`soft_drug`という表現を使用することで、マリファナの使用に関する言及を無視することができます。
 
 {% /admonition %}
 
-### Example
+### 例
 
-Request:
+リクエスト：
 
 ```json
 {
@@ -34,7 +34,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 ```json
 {
 	"text": "we sell elephant tusks. Great prices and top notch quality!",
@@ -55,11 +55,11 @@ Response:
 }
 ```
 
-## Relevant Tags
+## 関連タグ
 
-The `tags` array may contain the following tags.
+`tags`の配列には、以下のタグが含まれる場合があります。
 
-### Crimes
+### 犯罪
 
 * `bodily_harm`
 * `bribery`
@@ -67,7 +67,7 @@ The `tags` array may contain the following tags.
 * `crime`
 * `death`
 * `doxing`
-* `escape` (correctional institutions)
+* `escape`（矯正施設）
 * `extortion`
 * `hacking_services`
 * `human_trafficking`
@@ -81,9 +81,9 @@ The `tags` array may contain the following tags.
 * `terrorism`
 * `threat`
 * `violence`
-* `wildlife` (poaching)
+* `wildlife`（密猟）
 
-### Controlled Substances
+### 規制薬物
 
 * `controlled_substance`
 * `soft_drug`
@@ -98,28 +98,28 @@ The `tags` array may contain the following tags.
 * `medication`
 * `opioid`
 
-### Other Restricted Items
+### その他規制品目
 
 * `cold_weapons`
 * `explosives`
 * `firearms`
 * `weapon`
-* `contraband` (depends on the context)
+* `contraband`（状況による）
 
-### Miscellaneous
+### その他
 
-* `admission` - admission in a crime
+* `admission` - 犯罪の自白
 * `credentials`
 * `cryptocurrency`
 * `debt`
 * `payment`
 
-## Relevant Entity types
+## 関連するエンティティの種類
 
 `item_of_interest` entity type detects items potentially of interest to the investigation: luxury items, drugs, medications, vehicles.
 
-## Offline and Law Enforcement Use
+## オフラインおよび法執行機関での利用
 
-Law enforcement applications often have to operate in air-gapped environments. To accommodate this need, [Tisane Embedded](../../sdks/index.md) is available. Tisane Embedded allows running Tisane as an in-process library. [On-prem installations](/guides/deployment/onprem) are are available as well. 
+法執行機関のアプリケーションは、多くの場合、エアギャップ環境で動作する必要があります。このニーズに対応するため、[Tisaneエンベデッド](../../sdks/index.md)をご用意しています。Tisaneエンベデッドは、Tisaneをプロセス内ライブラリとして実行することが可能です。[オンプレミスのインストール](/guides/deployment/onprem)もご利用いただけます。 
 
 

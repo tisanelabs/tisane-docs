@@ -1,5 +1,5 @@
-## Can Tisane Be Embedded In My Application Deployed On A Standalone Machine?
+﻿## Tisaneをスタンドアロンマシンにデプロイされたアプリケーションに組み込むことはできますか？
 
-Yes. Tisane Embedded SDKs are available for C/C++ (Windows and Linux; other OSes available on request) and Core .NET.
+はい。Tisane Embedded SDKは、C/C++（WindowsおよびLinux、その他のOSもご要望に応じて対応可能）およびCore .NETに対応しています。
 
-See: [Tisane Embedded SDKs](/sdks)
+参考：[Tisane Embedded SDKs](/sdks)

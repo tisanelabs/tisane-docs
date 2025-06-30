@@ -1,20 +1,20 @@
-# Lexical Chunking and Tokenization
+# 語彙チャンクとトークン化
 
-Tisane uses a unified representation for lexical chunks, opting for a logical, morpheme-based representation. 
+Tisaneでは、語彙チャンクの表現に統一性を持たせ、論理的な形態素ベースの表現を採用しています。 
 
-In languages using compounds like German, the compounds are sliced into constituents.  
+ドイツ語のような複合語を使う言語では、複合語は構成要素に切り分けられます。  
 
-Idiomatic [multi-word expressions](https://en.wikipedia.org/wiki/Multiword_expression) ("kung fu", "power plant", "clay pigeon") are viewed as a single lexeme.
+慣用的な[複数単語表現](https://en.wikipedia.org/wiki/Multiword_expression)（「kung fu」、「power plant」、「clay pigeon」）は1つの語彙とみなされます。
 
-### Examples
-* English: "I don't see the power plant." => ["I", "do", "n't", "see", "the", "power plant", "."]
-* German: "Jetzt sollen die Stahlkugeln ersetzt werden." => ["Jetzt", "sollen", "die", "Stahl", "kugeln", "ersetzt", "werden", "."]
-* Simplified Chinese: "我给了老张三本书" => ["我", "给了", "老张", "三", "本", "书"] (In languages not using white spaces, particles are often joined with the word they modify.)
-* Spanish: "Asimismo, San Francisco es una de las mejores ciudades de EE. UU." => ["Asimismo", ",", "San Francisco", "es", "una", "de", "las", "mejores", "ciudades", "de", "EE. UU."]
+### 例：
+* 英語："I don't see the power plant."=> ["I", "do", "n't", "see", "the", "power plant", "."]
+* ドイツ語："Jetzt sollen die Stahlkugeln ersetzt werden."=> ["Jetzt", "sollen", "die", "Stahl", "kugeln", "ersetzt", "werden", "."]
+* 中国語簡体字："我给了老张三本书" => ["我", "给了", "老张", "三", "本", "书"]（空白を使わない言語では、助詞は修飾する単語と一緒になることが多くあります。）
+* スペイン語："Asimismo, San Francisco es una de las mejores ciudades de EE.UU."=> ["Asimismo", ",", "San Francisco", "es", "una", "de", "las", "mejores", "ciudades", "de", "EE.UU."]
 
-## How To Use
-To use Tisane for tokenization/lexical chunking:
+## 使い方
+トークン化／語彙チャンクにTisaneを利用するには：
 
-1. Specify `"words":true` in your `settings`.
-2. In the response, traverse all elements in the `sentence_list` section (individual sentences). 
-3. The lexical chunks are under `words`.
+1. `"words":true`を`settings`で指定する。
+2. レスポンスでは、`sentence_list`セクションのすべての要素（個々の文章）を横断する。 
+3. 語彙チャンクは `words`の下にあります。
