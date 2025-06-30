@@ -1,4 +1,4 @@
-# Topic Extraction
+﻿# Topic Extraction
 
 Topic extraction determines the dominant topics in the text. 
 

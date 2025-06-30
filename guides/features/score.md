@@ -1,4 +1,4 @@
-# Why Don't You Provide A Score On A Fixed Or Floating-Point Scale For Your Sentiment?
+﻿# Why Don't You Provide A Score On A Fixed Or Floating-Point Scale For Your Sentiment?
 
 **tl;dr:** because we believe it's a gimmick without much utility.
 

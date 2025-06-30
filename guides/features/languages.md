@@ -1,4 +1,4 @@
-## What Languages Are Supported?
+﻿## What Languages Are Supported?
 
 Tisane supports the following languages:
 

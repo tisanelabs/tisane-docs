@@ -1,4 +1,4 @@
-# Explainability and Transparency
+﻿# Explainability and Transparency
 
 Both in trust & safety and law enforcement, ability to trace the system's reasoning when making a decision is paramount. Today, algorithmic transparency is also required by [EU Digital Services Act](https://digital-strategy.ec.europa.eu/en/policies/dsa-brings-transparency). 
 

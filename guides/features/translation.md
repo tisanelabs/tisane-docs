@@ -1,4 +1,4 @@
-# Built-in Translation
+﻿# Built-in Translation
 
 Tisane provides machine translation capability, primarily for explanatory purposes. The translation uses the same language models as those used for analytical purposes, which guarantees consistent results. 
 

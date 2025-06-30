@@ -1,4 +1,4 @@
-# Sentiment Analysis
+﻿# Sentiment Analysis
 
 Sentiment analysis answers the question whether the author is positive or negative about something. Instances of detected sentiment are logged under the `sentiment_expressions` section; `polarity` determines if the sentiment is:
 

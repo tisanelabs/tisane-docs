@@ -1,4 +1,4 @@
-# Entity Extraction
+﻿# Entity Extraction
 
 Entities are elements of relevance or interest in the text. Tisane extracts both standard entities and those relevant to trust & safety/law enforcement applications.
 

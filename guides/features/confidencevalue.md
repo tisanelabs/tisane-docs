@@ -1,4 +1,4 @@
-# Is There a Confidence Value?
+﻿# Is There a Confidence Value?
 
 We do not use confidence values for 2 reasons:
 

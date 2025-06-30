@@ -1,4 +1,4 @@
-# What does Tisane do When Problematic Content is Detected?
+﻿# What does Tisane do When Problematic Content is Detected?
 
 - We are not moderators or investigators. We merely process textual content.
 - We do not set policy. 

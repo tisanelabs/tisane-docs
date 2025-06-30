@@ -1,4 +1,4 @@
-# Supported Functions
+﻿# Supported Functions
 
 Tisane is a powerful Natural Language Understanding (NLU) platform, designed from scratch for social media / user-generated text: ungrammatical, possibly obfuscated (e.g. algospeak), and heavy on slang and errors. Tisane's main applications are content moderation and law enforcement/national security/intelligence.
 

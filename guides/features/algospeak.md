@@ -1,4 +1,4 @@
-# Algospeak and Adversarial Text Manipulations
+﻿# Algospeak and Adversarial Text Manipulations
 
 Tisane uses a special type of built-in spellchecker module to process text with both unintentional errors (misspellings) and adversarial text manipulations (e.g. algospeak). 
 
