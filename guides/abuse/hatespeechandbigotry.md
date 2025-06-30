@@ -20,7 +20,7 @@ Every detected instance of bigotry is logged as a form of abuse. The type assign
 
 We define bigotry as hostility, negative opinions, or calls for discrimination and/or violence directed at an entire demographic group - or individuals - solely because of their association with that group.
 
-An association between one’s feelings and being a member is a group will also be tagged as an instance of bigotry.
+An association between one’s feelings and being a member in a group will also be tagged as an instance of bigotry.
 
 ### Implicit Bigotry
 Implicit bigotry towards one of the targeted groups without naming it (e.g. “get out of my country”) is also in the scope of recognition, although is significantly more difficult to recognize.
