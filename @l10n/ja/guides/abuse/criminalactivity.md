@@ -116,7 +116,7 @@ Tisaneは、検出された犯罪行為のインスタンスを`abuse`セクシ�
 
 ## 関連するエンティティの種類
 
-`item_of_interest` entity type detects items potentially of interest to the investigation: luxury items, drugs, medications, vehicles.
+item_of_interestエンティティタイプは、捜査対象となる可能性のある品目（高級品、薬物、医薬品、車両）を検出します。
 
 ## オフラインおよび法執行機関での利用
 
