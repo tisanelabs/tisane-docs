@@ -1,4 +1,4 @@
-# Lazy loading vs Fully Loaded Mode
+﻿# Lazy loading vs Fully Loaded Mode
 
 Tisane language models contain extensive information about the language, and so may take hundreds of megabytes when fully loaded in RAM. 
 
