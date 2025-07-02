@@ -1,35 +1,35 @@
-﻿# Profanities
+﻿# Ненормативная лексика
 
-Profanities are logged under the `abuse` section, with the `type` attribute set to `profanity`.
+Ненормативная лексика регистрируется в разделе `abuse` с присвоением атрибуту `type` значения `profanity`.
 
 {% admonition type="warning" %}
 
-Racial and other derogatory slurs are not considered profanities. They are handled by the `bigotry` type. 
+Расовые и другие уничижительные оскорбления не считаются ненормативной лексикой. Они обрабатываются как тип `bigotry`. 
 
-See: [Bigotry and Hate Speech](./hatespeechandbigotry.md) 
+Рекомендуем ознакомиться: [Нетерпимость и разжигание ненависти](./hatespeechandbigotry.md) 
 
 {% /admonition %}
 
-## Severity Levels
+## Уровни серьезности
 
-The severity levels are as following:
+Используются следующие уровни серьезности:
 
-* `low` - very mild profanities that are often not considered profanities
-* `medium` - the bulk of profanities
-* `high` - highly inappropriate profanities
-* `extreme` - usually "absolutely unacceptable" profanities (e.g. F-word in English or the [mat category in Slavic languages](https://en.wikipedia.org/wiki/Mat_(profanity)))
+* `low` — очень низкий уровень серьезности ненормативной лексики, которая часто не считается таковой
+* `medium` — основная часть ненормативной лексики
+* `high` — крайне неуместная ненормативная лексика
+* `extreme` — обычно «абсолютно неприемлемая» ненормативная лексика (например, слово на букву «F» в английском языке или матерные ругательства в славянских языках
 
-Attempts to obfuscate (e.g. with asterisks) does not impact the severity.
+Попытки избежать обнаружение (например, с помощью звездочек) не влияют на уровень серьезности.
 
-## Relevant Tags
+## Соответствующие теги
 
-The following tags are often associated with the `profanity` type:
+Следующие теги часто связываются с типом `profanity`:
 
-* `sex` - profanities related to sexual activities or organs
+* `sex` — ненормативная лексика, связанная с сексуальными действиями или органами
 
-## Example
+## Пример
 
-Request:
+Запрос:
 ```json
 {
   "language":"en",
@@ -41,7 +41,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 ```json
 {
 	"text": "i hate this fu*r",
