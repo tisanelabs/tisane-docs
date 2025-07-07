@@ -1,22 +1,22 @@
-# Topic Extraction
+﻿# Trích xuất chủ đề
 
-Topic extraction determines the dominant topics in the text. 
+Trích xuất chủ đề nhằm xác định các chủ đề chính trong văn bản. 
 
 {% admonition type="info" %}
 
-This functionality is also known as:
+Chức năng này còn được gọi là:
 
-* theme identification
-* subject detection
-* key topic recognition
+* nhận diện chủ đề
+* phát hiện nội dung
+* nhận biết chủ đề chính
 
 {% /admonition %}
 
-Tisane stores the topics under the `topics` array (strings without `topic_stats`, objects with `topic_stats`). The topics are document level.
+Tisane lưu các chủ đề vào mảng `topics` (dưới dạng chuỗi nếu không có `topic_stats`, hoặc đối tượng nếu có `topic_stats`). Các chủ đề được xác định ở cấp độ tài liệu.
 
-When a particular word has multiple interpretations, the sense of the word must be determined in the current context. For example, _Jupiter_ is a planet and a Roman deity. Whether it's the planet or the deity, depends on the text.
+Khi một từ có nhiều nghĩa, Tisane sẽ xác định nghĩa phù hợp dựa trên ngữ cảnh hiện tại. Ví dụ, _Jupiter_ có thể là một hành tinh hoặc một vị thần La Mã. Việc hiểu là hành tinh hay thần phụ thuộc vào ngữ cảnh.
 
-For example, the sentence _Juno is the wife of Jupiter_ refers to the deity. Tisane determines the relevant topics as `Roman mythology`, `supernatural` (gods), `relationship`, and `family` (since the spousal connection is mentioned).
+Ví dụ, câu _Juno is the wife of Jupiter_ (Juno là vợ của Jupiter) đề cập đến thần linh. Tisane sẽ xác định các chủ đề liên quan là `Roman mythology` (thần thoại La Mã), `supernatural` (siêu nhiên) (thần), `relationship`, and `family` (quan hệ và gia đình) (vì có đề cập đến mối quan hệ vợ chồng).
 
 ```json
 {
@@ -30,7 +30,7 @@ For example, the sentence _Juno is the wife of Jupiter_ refers to the deity. Tis
 }
 ```
 
-On the other hand, the sentence _Jupiter is farther from the sun than Mars_ refers to planets. Tisane determines the topics to be `outer space` and `astronomy`.
+Ngược lại, câu _Jupiter is farther from the sun than Mars_ (Jupiter xa mặt trời hơn sao Hỏa) đề cập đến hành tinh. Tisane sẽ xác định các chủ đề là `outer space` (không gian vũ trụ) và `astronomy` (thiên văn học).
 
 ```json
 {
@@ -42,13 +42,13 @@ On the other hand, the sentence _Jupiter is farther from the sun than Mars_ refe
 }
 ```
 
-## Topic Statistics
+## Thống kê chủ đề
 
-If the setting `topic_stats` is set to `true`, then the portion of the input where the topic is active is provided. The topic is then not provided as a string but as an object made of the topic itself (`topic` (string) attribute) and its distribution statistic (`coverage` (float) attribute).
+Nếu bật thiết lập `topic_stats` thành `true`, thì phần nội dung đầu vào mà chủ đề đó xuất hiện sẽ được cung cấp. Lúc này, chủ đề sẽ không còn được cung cấp dưới dạng chuỗi, mà dưới dạng một đối tượng bao gồm chính tên chủ đề (thuộc tính) `topic` (chuỗi) và thống kê mức độ phân bố của nó (thuộc tính) (`coverage` (kiểu số thực).
 
-**Example**
+**Ví dụ**
 
-Request:
+Yêu cầu:
 
 ```json
 {
@@ -61,7 +61,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 
 ```json
 {
@@ -80,22 +80,22 @@ Response:
 ```
 (both detected topics appear in 1 sentence out of 2, which is 0.5 of all sentences)
 
-## Standards
+## Tiêu chuẩn
 
-There are common taxonomy standards that Tisane can use with `topic_standard` setting:
+Có nhiều tiêu chuẩn phân loại chủ đề phổ biến mà Tisane có thể sử dụng khi bạn thiết lập `topic_standard`:
 
-* `native` - native Tisane topic names; based on standard English terms for the topic. The default standard.
-* `iptc_code` - codes of the [IPTC (International Press Telecommunications Council) Media Topics](https://iptc.org/standards/media-topics/) classification - a standard used in the media.
-* `iptc_description` - English descriptions of the IPTC codes.
-* `iab_code` - codes of the [IAB (Interactive Advertising Bureau)](https://www.iab.com/guidelines/content-taxonomy/) content taxonomy.
-* `iab_description` - English descriptions of the IAB codes.
-* `wikidata` - Wikidata codes (usually of the form Qnnnnn, e.g. Q123).
+* `native` -  chủ đề theo chuẩn riêng của Tisane, dựa trên thuật ngữ tiếng Anh phổ biến. Tiêu chuẩn mặc định
+* `iptc_code` - mã phân loại của [Chủ đề Truyền thông của IPTC (Hội đồng Viễn thông Báo chí Quốc tế)](https://iptc.org/standards/media-topics/) - tiêu chuẩn thường dùng trong truyền thông
+* `iptc_description` - mô tả bằng tiếng Anh cho các mã IPTC
+* `iab_code` - mã phân loại nội dung của [IAB (Interactive Advertising Bureau)](https://www.iab.com/guidelines/content-taxonomy/).
+* `iab_description` - Mô tả bằng tiếng Anh của mã IAB.
+* `wikidata` - Mã theo Wikidata (thường có dạng Qxxxx, ví dụ Q123).
 
-To specify the standard, add the `topic_standard` setting. 
+Để chọn tiêu chuẩn, thêm thiết lập  `topic_standard`. 
 
-**Example**
+**Ví dụ**
 
-Request:
+Yêu cầu:
 
 ```json
 {
@@ -108,7 +108,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 
 ```json
 {
@@ -123,6 +123,6 @@ Response:
 
 {% admonition type="warning" %}
 
-The standard taxonomies cover a small fraction of the native standard. When a concept is not covered by a taxonomy, it is omitted from the response.
+Hệ thống phân loại tiêu chuẩn chỉ bao phủ một phần nhỏ so với chuẩn gốc của Tisane. Khi một khái niệm không thuộc bất kỳ hệ phân loại nào, nó sẽ không được đưa vào kết quả phản hồi.
 
 {% /admonition %}

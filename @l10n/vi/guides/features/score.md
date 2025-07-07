@@ -1,14 +1,14 @@
-# Why Don't You Provide A Score On A Fixed Or Floating-Point Scale For Your Sentiment?
+﻿# Tại sao bạn không cung cấp điểm số theo thang điểm cố định hoặc thang điểm động cho cảm xúc của mình?
 
-**tl;dr:** because we believe it's a gimmick without much utility.
+**tl;dr:** vì chúng tôi tin rằng đó chỉ là một mánh lới quảng cáo không có nhiều tác dụng.
 
-The proponents of assigning a score claim that there's a difference between "best food ever eaten" and "good meal". It might be the case if we just look at one particular review, however:
+Những người ủng hộ việc chấm điểm cho rằng có sự khác biệt giữa "món ngon nhất từng được ăn" và "bữa ăn ngon". Tuy nhiên, điều này có thể đúng nếu chúng ta chỉ xem xét một đánh giá cụ thể:
 
-* The gradation of the superlatives are highly subjective. Is "wonderful" better than "excellent"? Is "excellent" the same as "great"? Is "good" the same as "pretty good"?
+* Mức độ đánh giá cao nhất mang tính chủ quan cao. "Tuyệt diệu" có tốt hơn "xuất sắc" không? "Xuất sắc" và "tuyệt vời" có như nhau không? "Tốt" và "khá tốt" có giống nhau không?
 
-* The choice of the adjectives is often influenced by the culture of the reviewer. British "could be improved" may mean "horrible" in another culture, and vice versa.
+* Việc lựa chọn tính từ thường bị ảnh hưởng bởi nền văn hóa của người đánh giá. "Có thể được cải thiện" với người Anh có thể mang nghĩa "khủng khiếp" trong nền văn hóa khác và ngược lại.
 
-* With multiple aspects, the results become much harder to read, integrate, and aggregate properly
+* Với nhiều khía cạnh, kết quả trở nên khó đọc, tích hợp và tổng hợp đúng cách hơn nhiều
 
-We believe that increasing the variety of aspects is better aligned with the actual business needs.
+Chúng tôi tin rằng việc tăng cường tính đa dạng của các khía cạnh sẽ phù hợp hơn với nhu cầu kinh doanh thực tế.
 

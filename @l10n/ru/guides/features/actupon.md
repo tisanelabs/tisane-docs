@@ -1,28 +1,28 @@
-# What does Tisane do When Problematic Content is Detected?
+﻿# Что делает Tisane при обнаружении проблемного контента?
 
-- We are not moderators or investigators. We merely process textual content.
-- We do not set policy. 
+- Мы не модераторы и не следователи. Мы просто обрабатываем текстовый контент.
+- Мы не устанавливаем политику. 
 
-The role of Tisane ends with detection. Tisane receives input text, processes it, and responds with a JSON structure containing details on what was detected. 
+Работа Tisane заканчивается на этапе обнаружения. Tisane получает исходный текст, обрабатывает его и отвечает структурой JSON, содержащей сведения об обнаруженном объекте. 
 
-The application calling Tisane can then act upon the findings of Tisane. The calling application has complete freedom as to how it handles the response. It may ignore specific sections according to its policy, request a human review, act immediately, etc. 
+Приложение, вызывающее Tisane, может затем действовать на основании результатов Tisane. Вызывающее приложение имеет полную свободу в отношении того, как обрабатывать ответ. Он может игнорировать определенные разделы в соответствии со своей политикой, запрашивать проверку человеком, действовать немедленно и т. д. 
 
-Tisane does not notify anyone or bans users. It is there for analysis (or translation).
+Tisane никого не уведомляет и не банит пользователей. Он предназначен для анализа (или перевода).
 
-## What If I Need a Complete Solution?
+## Что делать, если мне нужно комплексное решение?
 
-We built several plugins for popular platforms, which allow using Tisane without the need to code. That includes complete moderation platforms integrated with human moderation and legal compliance, as well as instant messaging applications and games.
+Мы создали несколько плагинов для популярных платформ, которые позволяют использовать Tisane без необходимости написания кода. К ним относятся входят комплексные платформы модерации, интегрированные с человеческой модерацией и системами обеспечения соблюдения законодательства, а также приложения для обмена мгновенными сообщениями и игры.
 
-See: [Integrations](https://tisane.ai/integrations).
+Рекомендуем ознакомиться: [Интеграции](https://tisane.ai/integrations) .
 
-If you need source code to kickstart building your front-end, our partners in PubNub have built a seamless integration for Tisane and a [demo](https://moderation-dashboard.pubnub.com/). Source code: [PubNub GitHub repository](https://github.com/pubnub/moderation-dashboard)
+Если вам нужен исходный код для начала разработки вашего интерфейса, наши партнеры в PubNub создали беспроблемную интеграцию для Tisane и [демонстрацию](https://moderation-dashboard.pubnub.com/). Исходный код: [Репозиторий PubNub GitHub](https://github.com/pubnub/moderation-dashboard)
 
-If the platform is not listed or you are building a solution from scratch, [contact us](https://tisane.ai/consulting) to discuss the details of your project. 
+Если платформа отсутствует в списке или вы создаете решение с нуля,[ свяжитесь с нами](https://tisane.ai/consulting) для обсуждения деталей вашего проекта. 
 
-## What If I Need Social Media Content for My Solution?
+## Что делать, если для моего решения мне нужен контент в социальных сетях?
 
-We do not provide content.
+Мы не предоставляем контент.
 
-However, we work with partners who do, covering sources from standard social media and Darkweb.
+Однако мы работаем с партнерами, которые это делают, охватывая источники из стандартных социальных сетей и Darkweb.
 
 [Contact us](https://tisane.ai/contact-us) for directions. 

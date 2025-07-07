@@ -1,12 +1,12 @@
-# Does Tisane Support My Programming Or Scripting Language?
+﻿# Поддерживает ли Tisane мой язык программирования или скриптинга?
 
-As long as your programming or scripting language can invoke RESTful requests, yes.
+Да, если ваш язык программирования или сценариев может вызывать запросы RESTful.
 
 ## Tisane Embedded
 
-If you'd like to embed Tisane on device as an in-process library rather than a server, we have:
+Если вы хотите встроить Tisane на устройство как внутрипроцессную библиотеку, а не как сервер, у нас есть:
 
-* Native C/C++ libraries for Linux and Windows. See: [Tisane Embedded C/C++ Reference](../../sdks/candc++.md)
-* Core .NET assemblies. See: [Tisane Embedded .NET Reference](../../sdks/dotnet.md)
+* Нативные библиотеки C/C++ для Linux и Windows. Рекомендуем ознакомиться: [Справочник по встроенному языку C/C++ Tisane](../../sdks/candc++.md)
+* Основные сборки .NET. Рекомендуем ознакомиться: [Справочник по .NET Tisane Embedded](../../sdks/dotnet.md)
 
-More OSes are available on request.
+Версии для иных операционных систем доступны по запросу.

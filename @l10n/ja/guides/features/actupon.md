@@ -1,28 +1,28 @@
-# What does Tisane do When Problematic Content is Detected?
+﻿# Tisaneは、問題のあるコンテンツが検出された場合、どのような対応を行いますか？
 
-- We are not moderators or investigators. We merely process textual content.
-- We do not set policy. 
+- Tisaneはモデレーターでも捜査官でもありません。Tisaneは単にテキストコンテンツの処理を行うだけです。
+- Tisaneはポリシーを策定していません。 
 
-The role of Tisane ends with detection. Tisane receives input text, processes it, and responds with a JSON structure containing details on what was detected. 
+Tisaneの役割は検出で終了します。Tisaneは入力テキストを受け取り、処理し、検出された内容の詳細を含むJSON構造で応答します。 
 
-The application calling Tisane can then act upon the findings of Tisane. The calling application has complete freedom as to how it handles the response. It may ignore specific sections according to its policy, request a human review, act immediately, etc. 
+Tisaneを呼び出したアプリケーションは、Tisaneの分析結果に基づいて動作することができます。呼び出しアプリケーションは、応答の処理方法について完全に自由です。ポリシーに従って特定のセクションを無視する、人間によるレビューを要求する、即座に対応する、などを行う場合があります。 
 
-Tisane does not notify anyone or bans users. It is there for analysis (or translation).
+Tisaneは、ユーザーに通知したり、ユーザーをBANしたりしません。Tisaneは解析（または翻訳）のためのものです。
 
-## What If I Need a Complete Solution?
+## 完全なソリューションが必要になった場合はどうすればいいですか？
 
-We built several plugins for popular platforms, which allow using Tisane without the need to code. That includes complete moderation platforms integrated with human moderation and legal compliance, as well as instant messaging applications and games.
+Tisaneは、人気のプラットフォーム向けに複数のプラグインを構築しました。これにより、コーディングの必要なくTisaneをご利用いただけます。これには、人間によるモデレーションと法的遵守を統合した完全なモデレーションプラットフォーム、およびインスタントメッセージングアプリケーションとゲームが含まれます。
 
-See: [Integrations](https://tisane.ai/integrations).
+参考：[プラグイン](https://tisane.ai/integrations)。
 
-If you need source code to kickstart building your front-end, our partners in PubNub have built a seamless integration for Tisane and a [demo](https://moderation-dashboard.pubnub.com/). Source code: [PubNub GitHub repository](https://github.com/pubnub/moderation-dashboard)
+フロントエンドの開発を迅速に開始するためにソースコードが必要な場合、TisaneのパートナーであるPubNubがTisaneとのシームレスな統合と[デモ](https://moderation-dashboard.pubnub.com/)を構築しています。ソースコード：[PubNub GitHubリポジトリ](https://github.com/pubnub/moderation-dashboard)
 
-If the platform is not listed or you are building a solution from scratch, [contact us](https://tisane.ai/consulting) to discuss the details of your project. 
+プラットフォームが一覧にない場合、または一からソリューションを構築している場合は、プロジェクトの詳細について[お問い合わせ](https://tisane.ai/consulting)ください。 
 
-## What If I Need Social Media Content for My Solution?
+## ソリューションにソーシャルメディアコンテンツが必要になった場合はどうすればいいですか？
 
-We do not provide content.
+Tisaneはコンテンツを提供していませんが、
 
-However, we work with partners who do, covering sources from standard social media and Darkweb.
+そのようなサービスを提供する企業と提携しており、標準的なソーシャルメディアからダークウェブまで、幅広く情報源をカバーしています。
 
-[Contact us](https://tisane.ai/contact-us) for directions. 
+[詳細については、お問い合わせください。](https://tisane.ai/contact-us)

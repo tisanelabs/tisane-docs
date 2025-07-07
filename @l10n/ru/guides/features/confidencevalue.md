@@ -1,11 +1,11 @@
-# Is There a Confidence Value?
+﻿# Существует ли уровень достоверности?
 
-We do not use confidence values for 2 reasons:
+Мы не используем значения достоверности по двум причинам:
 
-1. We witnessed on multiple occasions how the confidence values are abused. It is safe to say that **the confidence values do more harm than good**. 
+1. Мы неоднократно были свидетелями того, как значения достоверности становились объектом злоупотреблений. Можно с уверенностью сказать, что **значения достоверности приносят больше вреда, чем пользы**. 
 
-Industry leaders like Alice Goguen Hunsberger (formerly a lead of Trust & Safety in Grindr) say that it's not uncommon for an ML model to have high confidence but be wrong, and the human moderators must not be swayed by it.
+Лидеры отрасли, такие как Элис Гоген Хансбергер (ранее возглавлявшая отдел доверия и безопасности в Grindr), говорят, что модели МО нередко имеют высокую достоверность, но при этом оказываются ошибочными, и модераторы-люди не должны поддаваться этому влиянию.
 
-We view the confidence value as a security theater, introducing dangers like [automation bias](https://en.wikipedia.org/wiki/Automation_bias). In the perfect world, human moderators are PhDs in ethics debating big philosophical questions; in the real world, they are often underpaid students strongly encouraged to perform their tasks as fast as possible. The ["Computer says no"](https://en.wikipedia.org/wiki/Computer_says_no) phenomenon more often than not means the human moderators will say no, too.
+Мы рассматриваем значения достоверности как часть системы обеспечения безопасности, представляющий такие опасности, как [ предвзятость автоматизации](https://en.wikipedia.org/wiki/Automation_bias). В идеальном мире модераторы-люди — это доктора наук по этике, обсуждающие важные философские вопросы; в реальном мире они часто являются низкооплачиваемыми учашимися , которых настоятельно рекомендуют выполнять свои задачи как можно быстрее. Отображение информации о том, что [«Компьютер говорит нет»](https://en.wikipedia.org/wiki/Computer_says_no), чаще всего означает, что модераторы-люди тоже скажут «нет».
 
-2. Confidence values are simply not applicable to our headless NLP architecture.
+2. Ценности уверенности просто неприменимы к нашей безголовой архитектуре НЛП.

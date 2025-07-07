@@ -1,7 +1,7 @@
-# Does Tisane Provide On-premise Installations?
+﻿# Tisane có cung cấp bản cài đặt tại chỗ không?
 
-Yes, we provide on-premise installations.
+Có, chúng tôi có cung cấp bản cài đặt tại chỗ.
 
-If your monthly volume of messages is very high, or you need to keep the processing in a particular location, [contact us for a quote](https://tisane.ai/contact-us/).
+Nếu khối lượng tin nhắn hàng tháng của bạn rất lớn, hoặc bạn cần xử lý dữ liệu tại một địa điểm cụ thể, hãy [liên hệ với chúng tôi để nhận báo giá](https://tisane.ai/contact-us/).
 
-On-prem installations are also supported by Tisane Bot for Slack and Tisane Moderation Bot for Webex.
+Các bản cài đặt tại chỗ cũng được hỗ trợ bởi Tisane Bot cho Slack và Tisane Moderation Bot cho Webex.

@@ -1,24 +1,24 @@
-# Why Deploy Abuse Detection If It's Not 100% Accurate?
+# Зачем внедрять систему обнаружения злоупотреблений, если она не обеспечивает 100%-ной точности?
 
-Tisane offers high accuracy, but like all natural language processing systems, it is not 100% perfect. Nor are human moderators.
+Tisane обеспечивает высокую точность, но, как и все системы обработки естественного языка, эта система не идеальна на 100%. Как и модераторы-люди.
 
-## Why Use It Anyway?
+## Зачем вообще ее использовать?
 
-1. Deterrence Against Offenders
-   - Just as law enforcement cannot be everywhere, moderation tools do not need to be perfect to be effective.
-   - The mere presence of an abuse detection system discourages bad actors from engaging in harmful behavior.
-2. Speed and Efficiency
-   - NLP systems can analyze large volumes of content instantly, something human moderators cannot scale to match.
-   - Even if some cases require human review, the system significantly reduces the workload.
-3. Transparency and Consistency
-   - Automated moderation ensures rules are applied fairly, reducing bias and human inconsistency.
-   - Unlike human moderators, NLP systems do not get tired, emotional, or overwhelmed.
-4. Real-World Comparisons
-   - No police force prevents all crime, yet they reduce incidents and deter criminals.
-   - No spam filter catches 100% of spam, yet they dramatically improve email usability.
-   - No lock is 100% tamper-proof, yet it's much safer to keep the door locked than leave it open at all times.
-5. Continuous Improvement
-   - Tisane Labs is committed to improving accuracy over time.
-   - Real-world usage helps fine-tune detection models and reduce false positives and negatives.
+1. Предотвращение правонарушений
+   - Так же, как правоохранительные органы не могут присутствовать везде, инструменты модерации не обязательно должны быть идеальными, чтобы быть эффективными.
+   - Наличие системы обнаружения злоупотреблений само по себе удерживает недобросовестных субъектов от совершения вредоносных действий.
+2. Скорость и эффективность
+   - Системы обработки естественного языка способны мгновенно анализировать большие объемы контента, чего не могут сделать модераторы-люди.
+   - Даже если в некоторых случаях требуется участие человека, система значительно снижает рабочую нагрузку.
+3. Прозрачность и последовательность
+   - Автоматическая модерация обеспечивает справедливое применение правил, снижая предвзятость и человеческую непоследовательность.
+   - В отличие от людей-модераторов, системы НЛП не устают, не испытывают эмоций и не очущают чрезмерную моральную нагрузку.
+4. Сравнения с реальным миром
+   - Ни одна полиция не способна предотвратить все преступления, однако она сокращает количество инцидентов и сдерживает преступников.
+   - Ни один спам-фильтр не улавливает 100% спама, однако они значительно повышают удобство использования электронной почты.
+   - Ни один замок не защищен от взлома на 100%, однако гораздо безопаснее держать дверь запертой, чем оставлять ее открытой все время.
+5. Постоянное совершенствование
+   - Tisane Labs стремится со временем повышать точность результатов.
+   - Реальное использование помогает точнее настраивать модели обнаружения и сокращать количество ложных срабатываний и ложных отрицательных результатов.
 
-For reference, even serious crimes often remain unsolved ([source](https://www.reddit.com/r/UnresolvedMysteries/comments/5toay8/what_percentage_of_murders_are_unsolved/)), yet law enforcement remains essential. Similarly, abuse detection tools are valuable even if they aren’t perfect.
+Для справки, даже серьезные преступления часто остаются нераскрытыми ([ источник](https://www.reddit.com/r/UnresolvedMysteries/comments/5toay8/what_percentage_of_murders_are_unsolved/) ), однако обеспечение соблюдения законов по-прежнему имеет важное значение. Аналогичным образом, инструменты обнаружения злоупотреблений ценны, даже если они несовершенны.

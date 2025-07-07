@@ -1,43 +1,43 @@
-# Sentiment Analysis
+﻿# Анализ тональности
 
-Sentiment analysis answers the question whether the author is positive or negative about something. Instances of detected sentiment are logged under the `sentiment_expressions` section; `polarity` determines if the sentiment is:
+Анализ тональности отвечает на вопрос, относится ли автор к чему-либо положительно или отрицательно. Случаи обнаруженных настроений регистрируются в разделе ` sentiment_expressions`; ` polarity` определяет, является ли настроение:
 
 * `positive`
 * `negative`
 * `mixed`
 
-## Optional Settings
+## Дополнительные настройки
 
-* `explain` - if `true`, includes the explanation for flagging
-* `snippets` - if `true`, includes the fragment responsible for the sentiment
-* `document_sentiment` - if `true`, the overall sentiment of the entire text is provided at the root-level `sentiment` attribute. 
+* `explain` - если` true`, включает в себя объяснение для пометки
+* `snippets` — если `true` , включает фрагмент, отвечающий за настроение
+* `document_sentiment` — если `true`, общая тональность всего текста представлена в атрибуте корневого уровня `sentiment` . 
 
-## What Is Aspect-based Sentiment Analysis (ABSA)?
+## Что такое аспектный анализ тональности (ABSA)?
 
-Wikipedia defines [ABSA](https://en.wikipedia.org/wiki/Sentiment_analysis#Feature/aspect-based) as an approach that identifies sentiment for specific aspects mentioned in a review, rather than assigning a single sentiment score to the entire document or post. 
+Википедия определяет [ABSA](https://en.wikipedia.org/wiki/Sentiment_analysis#Feature/aspect-based) как подход, который определяет тональность для конкретных аспектов, упомянутых в обзоре, а не присваивает единую оценку тональности всему документу или посту. 
 
-In essence, aspect-based sentiment analysis does for sentiment analysis what color TV did for black-and-white TV: it adds depth and clarity.
+По сути, аспектный анализ тональности делает для анализа тональности то же, что цветное телевидение сделало для черно-белого телевидения: он добавляет глубину и ясность.
 
-Consider this review:
+Рассмотрим этот обзор:
 
-> "The breakfast was a bit tasteless but the hotel is close to the major attractions". 
+> «Завтрак был немного безвкусным, но отель расположен недалеко от основных достопримечательностей». 
 
-A hotel owner looking for actionable insights needs to know that:
+Владельцу отеля, который ищет практически применимую информацию, необходимо знать, что:
 
-- Sentiment towards **food** is *negative*.
-- Sentiment towards **location** is *positive*.
+- Отношение к **food** является *negative*.
+- Отношение к **location** является *positive*.
 
-A single sentiment score like 0.14 or -0.57 would be meaningless here. When aggregated across multiple multi-faceted reviews, these types of scores create a misleading picture that fail to capture real customer sentiment.
+Единый показатель тональности, например 0,14 или -0,57, здесь не имел бы смысла. При объединении множества разносторонних отзывов такие оценки создают вводящую в заблуждение картину, которая не отражает реальных настроений клиентов.
 
 {% admonition type="info" %}
 
-It is recommended to set the `format` setting to `review` to look for sentiment more aggressively.
+Рекомендуется установить для настройки `format` значение `review`, чтобы более настойчиво искать признаки тональности.
 
 {% /admonition %}
 
-## Example
+## Пример
 
-Request:
+Запрос:
 
 ```json
 {
@@ -50,7 +50,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 
 ```json
 {

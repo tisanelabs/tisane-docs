@@ -1,25 +1,25 @@
-# Built-in Translation
+﻿# 組み込み翻訳
 
-Tisane provides machine translation capability, primarily for explanatory purposes. The translation uses the same language models as those used for analytical purposes, which guarantees consistent results. 
+Tisaneは、主に説明のための機械翻訳機能を提供しています。この翻訳は、解析目的で使用されるのと同じ言語モデルを使用しているため、一貫した結果が保証されます。 
 
-To use translation, invoke `POST /transform`. The response is plain text (translation of the original utterance).
+翻訳を使用するには、`POST /transform`を呼び出します。レスポンスは平文（元の発言の翻訳）です。
 
-See: [Translate Text](/apis/tisane-api-short/nlu-nlp-methods/transform).
+参考：[テキストの翻訳](/apis/tisane-api-short/nlu-nlp-methods/transform)。
 
-## Standard Machine Translation vs Tisane Machine Translation
+## 標準的な機械翻訳とTisaneの機械翻訳の比較
 
-Standard machine translation engines (Google Translate, Microsoft Translator, DeepL) are primarily used to translate content in order to publish it. State of the art engines, while being able to handle diverse varieties of content, are only trained on small amounts of obscenities and slurs. For commercial reasons, they are mostly used to translate technical, scentific texts, official pronouncement, or news.
+標準的な機械翻訳エンジン（Google 翻訳、Microsoft Translator、DeepL）は、主にコンテンツを翻訳して公開するために使用されます。最先端のエンジンは、多彩なコンテンツに対応できる一方で、卑猥な言葉や差別的な表現については、ごく少量のデータでしか訓練されていません。商業的な理由から、主に技術文書、科学文書、公式発表、またはニュースの翻訳に利用されています。
 
-In order to avoid scandals and lawsuits, slurs and obscenities are underprioritized and removed, when possible. Often, "please" is added to requests even if it doesn't exist.
+スキャンダルや訴訟を回避するため、差別的表現や卑猥な言葉は優先度が低く、可能であれば削除されます。多くの場合、依頼文には本来含まれていない「please（〜ください）」が付け加えられます。
 
-That means that **the emotional component is not preserved**. If, say, the original text contained a slur, the standard machine translation will likely not. Moderators of global communities, using standard machine translation, will struggle to understand the people's reaction if the style is modified. (Compare: "are you an [ethnicity]?" vs "are you a [slur]?")
+つまり、**感情的な要素は保持されていない**ということです。例えば、原文に差別的な表現が含まれていた場合、標準的な機械翻訳ではその表現は翻訳されない可能性が高いです。標準的な機械翻訳を使用する国際的なコミュニティのモデレーターは、スタイルが変更されると、人々の反応を理解するのに苦労するでしょう（比較：「[民族]？」 と 「[差別]？」）。
 
-Another issue is that standard machine translation does not handle obfuscated words well. 
+もう一つの問題は、標準的な機械翻訳は難読化された単語を適切に処理できない点です。 
 
-That is why we created machine translation adapted for content moderation and law enforcement needs:
+そのため、Tisaneはコンテンツモデレーションと法執行機関のニーズに対応した機械翻訳を開発しました。
 
-* Tisane machine translation preserves the original emotional component: slurs and profanities in the source language are translated as slurs and profanities in the target language.
-* Tisane machine translation can decipher algospeak, since it employs the same analysis process.
+* Tisaneの機械翻訳は原文の感情的な要素を保持し、ソース言語の差別的な表現や卑猥な言葉は、ターゲット言語の差別的な表現や卑猥な言葉に翻訳されます。
+* Tisaneの機械翻訳は、スラングを解読できます。これは、同じ解析プロセスを採用しているためです。
 
 ```mermaid
 flowchart LR
@@ -32,9 +32,9 @@ flowchart LR
 	style standardTranslation color:#FF3131
 ```
 
-## Example
+## 例
 
-Request:
+リクエスト：
 
 ```json
 {
@@ -45,7 +45,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 ```text
 you are a bitch
 ```

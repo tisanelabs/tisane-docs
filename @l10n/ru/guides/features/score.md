@@ -1,14 +1,14 @@
-# Why Don't You Provide A Score On A Fixed Or Floating-Point Scale For Your Sentiment?
+﻿# Почему бы вам не указать оценку своей тональности по фиксированной или плавающей шкале?
 
-**tl;dr:** because we believe it's a gimmick without much utility.
+**tl;dr:** потому что мы считаем, что это бесполезная уловка.
 
-The proponents of assigning a score claim that there's a difference between "best food ever eaten" and "good meal". It might be the case if we just look at one particular review, however:
+Сторонники присвоения баллов утверждают, что существует разница между «лучшей едой, которую когда-либо ели» и «хорошей едой». Однако это может быть так, если мы рассмотрим только один конкретный отзыв:
 
-* The gradation of the superlatives are highly subjective. Is "wonderful" better than "excellent"? Is "excellent" the same as "great"? Is "good" the same as "pretty good"?
+* Градация превосходной степени весьма субъективна. «Замечательно» лучше, чем «превосходно»? «Отлично» — это то же самое, что «замечательно»? «Хорошо» — это то же самое, что «довольно хорошо»?
 
-* The choice of the adjectives is often influenced by the culture of the reviewer. British "could be improved" may mean "horrible" in another culture, and vice versa.
+* Выбор прилагательных часто зависит от культуры рецензента. Британское "could be improved" («можно было бы улучшить») в другой культуре может означать «ужасно», и наоборот.
 
-* With multiple aspects, the results become much harder to read, integrate, and aggregate properly
+* При наличии множества аспектов результаты становится гораздо сложнее читать, интегрировать и правильно объединять.
 
-We believe that increasing the variety of aspects is better aligned with the actual business needs.
+Мы считаем, что увеличение разнообразия аспектов лучше соответствует реальным потребностям бизнеса.
 

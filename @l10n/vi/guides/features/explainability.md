@@ -1,14 +1,14 @@
-# Explainability and Transparency
+﻿# Khả năng giải thích và tính minh bạch
 
-Both in trust & safety and law enforcement, ability to trace the system's reasoning when making a decision is paramount. Today, algorithmic transparency is also required by [EU Digital Services Act](https://digital-strategy.ec.europa.eu/en/policies/dsa-brings-transparency). 
+Cả trong lĩnh vực tin cậy và an toàn lẫn thực thi pháp luật, khả năng truy vết lập luận của hệ thống khi đưa ra quyết định là điều tối quan trọng. Hiện nay, tính minh bạch trong thuật toán cũng là yêu cầu bắt buộc theo [Đạo luật Dịch vụ Kỹ thuật số của Liên minh châu Âu](https://digital-strategy.ec.europa.eu/en/policies/dsa-brings-transparency). 
 
-## Providing Human-Readable Explanation
+## Cung cấp giải thích dễ hiểu cho con người
 
-If `"explain":true` is specified as a setting, then human-readable explaination is provided for every `abuse` and `sentiment_expressions` element.
+Nếu tùy chọn `"explain": true` được chỉ định, thì hệ thống sẽ cung cấp lời giải thích dễ hiểu cho con người đối với mỗi yếu tố liên quan đến hành vi `lạm dụng` và `biểu hiện_ cảm xúc`.
 
-### Example
+### Ví dụ
 
-Request:
+Yêu cầu:
 ```json
 {
   "content":"u r a liar",
@@ -17,7 +17,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 ```json
 {
 	"text": "u r a liar",
@@ -51,14 +51,14 @@ Response:
 }
 ```
 
-## Tracing and Debugging Platform Decisions
+## Truy vết và gỡ lỗi quyết định của nền tảng
 
-In debugging mode, Tisane generates a log which can then be loaded in a special debugger environment.
+Trong chế độ gỡ lỗi, Tisane sẽ tạo một nhật ký (log), nhật ký này có thể được tải vào một môi trường gỡ lỗi chuyên biệt.
 
 ![Parse tree presented in the debugger](../../images/lamp-es-debugger1.png)
 
 ![Debugger: intermediate structures](../../images/lamp-es-debugger2.png)
 
-Language Model Portal platform is available only for private cloud installations.
+Nền tảng Language Model Portal chỉ khả dụng cho các bản cài đặt đám mây riêng.
 
 [Contact us](https://tisane.ai/contact-us/) for more info.

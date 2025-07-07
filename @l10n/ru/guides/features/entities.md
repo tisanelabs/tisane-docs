@@ -1,45 +1,45 @@
-# Entity Extraction
+﻿# Извлечение сущностей
 
-Entities are elements of relevance or interest in the text. Tisane extracts both standard entities and those relevant to trust & safety/law enforcement applications.
+Сущности — это существенные элементы или элементы, представляющие интерес в тексте. Tisane извлекает как стандартные сущности, так и сущности, имеющие отношение к приложениям в сфере доверия и безопасности/правоприменительной деятельности.
 
-Standard entities are names of people, their social roles, organizations, places, and so on. We also extract cryptocurrency addresses, bank accounts, credit card numbers, phone numbers, software package names, and more.
+Стандартные сущности — это имена людей, их социальные роли, организации, места и т. д. Мы также извлекаем адреса криптовалют, банковские счета, номера кредитных карт, номера телефонов, названия пакетов программного обеспечения и многое другое.
 
-Entities are logged under the `entities_summary` section. Every entity entry is an object made of:
-  * `type` - the type of the entity
-  * `name` - a standard name, if exists; otherwise, the string that was logged
-  * `subtypes` - more detailed additional types
-  * `subtype` - the first subtype (for backward compatibility purposes)
-  * `mentions` - an array of all detected mentions, with:
+Объекты регистрируются в разделе `entities_summary`. Каждая запись сущности представляет собой объект, состоящий из следующего:
+  * `type` — тип сущности;
+  * `name` — стандартное имя, если существует; в противном случае зарегистрированная строка
+  * `subtypes` — более подробные дополнительные типы
+  * `subtype` — первый подтип (в целях обратной совместимости)
+  * `mentions` — массив всех обнаруженных упоминаний, включая:
     * `offset`
     * `length`
     * `sentence_index`
     * `text`
-  * `wikidata` - a Wikidata ID, if exists  
+  * `wikidata` — идентификатор Wikidata, если существует  
 
-See full list of detected entities: [Response Reference](/apis/tisane-api-response-guide#named-entities)
+Полный список обнаруженных объектов см. здесь: [Ссылка на ответ](/apis/tisane-api-response-guide#named-entities)
 
-## Subtypes
+## Подтипы
 
-Additional detail is provided in the `subtypes` array of strings (the first subtype is also logged as the `subtype` attribute).
+Дополнительные сведения приведены в массиве строк `subtypes` (первый подтип также регистрируется как атрибут `subtype`).
 
-The following subtypes are associated with specific entity types:
+Следующие подтипы связаны с определенными типами сущностей:
 
 - `person`
-  - `fictional_character` - a name of a character in a work of fiction
-  - `important_person` - a name of an historic figure or a public figure or a celebrity
-  - `spiritual_being` - a name of a deity or an angel or an evil spirit
+  - `fictional_character` — имя персонажа в художественном произведении
+  - `important_person` — имя исторической личности, общественного деятеля или знаменитости
+  - `spiritual_being` — имя божества, ангела или злого духа
 - `organization`
-  - `media` - a media outlet or a periodical publication
-  - `authorities` - a government agency
-  - `law_enforcement_agency` - a law enforcement agency
-  - `intelligence_agency` - an intelligence agency
-  - `military` - a military unit
+  - `media` — средство массовой информации или периодическое издание
+  - `authorities` — государственный орган
+  - `law_enforcement_agency` — правоохранительный орган
+  - `intelligence_agency` — разведывательный орган
+  - `military` — воинская часть
 - `software`
-  - `chat` - any software often used for instant messaging
-  - `online_community` - an online community such as a social network
-  - `low_trust_payment_method` - used for payments and commonly perceived as prone to abuse
+  - `chat` — любая программа, часто используемое для обмена мгновенными сообщениями
+  - `online_community` — интернет-сообщество, такое как социальная сеть
+  - `low_trust_payment_method` — используется для платежей и обычно считается подверженным злоупотреблениям
 - `age`
-  - `minor_age` - age under the age of consent
+  - `minor_age` — возраст младше возраста согласия
 - `crypto`
   - `bitcoin`
   - `ethereum`
@@ -50,11 +50,11 @@ The following subtypes are associated with specific entity types:
   - `dash`
   - `litecoin`
 - `ip_address`
-  - `v4` - IP address version 4
-  - `v6` - IP address version 6
+  - `v4` — IP-адрес версии 4
+  - `v6` — IP-адрес версии 8
 - `file`
-  - `windows` - a Windows pathname
-  - `unix` - a Unix pathname
+  - `windows` — имя пути Windows
+  - `unix` — имя пути Unix
 - `credit_card`
   - `american_express`
   - `visa`
@@ -67,9 +67,9 @@ The following subtypes are associated with specific entity types:
 - `credential`
   - `password`
 - `website`
-  - `high_risk` - high probability of encountering malware or scams
+  - `high_risk` — высокая вероятность столкнуться с вредоносным ПО или мошенничеством
 - `item_of_interest`
   - `cold_weapons`
-  - `luxury` - any luxury item, e.g. expensive watches, yachts, luxury cars
+  - `luxury` - любой предмет роскоши, например, дорогие часы, яхты, роскошные автомобили
   - `firearms`
   - `weapon`

@@ -1,14 +1,14 @@
-# Explainability and Transparency
+﻿# 説明可能性と透明性
 
-Both in trust & safety and law enforcement, ability to trace the system's reasoning when making a decision is paramount. Today, algorithmic transparency is also required by [EU Digital Services Act](https://digital-strategy.ec.europa.eu/en/policies/dsa-brings-transparency). 
+信頼性と安全性の分野においても、法執行の分野においても、システムが意思決定を行う際にその論理を追跡できる能力は最も重要です。現在、アルゴリズムの透明性は、[EUのデジタルサービス法](https://digital-strategy.ec.europa.eu/en/policies/dsa-brings-transparency)においても求められています。 
 
-## Providing Human-Readable Explanation
+## 人間が判読できる説明の提供
 
-If `"explain":true` is specified as a setting, then human-readable explaination is provided for every `abuse` and `sentiment_expressions` element.
+`"explain":true`が設定されている場合、すべての`abuse`と`sentiment_expressions`要素に対して、人間が判読できる説明が提供されます。
 
-### Example
+### 例
 
-Request:
+リクエスト：
 ```json
 {
   "content":"u r a liar",
@@ -17,7 +17,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 ```json
 {
 	"text": "u r a liar",
@@ -51,14 +51,14 @@ Response:
 }
 ```
 
-## Tracing and Debugging Platform Decisions
+## プラットフォームによる決定の追跡とデバッグ
 
-In debugging mode, Tisane generates a log which can then be loaded in a special debugger environment.
+デバッグモードでは、Tisaneはログを生成し、そのログを特殊なデバッガー環境で読み込むことができます。
 
 ![Parse tree presented in the debugger](../../images/lamp-es-debugger1.png)
 
 ![Debugger: intermediate structures](../../images/lamp-es-debugger2.png)
 
-Language Model Portal platform is available only for private cloud installations.
+言語モデルポータルプラットフォームは、プライベートクラウドのインストール専用です。
 
-[Contact us](https://tisane.ai/contact-us/) for more info.
+[詳細については、お問い合わせください。](https://tisane.ai/contact-us/)

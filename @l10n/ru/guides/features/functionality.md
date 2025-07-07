@@ -1,65 +1,65 @@
-# Supported Functions
+﻿# Поддерживаемые функции
 
-Tisane is a powerful Natural Language Understanding (NLU) platform, designed from scratch for social media / user-generated text: ungrammatical, possibly obfuscated (e.g. algospeak), and heavy on slang and errors. Tisane's main applications are content moderation and law enforcement/national security/intelligence.
+Tisane — это мощная платформа понимания естественного языка (NLU), разработанная с нуля для социальных сетей/текстов, создаваемых пользователями: грамматически некорректная, возможно, запутанная (например, algospeak) и изобилующая сленгом и ошибками. Основными сферами применения Tisane являются модерация контента, а также использование для целей правоохранительных органов, органов национальной безопасности и разведки.
 
-All features are available across all supported languages. All output is provided in one call.
+Все функции доступны на всех поддерживаемых языках. Все выходные данные предоставляются за один вызов.
 
-## Core Functionality
+## Основной функционал
 
-Tisane offers sophisticated capabilities for abuse detection, sentiment analysis, and entity recognition:
+Tisane предлагает современные возможности обнаружения злоупотреблений, анализа тональности и распознавания сущностей:
 
-- Detect problematic content for content moderation and investigations:
-  - Personal attacks, insults, cyberbullying
-  - Hate speech
-  - Profanity
-  - Sexual advances
-  - Adult only references
-  - Criminal activity (trade in restricted items like drugs, firearms, etc.)
-  - Threats
-  - Allegations (whether libel or not)
-  - Suicidal ideation
-  - Solicitation of contact outside the current media or platform
-  - Graphic depictions of violence
-  - Forceful assertions of hierarchy (e.g. workplace bullying)
-  - Data leaks (e.g. PII exfiltration, exposure of credentials)
-  - Spam
+- Обнаружение проблемного контента для модерации и расследования:
+  - Личные нападки, оскорбления, кибербуллинг
+  - Разжигание ненависти
+  - Ненормативная лексика
+  - Сексуальные домогательства
+  - Ссылки только для взрослых
+  - Преступная деятельность (торговля запрещенными товарами, такими как наркотики, огнестрельное оружие и т. д.)
+  - Угрозы
+  - Обвинения (клеветнические или иные)
+  - Суицидальные мысли
+  - Попытка установить контакт за пределами текущего средства массовой информации или платформы
+  - Графические изображения насилия
+  - Настойчивое утверждение иерархии (например, травля на рабочем месте)
+  - Утечки данных (например, кража личных данных, раскрытие учетных данных)
+  - Спам
   
-- Detect named entities and find relations between them:
-  - people
-  - organizations
-  - social roles (titles, occupations, etc.)
-  - places
-  - phone numbers
-  - credit card numbers
-  - dates
-  - amounts of money
-  - items of interest in investigations (drugs, weapons, vehicles)
-  - cryptocurrency addresses
-  - more
-- Detect topics (Subjects/Themes/Domains)
-- Sentiment analysis (positive, negative, or mixed), including
-  - sentiment expressed towards specific aspects or entities within the text. (Aspect-based sentiment analysis)
+- Обнаружение именованных сущностей и поиск связей между ними:
+  - люди
+  - организации
+  - социальные роли (звания, профессии и т. д.)
+  - места
+  - номера телефонов
+  - номера кредитных карт
+  - даты
+  - суммы денег
+  - предметы, представляющие интерес для расследований (наркотики, оружие, транспортные средства)
+  - криптовалютные адреса
+  - прочее
+- Определение тем (предметы/темы/области знаний)
+- Анализ настроений (положительных, отрицательных или смешанных), включая
+  - мнение, выраженное по отношению к определенным аспектам или сущностям в тексте. (Аспектный анализ тональности)
 
-## Deep Linguistic Analysis
+## Глубокий лингвистический анализ
 
-Tisane also provides access to linguistic fundamentals:
+Tisane также обеспечивает доступ к основам лингвистики:
 
-- Inteligent sentence splitting
-  - Provides original sentences and their corrected versions (if applicable). 
-  - Uses non-breaks to avoid false positives (e.g. `EE. UU.` or `www.google.com`)
-- Lexical chunking
-  - Tokenizes sentences by morpheme
-  - Supports all types of segmentation:
-    - languages using white spaces
-    - languages not using white spaces (e.g. Chinese, Japanese, Thai)
-    - languages using compounds (German, Dutch, Afrikaans)
-    - clitics
-    - multiword expressions
-    - nondictionary entities (emails, phone numbers, etc.)
-- Parse Trees and Phrases
-  - Offers hierarchical representations of sentence structure, highlighting phrases and their relationships.
-  - Extracts noun phrases, verbal phrases, prepositional phrases, adjectival phrases, adverbial phrases.
-- Words
-  - Provides detailed information about each word (or lexical chunk), including its lemma, role in the sentence, and grammatical features.
-- Sense disambiguation
-  - Detects the sense for every word in the current context.
+- Умное разделение предложений
+  - Предоставляет оригинальные предложения и их исправленные версии (если применимо). 
+  - Использует неразрывы, чтобы избежать ложных срабатываний (например,`EE. UU.` или `www.google.com`)
+- Лексическое разделение
+  - Токенизирует предложения по морфеме
+  - Поддерживает все типы сегментации:
+    - языки, использующие пробелы
+    - языки, не использующие пробелы (например, китайский, японский, тайский)
+    - языки, использующие сложные слова (немецкий, голландский, африкаанс)
+    - клитики
+    - многословные выражения
+    - несловарные сущности (адреса электронной почты, номера телефонов и т. д.)
+- Разбор грамматических деревьев и фраз
+  - Предлагает иерархическое представление структуры предложения, выделяя фразы и их взаимосвязи.
+  - Извлекает именные, глагольные, предложные, адъективные и наречные обороты.
+- Слова
+  - Предоставляет подробную информацию о каждом слове (или лексическом фрагменте), включая его лемму, роль в предложении и грамматические особенности.
+- Разрешение неоднозначности смысла
+  - Определяет смысл каждого слова в текущем контексте.

@@ -1,43 +1,43 @@
-# Sentiment Analysis
+﻿# 感情分析
 
-Sentiment analysis answers the question whether the author is positive or negative about something. Instances of detected sentiment are logged under the `sentiment_expressions` section; `polarity` determines if the sentiment is:
+感情分析は、著者が物事に対して肯定的か否定的かを判断します。検出された感情のインスタンスは、`sentiment_expressions`セクションに記録され、`polarity`が、感情が以下のように分類されるかを決定します。
 
 * `positive`
 * `negative`
 * `mixed`
 
-## Optional Settings
+## オプション設定
 
-* `explain` - if `true`, includes the explanation for flagging
-* `snippets` - if `true`, includes the fragment responsible for the sentiment
-* `document_sentiment` - if `true`, the overall sentiment of the entire text is provided at the root-level `sentiment` attribute. 
+* `explain` - `true`の場合、フラグ付けの説明が含まれます
+* `snippets` -  `true`の場合、感情を表現するフラグメントが含まれます
+* `document_sentiment` - `true`の場合、テキスト全体の全体的な感情がルートレベルの`sentiment`属性として提供されます。 
 
-## What Is Aspect-based Sentiment Analysis (ABSA)?
+## アスペクトベースの感情分析（ABSA）とは
 
-Wikipedia defines [ABSA](https://en.wikipedia.org/wiki/Sentiment_analysis#Feature/aspect-based) as an approach that identifies sentiment for specific aspects mentioned in a review, rather than assigning a single sentiment score to the entire document or post. 
+Wikipediaは、[ABSA](https://en.wikipedia.org/wiki/Sentiment_analysis#Feature/aspect-based)を文書や投稿全体に単一の感情スコアを割り当てるのではなく、レビューで言及された特定の側面に対する感情を特定するアプローチと定義しています。 
 
-In essence, aspect-based sentiment analysis does for sentiment analysis what color TV did for black-and-white TV: it adds depth and clarity.
+本質的に、アスペクトベースの感情分析は、感情分析に対してカラーテレビが白黒テレビに対して行ったのと同じ役割（深みと明瞭さを加える）を果たします。
 
-Consider this review:
+このレビューを検討しましょう。
 
-> "The breakfast was a bit tasteless but the hotel is close to the major attractions". 
+> 「朝食は少し味が薄かったですが、ホテルは主要な観光地に近いです」 
 
-A hotel owner looking for actionable insights needs to know that:
+ホテルのオーナーが実用的な情報を求めている場合、以下の点を理解する必要があります。
 
-- Sentiment towards **food** is *negative*.
-- Sentiment towards **location** is *positive*.
+- **食**に対する感情は否定的なものです。**
+- **立地**に対する感情は肯定的なものです。**
 
-A single sentiment score like 0.14 or -0.57 would be meaningless here. When aggregated across multiple multi-faceted reviews, these types of scores create a misleading picture that fail to capture real customer sentiment.
+0.14や-0.57のような単一の感情スコアは、ここでは意味を成しません。複数の多面的なレビューを統合すると、このようなスコアは実際の顧客の感情を正確に反映しない誤った印象を与えることになります。
 
 {% admonition type="info" %}
 
-It is recommended to set the `format` setting to `review` to look for sentiment more aggressively.
+感情分析をより積極的に行うためには、`format`設定を`review`に設定することをおすすめします。
 
 {% /admonition %}
 
-## Example
+## 例
 
-Request:
+リクエスト：
 
 ```json
 {
@@ -50,7 +50,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 
 ```json
 {

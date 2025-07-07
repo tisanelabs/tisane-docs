@@ -1,45 +1,45 @@
-# Entity Extraction
+﻿# Trích xuất thực thể
 
-Entities are elements of relevance or interest in the text. Tisane extracts both standard entities and those relevant to trust & safety/law enforcement applications.
+Thực thể là các yếu tố có liên quan hoặc đáng chú ý trong văn bản. Tisane trích xuất cả các thực thể tiêu chuẩn và các thực thể phục vụ cho các ứng dụng về an toàn – tin cậy và thực thi pháp luật.
 
-Standard entities are names of people, their social roles, organizations, places, and so on. We also extract cryptocurrency addresses, bank accounts, credit card numbers, phone numbers, software package names, and more.
+Các thực thể tiêu chuẩn bao gồm tên người, vai trò xã hội, tổ chức, địa điểm, v.v. Chúng tôi cũng trích xuất các địa chỉ tiền mã hóa, số tài khoản ngân hàng, số thẻ tín dụng, số điện thoại, tên gói phần mềm và nhiều hơn nữa.
 
-Entities are logged under the `entities_summary` section. Every entity entry is an object made of:
-  * `type` - the type of the entity
-  * `name` - a standard name, if exists; otherwise, the string that was logged
-  * `subtypes` - more detailed additional types
-  * `subtype` - the first subtype (for backward compatibility purposes)
-  * `mentions` - an array of all detected mentions, with:
+Các thực thể được ghi lại trong phần `entities_summary`. Mỗi thực thể là một đối tượng bao gồm các thành phần:
+  * `type` - loại thực thể
+  * `name` - tên chuẩn nếu có; nếu không có thì là chuỗi đã được phát hiện
+  * `subtypes` - các loại phụ chi tiết hơn
+  * `subtype` - loại phụ đầu tiên (để đảm bảo tương thích ngược)
+  * `mentions` - mảng chứa tất cả các lần đề cập đến thực thể, với:
     * `offset`
     * `length`
     * `sentence_index`
     * `text`
-  * `wikidata` - a Wikidata ID, if exists  
+  * `wikidata` - mã định danh trên Wikidata, nếu có  
 
-See full list of detected entities: [Response Reference](/apis/tisane-api-response-guide#named-entities)
+Xem danh sách đầy đủ các thực thể được phát hiện: [Response Reference](/apis/tisane-api-response-guide#named-entities)
 
-## Subtypes
+## Loại phụ
 
-Additional detail is provided in the `subtypes` array of strings (the first subtype is also logged as the `subtype` attribute).
+Thông tin chi tiết bổ sung được cung cấp trong mảng `subtypes` (loại phụ đầu tiên cũng được ghi lại riêng dưới thuộc tính `subtype`).
 
-The following subtypes are associated with specific entity types:
+Các loại phụ cụ thể sẽ được liên kết với từng loại thực thể tương ứng.
 
 - `person`
-  - `fictional_character` - a name of a character in a work of fiction
-  - `important_person` - a name of an historic figure or a public figure or a celebrity
-  - `spiritual_being` - a name of a deity or an angel or an evil spirit
+  - `fictional_character` -  tên của một nhân vật trong tác phẩm hư cấu
+  - `important_person` -  tên của một nhân vật lịch sử, người nổi tiếng hoặc nhân vật của công chúng
+  - `spiritual_being` -  tên của một vị thần, thiên thần hoặc ác hồn
 - `organization`
-  - `media` - a media outlet or a periodical publication
-  - `authorities` - a government agency
-  - `law_enforcement_agency` - a law enforcement agency
-  - `intelligence_agency` - an intelligence agency
-  - `military` - a military unit
+  - `media` - cơ quan truyền thông hoặc ấn phẩm định kỳ
+  - `authorities` - ơ quan chính phủ
+  - `law_enforcement_agency` - cơ quan thực thi pháp luật
+  - `intelligence_agency` - cơ quan tình báo
+  - `military` - đơn vị quân đội
 - `software`
-  - `chat` - any software often used for instant messaging
-  - `online_community` - an online community such as a social network
-  - `low_trust_payment_method` - used for payments and commonly perceived as prone to abuse
+  - `chat` -  bất kỳ phần mềm nào thường dùng để nhắn tin tức thì
+  - `online_community` - cộng đồng trực tuyến, chẳng hạn như mạng xã hội
+  - `low_trust_payment_method` - phương thức thanh toán thường bị xem là dễ bị lạm dụng
 - `age`
-  - `minor_age` - age under the age of consent
+  - `minor_age` - người chưa đủ tuổi hợp pháp
 - `crypto`
   - `bitcoin`
   - `ethereum`
@@ -50,11 +50,11 @@ The following subtypes are associated with specific entity types:
   - `dash`
   - `litecoin`
 - `ip_address`
-  - `v4` - IP address version 4
-  - `v6` - IP address version 6
+  - `v4` - địa chỉ IP phiên bản 4
+  - `v6` - địa chỉ IP phiên bản 6
 - `file`
-  - `windows` - a Windows pathname
-  - `unix` - a Unix pathname
+  - `windows` - tên đường dẫn Windows
+  - `unix` - tên đường dẫn Unix
 - `credit_card`
   - `american_express`
   - `visa`
@@ -67,9 +67,9 @@ The following subtypes are associated with specific entity types:
 - `credential`
   - `password`
 - `website`
-  - `high_risk` - high probability of encountering malware or scams
+  - `high_risk` - nguy cơ cao gặp phải phần mềm độc hại hoặc lừa đảo
 - `item_of_interest`
   - `cold_weapons`
-  - `luxury` - any luxury item, e.g. expensive watches, yachts, luxury cars
+  - `luxury` - bất kỳ món đồ xa xỉ nào, ví dụ như đồng hồ đắt tiền, du thuyền, xe hơi hạng sang
   - `firearms`
   - `weapon`

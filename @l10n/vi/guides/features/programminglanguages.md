@@ -1,12 +1,12 @@
-# Does Tisane Support My Programming Or Scripting Language?
+﻿# Tisane có hỗ trợ ngôn ngữ lập trình hoặc script của tôi không?
 
-As long as your programming or scripting language can invoke RESTful requests, yes.
+Miễn là ngôn ngữ lập trình hoặc script của bạn có thể gửi các yêu cầu RESTful, thì Tisane có hỗ trợ.
 
-## Tisane Embedded
+## Nhúng Tisane
 
-If you'd like to embed Tisane on device as an in-process library rather than a server, we have:
+Nếu bạn muốn nhúng Tisane trực tiếp vào thiết bị dưới dạng thư viện trong tiến trình thay vì sử dụng máy chủ, chúng tôi có:
 
-* Native C/C++ libraries for Linux and Windows. See: [Tisane Embedded C/C++ Reference](../../sdks/candc++.md)
-* Core .NET assemblies. See: [Tisane Embedded .NET Reference](../../sdks/dotnet.md)
+* Thư viện C/C++ gốc cho Linux và Windows Xem phần: [Tài liệu tham khảo C/C++ cho Tisane Embedded(../../sdks/candc++.md)
+* Các bộ thư viện Core .NET Xem phần: [Tài liệu tham khảo cho Tisane Embedded .NET](../../sdks/dotnet.md)
 
-More OSes are available on request.
+Cung cấp hỗ trợ cho các hệ điều hành khác theo yêu cầu.

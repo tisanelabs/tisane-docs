@@ -1,37 +1,37 @@
-# Algospeak and Adversarial Text Manipulations
+﻿# Алгоязык и состязательные текстовые манипуляции
 
-Tisane uses a special type of built-in spellchecker module to process text with both unintentional errors (misspellings) and adversarial text manipulations (e.g. algospeak). 
+Tisane использует специальный тип встроенного модуля проверки орфографии для обработки текста как с непреднамеренными ошибками (опечатками), так и с противоречащими манипуляциями текстом (например, algospeak). 
 
-The spellchecker employs several different techniques to handle different types of manipulations (masking characters, substitutions, etc.). These corrections are not limited by profanities or slurs, and consider the context. The same misspelled word may be interpreted differently in different sentences.
+Проверка орфографии использует несколько различных методов для обработки различных типов манипуляций (маскировка символов, замены и т. д.). Эти исправления не ограничиваются ненормативной лексикой или оскорблениями и учитывают контекст. Одно и то же слово с ошибкой может быть истолковано по-разному в разных предложениях.
 
-If corrections were found to be necessary in a sentence, the sentence gets a `corrected_text` attribute where the corrected text is logged. (Set `words` to `true` to output sentence data.)
+Если исправления в предложении были признаны необходимыми, предложение получает атрибут `corrected_text`, в котором регистрируется исправленный текст. (Установите для `words` значение `true`, чтобы вывести свдеения о преждложениях)
 
-## Limitations
+## Ограничения
 
-Spell-checking is not a ["did you mean" tool](https://stackoverflow.com/questions/307291/how-does-the-google-did-you-mean-algorithm-work), as many people seem to believe:
+Проверка орфографии не является [инструментом «вы имели в виду»](https://stackoverflow.com/questions/307291/how-does-the-google-did-you-mean-algorithm-work) , как многие люди, похоже, считают:
 
-- If the word is a legitimate word, no matter if misused or esoteric, Tisane will not correct it. For example, if *noun* is misspelled as *nun*, or *house* is misspelled as *horse*, Tisane won't help (unless it's part of a known often obfuscated concept, e.g. _corn star_ in English).
-- The primary purpose of the spellchecker is to decipher obfuscations. Therefore, the spellchecker is biased toward more profane, objectionable, or heavily used concepts.
+- Если слово является допустимым, неважно, употребляется ли оно неправильно или является эзотерическим, Tisane не исправит его. Например, если *noun* неправильно написано как *nun*  или *home* как *horse*, Tisane не поможет (если только это не часть известной, часто запутанной концепции, например, _corn star_ в английском).
+- Основная цель проверки орфографии — расшифровка запутанных текстов. Поэтому проверка орфографии смещена в сторону более непристойных, предосудительных или часто используемых понятий.
 
-## Excluding Esoteric Senses And Words To Get Better Results
+## Исключение эзотерических чувств и слов для получения лучших результатов
 
-To get around the issue, you can use the  `min_generic_frequency` parameter. 
+Чтобы обойти эту проблему, вы можете использовать` мин_ общий_ частота` параметр. 
 
-This allows you to exclude the most esoteric senses and words. 
+Это позволяет исключить наиболее эзотерические смыслы и слова. 
 
-The frequency is graded between 0 and 10, with 10 being the most frequent. 
+Частота оценивается по шкале от 0 до 10, где 10 соответствует наибольшей частоте. 
 
-Some esoteric senses are also graded at -10. 
+Некоторые эзотерические чувства также оцениваются в -10. 
 
-We recommend you initially set `min_generic_frequency` to `1` or`2` to see if it works in your situation.
+Мы рекомендуем вам изначально установить для параметра `min_generic_ ` значение `1` или `2`, чтобы увидеть, сработает ли оно в вашей ситуации.
 
-## Excluding Potential Proper Nouns
+## Исключая потенциальные имена собственные
 
-If you need to avoid spell-checking potential proper nouns, set `lowercase_spellcheck_only` to `true`.
+Если вам нужно избежать проверки орфографии потенциальных имен собственных, установите для параметра `lowercase_spellcheck_only` значение `true`.
 
-## Example
+## Пример
 
-Request:
+Запрос:
 ```json
 {
   "language":"en",
@@ -43,7 +43,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 ```json
 
 	"text": "I will br*k his neck and kll him",

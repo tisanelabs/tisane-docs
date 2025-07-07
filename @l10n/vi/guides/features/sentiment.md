@@ -1,43 +1,43 @@
-# Sentiment Analysis
+﻿# Phân tích cảm xúc
 
-Sentiment analysis answers the question whether the author is positive or negative about something. Instances of detected sentiment are logged under the `sentiment_expressions` section; `polarity` determines if the sentiment is:
+Phân tích cảm xúc trả lời cho câu hỏi liệu tác giả có thái độ tích cực hay tiêu cực đối với điều gì đó. Các trường hợp phát hiện cảm xúc sẽ được ghi lại trong phần `sentiment_expressions`; thuộc tính `polarity` xác định cảm xúc là:
 
-* `positive`
-* `negative`
-* `mixed`
+* `positive` (tích cực)
+* `negative` (tiêu cực)
+* `mixed` (lẫn lộn)
 
-## Optional Settings
+## Thiết lập tùy chọn
 
-* `explain` - if `true`, includes the explanation for flagging
-* `snippets` - if `true`, includes the fragment responsible for the sentiment
-* `document_sentiment` - if `true`, the overall sentiment of the entire text is provided at the root-level `sentiment` attribute. 
+* `explain` - nếu đặt là `true`, bao gồm giải thích lý do gắn cờ.
+* `snippets` - nếu đặt là `true`, bao gồm trích đoạn nội dung tạo ra cảm xúc đó.
+* `document_sentiment` - nếu đặt là `true`, cảm xúc tổng thể của toàn bộ văn bản sẽ được cung cấp tại thuộc tính  `sentiment` ở cấp độ gốc. 
 
-## What Is Aspect-based Sentiment Analysis (ABSA)?
+## Phân tích cảm xúc theo khía cạnh (ABSA) là gì?
 
-Wikipedia defines [ABSA](https://en.wikipedia.org/wiki/Sentiment_analysis#Feature/aspect-based) as an approach that identifies sentiment for specific aspects mentioned in a review, rather than assigning a single sentiment score to the entire document or post. 
+Theo định nghĩa của Wikipedia, [ABSA](https://en.wikipedia.org/wiki/Sentiment_analysis#Feature/aspect-based)) là phương pháp xác định cảm xúc đối với từng khía cạnh cụ thể được đề cập trong bài đánh giá, thay vì gán một điểm cảm xúc duy nhất cho toàn bộ tài liệu hoặc bài viết. 
 
-In essence, aspect-based sentiment analysis does for sentiment analysis what color TV did for black-and-white TV: it adds depth and clarity.
+Nói đơn giản, ABSA đối với phân tích cảm xúc cũng giống như truyền hình màu so với truyền hình đen trắng: nó thêm chiều sâu và độ rõ ràng.
 
-Consider this review:
+Xem xét ví dụ sau:
 
-> "The breakfast was a bit tasteless but the hotel is close to the major attractions". 
+> “Bữa sáng hơi nhạt nhẽo nhưng khách sạn gần các điểm tham quan chính.” 
 
-A hotel owner looking for actionable insights needs to know that:
+Một chủ khách sạn cần thông tin mang tính hành động sẽ cần biết rằng:
 
-- Sentiment towards **food** is *negative*.
-- Sentiment towards **location** is *positive*.
+- Cảm xúc đối với **food** (đồ ăn) là *negative* (tiêu cực).
+- Cảm xúc đối với **location** (địa điểm) là *positive* (tích cực).
 
-A single sentiment score like 0.14 or -0.57 would be meaningless here. When aggregated across multiple multi-faceted reviews, these types of scores create a misleading picture that fail to capture real customer sentiment.
+Một điểm cảm xúc đơn lẻ như 0,14 hoặc -0,57 sẽ không có ý nghĩa trong trường hợp này. Khi tổng hợp nhiều bài đánh giá có nhiều khía cạnh như vậy, các điểm số đơn giản đó sẽ tạo ra một bức tranh sai lệch, không phản ánh đúng cảm xúc thực sự của khách.
 
 {% admonition type="info" %}
 
-It is recommended to set the `format` setting to `review` to look for sentiment more aggressively.
+Do đó, bạn nên đặt thiết lập `format` thành `review` để hệ thống phân tích cảm xúc chi tiết hơn.
 
 {% /admonition %}
 
-## Example
+## Ví dụ
 
-Request:
+Yêu cầu:
 
 ```json
 {
@@ -50,7 +50,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 
 ```json
 {

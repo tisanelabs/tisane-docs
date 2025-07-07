@@ -1,11 +1,11 @@
-# Is There a Confidence Value?
+﻿# 信頼値は存在しますか？
 
-We do not use confidence values for 2 reasons:
+Tisaneは、以下の2つの理由から信頼値を使用しません。
 
-1. We witnessed on multiple occasions how the confidence values are abused. It is safe to say that **the confidence values do more harm than good**. 
+1. Tisaneは、信頼値が悪用される場面を複数回目撃しました。信頼値は、**害の方が大きい**と言っても過言ではありません。 
 
-Industry leaders like Alice Goguen Hunsberger (formerly a lead of Trust & Safety in Grindr) say that it's not uncommon for an ML model to have high confidence but be wrong, and the human moderators must not be swayed by it.
+業界のリーダーであるGrindrのアリス・ゴーゲン・ハンスバーガー氏（Grindrの元トラスト＆セーフティ部門長）は、「機械学習モデルが高い信頼性を有している一方で、実際は誤っていることは珍しくなく、人間のモデレーターはそれに惑わされてはなりません」と述べています。
 
-We view the confidence value as a security theater, introducing dangers like [automation bias](https://en.wikipedia.org/wiki/Automation_bias). In the perfect world, human moderators are PhDs in ethics debating big philosophical questions; in the real world, they are often underpaid students strongly encouraged to perform their tasks as fast as possible. The ["Computer says no"](https://en.wikipedia.org/wiki/Computer_says_no) phenomenon more often than not means the human moderators will say no, too.
+Tisaneは信頼値をセキュリティーシアターであると捉え、[自動化バイアス](https://en.wikipedia.org/wiki/Automation_bias)のような危険を招く要因として認識しています。理想の世界では、倫理学の博士号を持つ人間のモデレーターが重大な哲学的問題を議論していますが、現実の世界では、彼らは低賃金で働く学生で、できるだけ早くタスクを完了することを迫られていることが多いです。[「コンピュータがノーと言う」](https://en.wikipedia.org/wiki/Computer_says_no)現象では、ほとんどの場合、人間のモデレーターもノーと言うことになります。
 
-2. Confidence values are simply not applicable to our headless NLP architecture.
+2. 信頼値は、TisaneのヘッドレスNLPアーキテクチャには単純に適用できません。

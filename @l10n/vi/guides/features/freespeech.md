@@ -1,57 +1,57 @@
-# The Free Speech Debate
+# Tranh luận về tự do ngôn luận
 
-Since the launch of Tisane API, we’ve seen a wide range of reactions. Many were curious, most were enthusiastic, but a small, yet vocal, group was outraged.
+Kể từ khi ra mắt Tisane API, chúng tôi đã nhận được nhiều phản ứng khác nhau. Nhiều người tò mò, hầu hết đều nhiệt tình, nhưng có một nhóm nhỏ nhưng ồn ào lại tỏ ra phẫn nộ.
 
-Their comments included:
+Họ để lại những bình luận như:
 
-- "Censorship!"
-- "Dictatorship!"
-- "Stalin would be proud!"
-- "You’re destroying free speech!"
-- "Now we’re at the mercy of machine learning!"
+- "Chủ nghĩa kiểm duyệt!"
+- "Độc tài!"
+- "Stalin hẳn phải tự hào lắm đây!"
+- "Các người đang bóp chết tự do ngôn luận!"
+- "Giờ thì số phận chúng ta do máy học định đoạt rồi!"
 
-We won’t waste time debating with those who believe the internet exists solely for them to harass others. But we do want to clarify the **intent and purpose** behind Tisane and address common misconceptions.
+Chúng tôi sẽ không lãng phí thời gian tranh luận với những người tin rằng Internet tồn tại chỉ để họ quấy rối người khác. Nhưng chúng tôi muốn làm rõ **ý định và mục đích** đằng sau Tisane và giải quyết những quan niệm sai lầm phổ biến.
 
-## Moderation Is Not Dictatorship
+## Kiểm duyệt không phải là chế độ độc tài
 
-Stalin’s interest in sentiment analysis aside, moderating online communities is nothing new. Even the most unregulated spaces (like Darknet forums) have moderators. This is because completely unmoderated environments quickly become unusable. They drown in spam, scams, infighting, and low-quality discussions.
+Bỏ qua mối quan tâm của Stalin trong việc phân tích cảm xúc, việc điều hành các cộng đồng trực tuyến không phải là điều gì mới mẻ. Ngay cả những không gian ít được quản lý nhất (như các diễn đàn Darknet) cũng có người kiểm duyệt. Điều này là do các môi trường hoàn toàn không được kiểm duyệt sẽ nhanh chóng trở nên không thể sử dụng. Chúng sẽ chìm trong thư rác, lừa đảo, đấu đá nội bộ và các cuộc thảo luận chất lượng thấp.
 
-Moderation isn't dictatorship. Free speech comes with responsibilities. If you believe otherwise, try a thought experiment: Imagine being 50 years older, disabled, part of an unwanted minority, or bullied for any reason.
+Kiểm duyệt không phải chế độ độc tài. Tự do ngôn luận đi kèm với trách nhiệm. Nếu bạn tin vào điều ngược lại, hãy thử thực hiện một thí nghiệm tư duy như sau: Hãy tưởng tượng bạn già đi 50 tuổi, tàn tật, thuộc nhóm thiểu số không mong muốn hoặc bị bắt nạt vì bất kỳ lý do gì.
 
-## The Harsh Reality Of Moderation
+## Sự thật khắc nghiệt của kiểm duyệt
 
-Being a moderator is not fun. No matter how fair or impartial, moderators will always face complaints and accusations of bias. Larger communities generate more conflicts, while smaller ones risk becoming toxic and driving away valuable members, sometimes leading to their complete collapse ([examples here](https://www.wired.com/2015/10/brief-history-of-the-demise-of-the-comments-timeline/)).
+Làm người kiểm duyệt không hề vui vẻ. Bất kể công bằng hay vô tư đến đâu, người kiểm duyệt vẫn luôn phải đối mặt với những khiếu nại và cáo buộc thiên vị. Cộng đồng lớn hơn tạo ra nhiều xung đột hơn, trong khi các cộng đồng nhỏ hơn có nguy cơ trở nên độc hại và khiến các thành viên có giá trị rời xa, đôi khi dẫn đến sự sụp đổ hoàn toàn ([ví dụ tại đây](https://www.wired.com/2015/10/brief-history-of-the-demise-of-the-comments-timeline/)).
 
-For commercial platforms, poor moderation leads to financial strain, management headaches, and burned-out employees ([source](https://www.theguardian.com/news/2017/may/25/facebook-moderator-underpaid-overburdened-extreme-content)). It’s no surprise that tools to assist moderation have emerged over the years. We’re not the first, but we believe our tools are sharper, more customizable, and adaptable to a wider range of scenarios.
+Đối với các nền tảng thương mại, quy trình kiểm duyệt yếu kém sẽ dẫn đến căng thẳng về tài chính, các vấn đề nan giải trong quản lý và nhân viên kiệt sức ([nguồn](https://www.theguardian.com/news/2017/may/25/facebook-moderator-underpaid-overburdened-extreme-content)). Không có gì ngạc nhiên khi các công cụ hỗ trợ kiểm duyệt đã xuất hiện trong những năm qua. Chúng tôi không phải là người đầu tiên, nhưng chúng tôi tin rằng các công cụ của chúng tôi sắc sảo hơn, có thể tùy chỉnh nhiều hơn và thích ứng với nhiều tình huống hơn.
 
-## Tisane Is A Tool, Not A Replacement
+## Tisane là một công cụ, không phải là một sự thay thế
 
-Let’s be clear:
+Hãy làm rõ thế này:
 
-Tisane is not designed to replace human moderators. It is a tool to assist them, offering insights, detecting hotspots, and easing their workload. It does not dictate policy, nor does it make moderators smarter or more fair.
+Tisane không được thiết kế để thay thế người kiểm duyệt. Đây là công cụ hỗ trợ họ, cung cấp thông tin chi tiết, phát hiện điểm nóng và giảm bớt khối lượng công việc của họ. Nó không quyết định chính sách, cũng không giúp người kiểm duyệt trở nên thông minh hơn hay công bằng hơn.
 
-Many industries already use intelligent assistive tools:
+Nhiều ngành công nghiệp đã sử dụng các công cụ hỗ trợ thông minh:
 
-- Translators have translation aids.
-- Call centers use sentiment analysis.
-- Writers use grammar checkers.
+- Biên dịch viên có công cụ hỗ trợ dịch thuật.
+- Các trung tâm cuộc gọi sử dụng phân tích cảm xúc.
+- Người viết lách sử dụng công cụ kiểm tra ngữ pháp.
 
-Tisane follows the same logic. It’s an API - a tool. A kitchen knife can be used to prepare food or as a weapon. A police baton can protect or be abused. Tisane, like any tool, depends on how it's used.
+Tisane cũng làm theo logic tương tự. Nó là một API - một công cụ. Một con dao làm bếp có thể được sử dụng để chế biến thức ăn hoặc làm vũ khí. Dùi cui của cảnh sát có thể bảo vệ hoặc bị sử dụng sai mục đích. Tisane, giống như bất kỳ công cụ nào khác, phụ thuộc vào cách sử dụng.
 
-## Software Has Limits, But It Helps
+## Phần mềm có các giới hạn, nhưng chúng hữu ích
 
-We do not claim to detect every personal attack, every instance of bigotry, or every crime online. Software isn’t Sherlock Holmes - it’s more like a beat cop. A beat cop won’t catch every crime, but their presence deters many bad actors.
+Chúng tôi không khẳng định có thể phát hiện mọi cuộc tấn công cá nhân, mọi trường hợp cố chấp hoặc tội phạm trực tuyến. Phần mềm không phải là Sherlock Holmes - chúng giống cảnh sát tuần tra hơn. Cảnh sát tuần tra không thể bắt được tất cả tội phạm, nhưng sự hiện diện của họ có thể ngăn chặn nhiều kẻ xấu.
 
-## **Better Moderation Protects Free Speech**
+## **Quy trình kiểm duyệt tốt hơn giúp bảo vệ quyền tự do ngôn luận**
 
-Harassment silences people. Censorship isn’t just about governments jailing dissidents - it’s also about online abuse driving people away.
+Sự quấy rối khiến mọi người im lặng. Kiểm duyệt không chỉ là việc chính phủ bỏ tù những người bất đồng chính kiến ​​- nó còn để giải quyết những vấn đề như tình trạng lạm dụng trực tuyến khiến mọi người tránh xa.
 
-Consider these cases:
+Hãy cân nhắc các trường hợp sau:
 
-- Newspapers and online communities have [shut down comment sections](https://medium.com/global-editors-network/why-news-websites-are-closing-their-comments-sections-ea31139c469d) due to toxicity.
-- IMDb disabled its [message boards](https://www.theguardian.com/film/2017/feb/06/imdb-shuts-down-message-boards).
-- Public figures like Kathy Sierra [quit the internet](https://en.wikipedia.org/wiki/Kathy_Sierra) due to online harassment.
+- Các tờ báo và cộng đồng trực tuyến đã [đóng phần bình luận](https://medium.com/global-editors-network/why-news-websites-are-closing-their-comments-sections-ea31139c469d) do hành vi độc hại.
+- IMDb tắt [bảng tin nhắn](https://www.theguardian.com/film/2017/feb/06/imdb-shuts-down-message-boards).
+- Những người của công chúng như Kathy Sierra [đã rời khỏi internet](https://en.wikipedia.org/wiki/Kathy_Sierra) vì bị quấy rối trực tuyến.
 
-Better moderation tools protect free speech by creating safer environments where more voices can be heard.
+Các công cụ kiểm duyệt tốt hơn bảo vệ quyền tự do ngôn luận bằng cách tạo ra môi trường an toàn hơn, nơi nhiều tiếng nói có thể được lắng nghe hơn.
 
-We know Tisane isn’t perfect. But we have to start somewhere.
+Chúng tôi biết Tisane không hoàn hảo. Nhưng nếu không bắt đầu, ta sẽ không thể đến đích.

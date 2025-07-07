@@ -1,24 +1,24 @@
-# Why Deploy Abuse Detection If It's Not 100% Accurate?
+# 100%正確ではないにもかかわらず、中傷検出を導入する理由は？
 
-Tisane offers high accuracy, but like all natural language processing systems, it is not 100% perfect. Nor are human moderators.
+Tisaneは高い精度を提供しますが、すべての自然言語処理システムと同様に、100%完璧ではありません。人間のモデレーターも同様です。
 
-## Why Use It Anyway?
+## それでも使用する理由は？
 
-1. Deterrence Against Offenders
-   - Just as law enforcement cannot be everywhere, moderation tools do not need to be perfect to be effective.
-   - The mere presence of an abuse detection system discourages bad actors from engaging in harmful behavior.
-2. Speed and Efficiency
-   - NLP systems can analyze large volumes of content instantly, something human moderators cannot scale to match.
-   - Even if some cases require human review, the system significantly reduces the workload.
-3. Transparency and Consistency
-   - Automated moderation ensures rules are applied fairly, reducing bias and human inconsistency.
-   - Unlike human moderators, NLP systems do not get tired, emotional, or overwhelmed.
-4. Real-World Comparisons
-   - No police force prevents all crime, yet they reduce incidents and deter criminals.
-   - No spam filter catches 100% of spam, yet they dramatically improve email usability.
-   - No lock is 100% tamper-proof, yet it's much safer to keep the door locked than leave it open at all times.
-5. Continuous Improvement
-   - Tisane Labs is committed to improving accuracy over time.
-   - Real-world usage helps fine-tune detection models and reduce false positives and negatives.
+1. 違反者に対する抑止力
+   - 警察がどこにでもいることはできないのと同じように、モデレーションツールは完璧でなくても効果的であることができます。
+   - 中傷検出システムの存在そのものが、悪意のあるユーザーが有害な行為を行うことを抑止します。
+2. スピードと効率
+   - NLPシステムは、人間のモデレーターが対応できない規模で、大量のコンテンツを瞬時に分析することができます。
+   - 人間による確認が必要であっても、システムは作業負荷を大幅に軽減する場合もあります。
+3. 透明性と一貫性
+   - 自動モデレーションはルールを公平に適用し、バイアスや人間によって生じる一貫性の欠如を軽減します。
+   - 人間のモデレーターとは異なり、NLPシステムは疲れたり、感情的になったり、精神的圧迫を感じたりしません。
+4. 現実世界との比較
+   - 警察はすべての犯罪を防止できませんが、事件の発生を減らし、犯罪者を抑止します。
+   - スパムフィルターは100%のスパムを捕捉できませんが、メールの利便性を大幅に向上させます。
+   - 鍵には100%の不正侵入防止効果はありませんが、ドアを常に開けたままにするよりも、鍵をかけておく方がはるかに安全です。
+5. 継続的な改善
+   - Tisane Labsは、時間の経過とともに精度を向上させることに尽力しています。
+   - 現実世界での使用により、検出モデルの精度を向上させ、誤検出と検出漏れを削減します。
 
-For reference, even serious crimes often remain unsolved ([source](https://www.reddit.com/r/UnresolvedMysteries/comments/5toay8/what_percentage_of_murders_are_unsolved/)), yet law enforcement remains essential. Similarly, abuse detection tools are valuable even if they aren’t perfect.
+参考までに、重大な犯罪でも多くの場合未解決のままです（[出典](https://www.reddit.com/r/UnresolvedMysteries/comments/5toay8/what_percentage_of_murders_are_unsolved/)）。しかし、法執行機関は依然として不可欠です。同様に、中傷検出ツールは完璧でなくても価値があります。

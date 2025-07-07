@@ -1,65 +1,65 @@
-# Supported Functions
+﻿# Các chức năng được hỗ trợ
 
-Tisane is a powerful Natural Language Understanding (NLU) platform, designed from scratch for social media / user-generated text: ungrammatical, possibly obfuscated (e.g. algospeak), and heavy on slang and errors. Tisane's main applications are content moderation and law enforcement/national security/intelligence.
+Tisane là một nền tảng Hiểu ngôn ngữ tự nhiên (NLU) mạnh mẽ, được thiết kế từ đầu để xử lý văn bản trên mạng xã hội hoặc nội dung do người dùng tạo ra — thường không chuẩn ngữ pháp, có thể bị ngụy trang (ví dụ như algospeak) và chứa nhiều tiếng lóng hoặc lỗi. Các ứng dụng chính của Tisane là kiểm duyệt nội dung và phục vụ cho thực thi pháp luật / an ninh quốc gia / tình báo.
 
-All features are available across all supported languages. All output is provided in one call.
+Tất cả tính năng đều khả dụng cho mọi ngôn ngữ được hỗ trợ. Mọi kết quả được trả về chỉ trong một lần gọi API.
 
-## Core Functionality
+## Chức năng cốt lõi
 
-Tisane offers sophisticated capabilities for abuse detection, sentiment analysis, and entity recognition:
+Tisane cung cấp các khả năng tiên tiến về phát hiện hành vi lạm dụng, phân tích cảm xúc và nhận dạng thực thể:
 
-- Detect problematic content for content moderation and investigations:
-  - Personal attacks, insults, cyberbullying
-  - Hate speech
-  - Profanity
-  - Sexual advances
-  - Adult only references
-  - Criminal activity (trade in restricted items like drugs, firearms, etc.)
-  - Threats
-  - Allegations (whether libel or not)
-  - Suicidal ideation
-  - Solicitation of contact outside the current media or platform
-  - Graphic depictions of violence
-  - Forceful assertions of hierarchy (e.g. workplace bullying)
-  - Data leaks (e.g. PII exfiltration, exposure of credentials)
+- Phát hiện nội dung có vấn đề phục vụ cho kiểm duyệt nội dung hoặc điều tra:
+  - Công kích cá nhân, lăng mạ, bắt nạt trên mạng
+  - Ngôn từ thù ghét
+  - Từ ngữ tục tĩu
+  - Gạ gẫm tình dục
+  - Nội dung chỉ dành cho người lớn
+  - Hành vi phạm pháp (mua bán các mặt hàng bị cấm như ma túy, vũ khí, v.v.)
+  - Đe dọa
+  - Cáo buộc (dù có phải phỉ báng hay không)
+  - Ý định tự sát
+  - Mời gọi liên lạc ngoài nền tảng hiện tại
+  - Miêu tả bạo lực rùng rợn
+  - Ép buộc phân cấp thứ bậc (ví dụ: bắt nạt nơi làm việc)
+  - Rò rỉ dữ liệu (ví dụ: rò rỉ thông tin cá nhân, lộ thông tin đăng nhập)
   - Spam
   
-- Detect named entities and find relations between them:
-  - people
-  - organizations
-  - social roles (titles, occupations, etc.)
-  - places
-  - phone numbers
-  - credit card numbers
-  - dates
-  - amounts of money
-  - items of interest in investigations (drugs, weapons, vehicles)
-  - cryptocurrency addresses
-  - more
-- Detect topics (Subjects/Themes/Domains)
-- Sentiment analysis (positive, negative, or mixed), including
-  - sentiment expressed towards specific aspects or entities within the text. (Aspect-based sentiment analysis)
+- Phát hiện thực thể được đặt tên và xác định mối quan hệ giữa các thực thể, bao gồm:
+  - người
+  - tổ chức
+  - vai trò xã hội (chức danh, nghề nghiệp, v.v.)
+  - địa điểm
+  - số điện thoại
+  - số thẻ tín dụng
+  - ngày tháng
+  - số tiền
+  - Mặt hàng liên quan đến điều tra (ma túy, vũ khí, phương tiện)
+  - địa chỉ tiền mã hóa
+  - và hơn nữa
+- Phát hiện chủ đề (chủ đề / lĩnh vực / nội dung chính)
+- Phân tích cảm xúc (tích cực, tiêu cực hoặc hỗn hợp), bao gồm
+  - đánh giá cảm xúc hướng tới từng thực thể hoặc đặc điểm cụ thể trong văn bản. (Phân tích cảm xúc theo khía cạnh
 
-## Deep Linguistic Analysis
+## Phân tích ngôn ngữ sau
 
-Tisane also provides access to linguistic fundamentals:
+Tisane còn cung cấp truy cập vào các thành phần cơ bản của ngôn ngữ:
 
-- Inteligent sentence splitting
-  - Provides original sentences and their corrected versions (if applicable). 
-  - Uses non-breaks to avoid false positives (e.g. `EE. UU.` or `www.google.com`)
-- Lexical chunking
-  - Tokenizes sentences by morpheme
-  - Supports all types of segmentation:
-    - languages using white spaces
-    - languages not using white spaces (e.g. Chinese, Japanese, Thai)
-    - languages using compounds (German, Dutch, Afrikaans)
-    - clitics
-    - multiword expressions
-    - nondictionary entities (emails, phone numbers, etc.)
-- Parse Trees and Phrases
-  - Offers hierarchical representations of sentence structure, highlighting phrases and their relationships.
-  - Extracts noun phrases, verbal phrases, prepositional phrases, adjectival phrases, adverbial phrases.
-- Words
-  - Provides detailed information about each word (or lexical chunk), including its lemma, role in the sentence, and grammatical features.
-- Sense disambiguation
-  - Detects the sense for every word in the current context.
+- tách câu thông minh
+  - Cung cấp cả câu gốc và câu đã được sửa (nếu có). 
+  - Sử dụng các dấu ngắt hợp lý để tránh tách câu sai (ví dụ: `EE. UU.` hoặc `www.google.com`)
+- Phân tách từ vựng theo ngữ đoạn
+  - Tách câu theo hình vị
+  - Hỗ trợ tất cả các kiểu phân đoạn:
+    - ngôn ngữ dùng khoảng trắng
+    - Ngôn ngữ không dùng khoảng trắng (ví dụ: tiếng Trung, Nhật, Thái)
+    - ngôn ngữ dùng từ ghép (tiếng Đức, Hà Lan, Nam Phi)
+    - từ phụ thuộc
+    - cụm từ cố định
+    - thực thể không nằm trong từ điển (email, số điện thoại, v.v.)
+- Cây phân tích cú pháp và cụm từ
+  - Cung cấp cấu trúc phân cấp của câu, hiển thị các cụm từ và mối quan hệ giữa chúng
+  - Trích xuất cụm danh từ, động từ, giới từ, tính từ và trạng từ.
+- Từ vựng
+  - Cung cấp thông tin chi tiết về từng từ (hoặc đơn vị từ vựng), bao gồm dạng gốc (lemma), vai trò trong câu và các đặc điểm ngữ pháp
+- Phân biệt nghĩa theo ngữ cảnh
+  - Xác định nghĩa của từng từ trong ngữ cảnh hiện tại.

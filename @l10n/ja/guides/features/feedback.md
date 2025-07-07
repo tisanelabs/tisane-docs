@@ -1,21 +1,21 @@
-# Can I Send a Feedback to Improve the Results?
+# 結果を改善するためにフィードバックを送信することはできますか？
 
-Yes.
+はい。
 
-The method is `POST /feedback.` (Note: it’s a method in the LaMP web service, not Tisane.)
+メソッドは`POST /feedback.`です（注意：これはLaMPウェブサービス内のメソッドであり、Tisaneではありません）。
 
-Simply forward the original Tisane API request, specifying your API key or your custom code in the Authorization header.
+元のTisane APIリクエストをそのまま転送し、AuthorizationヘッダーにAPIキーまたはカスタムコードを指定します。
 
-For example:
+例：
 
-Body
+本文
 
 ```json
 {"language":"en", "content":"it's alive", "settings":{}}
 ```
 
-The method returns a JSON response with the following attributes:
+このメソッドは、以下の属性を持つJSONレスポンスを返します。
 
-success (boolean): whether the feedback submission was successful
-error (string, optional): if an error occurred, what the error is
-The response is purely for debugging purposes. You can send the request asynchronously, and ignore the response.
+success (boolean)：フィードバックの送信が成功したかどうか
+error (string, optional)：エラーが発生した場合、エラーの内容
+このレスポンスはデバッグのみを目的としています。リクエストを非同期で送信し、レスポンスを無視できます。

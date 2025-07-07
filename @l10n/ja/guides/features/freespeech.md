@@ -1,57 +1,57 @@
-# The Free Speech Debate
+# 言論の自由に関する議論
 
-Since the launch of Tisane API, we’ve seen a wide range of reactions. Many were curious, most were enthusiastic, but a small, yet vocal, group was outraged.
+Tisane APIのリリース以降、さまざまな反応が寄せられています。多くの人々が興味を示し、大多数は熱心でしたが、少数ながら声の大きなグループは激怒していました。
 
-Their comments included:
+彼らの言い分には次のようなものがありました。
 
-- "Censorship!"
-- "Dictatorship!"
-- "Stalin would be proud!"
-- "You’re destroying free speech!"
-- "Now we’re at the mercy of machine learning!"
+- 「検閲だ！」
+- 「独裁だ！」
+- 「スターリンが誇りに思うだろう！」
+- 「言論の自由を破壊している！」
+- 「今や我々は機械学習に翻弄されている！」
 
-We won’t waste time debating with those who believe the internet exists solely for them to harass others. But we do want to clarify the **intent and purpose** behind Tisane and address common misconceptions.
+私たちは、インターネットが他人に嫌がらせを行うためだけに存在すると考えている人々と議論して時間を無駄にしません。ただし、私たちはTisaneの**意図と目的**を明確にし、一般的な誤解を解消したいと考えています。
 
-## Moderation Is Not Dictatorship
+## モデレーションは独裁ではない
 
-Stalin’s interest in sentiment analysis aside, moderating online communities is nothing new. Even the most unregulated spaces (like Darknet forums) have moderators. This is because completely unmoderated environments quickly become unusable. They drown in spam, scams, infighting, and low-quality discussions.
+スターリンの感情分析への関心はさておき、オンラインコミュニティのモデレーションは目新しいものではありません。最も規制の緩い空間（ダークネット上の掲示板など）にもモデレーターが存在します。それは、完全にモデレーションされていない環境は、すぐに利用不可になるためです。モデレーターはスパム、詐欺、内輪もめ、そして低俗な議論に圧倒されます。
 
-Moderation isn't dictatorship. Free speech comes with responsibilities. If you believe otherwise, try a thought experiment: Imagine being 50 years older, disabled, part of an unwanted minority, or bullied for any reason.
+モデレーションは独裁ではありません。言論の自由には責任が伴います。そう思わない場合は、次のような思考実験を試してみてください。50歳年上で、障害を抱え、望まれない少数派の一員であるか、何らかの理由でいじめられている状況を想像してみてください。
 
-## The Harsh Reality Of Moderation
+## モデレーションの厳しい現実
 
-Being a moderator is not fun. No matter how fair or impartial, moderators will always face complaints and accusations of bias. Larger communities generate more conflicts, while smaller ones risk becoming toxic and driving away valuable members, sometimes leading to their complete collapse ([examples here](https://www.wired.com/2015/10/brief-history-of-the-demise-of-the-comments-timeline/)).
+モデレーターを務めるのは楽しいことではありません。どれだけ公平で偏りのないモデレーターであっても、必ず不満や偏向の指摘を受けるものです。大規模なコミュニティでは、より多くの対立が発生する一方、小規模なコミュニティは有害なものになり、貴重なメンバーを追い出し、場合によっては完全に崩壊するリスクがあります（[例はこちら](https://www.wired.com/2015/10/brief-history-of-the-demise-of-the-comments-timeline/)）。
 
-For commercial platforms, poor moderation leads to financial strain, management headaches, and burned-out employees ([source](https://www.theguardian.com/news/2017/may/25/facebook-moderator-underpaid-overburdened-extreme-content)). It’s no surprise that tools to assist moderation have emerged over the years. We’re not the first, but we believe our tools are sharper, more customizable, and adaptable to a wider range of scenarios.
+商用プラットフォームでは、不十分なモデレーションは財務的な負担、管理上の課題、そして従業員の燃え尽き症候群を招きます（[出典](https://www.theguardian.com/news/2017/may/25/facebook-moderator-underpaid-overburdened-extreme-content)）。近年のモデレーションを支援するツールの登場は、驚くべきことではありません。私たちが最初ではありませんが、Tisaneのツールはより高度で、よりカスタマイズ可能であり、さまざまなシナリオに対応できると考えています。
 
-## Tisane Is A Tool, Not A Replacement
+## Tisaneはツールであり、代替となるものではありません。
 
-Let’s be clear:
+明確にすると以下のとおりです。
 
-Tisane is not designed to replace human moderators. It is a tool to assist them, offering insights, detecting hotspots, and easing their workload. It does not dictate policy, nor does it make moderators smarter or more fair.
+Tisaneは、人間のモデレーターを置き換えるために設計されたものではなく、彼らを支援するためのツールであり、洞察を提供し、問題の頻発箇所を特定し、作業負荷を軽減します。ポリシーを強制するものではなく、モデレーターをより賢くしたり、より公平にしたりするものでもありません。
 
-Many industries already use intelligent assistive tools:
+多くの業界では既に、以下のようなインテリジェントな支援ツールが活用されています。
 
-- Translators have translation aids.
-- Call centers use sentiment analysis.
-- Writers use grammar checkers.
+- 翻訳者は翻訳支援ツールを利用しています。
+- コールセンターは感情分析を活用しています。
+- 作家は文法チェッカーを使用します。
 
-Tisane follows the same logic. It’s an API - a tool. A kitchen knife can be used to prepare food or as a weapon. A police baton can protect or be abused. Tisane, like any tool, depends on how it's used.
+Tisaneも同じロジックに従います。それはAPI（ツール）です。包丁は、料理の材料を切るために使用されるほかに、武器としても使用可能です。警棒は、保護のために使用されることもあれば、悪用されることもあります。Tisaneは、他のツールと同様、その使い方によって効果が変わります。
 
-## Software Has Limits, But It Helps
+## ソフトウェアには限界がありますが、有効なものです。
 
-We do not claim to detect every personal attack, every instance of bigotry, or every crime online. Software isn’t Sherlock Holmes - it’s more like a beat cop. A beat cop won’t catch every crime, but their presence deters many bad actors.
+私たちは、オンライン上ですべての個人攻撃、偏見、または犯罪を検出できるとは断言しません。ソフトウェアはシャーロック・ホームズではありません。むしろ、パトロールする警官のようなものです。そのような警官はすべての犯罪を摘発するわけではありませんが、彼らの存在は多くの犯罪者を抑止します。
 
-## **Better Moderation Protects Free Speech**
+## **優れたモデレーションは言論の自由を保護**
 
-Harassment silences people. Censorship isn’t just about governments jailing dissidents - it’s also about online abuse driving people away.
+ハラスメントは人々を閉口させます。検閲は、政府が反体制派を投獄することだけではありません。オンライン上の中傷が人々を追い出すことも含まれます。
 
-Consider these cases:
+以下の事例を検討してください。
 
-- Newspapers and online communities have [shut down comment sections](https://medium.com/global-editors-network/why-news-websites-are-closing-their-comments-sections-ea31139c469d) due to toxicity.
-- IMDb disabled its [message boards](https://www.theguardian.com/film/2017/feb/06/imdb-shuts-down-message-boards).
-- Public figures like Kathy Sierra [quit the internet](https://en.wikipedia.org/wiki/Kathy_Sierra) due to online harassment.
+- 新聞やオンラインコミュニティでは、有害なコメントが横行したため、[コメント欄を閉鎖](https://medium.com/global-editors-network/why-news-websites-are-closing-their-comments-sections-ea31139c469d)しました。
+- IMDbは[掲示板](https://www.theguardian.com/film/2017/feb/06/imdb-shuts-down-message-boards)を利用不可にしました。
+- キャシー・シエラのような著名人は、オンライン上の嫌がらせを理由に[インターネットをやめました](https://en.wikipedia.org/wiki/Kathy_Sierra)。
 
-Better moderation tools protect free speech by creating safer environments where more voices can be heard.
+優れたモデレーションツールは、より多くの声が聴かれる安全な環境を創出することで、言論の自由を保護します。
 
-We know Tisane isn’t perfect. But we have to start somewhere.
+私たちはTisaneが完璧ではないことを知っています。しかし、どこかで始めなければならないのです。

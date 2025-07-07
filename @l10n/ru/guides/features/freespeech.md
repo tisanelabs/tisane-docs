@@ -1,57 +1,57 @@
-# The Free Speech Debate
+# Дебаты о свободе слова
 
-Since the launch of Tisane API, we’ve seen a wide range of reactions. Many were curious, most were enthusiastic, but a small, yet vocal, group was outraged.
+С момента запуска Tisane API мы видели широкий спектр реакций. Многие проявили любопытство, большинство были полны энтузиазма, но небольшая, но активная группа была возмущена.
 
-Their comments included:
+Вот некоторые их комментарии:
 
-- "Censorship!"
-- "Dictatorship!"
-- "Stalin would be proud!"
-- "You’re destroying free speech!"
-- "Now we’re at the mercy of machine learning!"
+- «Цензура!»
+- «Диктатура!»
+- «Сталин был бы горд!»
+- «Вы уничтожаете свободу слова!»
+- «Теперь мы во власти машинного обучения!»
 
-We won’t waste time debating with those who believe the internet exists solely for them to harass others. But we do want to clarify the **intent and purpose** behind Tisane and address common misconceptions.
+Мы не будем тратить время на дебаты с теми, кто считает, что Интернет существует исключительно для того, чтобы преследовать других. Но мы хотим прояснить **намерение и цель** Tisane и развеять распространённые заблуждения.
 
-## Moderation Is Not Dictatorship
+## Модерация — это не диктатура
 
-Stalin’s interest in sentiment analysis aside, moderating online communities is nothing new. Even the most unregulated spaces (like Darknet forums) have moderators. This is because completely unmoderated environments quickly become unusable. They drown in spam, scams, infighting, and low-quality discussions.
+Если не принимать во внимание интерес Сталина к анализу настроений, модерирование интернет-сообществ не является чем-то новым. Даже в самых нерегулируемых пространствах (вроде форумов даркнета) есть модераторы. Это происходит потому, что полностью немодерируемые среды быстро становятся непригодными для использования. Они тонут в спаме, мошенничестве, распрях и низкопробных обсуждениях.
 
-Moderation isn't dictatorship. Free speech comes with responsibilities. If you believe otherwise, try a thought experiment: Imagine being 50 years older, disabled, part of an unwanted minority, or bullied for any reason.
+Модерация — это не диктатура. Свобода слова подразумевает ответственность. Если вы считаете иначе, попробуйте провести мысленный эксперимент: Представьте себе, что вы на 50 лет старше, что вы инвалид, что вы принадлежите к нежелательному меньшинству или подвергаетесь издевательствам по любой причине.
 
-## The Harsh Reality Of Moderation
+## Суровая реальность модерации
 
-Being a moderator is not fun. No matter how fair or impartial, moderators will always face complaints and accusations of bias. Larger communities generate more conflicts, while smaller ones risk becoming toxic and driving away valuable members, sometimes leading to their complete collapse ([examples here](https://www.wired.com/2015/10/brief-history-of-the-demise-of-the-comments-timeline/)).
+Быть модератором невесело. Независимо от того, насколько модераторы справедливы или беспристрастны, они всегда будут сталкиваться с жалобами и обвинениями в предвзятости. Более крупные сообщества порождают больше конфликтов, в то время как более мелкие рискуют стать токсичными и оттолкнуть ценных членов, что иногда приводит к их полному краху ([см. примеры здесь](https://www.wired.com/2015/10/brief-history-of-the-demise-of-the-comments-timeline/)).
 
-For commercial platforms, poor moderation leads to financial strain, management headaches, and burned-out employees ([source](https://www.theguardian.com/news/2017/may/25/facebook-moderator-underpaid-overburdened-extreme-content)). It’s no surprise that tools to assist moderation have emerged over the years. We’re not the first, but we believe our tools are sharper, more customizable, and adaptable to a wider range of scenarios.
+На коммерческих платформах плохая модерация приводит к финансовым трудностям, проблемам с управлением и выгоранию сотрудников ([источник](https://www.theguardian.com/news/2017/may/25/facebook-moderator-underpaid-overburdened-extreme-content)). Неудивительно, что за прошедшие годы появились инструменты, помогающие в модерации. Мы не первые, но мы считаем, что наши инструменты более совершенны, в большей степени настраиваемы и адаптируемы к более широкому спектру сценариев.
 
-## Tisane Is A Tool, Not A Replacement
+## Tisane — это инструмент, а не замена
 
-Let’s be clear:
+Давайте проясним:
 
-Tisane is not designed to replace human moderators. It is a tool to assist them, offering insights, detecting hotspots, and easing their workload. It does not dictate policy, nor does it make moderators smarter or more fair.
+Tisane не предназначен для замены модераторов-людей. Это инструмент, который помогает им, предоставляя ценную информацию, выявляя «проблемные точки» и облегчая рабочую нагрузку модераторов-людей. Он не диктует политику и не делает модераторов умнее или справедливее.
 
-Many industries already use intelligent assistive tools:
+Во многих отраслях уже используются интеллектуальные вспомогательные инструменты:
 
-- Translators have translation aids.
-- Call centers use sentiment analysis.
-- Writers use grammar checkers.
+- У переводчиков есть вспомогательные средства перевода.
+- Колл-центры используют анализ тональности.
+- Писатели используют программы проверки грамматики.
 
-Tisane follows the same logic. It’s an API - a tool. A kitchen knife can be used to prepare food or as a weapon. A police baton can protect or be abused. Tisane, like any tool, depends on how it's used.
+Tisane  следует той же логике. Он представляет собой API-инструмент. Кухонный нож можно использовать для приготовления пищи или в качестве оружия. Полицейская дубинка может использоваться для защиты или злоупотреблений властью. Эффективность Tisane, как и любого средства, зависит от того, как его использовать.
 
-## Software Has Limits, But It Helps
+## У программы есть ограничения, но она помогает
 
-We do not claim to detect every personal attack, every instance of bigotry, or every crime online. Software isn’t Sherlock Holmes - it’s more like a beat cop. A beat cop won’t catch every crime, but their presence deters many bad actors.
+Мы не утверждаем, что обнаруживаем все личные нападки, все случаи нетерпимости или все преступления в Интернете. Программа — это не Шерлок Холмс, это скорее патрульный полицейский. Патрульный полицейский не сможет поймать всех приступников, но его присутствие отпугивает многих мошенников.
 
-## **Better Moderation Protects Free Speech**
+## **Лучшая модерация защищает свободу слова**
 
-Harassment silences people. Censorship isn’t just about governments jailing dissidents - it’s also about online abuse driving people away.
+Преследование заставляет людей молчать. Цензура заключается не только в том, что правительства сажают в тюрьму диссидентов, но и в том, что оскорбления в Интернете отталкивают людей.
 
-Consider these cases:
+Рассмотрите следующие случаи:
 
-- Newspapers and online communities have [shut down comment sections](https://medium.com/global-editors-network/why-news-websites-are-closing-their-comments-sections-ea31139c469d) due to toxicity.
-- IMDb disabled its [message boards](https://www.theguardian.com/film/2017/feb/06/imdb-shuts-down-message-boards).
-- Public figures like Kathy Sierra [quit the internet](https://en.wikipedia.org/wiki/Kathy_Sierra) due to online harassment.
+- У газет и интернет-сообществ есть [разделы комментариев, которые были закрыты](https://medium.com/global-editors-network/why-news-websites-are-closing-their-comments-sections-ea31139c469d) из-за токсичности.
+- IMDb отключил свои [форумы](https://www.theguardian.com/film/2017/feb/06/imdb-shuts-down-message-boards).
+- Публичные деятели, такие как Кэти Сьерра, [покинули интернет](https://en.wikipedia.org/wiki/Kathy_Sierra) из-за онлайн-преследований.
 
-Better moderation tools protect free speech by creating safer environments where more voices can be heard.
+Более совершенные инструменты модерации защищают свободу слова, создавая более безопасную среду, в которой можно услышать больше голосов.
 
-We know Tisane isn’t perfect. But we have to start somewhere.
+Мы знаем, что Tisane не идеален. Но нам нужно с чего-то начать.

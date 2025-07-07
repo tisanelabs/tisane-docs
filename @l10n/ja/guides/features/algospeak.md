@@ -1,37 +1,37 @@
-# Algospeak and Adversarial Text Manipulations
+﻿# スラングと敵対的文章操作
 
-Tisane uses a special type of built-in spellchecker module to process text with both unintentional errors (misspellings) and adversarial text manipulations (e.g. algospeak). 
+Tisaneは、特殊な組み込みスペルチェッカーモジュールを用いて意図しない誤り（スペルミス）と敵対的文章操作（例：スラング）の両方を処理します。 
 
-The spellchecker employs several different techniques to handle different types of manipulations (masking characters, substitutions, etc.). These corrections are not limited by profanities or slurs, and consider the context. The same misspelled word may be interpreted differently in different sentences.
+このスペルチェッカーは複数の技術を採用しており、さまざまな種類の操作（文字のマスキング、置換など）に対応できます。これらの修正は、卑猥な言葉や差別的な表現に限らず、文脈を考慮して行われます。同じ誤字は、異なる文脈では異なる意味に解釈される可能性があります。
 
-If corrections were found to be necessary in a sentence, the sentence gets a `corrected_text` attribute where the corrected text is logged. (Set `words` to `true` to output sentence data.)
+文章に修正が必要と判断された場合、その文に`corrected_text`属性が付与され、修正されたテキストが記録されます（`words`を`true`に設定して、文章のデータを出力します）。
 
-## Limitations
+## 制限事項
 
-Spell-checking is not a ["did you mean" tool](https://stackoverflow.com/questions/307291/how-does-the-google-did-you-mean-algorithm-work), as many people seem to believe:
+スペルチェックは、多くの人が考えているような[「正しい単語を提案する」ツール](https://stackoverflow.com/questions/307291/how-does-the-google-did-you-mean-algorithm-work)ではありません。
 
-- If the word is a legitimate word, no matter if misused or esoteric, Tisane will not correct it. For example, if *noun* is misspelled as *nun*, or *house* is misspelled as *horse*, Tisane won't help (unless it's part of a known often obfuscated concept, e.g. _corn star_ in English).
-- The primary purpose of the spellchecker is to decipher obfuscations. Therefore, the spellchecker is biased toward more profane, objectionable, or heavily used concepts.
+- 正当な単語である場合、誤用や専門用語であっても、Tisaneは訂正しません。例えば、「noun」が 「nun」と誤って入力された場合、または「house」が「horse」と誤って入力された場合、Tisaneは対応できません（ただし、既知の難解な概念の一部である場合を除く。例えば、英語の「corn star」など）。********__
+- スペルチェッカーの主な目的は、難読化された表現を解読することです。そのため、スペルチェッカーは、より卑猥、不快、または頻繁に使用される概念に偏っています。
 
-## Excluding Esoteric Senses And Words To Get Better Results
+## 専門的な意味や言葉を排除して、より良好な結果を取得
 
-To get around the issue, you can use the  `min_generic_frequency` parameter. 
+この問題を回避するには、 `min_generic_frequency`パラメータを使用できます。 
 
-This allows you to exclude the most esoteric senses and words. 
+これにより、最も専門的な意味や単語を除外することができます。 
 
-The frequency is graded between 0 and 10, with 10 being the most frequent. 
+頻度は0から10のスケールで評価され、10が最も高い頻度を示します。 
 
-Some esoteric senses are also graded at -10. 
+一部の専門的な意味は、-10で評価されます。 
 
-We recommend you initially set `min_generic_frequency` to `1` or`2` to see if it works in your situation.
+まず、`min_generic_frequency`を`1`または`2`に設定して、ご自身の環境で正常に動作するか確認することをおすすめします。
 
-## Excluding Potential Proper Nouns
+## 潜在的な固有名詞の除外
 
-If you need to avoid spell-checking potential proper nouns, set `lowercase_spellcheck_only` to `true`.
+固有名詞のスペルチェックを無効にしたい場合は、`lowercase_spellcheck_only`を`true`に設定します。
 
-## Example
+## 例
 
-Request:
+リクエスト：
 ```json
 {
   "language":"en",
@@ -43,7 +43,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 ```json
 
 	"text": "I will br*k his neck and kll him",

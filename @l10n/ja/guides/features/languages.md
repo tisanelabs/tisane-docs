@@ -1,41 +1,41 @@
-## What Languages Are Supported?
+﻿## どの言語に対応していますか？
 
-Tisane supports the following languages:
+Tisaneは以下の言語に対応しています。
 
-* English
-* Afrikaans
-* Albanian
-* Arabic
-* Cantonese
-* Chinese Simplified 
-* Chinese Traditional
-* Danish
-* Dutch
-* Finnish
-* French
-* German
-* Haitian Creole
-* Hebrew
-* Hindi
-* Hungarian
-* Indonesian
-* Italian
-* Japanese
-* Korean
-* Malay
-* Norwegian
-* Pashto
-* Persian
-* Polish
-* Portuguese
-* Romanian
-* Russian
-* Spanish
-* Swedish
-* Tagalog (including Taglish)
-* Thai
-* Turkish
-* Urdu
-* Vietnamese
+* 英語
+* アフリカーンス語
+* アルバニア語
+* アラビア語
+* 広東語
+* 簡体字中国語 
+* 繁体字中国語
+* デンマーク語
+* オランダ語
+* フィンランド語
+* フランス語
+* ドイツ語
+* ハイチ・クレオール語
+* ヘブライ語
+* ヒンディー語
+* ハンガリー語
+* インドネシア語
+* イタリア語
+* 日本語
+* 韓国語
+* マレー語
+* ノルウェー語
+* パシュトー語
+* ペルシャ語
+* ポーランド語
+* ポルトガル語
+* ルーマニア語
+* ロシア語
+* スペイン語
+* スウェーデン語
+* タガログ語（タグリッシュを含む）
+* タイ語
+* トルコ語
+* ウルドゥー語
+* ベトナム語
 
-If your language is not supported, [contact us](https://tisane.ai/contact-us/#support).
+お使いの言語が対応していない場合は、[お問い合わせください](https://tisane.ai/contact-us/#support)。

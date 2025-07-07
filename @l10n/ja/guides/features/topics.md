@@ -1,22 +1,22 @@
-# Topic Extraction
+﻿# トピックの抽出
 
-Topic extraction determines the dominant topics in the text. 
+トピックの抽出は、テキスト内の主要なトピックを特定します。 
 
 {% admonition type="info" %}
 
-This functionality is also known as:
+この機能は、次のように呼ばれることもあります。
 
-* theme identification
-* subject detection
-* key topic recognition
+* テーマの特定
+* テーマの検出
+* 主要トピックの認識
 
 {% /admonition %}
 
-Tisane stores the topics under the `topics` array (strings without `topic_stats`, objects with `topic_stats`). The topics are document level.
+Tisaneはトピックを`topics`配列（`topic_stats`を持たない文字列、`topic_stats`を持つオブジェクト）に格納します。トピックはドキュメント単位です。
 
-When a particular word has multiple interpretations, the sense of the word must be determined in the current context. For example, _Jupiter_ is a planet and a Roman deity. Whether it's the planet or the deity, depends on the text.
+特定の単語に複数の意味がある場合、その単語の意味は現在の文脈において決定されなければなりません。例えば、ジュピターは惑星であり、ローマ神話の神でもあります。__それが惑星なのか神なのかは、文脈によって異なります。
 
-For example, the sentence _Juno is the wife of Jupiter_ refers to the deity. Tisane determines the relevant topics as `Roman mythology`, `supernatural` (gods), `relationship`, and `family` (since the spousal connection is mentioned).
+例えば、「ジュノーはジュピターの妻である」という文は、神を指しています。__Tisaneは、関連するトピックとして`Roman mythology`、`supernatural`（神々）、 `relationship`、`family`（配偶者間のつながりが言及されているため）と判定しました。
 
 ```json
 {
@@ -30,7 +30,7 @@ For example, the sentence _Juno is the wife of Jupiter_ refers to the deity. Tis
 }
 ```
 
-On the other hand, the sentence _Jupiter is farther from the sun than Mars_ refers to planets. Tisane determines the topics to be `outer space` and `astronomy`.
+一方、「木星は火星よりも太陽から遠い」という文は惑星について言及しています。__Tisaneは、トピックが`outer space`と`astronomy`であると判定しました。
 
 ```json
 {
@@ -42,13 +42,13 @@ On the other hand, the sentence _Jupiter is farther from the sun than Mars_ refe
 }
 ```
 
-## Topic Statistics
+## トピックの統計
 
-If the setting `topic_stats` is set to `true`, then the portion of the input where the topic is active is provided. The topic is then not provided as a string but as an object made of the topic itself (`topic` (string) attribute) and its distribution statistic (`coverage` (float) attribute).
+`topic_stats`の設定が`true`に設定されている場合、トピックがアクティブである入力の該当部分が提供されます。トピックは文字列としてではなく、トピック自体（`topic`（文字列）属性）とその分布統計量（`coverage`（浮動小数）属性）からなるオブジェクトとして提供されます。
 
-**Example**
+**例**
 
-Request:
+リクエスト：
 
 ```json
 {
@@ -61,7 +61,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 
 ```json
 {
@@ -80,22 +80,22 @@ Response:
 ```
 (both detected topics appear in 1 sentence out of 2, which is 0.5 of all sentences)
 
-## Standards
+## 基準
 
-There are common taxonomy standards that Tisane can use with `topic_standard` setting:
+Tisaneが`topic_standard`設定と組み合わせて使用できる一般的な分類基準があります。
 
-* `native` - native Tisane topic names; based on standard English terms for the topic. The default standard.
-* `iptc_code` - codes of the [IPTC (International Press Telecommunications Council) Media Topics](https://iptc.org/standards/media-topics/) classification - a standard used in the media.
-* `iptc_description` - English descriptions of the IPTC codes.
-* `iab_code` - codes of the [IAB (Interactive Advertising Bureau)](https://www.iab.com/guidelines/content-taxonomy/) content taxonomy.
-* `iab_description` - English descriptions of the IAB codes.
-* `wikidata` - Wikidata codes (usually of the form Qnnnnn, e.g. Q123).
+* `native` - ネイティブのTisaneトピック名（トピックの標準的な英語の用語に基づく）。デフォルトの基準です。
+* `iptc_code` - [IPTC（国際新聞電気通信評議会）メディアトピック](https://iptc.org/standards/media-topics/)の分類コード（メディア業界で採用されている規格）。
+* `iptc_description` - IPTCコードの英語での説明。
+* `iab_code` - [IAB（双方向広告業界団体）](https://www.iab.com/guidelines/content-taxonomy/)のコンテンツ分類のコード。
+* `iab_description` - IABコードの英語での説明。
+* `wikidata` - Wikidataコード（通常はQnnnnnの形式、例：Q123）。
 
-To specify the standard, add the `topic_standard` setting. 
+基準を指定するには、`topic_standard`を追加します。 
 
-**Example**
+**例**
 
-Request:
+リクエスト：
 
 ```json
 {
@@ -108,7 +108,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 
 ```json
 {
@@ -123,6 +123,6 @@ Response:
 
 {% admonition type="warning" %}
 
-The standard taxonomies cover a small fraction of the native standard. When a concept is not covered by a taxonomy, it is omitted from the response.
+これらの基準の分類は、ネイティブ基準のほんの一部にしか対応していません。概念が分類体系に含まれていない場合、その概念はレスポンスから省略されます。
 
 {% /admonition %}

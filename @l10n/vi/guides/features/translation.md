@@ -1,25 +1,25 @@
-# Built-in Translation
+﻿# Dịch tích hợp
 
-Tisane provides machine translation capability, primarily for explanatory purposes. The translation uses the same language models as those used for analytical purposes, which guarantees consistent results. 
+Tisane cung cấp khả năng dịch máy, chủ yếu để giải thích. Việc dịch sử dụng cùng các mô hình ngôn ngữ như trong mục đích phân tích, giúp đảm bảo tính nhất quán trong kết quả. 
 
-To use translation, invoke `POST /transform`. The response is plain text (translation of the original utterance).
+Để sử dụng chức năng dịch, gọi phương thức `POST /transform`. Cầu phản hồi sẽ là văn bản thuần (bản dịch của câu gốc).
 
-See: [Translate Text](/apis/tisane-api-short/nlu-nlp-methods/transform).
+Xem phần: [Dịch văn bản](/apis/tisane-api-short/nlu-nlp-methods/transform).
 
-## Standard Machine Translation vs Tisane Machine Translation
+## So sánh giữa Dịch máy thông thường và Dịch máy của Tisane
 
-Standard machine translation engines (Google Translate, Microsoft Translator, DeepL) are primarily used to translate content in order to publish it. State of the art engines, while being able to handle diverse varieties of content, are only trained on small amounts of obscenities and slurs. For commercial reasons, they are mostly used to translate technical, scentific texts, official pronouncement, or news.
+Các công cụ dịch máy thông thường (như Google Translate, Microsoft Translator, DeepL) chủ yếu dùng để dịch nội dung nhằm mục đích xuất bản. Dù có khả năng xử lý nhiều loại nội dung khác nhau, các công cụ hiện đại này chỉ được huấn luyện với một lượng rất ít các từ tục tĩu hoặc xúc phạm. Vì lý do thương mại, chúng thường được sử dụng để dịch các văn bản kỹ thuật, khoa học, thông cáo chính thức hoặc tin tức.
 
-In order to avoid scandals and lawsuits, slurs and obscenities are underprioritized and removed, when possible. Often, "please" is added to requests even if it doesn't exist.
+Để tránh gây tai tiếng hay kiện tụng, những từ ngữ xúc phạm hoặc tục tĩu thường bị giảm mức ưu tiên hoặc loại bỏ nếu có thể. Trong nhiều trường hợp, từ “please” (làm ơn) được thêm vào các câu yêu cầu dù không hề có trong bản gốc.
 
-That means that **the emotional component is not preserved**. If, say, the original text contained a slur, the standard machine translation will likely not. Moderators of global communities, using standard machine translation, will struggle to understand the people's reaction if the style is modified. (Compare: "are you an [ethnicity]?" vs "are you a [slur]?")
+Điều này dẫn đến việc **yếu tố cảm xúc trong câu gốc không được giữ lại**. Ví dụ, nếu câu gốc có từ ngữ xúc phạm, bản dịch của công cụ thông thường có thể sẽ không giữ nguyên điều đó. Do đó, các quản trị viên cộng đồng toàn cầu khi sử dụng dịch máy thông thường sẽ gặp khó khăn trong việc hiểu phản ứng của người dùng nếu giọng điệu bị thay đổi. (So sánh: “Bạn có phải là người [dân tộc]?” so với “Mày là thằng [lời lẽ xúc phạm] à?”
 
-Another issue is that standard machine translation does not handle obfuscated words well. 
+Một vấn đề khác là các công cụ dịch máy thường xử lý không hiệu quả với các từ bị ngụy trang. 
 
-That is why we created machine translation adapted for content moderation and law enforcement needs:
+Vì lý do đó, chúng tôi đã phát triển hệ thống dịch máy dành riêng cho nhu cầu kiểm duyệt nội dung và thực thi pháp luật:
 
-* Tisane machine translation preserves the original emotional component: slurs and profanities in the source language are translated as slurs and profanities in the target language.
-* Tisane machine translation can decipher algospeak, since it employs the same analysis process.
+* Dịch máy của Tisane giữ nguyên yếu tố cảm xúc gốc: các từ ngữ tục tĩu hoặc xúc phạm trong ngôn ngữ nguồn sẽ được dịch sang tương đương trong ngôn ngữ đích.
+* Dịch máy của Tisane có thể giải mã algospeak (ngôn ngữ lách thuật toán), vì nó sử dụng cùng quy trình phân tích.
 
 ```mermaid
 flowchart LR
@@ -32,9 +32,9 @@ flowchart LR
 	style standardTranslation color:#FF3131
 ```
 
-## Example
+## Ví dụ
 
-Request:
+Yêu cầu:
 
 ```json
 {
@@ -45,7 +45,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 ```text
 you are a bitch
 ```

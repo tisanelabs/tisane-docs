@@ -1,21 +1,22 @@
-# Can I Send a Feedback to Improve the Results?
+# Могу ли я отправить отзыв для улучшения результатов?
 
-Yes.
+Да.
 
-The method is `POST /feedback.` (Note: it’s a method in the LaMP web service, not Tisane.)
+Метод — это `POST /feedback.` (Примечание: это метод веб-сервиса LaMP, а не Tisane.)
 
-Simply forward the original Tisane API request, specifying your API key or your custom code in the Authorization header.
+Просто перешлите исходный запрос к Tisane, указав свой ключ API или свой пользовательский код в заголовке авторизации.
 
-For example:
+Например:
 
-Body
+Основной текст
 
 ```json
 {"language":"en", "content":"it's alive", "settings":{}}
 ```
 
-The method returns a JSON response with the following attributes:
+Метод возвращает ответ JSON со следующими атрибутами:
 
-success (boolean): whether the feedback submission was successful
-error (string, optional): if an error occurred, what the error is
-The response is purely for debugging purposes. You can send the request asynchronously, and ignore the response.
+* `success` (логическое значение): была ли отправка отзыва успешной
+* `error` (строка, необязательно): если произошла ошибка, то какая именно
+
+Ответ предназначен исключительно для отладки. Вы можете отправить запрос асинхронно и проигнорировать ответ.

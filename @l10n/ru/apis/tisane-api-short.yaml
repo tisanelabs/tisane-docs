@@ -132,7 +132,7 @@ paths:
         - NLU / NLP Methods
       summary: "Анализ текста"
       description: >-
-                      Метод анализирует входные данные и обнаруживает проблемный контент, фрагменты тональности, сущности, темы, структуру фраз, части речи, стоп-слова и многое другое."
+                      Метод анализирует входные данные и обнаруживает проблемный контент, фрагменты тональности, сущности, темы, структуру фраз, части речи, стоп-слова и многое другое.
       requestBody:
         required: true
         content:
@@ -1052,7 +1052,7 @@ paths:
             type: string
           required: true
           description: >-
-            The code of a language in Tisane. Example: "Код языка в Tisane. Например: `en`.
+            Код языка в Tisane. Например: `en`.
           example: en
         - name: lexeme
           in: query

@@ -1,25 +1,25 @@
-# Built-in Translation
+﻿# Встроенный перевод
 
-Tisane provides machine translation capability, primarily for explanatory purposes. The translation uses the same language models as those used for analytical purposes, which guarantees consistent results. 
+Tisane предоставляет возможность машинного перевода, в первую очередь для пояснительных целей. При переводе используются те же языковые модели, что и для аналитических целей, что гарантирует единообразие результатов. 
 
-To use translation, invoke `POST /transform`. The response is plain text (translation of the original utterance).
+Чтобы использовать перевод, вызовите `POST /transform`. Ответ представляет собой простой текст (перевод исходного высказывания).
 
-See: [Translate Text](/apis/tisane-api-short/nlu-nlp-methods/transform).
+Рекомендуем ознакомиться: [Перевод текста](/apis/tisane-api-short/nlu-nlp-methods/transform).
 
-## Standard Machine Translation vs Tisane Machine Translation
+## Стандартный машинный перевод по сравнению с машинным переводом Tisane
 
-Standard machine translation engines (Google Translate, Microsoft Translator, DeepL) are primarily used to translate content in order to publish it. State of the art engines, while being able to handle diverse varieties of content, are only trained on small amounts of obscenities and slurs. For commercial reasons, they are mostly used to translate technical, scentific texts, official pronouncement, or news.
+Стандартные системы машинного перевода (Google Translate, Microsoft Translator, DeepL) в основном используются для перевода контента с целью его публикации. Современные поисковые системы, хотя и способны обрабатывать разнообразный контент, обучены лишь распознавать небольшое количество непристойностей и оскорблений. В коммерческих целях они в основном используются для перевода технических, научных текстов, официальных заявлений или новостей.
 
-In order to avoid scandals and lawsuits, slurs and obscenities are underprioritized and removed, when possible. Often, "please" is added to requests even if it doesn't exist.
+Во избежание скандалов и судебных исков оскорбления и непристойности не рассматриваются в первую очередь и по возможности удаляются. Часто к просьбам добавляют слово «пожалуйста», даже если его нет в оригинале.
 
-That means that **the emotional component is not preserved**. If, say, the original text contained a slur, the standard machine translation will likely not. Moderators of global communities, using standard machine translation, will struggle to understand the people's reaction if the style is modified. (Compare: "are you an [ethnicity]?" vs "are you a [slur]?")
+Это означает, что **эмоциональная составляющая не сохраняется** . Если, скажем, исходный текст содержал оскорбление, то стандартный машинный перевод, скорее всего, не будет его содержать. Модераторам глобальных сообществ, использующим стандартный машинный перевод, будет сложно понять реакцию людей, если стиль будет изменен. (Сравните: «Ты [этническая принадлежность]?» по сравнению с «Ты [оскорбление]?»)
 
-Another issue is that standard machine translation does not handle obfuscated words well. 
+Другая проблема заключается в том, что стандартный машинный перевод плохо справляется со сложными словами. 
 
-That is why we created machine translation adapted for content moderation and law enforcement needs:
+Вот почему мы создали машинный перевод, адаптированный для модерации контента и нужд правоохранительных органов:
 
-* Tisane machine translation preserves the original emotional component: slurs and profanities in the source language are translated as slurs and profanities in the target language.
-* Tisane machine translation can decipher algospeak, since it employs the same analysis process.
+* Машинный перевод Tisane сохраняет исходную эмоциональную составляющую: оскорбления и ненормативная лексика на исходном языке переводятся как оскорбления и ненормативная лексика на целевом языке.
+* Машинный перевод Tisane может расшифровать алгоязык, поскольку он использует тот же процесс анализа.
 
 ```mermaid
 flowchart LR
@@ -32,9 +32,9 @@ flowchart LR
 	style standardTranslation color:#FF3131
 ```
 
-## Example
+## Пример
 
-Request:
+Запрос:
 
 ```json
 {
@@ -45,7 +45,7 @@ Request:
 }
 ```
 
-Response:
+Ответ:
 ```text
 you are a bitch
 ```

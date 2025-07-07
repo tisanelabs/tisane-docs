@@ -1,65 +1,65 @@
-# Supported Functions
+﻿# サポートされている機能
 
-Tisane is a powerful Natural Language Understanding (NLU) platform, designed from scratch for social media / user-generated text: ungrammatical, possibly obfuscated (e.g. algospeak), and heavy on slang and errors. Tisane's main applications are content moderation and law enforcement/national security/intelligence.
+Tisaneは、ソーシャルメディアやユーザー生成テキスト（文法的に正しくない、可能性のある難解な表現（例：スラング）や誤りが多く認められるテキスト）向けに一から開発された、強力な自然言語理解（NLU）プラットフォームです。Tisaneの主な用途は、コンテンツモデレーションと法執行機関／国家安全保障／諜報機関です。
 
-All features are available across all supported languages. All output is provided in one call.
+すべての対応言語ですべての機能が利用可能です。すべての出力を1回の呼び出しで提供します。
 
-## Core Functionality
+## コア機能
 
-Tisane offers sophisticated capabilities for abuse detection, sentiment analysis, and entity recognition:
+Tisaneは、中傷の検出、感情分析、エンティティ認識に関する高度な機能を提供します。
 
-- Detect problematic content for content moderation and investigations:
-  - Personal attacks, insults, cyberbullying
-  - Hate speech
-  - Profanity
-  - Sexual advances
-  - Adult only references
-  - Criminal activity (trade in restricted items like drugs, firearms, etc.)
-  - Threats
-  - Allegations (whether libel or not)
-  - Suicidal ideation
-  - Solicitation of contact outside the current media or platform
-  - Graphic depictions of violence
-  - Forceful assertions of hierarchy (e.g. workplace bullying)
-  - Data leaks (e.g. PII exfiltration, exposure of credentials)
-  - Spam
+- コンテンツモデレーションおよび捜査のために以下の問題のあるコンテンツを検出します。
+  - 個人攻撃、侮辱、ネットいじめ
+  - ヘイトスピーチ
+  - 卑猥な言葉
+  - 不適切な性的表現
+  - 成人向けの内容
+  - 犯罪行為（麻薬、銃器といった規制品目の取引など）
+  - 脅迫
+  - 告発（名誉毀損に該当するか否かを問わず）
+  - 自殺念慮
+  - 現在のメディアまたはプラットフォーム外での接触の誘導
+  - 生々しい暴力表現
+  - ヒエラルキーの強硬な主張（例：職場いじめ）
+  - データ漏洩（例：個人情報の漏洩、認証情報の漏洩）
+  - スパム
   
-- Detect named entities and find relations between them:
-  - people
-  - organizations
-  - social roles (titles, occupations, etc.)
-  - places
-  - phone numbers
-  - credit card numbers
-  - dates
-  - amounts of money
-  - items of interest in investigations (drugs, weapons, vehicles)
-  - cryptocurrency addresses
-  - more
-- Detect topics (Subjects/Themes/Domains)
-- Sentiment analysis (positive, negative, or mixed), including
-  - sentiment expressed towards specific aspects or entities within the text. (Aspect-based sentiment analysis)
+- 固有表現を検出し、それらの関係の特定：
+  - 人物
+  - 組織
+  - 社会的役割（役職、職業など）
+  - 場所
+  - 電話番号
+  - クレジットカード番号
+  - 日付
+  - 金額
+  - 捜査対象物（薬物、武器、車両）
+  - 暗号資産アドレス
+  - その他
+- トピック（テーマ／ドメイン）の検出
+- 感情分析（ポジティブ、ネガティブ、または混合）。以下を含む
+  - テキスト内の特定のアスペクトやエンティティに対する感情表現（アスペクトベースの感情分析）。
 
-## Deep Linguistic Analysis
+## 深層言語分析
 
-Tisane also provides access to linguistic fundamentals:
+Tisaneは言語の基礎知識へのアクセスも提供します。
 
-- Inteligent sentence splitting
-  - Provides original sentences and their corrected versions (if applicable). 
-  - Uses non-breaks to avoid false positives (e.g. `EE. UU.` or `www.google.com`)
-- Lexical chunking
-  - Tokenizes sentences by morpheme
-  - Supports all types of segmentation:
-    - languages using white spaces
-    - languages not using white spaces (e.g. Chinese, Japanese, Thai)
-    - languages using compounds (German, Dutch, Afrikaans)
-    - clitics
-    - multiword expressions
-    - nondictionary entities (emails, phone numbers, etc.)
-- Parse Trees and Phrases
-  - Offers hierarchical representations of sentence structure, highlighting phrases and their relationships.
-  - Extracts noun phrases, verbal phrases, prepositional phrases, adjectival phrases, adverbial phrases.
-- Words
-  - Provides detailed information about each word (or lexical chunk), including its lemma, role in the sentence, and grammatical features.
-- Sense disambiguation
-  - Detects the sense for every word in the current context.
+- インテリジェントな文分割
+  - 元の文と、（必要に応じて）その訂正版を提供する。 
+  - 改行コードを使用しないことで、誤検出を回避する（例：`EE.UU.`または`www.google.com`）。
+- 語彙チャンク
+  - 文を形態素にトークン化
+  - すべての種類のセグメンテーションに対応：
+    - スペースを使用する言語
+    - スペースを使用しない言語（例：中国語、日本語、タイ語）
+    - 複合語を使用する言語（ドイツ語、オランダ語、アフリカーンス語）
+    - 接語
+    - 複合語表現
+    - 辞書に収録されていないエンティティ（メールアドレス、電話番号など）
+- パースツリーとフレーズ
+  - フレーズとその関係を強調して文章の構造を階層的に表現する。
+  - 名詞句、動詞句、前置詞句、形容詞句、副詞句を抽出する。
+- 単語
+  - 各単語（または語彙チャンク）について、その基本形、文中の役割、および文法的な特徴を含む詳細な情報を提供する。
+- 語義の曖昧性解消
+  - 現在の文脈内の各単語の意味を検出する。

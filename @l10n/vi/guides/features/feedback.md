@@ -1,21 +1,21 @@
-# Can I Send a Feedback to Improve the Results?
+# Tôi có thể gửi phản hồi để cải thiện kết quả không?
 
-Yes.
+Có.
 
-The method is `POST /feedback.` (Note: it’s a method in the LaMP web service, not Tisane.)
+Phương thức là `POST /feedback.` (Lưu ý: đây là phương thức thuộc dịch vụ web LaMP, không phải Tisane.)
 
-Simply forward the original Tisane API request, specifying your API key or your custom code in the Authorization header.
+Chỉ cần gửi lại yêu cầu gốc đến API của Tisane, đồng thời chỉ định khóa API hoặc mã tùy chỉnh của bạn trong phần tiêu đề Ủy quyền.
 
-For example:
+Ví dụ:
 
-Body
+Nội dung yêu cầu
 
 ```json
 {"language":"en", "content":"it's alive", "settings":{}}
 ```
 
-The method returns a JSON response with the following attributes:
+Phương thức này sẽ trả về phản hồi ở định dạng JSON với các thuộc tính sau:
 
-success (boolean): whether the feedback submission was successful
-error (string, optional): if an error occurred, what the error is
-The response is purely for debugging purposes. You can send the request asynchronously, and ignore the response.
+success (boolean): cho biết việc gửi phản hồi có thành công hay không
+error (kiểu chuỗi, tùy chọn): nếu có lỗi xảy ra, mô tả lỗi là gì
+Phản hồi này chỉ phục vụ mục đích gỡ lỗi. Bạn có thể gửi yêu cầu một cách bất đồng bộ và bỏ qua phản hồi.

@@ -1,28 +1,28 @@
-# What does Tisane do When Problematic Content is Detected?
+﻿# Tisane xử lý thế nào khi phát hiện nội dung có vấn đề?
 
-- We are not moderators or investigators. We merely process textual content.
-- We do not set policy. 
+- Chúng tôi không phải là người kiểm duyệt hay điều tra viên. Chúng tôi chỉ xử lý nội dung văn bản.
+- Chúng tôi không đặt ra chính sách. 
 
-The role of Tisane ends with detection. Tisane receives input text, processes it, and responds with a JSON structure containing details on what was detected. 
+Vai trò của Tisane kết thúc khi đã phát hiện nội dung. Tisane nhận đầu vào là đoạn văn bản, xử lý nó và phản hồi bằng một cấu trúc JSON chứa thông tin chi tiết về những gì phát hiện. 
 
-The application calling Tisane can then act upon the findings of Tisane. The calling application has complete freedom as to how it handles the response. It may ignore specific sections according to its policy, request a human review, act immediately, etc. 
+Ứng dụng gọi Tisane sau đó sẽ dựa vào kết quả này để hành động. Ứng dụng đó có toàn quyền xử lý phản hồi theo cách riêng. Nó có thể bỏ qua một số phần theo chính sách, yêu cầu con người kiểm duyệt, hoặc hành động ngay lập tức, v.v. 
 
-Tisane does not notify anyone or bans users. It is there for analysis (or translation).
+Tisane không thông báo cho bất kỳ ai cũng như không cấm người dùng. Tisane chỉ phục vụ cho mục đích phân tích (hoặc dịch thuật).
 
-## What If I Need a Complete Solution?
+## Nếu tôi cần một giải pháp hoàn chỉnh thì sao?
 
-We built several plugins for popular platforms, which allow using Tisane without the need to code. That includes complete moderation platforms integrated with human moderation and legal compliance, as well as instant messaging applications and games.
+Chúng tôi đã xây dựng một số plugin dành cho các nền tảng phổ biến, để sử dụng Tisane mà không cần viết mã. Bao gồm cả các nền tảng kiểm duyệt hoàn chỉnh tích hợp với kiểm duyệt viên là con người và tuân thủ pháp lý, cũng như các ứng dụng nhắn tin tức thì và trò chơi.
 
-See: [Integrations](https://tisane.ai/integrations).
+Xem phần: [Tích hợp](https://tisane.ai/integrations).
 
-If you need source code to kickstart building your front-end, our partners in PubNub have built a seamless integration for Tisane and a [demo](https://moderation-dashboard.pubnub.com/). Source code: [PubNub GitHub repository](https://github.com/pubnub/moderation-dashboard)
+Nếu bạn cần mã nguồn để bắt đầu xây dựng giao diện người dùng, đối tác của chúng tôi tại PubNub đã xây dựng một tích hợp liền mạch với Tisane cùng với bản [demo](https://moderation-dashboard.pubnub.com/). Mã nguồn: [Kho lưu trữ GitHub của PubNub](https://github.com/pubnub/moderation-dashboard)
 
-If the platform is not listed or you are building a solution from scratch, [contact us](https://tisane.ai/consulting) to discuss the details of your project. 
+Nếu nền tảng bạn đang sử dụng không được liệt kê, hoặc bạn đang xây dựng một giải pháp từ đầu, [hãy liên hệ với chúng tôi](https://tisane.ai/consulting) để trao đổi chi tiết về dự án. 
 
-## What If I Need Social Media Content for My Solution?
+## Nếu tôi cần nội dung từ mạng xã hội cho giải pháp của mình thì sao?
 
-We do not provide content.
+Chúng tôi không cung cấp nội dung.
 
-However, we work with partners who do, covering sources from standard social media and Darkweb.
+Tuy nhiên, chúng tôi hợp tác với các đối tác chuyên cung cấp nội dung từ các nền tảng mạng xã hội thông thường và cả Darkweb.
 
 [Contact us](https://tisane.ai/contact-us) for directions. 

@@ -1,41 +1,41 @@
-## What Languages Are Supported?
+﻿## Những ngôn ngữ nào được hỗ trợ?
 
-Tisane supports the following languages:
+Tisane hỗ trợ các ngôn ngữ sau:
 
-* English
-* Afrikaans
-* Albanian
-* Arabic
-* Cantonese
-* Chinese Simplified 
-* Chinese Traditional
-* Danish
-* Dutch
-* Finnish
-* French
-* German
-* Haitian Creole
-* Hebrew
-* Hindi
-* Hungarian
-* Indonesian
-* Italian
-* Japanese
-* Korean
-* Malay
-* Norwegian
-* Pashto
-* Persian
-* Polish
-* Portuguese
-* Romanian
-* Russian
-* Spanish
-* Swedish
-* Tagalog (including Taglish)
-* Thai
-* Turkish
-* Urdu
-* Vietnamese
+* Tiếng Anh
+* Tiếng Afrikaans
+* Tiếng Albania
+* Tiếng Ả Rập
+* Tiếng Quảng Đông
+* Tiếng Trung Giản Thể 
+* Tiếng Trung Phồn Thể
+* Tiếng Đan Mạch
+* Tiếng Hà Lan
+* Tiếng Phần Lan
+* Tiếng Pháp
+* Tiếng Đức
+* Tiếng Creole Haiti
+* Tiếng Do Thái
+* Tiếng Hindi
+* Tiếng Hungary
+* Tiếng Indonesia
+* Tiếng Ý
+* Tiếng Nhật
+* Tiếng Hàn
+* Tiếng Mã Lai
+* Tiếng Na Uy
+* Tiếng Pashto
+* Tiếng Ba Tư
+* Tiếng Ba Lan
+* Tiếng Bồ Đào Nha
+* Tiếng Romania
+* Tiếng Nga
+* Tiếng Tây Ban Nha
+* Tiếng Thụy Điển
+* Tiếng Tagalog (bao gồm cả Taglish)
+* Tiếng Thái
+* Tiếng Thổ Nhĩ Kỳ
+* Tiếng Urdu
+* Tiếng Việt
 
-If your language is not supported, [contact us](https://tisane.ai/contact-us/#support).
+Nếu ngôn ngữ của bạn không được hỗ trợ, hãy [liên hệ với chúng tôi](https://tisane.ai/contact-us/#support).

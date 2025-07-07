@@ -1,37 +1,37 @@
-# Algospeak and Adversarial Text Manipulations
+﻿# Ngôn ngữ lách thuật toán và thao túng văn bản đối kháng
 
-Tisane uses a special type of built-in spellchecker module to process text with both unintentional errors (misspellings) and adversarial text manipulations (e.g. algospeak). 
+Tisane sử dụng mô-đun kiểm tra chính tả tích hợp đặc biệt để xử lý văn bản chứa cả lỗi không cố ý (sai chính tả) và thao túng văn bản đối kháng (ví dụ: ngôn ngữ né tránh thuật toán). 
 
-The spellchecker employs several different techniques to handle different types of manipulations (masking characters, substitutions, etc.). These corrections are not limited by profanities or slurs, and consider the context. The same misspelled word may be interpreted differently in different sentences.
+Bộ kiểm tra chính tả này sử dụng nhiều kỹ thuật khác nhau để xử lý các kiểu thao túng khác nhau (như thay thế ký tự, ẩn ký tự, v.v.). Việc sửa lỗi không giới hạn ở các từ tục tĩu hay xúc phạm, mà còn xem xét đến ngữ cảnh. Cùng một từ viết sai có thể được hiểu khác nhau theo các câu khác nhau.
 
-If corrections were found to be necessary in a sentence, the sentence gets a `corrected_text` attribute where the corrected text is logged. (Set `words` to `true` to output sentence data.)
+Nếu phát hiện cần sửa lỗi trong một câu, thuộc tính `corrected_text` sẽ được gán cho câu đó và ghi lại văn bản đã được sửa. (Đặt `words` thành `true`  để xuất dữ liệu theo từng câu.)
 
-## Limitations
+## Hạn chế
 
-Spell-checking is not a ["did you mean" tool](https://stackoverflow.com/questions/307291/how-does-the-google-did-you-mean-algorithm-work), as many people seem to believe:
+Kiểm tra chính tả không phải là [công cụ kiểu “ý bạn là...”](https://stackoverflow.com/questions/307291/how-does-the-google-did-you-mean-algorithm-work) như nhiều người vẫn tưởng:
 
-- If the word is a legitimate word, no matter if misused or esoteric, Tisane will not correct it. For example, if *noun* is misspelled as *nun*, or *house* is misspelled as *horse*, Tisane won't help (unless it's part of a known often obfuscated concept, e.g. _corn star_ in English).
-- The primary purpose of the spellchecker is to decipher obfuscations. Therefore, the spellchecker is biased toward more profane, objectionable, or heavily used concepts.
+- Nếu từ là một từ hợp lệ, dù dùng sai ngữ cảnh hoặc mang tính học thuật, Tisane sẽ không sửa. Ví dụ: nếu *noun* bị viết sai thành *nun*, hoặc *house* bị viết sai thành *horse*, Tisane sẽ không phát hiện (trừ khi nó nằm trong cụm từ thường bị ngụy trang như _corn star_ trong tiếng Anh).
+- Mục đích chính của bộ kiểm tra chính tả là giải mã từ ngữ ngụy trang. Do đó, nó thiên về phát hiện các khái niệm tục tĩu, gây phản cảm hoặc bị sử dụng sai phổ biến.
 
-## Excluding Esoteric Senses And Words To Get Better Results
+## Loại trừ các nghĩa và từ ngữ hiếm để có kết quả tốt hơn
 
-To get around the issue, you can use the  `min_generic_frequency` parameter. 
+Để tránh vấn đề này, bạn có thể sử dụng tham số `min_generic_frequency`. 
 
-This allows you to exclude the most esoteric senses and words. 
+Điều này giúp loại trừ những nghĩa và từ ngữ hiếm gặp nhất. 
 
-The frequency is graded between 0 and 10, with 10 being the most frequent. 
+Tần suất được đánh giá từ 0 đến 10, với 10 là phổ biến nhất. 
 
-Some esoteric senses are also graded at -10. 
+Một số nghĩa cực kỳ hiếm được đánh giá ở mức -10. 
 
-We recommend you initially set `min_generic_frequency` to `1` or`2` to see if it works in your situation.
+Ban đầu, bạn nên đặt `min_generic_frequency` ở mức `1` hoặc`2` để kiểm tra hiệu quả trong tình huống của bạn.
 
-## Excluding Potential Proper Nouns
+## Loại trừ danh từ riêng tiềm năng
 
-If you need to avoid spell-checking potential proper nouns, set `lowercase_spellcheck_only` to `true`.
+Nếu bạn muốn tránh việc kiểm tra chính tả đối với các danh từ riêng có thể có, hãy đặt `lowercase_spellcheck_only` thành `true`.
 
-## Example
+## Ví dụ
 
-Request:
+Yêu cầu:
 ```json
 {
   "language":"en",
@@ -43,7 +43,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 ```json
 
 	"text": "I will br*k his neck and kll him",

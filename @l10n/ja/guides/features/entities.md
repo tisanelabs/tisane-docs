@@ -1,45 +1,45 @@
-# Entity Extraction
+﻿# エンティティの抽出
 
-Entities are elements of relevance or interest in the text. Tisane extracts both standard entities and those relevant to trust & safety/law enforcement applications.
+エンティティは、テキスト内の関連性や関心の対象となる要素です。Tisaneは、標準的なエンティティと、トラスト＆セーフティ／法執行機関のアプリケーションに関連するエンティティを抽出します。
 
-Standard entities are names of people, their social roles, organizations, places, and so on. We also extract cryptocurrency addresses, bank accounts, credit card numbers, phone numbers, software package names, and more.
+標準的なエンティティは、人名、その社会的役割、組織、場所などです。Tisaneでは、暗号資産のアドレス、銀行口座番号、クレジットカード番号、電話番号、ソフトウェアパッケージ名など、さらに多くの情報も抽出しています。
 
-Entities are logged under the `entities_summary` section. Every entity entry is an object made of:
-  * `type` - the type of the entity
-  * `name` - a standard name, if exists; otherwise, the string that was logged
-  * `subtypes` - more detailed additional types
-  * `subtype` - the first subtype (for backward compatibility purposes)
-  * `mentions` - an array of all detected mentions, with:
+エンティティは、`entities_summary`セクションに記録されます。すべてのエンティティエントリは、次の要素から構成されるオブジェクトです。
+  * `type` - エンティティのタイプ
+  * `name` - 標準名（存在する場合）。存在しない場合は、ログに記録された文字列
+  * `subtypes` - より詳細な追加のタイプ
+  * `subtype` - 最初のサブタイプ（後方互換性のため）
+  * `mentions` - 検出されたすべてのメンションの配列、以下を含む。
     * `offset`
     * `length`
     * `sentence_index`
     * `text`
-  * `wikidata` - a Wikidata ID, if exists  
+  * `wikidata` - Wikidata ID（存在する場合）  
 
-See full list of detected entities: [Response Reference](/apis/tisane-api-response-guide#named-entities)
+検出されたエンティティの全リストを表示：[Response Reference](/apis/tisane-api-response-guide#named-entities)
 
-## Subtypes
+## サブタイプ
 
-Additional detail is provided in the `subtypes` array of strings (the first subtype is also logged as the `subtype` attribute).
+追加の詳細は、文字列の`subtypes`配列に記載されています（最初のサブタイプは`subtype`属性としても記録されます）。
 
-The following subtypes are associated with specific entity types:
+以下のサブタイプは、特定のエンティティタイプと関連付けられています。
 
 - `person`
-  - `fictional_character` - a name of a character in a work of fiction
-  - `important_person` - a name of an historic figure or a public figure or a celebrity
-  - `spiritual_being` - a name of a deity or an angel or an evil spirit
+  - `fictional_character` - フィクション作品に登場するキャラクターの名前
+  - `important_person` - 歴史上の人物、著名人、またはセレブの名前
+  - `spiritual_being` - 神や天使、または悪霊の名前
 - `organization`
-  - `media` - a media outlet or a periodical publication
-  - `authorities` - a government agency
-  - `law_enforcement_agency` - a law enforcement agency
-  - `intelligence_agency` - an intelligence agency
-  - `military` - a military unit
+  - `media` - メディア機関または定期刊行物
+  - `authorities` - 政府機関
+  - `law_enforcement_agency` - 法執行機関
+  - `intelligence_agency` - 諜報機関
+  - `military` - 軍隊
 - `software`
-  - `chat` - any software often used for instant messaging
-  - `online_community` - an online community such as a social network
-  - `low_trust_payment_method` - used for payments and commonly perceived as prone to abuse
+  - `chat` - インスタントメッセージングに頻繁に使用されるソフトウェア全般
+  - `online_community` - ソーシャルネットワークのようなオンラインコミュニティ
+  - `low_trust_payment_method` - 支払い用に使用され、一般的に悪用されやすいと認識される
 - `age`
-  - `minor_age` - age under the age of consent
+  - `minor_age` - 承諾年齢未満の年齢
 - `crypto`
   - `bitcoin`
   - `ethereum`
@@ -50,11 +50,11 @@ The following subtypes are associated with specific entity types:
   - `dash`
   - `litecoin`
 - `ip_address`
-  - `v4` - IP address version 4
-  - `v6` - IP address version 6
+  - `v4` - IPアドレスバージョン4
+  - `v6` - IPアドレスバージョン6
 - `file`
-  - `windows` - a Windows pathname
-  - `unix` - a Unix pathname
+  - `windows` - Windowsのパス名
+  - `unix` - Unixのパス名
 - `credit_card`
   - `american_express`
   - `visa`
@@ -67,9 +67,9 @@ The following subtypes are associated with specific entity types:
 - `credential`
   - `password`
 - `website`
-  - `high_risk` - high probability of encountering malware or scams
+  - `high_risk` - マルウェアや詐欺に遭遇する可能性が高い
 - `item_of_interest`
   - `cold_weapons`
-  - `luxury` - any luxury item, e.g. expensive watches, yachts, luxury cars
+  - `luxury` - 高級品全般（例：高級時計、ヨット、高級車）
   - `firearms`
   - `weapon`

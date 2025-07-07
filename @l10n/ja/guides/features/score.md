@@ -1,14 +1,14 @@
-# Why Don't You Provide A Score On A Fixed Or Floating-Point Scale For Your Sentiment?
+﻿# なぜ、センチメントの評価に固定小数点または浮動小数点スケールでのスコアを提供しないのですか？
 
-**tl;dr:** because we believe it's a gimmick without much utility.
+**要約：**Tisaneはそれが実用性のないギミックであると考えているからです。
 
-The proponents of assigning a score claim that there's a difference between "best food ever eaten" and "good meal". It might be the case if we just look at one particular review, however:
+スコアを割り当てる人々は、「これまで食べた中で最高の食べ物」と「美味しい食事」の間には違いがあると主張しています。しかし、特定のレビューだけを見ると、その違いは明確ではないのかもしれません。
 
-* The gradation of the superlatives are highly subjective. Is "wonderful" better than "excellent"? Is "excellent" the same as "great"? Is "good" the same as "pretty good"?
+* 最上級の表現は、非常に主観的なものです。「wonderful」は「excellent」よりも優れていますか？「excellent」と「great」は同じですか？「good」と「pretty good」は同じですか？
 
-* The choice of the adjectives is often influenced by the culture of the reviewer. British "could be improved" may mean "horrible" in another culture, and vice versa.
+* 形容詞の選択は、しばしばレビュアーの文化に影響を受けるものです。イギリスでの「could be improved」は、別の文化圏では「horrible」を意味する可能性があり、逆もまた然りです。
 
-* With multiple aspects, the results become much harder to read, integrate, and aggregate properly
+* 複数の要素が絡み合うため、結果の読み取り、統合、および適切な集計が非常に困難になります。
 
-We believe that increasing the variety of aspects is better aligned with the actual business needs.
+Tisaneは、要素の多様性を増やすことが、実際のビジネスニーズにより合致すると考えています。
 

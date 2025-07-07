@@ -1,24 +1,24 @@
-# Why Deploy Abuse Detection If It's Not 100% Accurate?
+# Tại sao phải triển khai tính năng phát hiện lạm dụng nếu tính năng này không chính xác 100%?
 
-Tisane offers high accuracy, but like all natural language processing systems, it is not 100% perfect. Nor are human moderators.
+Tisane có độ chính xác cao, nhưng giống như tất cả các hệ thống xử lý ngôn ngữ tự nhiên, nó không hoàn hảo 100%. Kiểm duyệt bằng con người cũng vậy.
 
-## Why Use It Anyway?
+## Tại sao vẫn nên sử dụng Tisane?
 
-1. Deterrence Against Offenders
-   - Just as law enforcement cannot be everywhere, moderation tools do not need to be perfect to be effective.
-   - The mere presence of an abuse detection system discourages bad actors from engaging in harmful behavior.
-2. Speed and Efficiency
-   - NLP systems can analyze large volumes of content instantly, something human moderators cannot scale to match.
-   - Even if some cases require human review, the system significantly reduces the workload.
-3. Transparency and Consistency
-   - Automated moderation ensures rules are applied fairly, reducing bias and human inconsistency.
-   - Unlike human moderators, NLP systems do not get tired, emotional, or overwhelmed.
-4. Real-World Comparisons
-   - No police force prevents all crime, yet they reduce incidents and deter criminals.
-   - No spam filter catches 100% of spam, yet they dramatically improve email usability.
-   - No lock is 100% tamper-proof, yet it's much safer to keep the door locked than leave it open at all times.
-5. Continuous Improvement
-   - Tisane Labs is committed to improving accuracy over time.
-   - Real-world usage helps fine-tune detection models and reduce false positives and negatives.
+1. Răn đe chống lại những kẻ có hành vi sai trái
+   - Cũng giống như việc lực lượng thực thi pháp luật không thể có mặt ở mọi nơi, các công cụ kiểm duyệt không cần phải hoàn hảo để có hiệu quả.
+   - Chỉ cần có hệ thống phát hiện lạm dụng cũng đủ để ngăn chặn kẻ xấu thực hiện hành vi gây hại.
+2. Tốc độ và độ hiệu quả
+   - Các hệ thống NLP có thể phân tích khối lượng lớn nội dung ngay lập tức, điều mà người kiểm duyệt không thể làm được.
+   - Ngay cả khi một số trường hợp cần phải có sự xem xét của con người, hệ thống vẫn giúp giảm đáng kể khối lượng công việc.
+3. Tính minh bạch và nhất quán
+   - Quy trình kiểm duyệt tự động đảm bảo các quy tắc được áp dụng công bằng, giảm sự thiên vị và tính thiếu nhất quán của con người.
+   - Không giống như người kiểm duyệt, các hệ thống NLP không biết mệt mỏi, xúc động hay quá tải.
+4. So sánh thực tế
+   - Không có lực lượng cảnh sát nào ngăn chặn được tất cả tội phạm, nhưng họ giúp giảm các vụ việc và ngăn cản tội phạm.
+   - Không có bộ lọc thư rác nào có thể chặn được 100% thư rác, nhưng chúng lại cải thiện đáng kể trải nghiệm sử dụng email.
+   - Không có ổ khóa nào có khả năng chống phá khóa 100%, tuy nhiên, khóa cửa vẫn an toàn hơn nhiều so với việc để cửa mở mọi lúc.
+5. Liên tục cải tiến
+   - Tisane Labs cam kết cải thiện độ chính xác theo thời gian.
+   - Quá trình sử dụng trong thực tế giúp tinh chỉnh các mô hình phát hiện và giảm thiểu các kết quả báo động giả hoặc hợp lệ sai.
 
-For reference, even serious crimes often remain unsolved ([source](https://www.reddit.com/r/UnresolvedMysteries/comments/5toay8/what_percentage_of_murders_are_unsolved/)), yet law enforcement remains essential. Similarly, abuse detection tools are valuable even if they aren’t perfect.
+Để tham khảo, ngay cả những tội ác nghiêm trọng thường vẫn chưa được giải quyết ([nguồn](https://www.reddit.com/r/UnresolvedMysteries/comments/5toay8/what_percentage_of_murders_are_unsolved/)), nhưng việc thực thi pháp luật vẫn rất cần thiết. Tương tự, các công cụ phát hiện lạm dụng vẫn có giá trị ngay cả khi chúng không hoàn hảo.
