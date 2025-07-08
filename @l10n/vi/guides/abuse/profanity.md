@@ -1,35 +1,35 @@
-# Profanities
+﻿# Ngôn từ tục tĩu
 
-Profanities are logged under the `abuse` section, with the `type` attribute set to `profanity`.
+Ngôn từ tục tĩu được ghi vào phần `abuse`, với thuộc tính `type` được đặt thành `profanity`.
 
 {% admonition type="warning" %}
 
-Racial and other derogatory slurs are not considered profanities. They are handled by the `bigotry` type. 
+Những lời lẽ phân biệt chủng tộc và xúc phạm khác không được coi là ngôn từ tục tĩu. Chúng được phân vào loại `bigotry`. 
 
-See: [Bigotry and Hate Speech](./hatespeechandbigotry.md) 
+Xem phần: [Cố chấp và phát ngôn thù hận](./hatespeechandbigotry.md) 
 
 {% /admonition %}
 
-## Severity Levels
+## Mức độ nghiêm trọng
 
-The severity levels are as following:
+Các mức độ nghiêm trọng như sau:
 
-* `low` - very mild profanities that are often not considered profanities
-* `medium` - the bulk of profanities
-* `high` - highly inappropriate profanities
-* `extreme` - usually "absolutely unacceptable" profanities (e.g. F-word in English or the [mat category in Slavic languages](https://en.wikipedia.org/wiki/Mat_(profanity)))
+* `low` - ngôn từ tục tĩu rất nhẹ thường không được coi là tục tĩu
+* `medium` - phần lớn ngôn từ tục tĩu
+* `high` - ngôn từ tục tĩu cực kỳ không phù hợp
+* `extreme` - thường là những ngôn từ tục tĩu "hoàn toàn không thể chấp nhận được" (ví dụ: từ bắt đầu bằng chữ F trong tiếng Anh hoặc [từ mat trong các ngôn ngữ Slavic](https://en.wikipedia.org/wiki/Mat_(profanity)))
 
-Attempts to obfuscate (e.g. with asterisks) does not impact the severity.
+Các nỗ lực làm tối nghĩa (ví dụ như sử dụng dấu hoa thị) không ảnh hưởng đến mức độ nghiêm trọng.
 
-## Relevant Tags
+## Thẻ liên quan
 
-The following tags are often associated with the `profanity` type:
+Các thẻ sau đây thường được liên kết với loại `profanity`:
 
-* `sex` - profanities related to sexual activities or organs
+* `sex` - ngôn từ tục tĩu liên quan đến hoạt động tình dục hoặc cơ quan sinh dục
 
-## Example
+## Ví dụ
 
-Request:
+Yêu cầu:
 ```json
 {
   "language":"en",
@@ -41,7 +41,7 @@ Request:
 }
 ```
 
-Response:
+Phản hồi:
 ```json
 {
 	"text": "i hate this fu*r",

@@ -1,35 +1,35 @@
-# Profanities
+﻿# 卑猥な言葉
 
-Profanities are logged under the `abuse` section, with the `type` attribute set to `profanity`.
+卑猥な言葉は`abuse`セクションに記録され、`type`属性は`profanity`に設定されます。
 
 {% admonition type="warning" %}
 
-Racial and other derogatory slurs are not considered profanities. They are handled by the `bigotry` type. 
+人種差別的な表現やその他の中傷的な表現は、卑猥な言葉とはみなされません。これらは`bigotry`タイプによって処理されます。 
 
-See: [Bigotry and Hate Speech](./hatespeechandbigotry.md) 
+参考：[偏見・ヘイトスピーチ](./hatespeechandbigotry.md) 
 
 {% /admonition %}
 
-## Severity Levels
+## 重大度
 
-The severity levels are as following:
+重大度は以下の通りです。
 
-* `low` - very mild profanities that are often not considered profanities
-* `medium` - the bulk of profanities
-* `high` - highly inappropriate profanities
-* `extreme` - usually "absolutely unacceptable" profanities (e.g. F-word in English or the [mat category in Slavic languages](https://en.wikipedia.org/wiki/Mat_(profanity)))
+* `low` - 非常に軽度の卑猥な言葉で、通常は卑猥な言葉とは見なされないもの
+* `medium` - 大部分が卑猥な言葉
+* `high` - 極めて不適切な卑猥な言葉
+* `extreme` - 通常「到底で容認できない」卑猥な言葉（例：英語のFワードや[スラブ語の「mat」カテゴリーに該当する言葉](https://en.wikipedia.org/wiki/Mat_(profanity)))
 
-Attempts to obfuscate (e.g. with asterisks) does not impact the severity.
+難読化（例：伏せ字の使用）は、重大度に影響しません。
 
-## Relevant Tags
+## 関連タグ
 
-The following tags are often associated with the `profanity` type:
+以下のタグは、`profanity`タイプと関連付けられることが多いです。
 
-* `sex` - profanities related to sexual activities or organs
+* `sex` - 性行為や性器に関する卑猥な言葉
 
-## Example
+## 例
 
-Request:
+リクエスト：
 ```json
 {
   "language":"en",
@@ -41,7 +41,7 @@ Request:
 }
 ```
 
-Response:
+レスポンス：
 ```json
 {
 	"text": "i hate this fu*r",
