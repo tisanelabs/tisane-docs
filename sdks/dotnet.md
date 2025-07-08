@@ -128,7 +128,7 @@ string DetectLanguage(string content, string likelyLanguages, string delimiter)
 Identifies languages in text.
 
 - `content`: The text to analyze
-- `likelyLanguages`: Pipe-delimited list of likely language codes (e.g., de|fr|ja). Use *, ?, or an empty string if the languages are unknown).
+- `likelyLanguages`: Pipe-delimited list of likely language codes (e.g., de|fr|ja). Use *, ?, or an empty string if the languages are unknown.
 - `delimiter`: Optional custom delimiter (regular expression, Google RE2 flavor) for chunking the text. For example:  sentence, paragraph. If omitted, the entire content is analyzed as a single chunk.
 
 Example:
