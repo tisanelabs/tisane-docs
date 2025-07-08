@@ -1,46 +1,46 @@
-# Language Models Data Stores
+﻿# 言語モデルデータストア
 
-Tisane language models are stored in directories. They can be divided into:
+Tisaneの言語モデルはディレクトリに格納されています。これは次のように分類できます。
 
-1. **Language-specific data** that describes a particular language.
-2. **Crosslingual data** used by all languages (for example, semantic connections between concepts).
+1. 特定の言語を説明する**言語固有のデータ**。
+2. すべての言語で利用される**クロスリンガルデータ**（例：概念間の意味論的な関連性）。
 
-### Language-Specific Data
+### 言語固有のデータ
 
 
-Language-specific data stores are named according to the following convention: `(language_code)-(data_store_name)`
+言語固有のデータストアは、以下の慣習に従って命名されます。`(language_code)-(data_store_name)`
 
-*   Language code: Based on <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">ISO-639-1</a> language code standard, optionally including dialects.
-*   Data store name: Structures stored.
+*   言語コード：言語コードの規格<a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">ISO-639-1</a>に基づく。方言を含む場合もあります。
+*   データストア名：保存された構造。
 
-Examples:
+例：
 
-*   `en-phrase`: English phrasal patterns
-*   `fr-nondic`: French nondictionary entity heuristics
-*   `zh_CN-phrase`: Chinese (Simplified) phrasal patterns
+*   `en-phrase`：英語のフレーズパターン
+*   `fr-nondic`：フランス語の辞書に載っていないエンティティのヒューリスティック
+*   `zh_CN-phrase`：中国語（簡体字）のフレーズパターン
 
-### Crosslingual Data Stores
+### クロスリンガルデータストア
 
-These data stores used by *all* languages:
+これらのデータストアは、全言語で使用されています。**
 
 *   `family`
 *   `role`
 *   `pragma`
 
-**Important:** All data stores for a language must reside in the *same* directory.
+**重要：**言語用のすべてのデータストアは、同じディレクトリ内に配置する必要があります。**
 
-### Partial Distribution
+### 部分的な配布
 
-In order to conserve space or out of other considerations, it is possible to exclude languages or components from deployment.
+スペースを節約するため、またはその他の理由により、デプロイメントから言語やコンポーネントを除外することが可能です。
 
-## Providing Selected Languages Only
+## 選択された言語のみを提供
 
-To include only specific languages, identify the appropriate language codes (e.g., `en`, `de`, `zh_CN`) and include the corresponding language-specific data stores along with the three shared data stores (`family`, `role`, `pragma`).
+特定の言語のみを含めるには、適切な言語コード（例： `en`、`de`、`zh_CN`）を特定し、対応する言語固有のデータストアを、3つの共有データストア（`family`、`role`、`pragma`）と共に含めます。
 
-## Providing Partial Functionality
+## 一部機能の提供
 
-Stores `xx-famlex` and `xx-famphrase` are used for translation only, and can be excluded from distribution if Tisane is not used for translation.
+`xx-famlex`と`xx-famphrase`のストアは翻訳専用に使用され、Tisaneを翻訳に利用しない場合、配布から除外可能です。
 
-## spellchecking
+## スペルチェック
 
-Spellchecking data is stored under `xx-spell` stores. If omitted, spellchecking will not work.
+スペルチェックのデータは、`xx-spell`ストアに格納されています。省略した場合、スペルチェックは機能しません。

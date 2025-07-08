@@ -1,27 +1,27 @@
-# Lazy loading vs Fully Loaded Mode
+﻿# Сравнение режима отложенной загрузки с режимом полной загрузки
 
-Tisane language models contain extensive information about the language, and so may take hundreds of megabytes when fully loaded in RAM. 
+Языковые модели Tisane содержат обширную информацию о языке, поэтому при полной загрузке в оперативную память могут занимать сотни мегабайт. 
 
-When using Tisane occasionally or on a device with limited RAM, a better option is so-called lazy loading. In the lazy loading mode, linguistic data is loaded only when required, resulting in huge savings of RAM.
+При эпизодическом использовании Tisane или на устройстве с ограниченным объемом оперативной памяти лучшим вариантом будет так называемая отложенная загрузка. В режиме отложенной загрузки лингвистические данные загружаются только при необходимости, что обеспечивает значительную экономию оперативной памяти.
 
-1. Lazy Loading (Recommended for incidental use)
-   - Loads only essential parts of the language model during initialization. The full lexicon is accessed as needed.
-   - Initialization: ~1 second
-   - Initial Query Performance:  Much slower for the first few calls, then 10% to 30% slower.
-   - Memory: ~20-40 MB per language + 40-60 MB base
-2. Preloading (Recommended for servers/bulk data processing)
-   - Loads the full language model into RAM at startup (except spellchecking dictionary).
-   - Initialization:(20-40 seconds on a modern machine with an SSD.
-   - Memory: ~400 MB - 2 Gb per language + 40-60 MB base. (More morphologically complex languages required more RAM.)
+1. Отложенная загрузка (рекомендуется для эпизодического использования)
+   - Во время инициализации загружает только основные части языковой модели. Полный лексикон доступен по мере необходимости.
+   - Инициализация: ~1 секунда
+   - Первоначальная производительность запроса:  значительно медленнее при первых нескольких вызовах, затем на 10–30 % медленнее.
+   - Память: ~20-40 МБ на язык + 40-60 МБ для базового модуля
+2. Предварительная загрузка (рекомендуется для серверов/пакетной обработки данных)
+   - Загружает полную языковую модель в оперативную память при запуске (за исключением словаря проверки орфографии).
+   - Инициализация: (20-40 секунд на современном компьютере с SSD.
+   - Память: ~400 МБ - 2 ГБ на язык + 40-60 МБ для базового модуля. (Более морфологически сложные языки требуют больше оперативной памяти).
 
-Important considerations:
+Важные моменты:
 
-*   You can preload some language models while leaving others in lazy-loading mode.
-*   Once lazy loading is enabled, it cannot be disabled for the lifetime of the library or `Tisane.Server` instance.
-*   Choose the loading strategy that best aligns with your application's performance requirements and resource constraints.
+*   Вы можете предварительно загрузить некоторые языковые модели, оставив другие в режиме отложенной загрузки.
+*   После включения отложенной загрузки ее нельзя отключить на протяжении всего срока службы библиотеки или экземпляра `Tisane.Server`.
+*   Выберите стратегию загрузки, которая наилучшим образом соответствует требованиям производительности вашего приложения и ограничениям ресурсов.
 
-## Activating Lazy Loading
+## Включение отложенной загрузки
 
-By default, all language models are loaded in full. To activate lazy loading mode, use `ActivateLazyLoading` method. (The .NET assembly calls it after the preloading.)
+По умолчанию все языковые модели загружаются полностью. Чтобы включить режим отложенной загрузки, используйте метод `ActivateLazyLoading`. (Сборка .NET вызывает его после предварительной загрузки).
 
-As soon as lazy loading mode is activated, all the subsequently loaded models are in lazy loading mode.
+Как только активируется режим отложенной загрузки, все последующие загружаемые модели переходят в режим отложенной загрузки.

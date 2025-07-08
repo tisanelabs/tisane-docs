@@ -1,46 +1,46 @@
-# Language Models Data Stores
+﻿# Kho dữ liệu mô hình ngôn ngữ
 
-Tisane language models are stored in directories. They can be divided into:
+Các mô hình ngôn ngữ của Tisane được lưu trữ trong các thư mục. Chúng có thể được chia thành:
 
-1. **Language-specific data** that describes a particular language.
-2. **Crosslingual data** used by all languages (for example, semantic connections between concepts).
+1. **Dữ liệu đặc thù theo ngôn ngữ** - mô tả một ngôn ngữ cụ thể
+2. **Dữ liệu liên ngôn ngữ** được dùng chung cho tất cả các ngôn ngữ (ví dụ: kết nối ngữ nghĩa giữa các khái niệm)
 
-### Language-Specific Data
+### Dữ liệu đặc thù theo ngôn ngữ
 
 
-Language-specific data stores are named according to the following convention: `(language_code)-(data_store_name)`
+Các kho dữ liệu đặc thù theo ngôn ngữ được đặt tên theo quy ước sau: `(language_code)-(data_store_name)`
 
-*   Language code: Based on <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">ISO-639-1</a> language code standard, optionally including dialects.
-*   Data store name: Structures stored.
+*   Mã ngôn ngữ: Dựa trên tiêu chuẩn mã ngôn ngữ <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">ISO-639-1</a>, có thể bao gồm cả phương ngữ.
+*   Tên kho dữ liệu: Cấu trúc lưu trữ.
 
-Examples:
+Ví dụ:
 
-*   `en-phrase`: English phrasal patterns
-*   `fr-nondic`: French nondictionary entity heuristics
-*   `zh_CN-phrase`: Chinese (Simplified) phrasal patterns
+*   `en-phrase`: mẫu cụm từ tiếng Anh
+*   `fr-nondic`: các quy tắc thực thể không có trong từ điển cho tiếng Pháp
+*   `zh_CN-phrase`: Mẫu cụm từ tiếng Trung giản thể
 
-### Crosslingual Data Stores
+### Kho dữ liệu liên ngôn ngữ
 
-These data stores used by *all* languages:
+Các kho dữ liệu sau được sử dụng cho *tất cả* các ngôn ngữ:
 
 *   `family`
 *   `role`
 *   `pragma`
 
-**Important:** All data stores for a language must reside in the *same* directory.
+**Important:** Lưu ý quan trọng: Tất cả các kho dữ liệu cho một ngôn ngữ phải nằm trong *cùng một* thư mục.
 
-### Partial Distribution
+### Phân phối một phần
 
-In order to conserve space or out of other considerations, it is possible to exclude languages or components from deployment.
+Để tiết kiệm dung lượng hoặc vì lý do khác, bạn có thể loại trừ một số ngôn ngữ hoặc thành phần khi triển khai.
 
-## Providing Selected Languages Only
+## Chỉ cung cấp một số ngôn ngữ được chọn
 
-To include only specific languages, identify the appropriate language codes (e.g., `en`, `de`, `zh_CN`) and include the corresponding language-specific data stores along with the three shared data stores (`family`, `role`, `pragma`).
+Để chỉ bao gồm một số ngôn ngữ nhất định, hãy xác định mã ngôn ngữ tương ứng (ví dụ: `en`, `de`, `zh_CN`) và thêm vào các kho dữ liệu đặc thù cho các ngôn ngữ đó, cùng với ba kho dữ liệu dùng chung (`family`, `role`, `pragma`).
 
-## Providing Partial Functionality
+## Cung cấp chức năng một phần
 
-Stores `xx-famlex` and `xx-famphrase` are used for translation only, and can be excluded from distribution if Tisane is not used for translation.
+Các kho dữ liệu `xx-famlex` and `xx-famphrase` chỉ được dùng cho chức năng dịch, nên có thể loại bỏ khỏi gói cài đặt nếu bạn không sử dụng Tisane để dịch thuật.
 
-## spellchecking
+## kiểm tra chính tả
 
-Spellchecking data is stored under `xx-spell` stores. If omitted, spellchecking will not work.
+Dữ liệu kiểm tra chính tả được lưu trong các kho dữ liệu có tên `xx-spell`. Nếu không được bao gồm, chức năng kiểm tra chính tả sẽ không hoạt động.

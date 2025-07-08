@@ -1,27 +1,27 @@
-# Lazy loading vs Fully Loaded Mode
+﻿# 遅延読み込みと完全読み込みの比較
 
-Tisane language models contain extensive information about the language, and so may take hundreds of megabytes when fully loaded in RAM. 
+Tisaneの言語モデルには言語に関する広範な情報が含まれているため、RAMに完全に読み込まれると数百メガバイトの容量を要する場合があります。 
 
-When using Tisane occasionally or on a device with limited RAM, a better option is so-called lazy loading. In the lazy loading mode, linguistic data is loaded only when required, resulting in huge savings of RAM.
+Tisaneを時々使用する場合や、RAMが限られたデバイスで使用する場合、より良い選択肢は「遅延読み込み」と呼ばれるものです。遅延読み込みモードでは、言語データは必要な場合にのみ読み込まれるため、RAMの消費量が大幅に削減されます。
 
-1. Lazy Loading (Recommended for incidental use)
-   - Loads only essential parts of the language model during initialization. The full lexicon is accessed as needed.
-   - Initialization: ~1 second
-   - Initial Query Performance:  Much slower for the first few calls, then 10% to 30% slower.
-   - Memory: ~20-40 MB per language + 40-60 MB base
-2. Preloading (Recommended for servers/bulk data processing)
-   - Loads the full language model into RAM at startup (except spellchecking dictionary).
-   - Initialization:(20-40 seconds on a modern machine with an SSD.
-   - Memory: ~400 MB - 2 Gb per language + 40-60 MB base. (More morphologically complex languages required more RAM.)
+1. 遅延読み込み（偶発的な使用に推奨）
+   - 初期化時に言語モデルの必須部分のみを読み込みます。必要に応じて、全語彙にアクセスできます。
+   - 初期化：約1秒
+   - 初期クエリのパフォーマンス：  最初の数回の呼び出しでは大幅に遅延し、その後10%〜30%遅延します。
+   - メモリ：約20～40MB／言語 + 40～60MBベース
+2. 事前読み込み（サーバー／大量データ処理向けで推奨）
+   - 起動時に言語モデル全体をRAMに読み込みます（スペルチェック辞書を除く）。
+   - 初期化：（SSD搭載の最新のコンピュータで20～40秒）
+   - メモリ：約400MB - 2GB／言語 + 40～60MBベース（形態的に複雑な言語ほど、より多くのRAMが必要）。
 
-Important considerations:
+重要な考慮事項：
 
-*   You can preload some language models while leaving others in lazy-loading mode.
-*   Once lazy loading is enabled, it cannot be disabled for the lifetime of the library or `Tisane.Server` instance.
-*   Choose the loading strategy that best aligns with your application's performance requirements and resource constraints.
+*   一部の言語モデルは事前に読み込むことができますが、他の言語モデルは遅延読み込みモードのままにしておくことができます。
+*   遅延読み込みを有効にすると、ライブラリまたは`Tisane.Server`インスタンスのライフタイムを通じて無効にすることはできません。
+*   ご利用のアプリケーションのパフォーマンス要件とリソース制約に最も適した読み込み方法を選択します。
 
-## Activating Lazy Loading
+## 遅延読み込みの有効化
 
-By default, all language models are loaded in full. To activate lazy loading mode, use `ActivateLazyLoading` method. (The .NET assembly calls it after the preloading.)
+デフォルトでは、すべての言語モデルが完全に読み込まれます。遅延読み込みモードを有効にするには、`ActivateLazyLoading`メソッドを使用します（.NETアセンブリは、事前読み込み後にこれを呼び出します）
 
-As soon as lazy loading mode is activated, all the subsequently loaded models are in lazy loading mode.
+遅延読み込みモードが有効になると、以降に読み込まれるすべてのモデルは遅延読み込みモードになります。

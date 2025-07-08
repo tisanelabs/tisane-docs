@@ -1,14 +1,14 @@
-# Tisane Embedded .NET Reference
+# Tisaneエンベデッド.NETリファレンス
 
-## Overview
+## 概要
 
-Tisane Embedded enables integrating Tisane's natural language processing (NLP) capabilities directly into your desktop and server .NET applications. 
+Tisaneエンベデッドは、Tisaneの自然言語処理（NLP）機能をデスクトップおよびサーバー.NETアプリケーションに直接組み込むことができます。 
 
-This guide provides a reference to the methods available in the Tisane Embedded SDK for .NET applications.
+本ガイドは、.NETアプリケーション用のTisaneエンベデッドSDKで利用可能なメソッドのリファレンスを提供します。
 
-### Components
+### コンポーネント
 
-Under the hood, the Tisane runtime directly communicates with Tisane language models stored in RocksDB stores. No client-server database engines need to be installed.
+内部で、TisaneランタイムがRocksDBストアに格納されたTisane言語モデルと直接通信します。クライアントサーバーデータベースエンジンをインストールする必要はありません。
 
 ```mermaid
 flowchart LR
@@ -17,56 +17,56 @@ flowchart LR
   library<--->rocksdb
 ```
 
-#### Binaries
+#### バイナリ
 
-- Runtime libraries:
+- ランタイムライブラリ：
 - 
-  - `libTisane.dll`: The core Tisane runtime, with the embedded RocksDB library.
-  - `libgcc_s_seh-1.dll`: Standard POSIX C/C++ library.
-  - `libstdc++-6.dll`: Standard POSIX C/C++ library.
-  - `libwinpthread-1.dll`: Standard POSIX C/C++ library.
+  - `libTisane.dll`：Tisaneコアランタイムに組み込まれたRocksDBライブラリ。
+  - `libgcc_s_seh-1.dll`：標準POSIX C/C++ライブラリ。
+  - `libstdc++-6.dll`：標準POSIX C/C++ライブラリ。
+  - `libwinpthread-1.dll`：標準POSIX C/C++ライブラリ。
 
-- .NET wrapper files:
-  - `Tisane.Runtime.dll` – The .NET assembly that wraps the core library.  This is the primary assembly you'll reference in your .NET project.
-  - `native/amd64/rocksdb.dll` – Windows port of RocksDB.
-  - `RocksDbSharp.dll`: .NET wrappers for RocksDB.
-  - `netstandard.dll`: Standard .NET assembly.
-  - `Newtonsoft.Json.dll`:  JSON parsing assembly.
-  - `System.*.dll`, `Microsoft.*.dll`:  Other standard .NET assemblies.
+- .NETラッパーファイル：
+  - `Tisane.Runtime.dll` – コアライブラリをラップする.NETアセンブリ。  これは、.NETプロジェクトで参照する主要なアセンブリです。
+  - `native/amd64/rocksdb.dll` – RocksDBのWindowsポート。
+  - `RocksDbSharp.dll`：RocksDB用の.NETラッパー。
+  - `netstandard.dll`：標準の.NETアセンブリ。
+  - `Newtonsoft.Json.dll`：  JSONパーシングアセンブリ。
+  - `System.*.dll`, `Microsoft.*.dll`：  その他の標準的な.NETアセンブリ。
 
-#### Language Models
+#### 言語モデル
 
-See: [Language Models Data Stores](./languagemodels.md) 
+参考：[言語モデルデータストア](./languagemodels.md) 
 
-### Requirements
+### 必要事項
 
-#### Runtime
+#### ランタイム
 
 ASP.NET Core Runtime 8+
 
 #### RAM
 
-**Lazy loading**: 50 Mb fixed + 50 to 100 Mb per language model
+**遅延読み込み**：50 Mb固定 + 50～100 Mb（言語モデルあたり）
 
-**Fully loaded**: between 400 Mb and 2 Gb per language model
+**完全読み込み**：400 Mbから2 Gbの間（言語モデルあたり）
 
-Read more: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
+続きを読む：[遅延読み込みと完全読み込みの比較](./lazyloading.md)
 
-## Deployment
+## デプロイメント
 
-Extract the contents of the distribution package into a directory of your choice. 
+配布パッケージの内容を、お好みのディレクトリに抽出してください。 
 
-Make sure the `DbPath` setting containing the name of the data directory is correct. 
+データディレクトリの名前を含む`DbPath`設定が正しいことを確認してください。 
 
 {% admonition type="info" %}
 
-Tisane .NET assemblies use `ConfigurationManager` configurations (XML). The name of the configuration file is: `executable filename without extension` + `.dll.config`.
+Tisane .NETアセンブリは、`ConfigurationManager`設定（XML）を使用します。設定ファイルの名前：`executable filename without extension` + `.dll.config`。
 
-For example, if your executable is `Tisane.TestConsole.Desktop.exe`, then the configuration is `Tisane.TestConsole.Desktop.dll.config`.
+例えば、実行ファイルが`Tisane.TestConsole.Desktop.exe`である場合、設定ファイルは`Tisane.TestConsole.Desktop.dll.config`です。
 
 {% /admonition %}
 
-#### Core Methods
+#### コアメソッド
 
 ##### Parse
 
@@ -74,24 +74,24 @@ For example, if your executable is `Tisane.TestConsole.Desktop.exe`, then the co
 string Parse(string language, string content, string settings)
 ```
 
-Analyzes text and returns a JSON structure with results.
+テキストを解析し、結果をJSON構造として返します。
 
-- `language`: Language code for analysis. Use `*` for language autodetection, or a pipe-delimited list of language codes (e.g., `de|fr|ja`).
-- `content`: The text to analyze.
-- `settings`: A JSON object defining analysis settings. See [Configuration and Customization Guide](../apis/tisane-api-configuration.md).
+- `language`：解析用の言語コード。`*`またはパイプ区切りの言語コードのリスト（例：`de|fr|ja`）を使用して言語を自動検出します。
+- `content`：解析対象のテキスト。
+- `settings`：解析設定を定義するJSONオブジェクト。参考：[設定およびカスタマイズガイド](../apis/tisane-api-configuration.md)。
 
-Returns: A JSON response object.
+リターン：JSON形式のレスポンスオブジェクト。
 
-Example:
+例：
 
 ```c#
 string result = Tisane.Server.Parse("en", "What a lovely day", "{}");
 Console.WriteLine(result);
 ```
 
-Also see: 
+こちらも参考： 
  
-* [Response guide](../apis/tisane-api-response-guide.md)
+* [レスポンスガイド](../apis/tisane-api-response-guide.md)
 
 ##### Transform
 
@@ -99,20 +99,20 @@ Also see:
 string Transform(string sourceLanguage, string targetLanguage, string content, string settings)
 ```
 
-Translates or paraphrases text.
+テキストを翻訳または置き換えます。
 
-- `sourceLanguage`:  Language code of the input text. Use `*` or a pipe-delimited list (e.g., `de|fr|ja`) for language autodetection.
-- `targetLanguage`: Target language code
-- `content`: The text to transform
-- `settings`: A JSON object defining transformation settings. See [Configuration and Customization Guide](../apis/tisane-api-configuration.md).
+- `sourceLanguage`：  入力テキストの言語コード。`*`またはパイプ区切りのリスト（例：`de|fr|ja`）を使用して言語を自動検出します。
+- `targetLanguage`：ターゲット言語コード
+- `content`：変換対象のテキスト
+- `settings`：変換設定で定義されたJSONオブジェクト。参考：[設定およびカスタマイズガイド](../apis/tisane-api-configuration.md)。
 
-Returns: A transformed/translated text.
+リターン：変換／翻訳されたテキスト。
 
-See also: 
+こちらも参照： 
 
-- [API response and configuration guide](../apis/tisane-api-response-guide.md)
+- [APIレスポンスおよびコンフィギュレーションガイド](../apis/tisane-api-response-guide.md)
 
-Example:
+例：
 
 ```c#
 string result = Tisane.Server.Transform("fr", "en", "Bonjour!", "{}");
@@ -125,13 +125,13 @@ Console.WriteLine(result);
 string DetectLanguage(string content, string likelyLanguages, string delimiter)
 ```
 
-Identifies languages in text.
+テキスト内の言語を識別します。
 
-- `content`: The text to analyze
-- `likelyLanguages`: Pipe-delimited list of likely language codes (e.g., de|fr|ja). Use *, ?, or an empty string if the languages are unknown).
-- `delimiter`: Optional custom delimiter (regular expression, Google RE2 flavor) for chunking the text. For example:  sentence, paragraph. If omitted, the entire content is analyzed as a single chunk.
+- `content`：解析対象のテキスト
+- `likelyLanguages`：パイプ区切りの言語コードに適したリスト（例：de|fr|ja)。言語が不明な場合は、*、?、または空の文字列を使用してください。
+- `delimiter`：テキストのチャンク化用のオプションのカスタム区切り文字（正規表現、Google RE2形式）。例：  文、段落。省略した場合、全体の内容が一つのチャンクとして解析されます。
 
-Example:
+例：
 
 ```c#
 string text = "This is English.  C'est français.";
@@ -141,9 +141,9 @@ string result = Tisane.Server.DetectLanguage(text, likelyLanguages, delimiter);
 Console.WriteLine(result);
 ```
 
-#### Language Model Access Methods
+#### 言語モデルへのアクセス方法
 
-These methods allow you to query and inspect contents of the language models.
+これらのメソッドにより、言語モデルの内容をクエリ・検査できます。
 
 ##### GetFamilyData
 
@@ -151,9 +151,9 @@ These methods allow you to query and inspect contents of the language models.
 string GetFamilyData(int id)
 ```
 
-Returns a JSON document with family description and attributes.
+語族の説明と属性を持つJSONドキュメントを返します。
 
-- `id`: The ID of the family to retrieve.
+- `id`：取得対象の語族のID。
 
 ##### ListSenses
 
@@ -161,10 +161,10 @@ Returns a JSON document with family description and attributes.
 string ListSenses(string language, string word)
 ```
 
-Lists families linked to a word, with IDs, descriptions, and features. Returns a JSON document (Stream).
+単語に紐付けられた語族を、ID、説明、特徴と共に一覧表示します。JSONドキュメント（Stream）を返します。
 
-- `language`:The language code. *Automatic language detection is not supported.*
-- `word`: The word (or multi-word expression) to look up. Can be an inflected form, not necessarily the lemma.
+- `language`：言語コード。自動言語検出はサポートされていません。**
+- `word`：検索対象の単語（または複数単語から成る表現）。活用形であり、必ずしも見出語ではありません。
 
 ##### ListHypernyms
 
@@ -172,10 +172,10 @@ Lists families linked to a word, with IDs, descriptions, and features. Returns a
 string ListHypernyms(int family, int maxLevel)
 ```
 
-Returns a JSON document containing hypernyms (broader terms) for a given family.
+既定の語族に対して、その上位語（より広範な用語）を含むJSONドキュメントを返します。
 
-- `family`: The ID of the family to list hypernyms for.
-- `maxLevel`: The maximum number of levels to traverse upwards in the hypernym hierarchy.
+- `family`：上位語を一覧表示する語族のID。
+- `maxLevel`：上位語階層において、上方向に移動する階層の最大数。
 
 ##### GetInflectedForms
 
@@ -183,15 +183,15 @@ Returns a JSON document containing hypernyms (broader terms) for a given family.
 string GetInflectedForms(string language, int lexeme, int family)
 ```
 
-Returns a JSON object containing inflected forms (variations of a word) linked to a lexeme and family.
+見出語と語族に紐付けられた活用形（単語の派生形）を含むJSONオブジェクトを返します。
 
-- `language`:The language code. *Automatic language detection is not supported.*
-- `lexeme`: The ID of the lexeme.
-- `family`: The ID of the family.
+- `language`：言語コード。自動言語検出はサポートされていません。**
+- `lexeme`：見出語のID。
+- `family`：語族のID。
 
-#### Cleanup Methods
+#### Cleanupメソッド
 
-These are helper methods to extract or clean up text to be parsed.
+これらのメソッドは、パース対象のテキストを抽出または整理するためのヘルパーメソッドです。
 
 ##### Normalize
 
@@ -199,9 +199,9 @@ These are helper methods to extract or clean up text to be parsed.
 string Normalize(string dirtyText)
 ```
 
-Returns a cleaned up text by removing OCR artifacts, email headers/signatures, and other boilerplate fragments.
+OCRのアーチファクト、メールのヘッダー／署名、その他の定型文の断片を削除して、クリーンなテキストを返します。
 
-- `dirtyText`: The text to clean up.
+- `dirtyText`：クリーンアップ対象のテキスト。
 
 ##### ExtractText
 
@@ -209,8 +209,8 @@ Returns a cleaned up text by removing OCR artifacts, email headers/signatures, a
 string ExtractText(string webpageText)
 ```
 
-Extracts the plain text content from a web page, stripping the HTML markup.
+ウェブページからHTMLマークアップを削除し、平文のテキストコンテンツを抽出します。
 
-- `webpageText`: The HTML content of a web page.
+- `webpageText`：ウェブページのHTMLコンテンツ。
 
-Returns: extracted text.
+Return：抽出されたテキスト。

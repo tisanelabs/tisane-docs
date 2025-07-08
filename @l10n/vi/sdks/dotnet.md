@@ -1,14 +1,14 @@
-# Tisane Embedded .NET Reference
+# Tài liệu tham khảo .NET cho Tisane Embedded
 
-## Overview
+## Tổng quan
 
-Tisane Embedded enables integrating Tisane's natural language processing (NLP) capabilities directly into your desktop and server .NET applications. 
+Tisane Embedded cho phép tích hợp khả năng xử lý ngôn ngữ tự nhiên (NLP) của Tisane trực tiếp vào các ứng dụng .NET trên máy tính để bàn và máy chủ của bạn. 
 
-This guide provides a reference to the methods available in the Tisane Embedded SDK for .NET applications.
+Hướng dẫn này cung cấp tài liệu tham khảo về các phương pháp có sẵn trong Bộ công cụ phát triển phần mềm (SDK) Tisane Embedded cho các ứng dụng .NET.
 
-### Components
+### Thành phần
 
-Under the hood, the Tisane runtime directly communicates with Tisane language models stored in RocksDB stores. No client-server database engines need to be installed.
+Về cơ bản, Tisane runtime giao tiếp trực tiếp với các mô hình ngôn ngữ Tisane được lưu trữ trong kho lưu trữ RocksDB. Không cần cài đặt bất kỳ công cụ cơ sở dữ liệu máy khách-máy chủ nào.
 
 ```mermaid
 flowchart LR
@@ -17,102 +17,102 @@ flowchart LR
   library<--->rocksdb
 ```
 
-#### Binaries
+#### Các hệ điều hành nhị phân
 
-- Runtime libraries:
+- Thư viện runtime:
 - 
-  - `libTisane.dll`: The core Tisane runtime, with the embedded RocksDB library.
-  - `libgcc_s_seh-1.dll`: Standard POSIX C/C++ library.
-  - `libstdc++-6.dll`: Standard POSIX C/C++ library.
-  - `libwinpthread-1.dll`: Standard POSIX C/C++ library.
+  - `libTisane.dll`: Tisane runtime cốt lõi, có thư viện RocksDB nhúng.
+  - `libgcc_s_seh-1.dll`: Thư viện POSIX C/C++ chuẩn.
+  - `libstdc++-6.dll`: Thư viện POSIX C/C++ chuẩn.
+  - `libwinpthread-1.dll`: Thư viện POSIX C/C++ chuẩn.
 
-- .NET wrapper files:
-  - `Tisane.Runtime.dll` – The .NET assembly that wraps the core library.  This is the primary assembly you'll reference in your .NET project.
-  - `native/amd64/rocksdb.dll` – Windows port of RocksDB.
-  - `RocksDbSharp.dll`: .NET wrappers for RocksDB.
-  - `netstandard.dll`: Standard .NET assembly.
-  - `Newtonsoft.Json.dll`:  JSON parsing assembly.
-  - `System.*.dll`, `Microsoft.*.dll`:  Other standard .NET assemblies.
+- Các tệp đóng gói .NET:
+  - `Tisane.Runtime.dll` – Phiên bản .NET bao bọc thư viện cốt lõi.  Đây là phiên bản chính mà bạn sẽ tham chiếu trong dự án .NET của mình.
+  - `native/amd64/rocksdb.dll` – Cổng Windows của RocksDB.
+  - `RocksDbSharp.dll`: Các tệp đóng gói .NET cho RocksDB.
+  - `netstandard.dll`: Phiên bản .NET chuẩn.
+  - `Newtonsoft.Json.dll`:  Phiên bản phân tích cú pháp JSON.
+  - `System.*.dll`, `Microsoft.*.dll`:  Các phiên bản .NET chuẩn khác.
 
-#### Language Models
+#### Mô hình ngôn ngữ
 
-See: [Language Models Data Stores](./languagemodels.md) 
+Xem phần: [Kho dữ liệu mô hình ngôn ngữ](./languagemodels.md) 
 
-### Requirements
+### Yêu cầu
 
 #### Runtime
 
-ASP.NET Core Runtime 8+
+ASP.NET Core Runtime 8 trở lên
 
 #### RAM
 
-**Lazy loading**: 50 Mb fixed + 50 to 100 Mb per language model
+**Tải chậm**: 50 Mb cố định + 50 đến 100 Mb cho mỗi mô hình ngôn ngữ
 
-**Fully loaded**: between 400 Mb and 2 Gb per language model
+**Tải đầy đủ**: từ 400 Mb đến 2 Gb cho mỗi mô hình ngôn ngữ
 
-Read more: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
+Đọc thêm: [Chế độ Tải chậm so với chế độ Tải đầy đủ](./lazyloading.md)
 
-## Deployment
+## Triển khai
 
-Extract the contents of the distribution package into a directory of your choice. 
+Trích xuất nội dung của gói phân phối vào thư mục bạn chọn. 
 
-Make sure the `DbPath` setting containing the name of the data directory is correct. 
+Đảm bảo cài đặt `DbPath` chứa tên thư mục dữ liệu là chính xác. 
 
 {% admonition type="info" %}
 
-Tisane .NET assemblies use `ConfigurationManager` configurations (XML). The name of the configuration file is: `executable filename without extension` + `.dll.config`.
+Các phiên bản .NET Tisane sử dụng cấu hình `ConfigurationManager` (XML). Tên của tệp cấu hình là: `tên tệp thực thi không có phần mở rộng` + `.dll.config`.
 
-For example, if your executable is `Tisane.TestConsole.Desktop.exe`, then the configuration is `Tisane.TestConsole.Desktop.dll.config`.
+Ví dụ: nếu tệp thực thi của bạn là `Tisane.TestConsole.Desktop.exe`, thì cấu hình là `Tisane.TestConsole.Desktop.dll.config`.
 
 {% /admonition %}
 
-#### Core Methods
+#### Phương pháp cốt lõi
 
-##### Parse
+##### Phân tích cú pháp
 
 ```c#
 string Parse(string language, string content, string settings)
 ```
 
-Analyzes text and returns a JSON structure with results.
+Phân tích văn bản và trả về cấu trúc JSON có kết quả.
 
-- `language`: Language code for analysis. Use `*` for language autodetection, or a pipe-delimited list of language codes (e.g., `de|fr|ja`).
-- `content`: The text to analyze.
-- `settings`: A JSON object defining analysis settings. See [Configuration and Customization Guide](../apis/tisane-api-configuration.md).
+- `language`: Mã ngôn ngữ để phân tích. Sử dụng `*` để tự động phát hiện ngôn ngữ hoặc danh sách các mã ngôn ngữ được phân cách bằng dấu gạch ngang (ví dụ: `de|fr|ja`).
+- `content`: Văn bản cần phân tích.
+- `settings`: Một đối tượng JSON xác định các cài đặt phân tích. Xem phần [Hướng dẫn cấu hình và tùy chỉnh](../apis/tisane-api-configuration.md).
 
-Returns: A JSON response object.
+Trả về: Một đối tượng phản hồi JSON.
 
-Example:
+Ví dụ:
 
 ```c#
 string result = Tisane.Server.Parse("en", "What a lovely day", "{}");
 Console.WriteLine(result);
 ```
 
-Also see: 
+Xem thêm phần: 
  
-* [Response guide](../apis/tisane-api-response-guide.md)
+* [Hướng dẫn về phản hồi](../apis/tisane-api-response-guide.md)
 
-##### Transform
+##### Chuyển đổi
 
 ```c#
 string Transform(string sourceLanguage, string targetLanguage, string content, string settings)
 ```
 
-Translates or paraphrases text.
+Dịch hoặc diễn đạt lại văn bản.
 
-- `sourceLanguage`:  Language code of the input text. Use `*` or a pipe-delimited list (e.g., `de|fr|ja`) for language autodetection.
-- `targetLanguage`: Target language code
-- `content`: The text to transform
-- `settings`: A JSON object defining transformation settings. See [Configuration and Customization Guide](../apis/tisane-api-configuration.md).
+- `sourceLanguage`:  Mã ngôn ngữ của văn bản đầu vào. Sử dụng `*` hoặc một danh sách phân cách bằng dấu gạch ngang (ví dụ: `de|fr|ja`) để tự động phát hiện ngôn ngữ.
+- `targetLanguage`: Mã ngôn ngữ đích
+- `content`: Văn bản cần chuyển đổi
+- `settings`: Một đối tượng JSON xác định các cài đặt chuyển đổi. Xem phần [Hướng dẫn cấu hình và tùy chỉnh](../apis/tisane-api-configuration.md).
 
-Returns: A transformed/translated text.
+Trả về: Một văn bản đã được chuyển đổi/dịch.
 
-See also: 
+Xem thêm phần: 
 
-- [API response and configuration guide](../apis/tisane-api-response-guide.md)
+- [Hướng dẫn cấu hình và phản hồi API](../apis/tisane-api-response-guide.md)
 
-Example:
+Ví dụ:
 
 ```c#
 string result = Tisane.Server.Transform("fr", "en", "Bonjour!", "{}");
@@ -125,13 +125,13 @@ Console.WriteLine(result);
 string DetectLanguage(string content, string likelyLanguages, string delimiter)
 ```
 
-Identifies languages in text.
+Xác định ngôn ngữ trong văn bản.
 
-- `content`: The text to analyze
-- `likelyLanguages`: Pipe-delimited list of likely language codes (e.g., de|fr|ja). Use *, ?, or an empty string if the languages are unknown).
-- `delimiter`: Optional custom delimiter (regular expression, Google RE2 flavor) for chunking the text. For example:  sentence, paragraph. If omitted, the entire content is analyzed as a single chunk.
+- `content`: Văn bản cần phân tích
+- `likelyLanguages`: Danh sách phân cách bằng dấu gạch ngang của các mã ngôn ngữ có thể xuất hiện (ví dụ: de|fr|ja). Sử dụng *, ?,  hoặc một chuỗi rỗng nếu ngôn ngữ là không xác định).
+- `delimiter`: Loại phân cách tùy chỉnh tùy chọn (biểu thức chính quy, kiểu Google RE2) để phân đoạn văn bản. Ví dụ:  câu, đoạn văn. Nếu bỏ qua, toàn bộ nội dung sẽ được phân tích dưới dạng một khối duy nhất.
 
-Example:
+Ví dụ:
 
 ```c#
 string text = "This is English.  C'est français.";
@@ -141,9 +141,9 @@ string result = Tisane.Server.DetectLanguage(text, likelyLanguages, delimiter);
 Console.WriteLine(result);
 ```
 
-#### Language Model Access Methods
+#### Các phương pháp truy cập mô hình ngôn ngữ
 
-These methods allow you to query and inspect contents of the language models.
+Các phương pháp này cho phép bạn truy vấn và kiểm tra nội dung của các mô hình ngôn ngữ.
 
 ##### GetFamilyData
 
@@ -151,9 +151,9 @@ These methods allow you to query and inspect contents of the language models.
 string GetFamilyData(int id)
 ```
 
-Returns a JSON document with family description and attributes.
+Trả về một tài liệu JSON chứa mô tả và các thuộc tính của họ.
 
-- `id`: The ID of the family to retrieve.
+- `id`: ID của họ cần truy xuất.
 
 ##### ListSenses
 
@@ -161,10 +161,10 @@ Returns a JSON document with family description and attributes.
 string ListSenses(string language, string word)
 ```
 
-Lists families linked to a word, with IDs, descriptions, and features. Returns a JSON document (Stream).
+Liệt kê các họ từ có liên kết với một từ, kèm theo ID, mô tả và tính năng. Trả về một tài liệu JSON (Stream).
 
-- `language`:The language code. *Automatic language detection is not supported.*
-- `word`: The word (or multi-word expression) to look up. Can be an inflected form, not necessarily the lemma.
+- `language`: Mã ngôn ngữ. *Không hỗ trợ phát hiện ngôn ngữ tự động.*
+- `word`: Từ (hoặc biểu thức gồm nhiều từ) cần tra cứu. Có thể là một dạng biến cách, không nhất thiết phải là từ gốc.
 
 ##### ListHypernyms
 
@@ -172,10 +172,10 @@ Lists families linked to a word, with IDs, descriptions, and features. Returns a
 string ListHypernyms(int family, int maxLevel)
 ```
 
-Returns a JSON document containing hypernyms (broader terms) for a given family.
+Trả về một tài liệu JSON chứa các thượng vị (thuật ngữ rộng hơn) cho một họ nhất định.
 
-- `family`: The ID of the family to list hypernyms for.
-- `maxLevel`: The maximum number of levels to traverse upwards in the hypernym hierarchy.
+- `family`: ID của họ cần liệt kê các thượng vị.
+- `maxLevel`: Số lượng cấp độ tối đa có thể di chuyển lên trên trong hệ thống phân cấp thượng vị.
 
 ##### GetInflectedForms
 
@@ -183,25 +183,25 @@ Returns a JSON document containing hypernyms (broader terms) for a given family.
 string GetInflectedForms(string language, int lexeme, int family)
 ```
 
-Returns a JSON object containing inflected forms (variations of a word) linked to a lexeme and family.
+Trả về một đối tượng JSON chứa các dạng biến cách (biến thể của một từ) được liên kết với một trị từ vựng và họ.
 
-- `language`:The language code. *Automatic language detection is not supported.*
-- `lexeme`: The ID of the lexeme.
-- `family`: The ID of the family.
+- `language`: Mã ngôn ngữ. *Không hỗ trợ phát hiện ngôn ngữ tự động.*
+- `lexeme`: ID của trị từ vựng.
+- `family`: ID của họ.
 
-#### Cleanup Methods
+#### Phương pháp dọn dẹp
 
-These are helper methods to extract or clean up text to be parsed.
+Đây là các phương pháp hỗ trợ để trích xuất hoặc dọn dẹp văn bản cần phân tích cú pháp.
 
-##### Normalize
+##### Chuẩn hóa
 
 ```c#
 string Normalize(string dirtyText)
 ```
 
-Returns a cleaned up text by removing OCR artifacts, email headers/signatures, and other boilerplate fragments.
+Trả về văn bản đã được dọn dẹp bằng cách loại bỏ các hiện tượng OCR, tiêu đề/chữ ký email và các đoạn văn bản mẫu khác.
 
-- `dirtyText`: The text to clean up.
+- `dirtyText`: Văn bản cần dọn dẹp.
 
 ##### ExtractText
 
@@ -209,8 +209,8 @@ Returns a cleaned up text by removing OCR artifacts, email headers/signatures, a
 string ExtractText(string webpageText)
 ```
 
-Extracts the plain text content from a web page, stripping the HTML markup.
+Trích xuất nội dung văn bản thuần túy từ trang web, loại bỏ mã HTML.
 
-- `webpageText`: The HTML content of a web page.
+- `webpageText`: Nội dung HTML của một trang web.
 
-Returns: extracted text.
+Trả về: văn bản được trích xuất.

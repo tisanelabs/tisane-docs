@@ -1,46 +1,46 @@
-# Language Models Data Stores
+﻿# Хранилища данных языковых моделей
 
-Tisane language models are stored in directories. They can be divided into:
+Языковые модели Tisane хранятся в каталогах. Их можно разделить на:
 
-1. **Language-specific data** that describes a particular language.
-2. **Crosslingual data** used by all languages (for example, semantic connections between concepts).
+1. **Данные, специфичные для языка**, описывающие определенный язык.
+2. **Межъязыковые данные**, которые используются всеми языками (например, семантические связи между понятиями).
 
-### Language-Specific Data
+### Данные, специфичные для языка
 
 
-Language-specific data stores are named according to the following convention: `(language_code)-(data_store_name)`
+Хранилища данных, специфичные для конкретного языка, именуются в соответствии со следующим правилом: `(language_code)-(data_store_name)`
 
-*   Language code: Based on <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">ISO-639-1</a> language code standard, optionally including dialects.
-*   Data store name: Structures stored.
+*   Код языка: на основе стандарта кодов языков <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">ISO-639-1</a>, в который по желанию можно включить диалекты.
+*   Имя хранилища данных: сохраняемые конструкции.
 
-Examples:
+Примеры:
 
-*   `en-phrase`: English phrasal patterns
-*   `fr-nondic`: French nondictionary entity heuristics
-*   `zh_CN-phrase`: Chinese (Simplified) phrasal patterns
+*   `en-phrase`: английские фразовые модели
+*   `fr-nondic`: эвристика несловарных сущностей французского языка
+*   `zh_CN-phrase`: китайские (упрощенные) фразовые модели
 
-### Crosslingual Data Stores
+### Хранилища межъязыковых данных
 
-These data stores used by *all* languages:
+Эти хранилища данных используются *всеми* языками:
 
 *   `family`
 *   `role`
 *   `pragma`
 
-**Important:** All data stores for a language must reside in the *same* directory.
+**Важно:** все хранилища данных для языка должны находиться в *одном и том же* каталоге.
 
-### Partial Distribution
+### Частичное распределение
 
-In order to conserve space or out of other considerations, it is possible to exclude languages or components from deployment.
+В целях экономии места или по другим соображениям можно исключить языки или компоненты из развертывания.
 
-## Providing Selected Languages Only
+## Предоставление только выбранных языков
 
-To include only specific languages, identify the appropriate language codes (e.g., `en`, `de`, `zh_CN`) and include the corresponding language-specific data stores along with the three shared data stores (`family`, `role`, `pragma`).
+Чтобы включить только определенные языки, определите соответствующие языковые коды (например, `en`, `de`,`zh_CN` ) и укажите соответствующие хранилища данных, специфичные для конкретного языка, вместе с тремя общими хранилищами данных (`family`, `role`, `pragma`).
 
-## Providing Partial Functionality
+## Предоставление частичной функциональности
 
-Stores `xx-famlex` and `xx-famphrase` are used for translation only, and can be excluded from distribution if Tisane is not used for translation.
+Хранилища `xx-famlex` и `xx-famphrase` используются только для перевода и могут быть исключены из дистрибутива, если Tisane  не используется для перевода.
 
-## spellchecking
+## Проверка орфографии
 
-Spellchecking data is stored under `xx-spell` stores. If omitted, spellchecking will not work.
+Данные проверки орфографии хранятся в хранилищах `xx-spell`. Если этот параметр пропущен, проверка орфографии работать не будет.

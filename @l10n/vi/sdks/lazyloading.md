@@ -1,27 +1,27 @@
-# Lazy loading vs Fully Loaded Mode
+﻿# Chế độ Tải chậm so với chế độ Tải đầy đủ
 
-Tisane language models contain extensive information about the language, and so may take hundreds of megabytes when fully loaded in RAM. 
+Các mô hình ngôn ngữ của Tisane chứa lượng lớn thông tin ngôn ngữ, vì vậy khi tải đầy đủ vào RAM, chúng có thể chiếm đến hàng trăm megabyte. 
 
-When using Tisane occasionally or on a device with limited RAM, a better option is so-called lazy loading. In the lazy loading mode, linguistic data is loaded only when required, resulting in huge savings of RAM.
+Khi bạn chỉ sử dụng Tisane không thường xuyên hoặc đang chạy trên thiết bị có RAM hạn chế, lựa chọn phù hợp hơn là chế độ tải chậm. Trong chế độ này, dữ liệu ngôn ngữ chỉ được tải khi cần thiết, giúp tiết kiệm đáng kể bộ nhớ RAM.
 
-1. Lazy Loading (Recommended for incidental use)
-   - Loads only essential parts of the language model during initialization. The full lexicon is accessed as needed.
-   - Initialization: ~1 second
-   - Initial Query Performance:  Much slower for the first few calls, then 10% to 30% slower.
-   - Memory: ~20-40 MB per language + 40-60 MB base
-2. Preloading (Recommended for servers/bulk data processing)
-   - Loads the full language model into RAM at startup (except spellchecking dictionary).
-   - Initialization:(20-40 seconds on a modern machine with an SSD.
-   - Memory: ~400 MB - 2 Gb per language + 40-60 MB base. (More morphologically complex languages required more RAM.)
+1. Tải chậm (Khuyến nghị khi sử dụng không thường xuyên)
+   - Chỉ tải các phần thiết yếu của mô hình ngôn ngữ khi khởi tạo. Từ điển đầy đủ sẽ được truy cập khi cần.
+   - Thời gian khởi tạo: khoảng 1 giây
+   - Hiệu suất truy vấn ban đầu:  Chậm hơn nhiều trong vài truy vấn đầu tiên, sau đó chậm hơn khoảng 10–30%.
+   - Bộ nhớ sử dụng: khoảng 20–40 MB cho mỗi ngôn ngữ + 40–60 MB cơ bản
+2. Preloading (Khuyến nghị cho máy chủ / xử lý dữ liệu số lượng lớn)
+   - Tải toàn bộ mô hình ngôn ngữ vào RAM khi khởi động (trừ từ điển kiểm tra chính tả).
+   - Thời gian khởi tạo: khoảng 20–40 giây trên máy hiện đại có ổ SSD.
+   - Bộ nhớ sử dụng: khoảng 400 MB – 2 GB cho mỗi ngôn ngữ + 40–60 MB cơ bản (Các ngôn ngữ có cấu trúc hình thái phức tạp sẽ yêu cầu nhiều RAM hơn.)
 
-Important considerations:
+Các lưu ý quan trọng:
 
-*   You can preload some language models while leaving others in lazy-loading mode.
-*   Once lazy loading is enabled, it cannot be disabled for the lifetime of the library or `Tisane.Server` instance.
-*   Choose the loading strategy that best aligns with your application's performance requirements and resource constraints.
+*   Bạn có thể tải trước một số mô hình ngôn ngữ, đồng thời để các mô hình khác ở chế độ tải chậm.
+*   Sau khi kích hoạt tải chậm, bạn không thể tắt nó trong suốt vòng đời của thư viện hoặc của instance `Tisane.Server`.
+*   Hãy chọn chiến lược tải phù hợp nhất với yêu cầu hiệu suất và hạn chế tài nguyên của ứng dụng của bạn.
 
-## Activating Lazy Loading
+## Kích hoạt Tải chậm
 
-By default, all language models are loaded in full. To activate lazy loading mode, use `ActivateLazyLoading` method. (The .NET assembly calls it after the preloading.)
+Theo mặc định, tất cả các mô hình ngôn ngữ sẽ được tải đầy đủ. Để kích hoạt chế độ tải chậm, sử dụng phương thức `ActivateLazyLoading`. (Thư viện .NET sẽ gọi phương thức này sau khi hoàn tất tải trước.)
 
-As soon as lazy loading mode is activated, all the subsequently loaded models are in lazy loading mode.
+Ngay khi chế độ tải chậm được kích hoạt, mọi mô hình ngôn ngữ được tải sau đó sẽ được đặt ở chế độ tải chậm.

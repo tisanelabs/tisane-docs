@@ -1,16 +1,16 @@
-# Overview
+﻿# 概要
 
-Tisane Embedded allows in-process integration of the Tisane functionality in desktop and server applications, eliminating the need to connect to a remote server. The two principal components of the package are the runtime library and the set of language models. 
+Tisaneエンベデッドは、デスクトップおよびサーバーアプリケーション内でTisaneの機能のプロセス内での統合を可能にし、リモートサーバーへの接続を不要にします。パッケージの主要な2つのコンポーネントは、ランタイムライブラリと言語モデルのセットです。 
 
-The core library is based on POSIX C/C++ and uses RocksDB to store its language models, supporting all POSIX-compliant OSes. For easier integration in .NET applications, Core .NET wrapper component is provided.
+コアライブラリはPOSIX C/C++を基盤としており、言語モデルをRocksDBで格納し、すべてのPOSIX準拠OSをサポートしています。.NETアプリケーションにおける統合を容易にするため、コア.NETラッパーコンポーネントが提供されています。
 
-* [Tisane Embedded SDK for C/C++](./candc++.md)
-* [Tisane Embedded SDK for .NET](./dotnet.md)
+* [TisaneエンベデッドSDK for C/C++](./candc++.md)
+* [TisaneエンベデッドSDK for .NET](./dotnet.md)
 
-For on-premise deployment of Tisane as a separate web service, see: [On-premise Deployment](../guides/deployment/onprem.md).
+Tisaneを独立したウェブサービスとしてオンプレミスでデプロイするには、[オンプレミスのデプロイメント](../guides/deployment/onprem.md)をご覧ください。
 
-## Response and Configuration Guides
+## レスポンスおよび設定ガイド
 
-* [Configuration and customization](../apis/tisane-api-configuration.md)
-* [Response JSON reference](../apis/tisane-api-response-guide.md)
+* [設定とカスタマイズ](../apis/tisane-api-configuration.md)
+* [レスポンスJSONリファレンス](../apis/tisane-api-response-guide.md)
 

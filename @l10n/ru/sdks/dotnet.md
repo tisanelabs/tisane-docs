@@ -1,14 +1,14 @@
-# Tisane Embedded .NET Reference
+# Справка по Tisane Embedded для .NET
 
-## Overview
+## Обзор
 
-Tisane Embedded enables integrating Tisane's natural language processing (NLP) capabilities directly into your desktop and server .NET applications. 
+Tisane Embedded позволяет интегрировать возможности обработки естественного языка (NLP) Tisane непосредственно в ваши .NET-приложения для ПК и серверов. 
 
-This guide provides a reference to the methods available in the Tisane Embedded SDK for .NET applications.
+В этом руководстве содержится ссылка на методы, доступные в Tisane Embedded SDK для приложений .NET.
 
-### Components
+### Компоненты
 
-Under the hood, the Tisane runtime directly communicates with Tisane language models stored in RocksDB stores. No client-server database engines need to be installed.
+Внутри себя среда выполнения Tisane напрямую взаимодействует с языковыми моделями Tisane, сохраненными в хранилищах RocksDB. Установка клиент-серверных баз данных не требуется.
 
 ```mermaid
 flowchart LR
@@ -17,56 +17,56 @@ flowchart LR
   library<--->rocksdb
 ```
 
-#### Binaries
+#### Двоичные файлы
 
-- Runtime libraries:
+- Библиотеки исполняющей системы:
 - 
-  - `libTisane.dll`: The core Tisane runtime, with the embedded RocksDB library.
-  - `libgcc_s_seh-1.dll`: Standard POSIX C/C++ library.
-  - `libstdc++-6.dll`: Standard POSIX C/C++ library.
-  - `libwinpthread-1.dll`: Standard POSIX C/C++ library.
+  - `libTisane.dll`: Основная среда выполнения Tisane со встроенной библиотекой RocksDB.
+  - `libgcc_s_seh-1.dll`: Стандартная библиотека POSIX C/C++.
+  - `libstdc++-6.dll`: Стандартная библиотека POSIX C/C++.
+  - `libwinpthread-1.dll`: Стандартная библиотека POSIX C/C++.
 
-- .NET wrapper files:
-  - `Tisane.Runtime.dll` – The .NET assembly that wraps the core library.  This is the primary assembly you'll reference in your .NET project.
-  - `native/amd64/rocksdb.dll` – Windows port of RocksDB.
-  - `RocksDbSharp.dll`: .NET wrappers for RocksDB.
-  - `netstandard.dll`: Standard .NET assembly.
-  - `Newtonsoft.Json.dll`:  JSON parsing assembly.
-  - `System.*.dll`, `Microsoft.*.dll`:  Other standard .NET assemblies.
+- Файлы-оболочки .NET:
+  - `Tisane.Runtime.dll` — сборка .NET, которая оборачивает основную библиотеку.  Это основная сборка, на которую вы будете ссылаться в своем проекте .NET.
+  - `native/amd64/rocksdb.dll` – порт RocksDB для Windows.
+  - `RocksDbSharp.dll`: оболочки .NET для RocksDB.
+  - `netstandard.dll`: стандартная сборка .NET.
+  - `Newtonsoft.Json.dll`:  сборка для парсинга JSON.
+  - `System.*.dll`, `Microsoft.*.dll`:  другие стандартные сборки .NET.
 
-#### Language Models
+#### Языковые модели
 
-See: [Language Models Data Stores](./languagemodels.md) 
+Рекомендуем ознакомиться: [Хранилища данных языковых моделей](./languagemodels.md) 
 
-### Requirements
+### Требования
 
-#### Runtime
+#### Время выполнения
 
-ASP.NET Core Runtime 8+
+Среда выполнения ASP.NET Core 8+
 
-#### RAM
+#### ОЗУ
 
-**Lazy loading**: 50 Mb fixed + 50 to 100 Mb per language model
+**Замедленная загрузка**: 50 МБ фиксированной квоты + 50–100 МБ на языковую модель
 
-**Fully loaded**: between 400 Mb and 2 Gb per language model
+**Полная загрузка** : от 400 МБ до 2 ГБ на языковую модель
 
-Read more: [Lazy loading vs Fully Loaded Mode](./lazyloading.md)
+Подробнее: [Сравнение режима замедленной загрузки с режимом полной загрузки](./lazyloading.md)
 
-## Deployment
+## Развертывание
 
-Extract the contents of the distribution package into a directory of your choice. 
+Извлеките содержимое пакета дистрибутива в каталог по вашему выбору. 
 
-Make sure the `DbPath` setting containing the name of the data directory is correct. 
+Убедитесь, что верна настройка `DbPath` , содержащая имя каталога данных. 
 
 {% admonition type="info" %}
 
-Tisane .NET assemblies use `ConfigurationManager` configurations (XML). The name of the configuration file is: `executable filename without extension` + `.dll.config`.
+Сборки Tisane .NET используют конфигурации `ConfigurationManager` (XML). Имя файла конфигурации: `имя исполняемого файла без расширения` + `.dll.config` .
 
-For example, if your executable is `Tisane.TestConsole.Desktop.exe`, then the configuration is `Tisane.TestConsole.Desktop.dll.config`.
+Например, если ваш исполняемый файл `Tisane.TestConsole.Desktop.exe`, то конфигурация будет `Tisane.TestConsole.Desktop.dll.config`.
 
 {% /admonition %}
 
-#### Core Methods
+#### Основные методы
 
 ##### Parse
 
@@ -74,24 +74,24 @@ For example, if your executable is `Tisane.TestConsole.Desktop.exe`, then the co
 string Parse(string language, string content, string settings)
 ```
 
-Analyzes text and returns a JSON structure with results.
+Анализирует текст и возвращает структуру JSON с результатами.
 
-- `language`: Language code for analysis. Use `*` for language autodetection, or a pipe-delimited list of language codes (e.g., `de|fr|ja`).
-- `content`: The text to analyze.
-- `settings`: A JSON object defining analysis settings. See [Configuration and Customization Guide](../apis/tisane-api-configuration.md).
+- `language`: код языка для анализа. Используйте `*` для автоматического определения языка или список кодов языков, разделенных вертикальной чертой (например, `de|fr|ja`).
+- `content`: Текст для анализа.
+- `settings`: объект JSON, определяющий настройки анализа. Ознакомьтесь с [Руководством по настройке и кастомизации](../apis/tisane-api-configuration.md).
 
-Returns: A JSON response object.
+Возвращает: объект ответа JSON.
 
-Example:
+Например:
 
 ```c#
 string result = Tisane.Server.Parse("en", "What a lovely day", "{}");
 Console.WriteLine(result);
 ```
 
-Also see: 
+См. также: 
  
-* [Response guide](../apis/tisane-api-response-guide.md)
+* [Руководство по ответам](../apis/tisane-api-response-guide.md)
 
 ##### Transform
 
@@ -99,20 +99,20 @@ Also see:
 string Transform(string sourceLanguage, string targetLanguage, string content, string settings)
 ```
 
-Translates or paraphrases text.
+Переводит или перефразирует текст.
 
-- `sourceLanguage`:  Language code of the input text. Use `*` or a pipe-delimited list (e.g., `de|fr|ja`) for language autodetection.
-- `targetLanguage`: Target language code
-- `content`: The text to transform
-- `settings`: A JSON object defining transformation settings. See [Configuration and Customization Guide](../apis/tisane-api-configuration.md).
+- `sourceLanguage`:  код языка входного текста. Используйте `*` или список, разделенный вертикальной чертой (например,` de|fr|ja`) для автоматического определения языка.
+- `targetLanguage`: Код целевого языка
+- `content`: текст для преобразования
+- `settings`: объект JSON, определяющий параметры преобразования. Ознакомьтесь с [Руководством по настройке и кастомизации](../apis/tisane-api-configuration.md).
 
-Returns: A transformed/translated text.
+Возвращает: преобразованный/переведенный текст.
 
-See also: 
+См. также: 
 
-- [API response and configuration guide](../apis/tisane-api-response-guide.md)
+- [Руководство по ответам и настройке API](../apis/tisane-api-response-guide.md)
 
-Example:
+Например:
 
 ```c#
 string result = Tisane.Server.Transform("fr", "en", "Bonjour!", "{}");
@@ -125,13 +125,13 @@ Console.WriteLine(result);
 string DetectLanguage(string content, string likelyLanguages, string delimiter)
 ```
 
-Identifies languages in text.
+Определяет языки в тексте.
 
-- `content`: The text to analyze
-- `likelyLanguages`: Pipe-delimited list of likely language codes (e.g., de|fr|ja). Use *, ?, or an empty string if the languages are unknown).
-- `delimiter`: Optional custom delimiter (regular expression, Google RE2 flavor) for chunking the text. For example:  sentence, paragraph. If omitted, the entire content is analyzed as a single chunk.
+- `content`: текст для анализа
+- `likelyLanguages`: Список вероятных языковых кодов, разделенных вертикальной чертой (например, de|fr|ja). Используйте *, ? или пустую строку, если языки неизвестны).
+- `delimiter`: опциональный пользовательский разделитель (регулярное выражение, вариант Google RE2) для разбиения текста на части. Например:  предложение, абзац. Если этот параметр пропущен, весь контент анализируется как единый фрагмент.
 
-Example:
+Например:
 
 ```c#
 string text = "This is English.  C'est français.";
@@ -141,9 +141,9 @@ string result = Tisane.Server.DetectLanguage(text, likelyLanguages, delimiter);
 Console.WriteLine(result);
 ```
 
-#### Language Model Access Methods
+#### Методы доступа к языковой модели
 
-These methods allow you to query and inspect contents of the language models.
+Эти методы позволяют запрашивать и проверять содержимое языковых моделей.
 
 ##### GetFamilyData
 
@@ -151,9 +151,9 @@ These methods allow you to query and inspect contents of the language models.
 string GetFamilyData(int id)
 ```
 
-Returns a JSON document with family description and attributes.
+возвращает документ JSON с описанием семейства и атрибутами.
 
-- `id`: The ID of the family to retrieve.
+- `id`: идентификатор семейства, которое необходимо получить.
 
 ##### ListSenses
 
@@ -161,10 +161,10 @@ Returns a JSON document with family description and attributes.
 string ListSenses(string language, string word)
 ```
 
-Lists families linked to a word, with IDs, descriptions, and features. Returns a JSON document (Stream).
+Перечисляет семейства, связанные со словом, с идентификаторами, описаниями и характеристиками. Возвращает документ JSON (поток).
 
-- `language`:The language code. *Automatic language detection is not supported.*
-- `word`: The word (or multi-word expression) to look up. Can be an inflected form, not necessarily the lemma.
+- `language`: код языка. *Автоматическое определение языка не поддерживается.*
+- `word` : слово (или многословное выражение), которое нужно найти. Может быть склоняемой формой, не обязательно леммой.
 
 ##### ListHypernyms
 
@@ -172,10 +172,10 @@ Lists families linked to a word, with IDs, descriptions, and features. Returns a
 string ListHypernyms(int family, int maxLevel)
 ```
 
-Returns a JSON document containing hypernyms (broader terms) for a given family.
+Возвращает документ JSON, содержащий гипернимы (более широкие термины) для заданного семейства.
 
-- `family`: The ID of the family to list hypernyms for.
-- `maxLevel`: The maximum number of levels to traverse upwards in the hypernym hierarchy.
+- `family`: Идентификатор семейства, для которого необходимо составить список гипернимов.
+- `maxLevel`: максимальное количество уровней, на которые можно подняться вверх в иерархии гипернимов.
 
 ##### GetInflectedForms
 
@@ -183,15 +183,15 @@ Returns a JSON document containing hypernyms (broader terms) for a given family.
 string GetInflectedForms(string language, int lexeme, int family)
 ```
 
-Returns a JSON object containing inflected forms (variations of a word) linked to a lexeme and family.
+возвращает объект JSON, содержащий флективные формы (варианты слова), связанные с лексемой и семейством.
 
-- `language`:The language code. *Automatic language detection is not supported.*
-- `lexeme`: The ID of the lexeme.
-- `family`: The ID of the family.
+- `language`: код языка. *Автоматическое определение языка не поддерживается.*
+- `lexeme`: идентификатор лексемы.
+- `family`: идентификатор семейства.
 
-#### Cleanup Methods
+#### Способы очистки
 
-These are helper methods to extract or clean up text to be parsed.
+Это вспомогательные методы для извлечения или очистки текста для анализа.
 
 ##### Normalize
 
@@ -199,9 +199,9 @@ These are helper methods to extract or clean up text to be parsed.
 string Normalize(string dirtyText)
 ```
 
-Returns a cleaned up text by removing OCR artifacts, email headers/signatures, and other boilerplate fragments.
+Возвращает очищенный текст, удаляя артефакты оптического распознавания, заголовки/подписи электронных писем и другие шаблонные фрагменты.
 
-- `dirtyText`: The text to clean up.
+- `dirtyText`: текст для очистки.
 
 ##### ExtractText
 
@@ -209,8 +209,8 @@ Returns a cleaned up text by removing OCR artifacts, email headers/signatures, a
 string ExtractText(string webpageText)
 ```
 
-Extracts the plain text content from a web page, stripping the HTML markup.
+Извлекает простой текстовый контент с веб-страницы, удаляя HTML-разметку.
 
-- `webpageText`: The HTML content of a web page.
+- `webpageText`: HTML-содержимое веб-страницы.
 
-Returns: extracted text.
+Возвращает: извлеченный текст.

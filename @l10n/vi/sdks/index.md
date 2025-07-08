@@ -1,16 +1,16 @@
-# Overview
+﻿# Tổng quan
 
-Tisane Embedded allows in-process integration of the Tisane functionality in desktop and server applications, eliminating the need to connect to a remote server. The two principal components of the package are the runtime library and the set of language models. 
+Tisane Embedded cho phép tích hợp trực tiếp các chức năng của Tisane vào trong ứng dụng máy tính để bàn và máy chủ, loại bỏ nhu cầu kết nối tới máy chủ từ xa. Hai thành phần chính của gói này là thư viện thời gian chạy (runtime library) và tập hợp các mô hình ngôn ngữ. 
 
-The core library is based on POSIX C/C++ and uses RocksDB to store its language models, supporting all POSIX-compliant OSes. For easier integration in .NET applications, Core .NET wrapper component is provided.
+Thư viện lõi được xây dựng dựa trên POSIX C/C++ và sử dụng RocksDB để lưu trữ các mô hình ngôn ngữ, hỗ trợ tất cả các hệ điều hành tuân thủ POSIX. Để dễ dàng tích hợp vào các ứng dụng .NET, một thành phần bao bọc Core .NET được cung cấp.
 
 * [Tisane Embedded SDK for C/C++](./candc++.md)
 * [Tisane Embedded SDK for .NET](./dotnet.md)
 
-For on-premise deployment of Tisane as a separate web service, see: [On-premise Deployment](../guides/deployment/onprem.md).
+Để triển khai Tisane tại chỗ dưới dạng dịch vụ web riêng biệt, vui lòng xem: [Triển khai tại chỗ](../guides/deployment/onprem.md).
 
-## Response and Configuration Guides
+## Hướng dẫn Cấu hình và Phản hồi
 
-* [Configuration and customization](../apis/tisane-api-configuration.md)
-* [Response JSON reference](../apis/tisane-api-response-guide.md)
+* [Hướng dẫn cấu hình và tùy chỉnh](../apis/tisane-api-configuration.md)
+* [Tham chiếu định dạng JSON phản hồi](../apis/tisane-api-response-guide.md)
 
