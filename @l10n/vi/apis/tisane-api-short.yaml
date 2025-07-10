@@ -1,17 +1,17 @@
 openapi: 3.0.0
 info:
-  title: Overview
+  title: "Tổng quan"
   version: 4.8.0.0
   description: >-
-    This reference describes RESTful web methods for interacting with Tisane API using standard HTTP and JSON-based communication. 
+                      Tài liệu tham khảo này mô tả các phương thức web RESTful để tương tác với Tisane API bằng cách sử dụng giao tiếp chuẩn dựa trên HTTP và JSON.
 servers:
   - url: https://api.tisane.ai
-    description: Tisane public cloud
+    description: "Đám mây công cộng của Tisane"
 tags:
   - name: NLU / NLP Methods
-    description: These are the methods that actually perform analysis and transformation of input text.
+    description: "Đây là những phương pháp thực sự thực hiện phân tích và chuyển đổi văn bản đầu vào."
   - name: Language Model Direct Access
-    description: Methods to retrieve and inspect entries from the language models.
+    description: "Các phương pháp để truy xuất và kiểm tra các mục nhập từ mô hình ngôn ngữ."
 components:
   schemas:
     Feature:
@@ -20,14 +20,14 @@ components:
       properties:
         type:
           type: string
-          description: "Feature type. If unspecified: Grammar"
+          description: "Loại tính năng. Nếu không xác định: Ngữ pháp"
           enum: [Grammar, Semantics, Style]
         index:
           type: integer
-          description: Feature index (within its type)
+          description: "Chỉ số tính năng (trong loại tính năng)"
         value:
           type: string
-          description: Feature value ID
+          description: "ID giá trị tính năng"
     FeatureArray:
       type: array
       items: 
@@ -39,79 +39,79 @@ components:
       properties:
         flags: 
           $ref: "#/components/schemas/FeatureArray"
-          description: Flags and semantic features set.
+          description: "Các dấu hiệu và bộ tính năng ngữ nghĩa."
         antecedents:
           type: array
-          description: Previously mentioned elements to be used for coreference resolution.
+          description: "Các phần tử được đề cập trước đó sẽ được sử dụng để giải quyết tham chiếu chung."
           items: 
             type: object
             properties: 
               family:
                 type: integer
-                description: The family ID of the antecedent.
+                description: "ID họ của tiền đề."
               features:
                 $ref: "#/components/schemas/FeatureArray"
         assign:
           type: array
-          description: Conditional assignments to be executed when parsing.
+          description: "Các phép gán có điều kiện sẽ được thực hiện khi phân tích cú pháp."
           items: 
             type: object
             required: [if, then]
             properties: 
               if: 
                 type: object
-                description: Conditions to match (all conditions must match).
+                description: "Các điều kiện để khớp (tất cả các điều kiện phải khớp)."
                 properties:
                   family:
                     type: integer
-                    description: A family ID of the target lexeme.
+                    description: "ID họ của trị từ vựng đích."
                   hypernym:
                     type: integer
-                    description: A family ID of a hypernym of the target lexeme.
+                    description: "ID họ của một thượng vị của trị từ vựng đích."
                   features:
-                    description: Features to match.
+                    description: "Các tính năng cần khớp."
                     $ref: "#/components/schemas/FeatureArray"
                   regex:
                     type: string
-                    description: A regular expression to match.
+                    description: "Một biểu thức chính quy cần khớp."
               then:
                 type: object
-                description: Attribute values to assign.
+                description: "Giá trị thuộc tính cần gán."
                 properties:
                   family:
                     type: integer
-                    description: A family ID to assign.
+                    description: "Một ID họ cần gán."
                   hypernym:
                     type: integer
-                    description: A family ID of a hypernym to assign.
+                    description: "Một ID họ của một thượng vị cần gán."
                   features:
-                    description: Features to assign.
+                    description: "Các tính năng cần gán."
                     $ref: "#/components/schemas/FeatureArray"
                   attribution:
                     type: boolean
-                    description: Marks the target as attribution.
+                    description: "Đánh dấu mục tiêu là thuộc tính."
     Phrase:
       type: object
       required: [type, family, offset, length, text]
       properties:
         type:
           type: string
-          description: The type of the phrase (NP/VP/ADJP/ADVP/S).
+          description: "Loại cụm từ (NP/VP/ADJP/ADVP/S)."
         family:
           type: integer
-          description: The family ID of the phrase.
+          description: "ID họ của cụm từ."
         offset:
           type: integer
-          description: The offset where the phrase starts.
+          description: "Vị trí bắt đầu của cụm từ."
         length:
           type: integer
-          description: The length of the phrase string.
+          description: "Độ dài của chuỗi cụm từ."
         text:
           type: string
-          description: The text of the phrase in which members delimited with vertical bars and inner phrases are encapsulated in brackets. For example, *"I|(love|Lucy)"*.
+          description: "Văn bản của cụm từ trong đó các thành viên được phân cách bằng dấu gạch đứng và các cụm từ bên trong nằm trong dấu ngoặc. Ví dụ: *I|(love|Lucy)*."
         role:
           type: string
-          description: Semantic role of the phrase in the sentence.
+          description: "Vai trò ngữ nghĩa của cụm từ trong câu."
         children:
           type: array
           items:
@@ -121,7 +121,7 @@ components:
       type: apiKey
       in: header
       name: Ocp-Apim-Subscription-Key
-      description: API subscription key (primary or secondary) from [Tisane Developer Portal](https://dev.tisane.ai/profile)
+      description: "Khóa đăng ký API (chính hoặc phụ) từ [Cổng thông tin dành cho nhà phát triển Tisane](https://dev.tisane.ai/profile)"
 paths:
   /parse:
     post:
@@ -130,9 +130,9 @@ paths:
         - Tisane-API-Key: []
       tags:
         - NLU / NLP Methods
-      summary: Analyze text
+      summary: "Phân tích văn bản"
       description: >-
-        The method analyzes the input and detects problematic content, sentiment snippets, entities, topics, phrase structure, parts of speech, stopwords, and more.
+                      Phương pháp này phân tích dữ liệu đầu vào và phát hiện nội dung có vấn đề, đoạn văn bản thể hiện cảm xúc, thực thể, chủ đề, cấu trúc cụm từ, các loại từ, từ dừng, v.v.
       requestBody:
         required: true
         content:
@@ -211,13 +211,13 @@ paths:
                 properties:
                   text:
                     type: string
-                    description: Input text.
+                    description: "Văn bản đầu vào."
                   language:
                     type: string
-                    description: Language code, when the language identification is used.
+                    description: "Mã ngôn ngữ, khi sử dụng mã nhận dạng ngôn ngữ."
                   memory:
                     $ref: "#/components/schemas/Memory"
-                    description: The state after the analysis. Can be used to set the state of the future analyses. (Set `state` to `true` to show.)
+                    description: "Trạng thái sau khi phân tích. Có thể được sử dụng để thiết lập trạng thái của các phân tích trong tương lai. (Đặt `state` thành `true` để hiển thị)."
                   topics:
                     type: array
                     items:
@@ -238,16 +238,16 @@ paths:
                         properties: 
                           offset:
                             type: integer
-                            description: 0-based location in the sentence
+                            description: "Vị trí tính từ 0 trong câu"
                           length:
                             type: integer
-                            description: Length of the fragment
+                            description: "Độ dài của đoạn văn bản"
                           sentence_index:
                             type: integer
-                            description: Index of the sentence where the fragment is located
+                            description: "Chỉ số của câu nơi có đoạn văn bản"
                           type:
                             type: string
-                            description: Type of the problematic content
+                            description: "Loại nội dung có vấn đề"
                             enum: 
                               - personal_attack
                               - bigotry
@@ -264,7 +264,7 @@ paths:
                               - generic
                           severity:
                             type: string
-                            description: How severe the issue is
+                            description: "Độ nghiêm trọng của vấn đề"
                             enum: 
                               - low
                               - medium
@@ -276,10 +276,10 @@ paths:
                               type: string
                           text:
                             type: string
-                            description: The fragment itself (`snippets` must be set to `true`)
+                            description: "Bản thân đoạn văn bản (`snippets` phải được đặt thành `true`)"
                           explanation:
                             type: string
-                            description: Human-readable explanation of the rationale for flagging
+                            description: "Cách giải thích con người có thể hiểu được về lý do đánh dấu"
                   sentence_list:
                     type: array
                     items:
@@ -288,70 +288,70 @@ paths:
                       properties: 
                         offset:
                           type: integer
-                          description: An offset where the sentence starts.
+                          description: "Vị trí bắt đầu của câu."
                         text:
                           type: string
-                          description: The sentence itself.
+                          description: "Bản thân câu."
                         words:
                           type: array
-                          description: Tokenized array of lexical units/lexical chunks (not necessarily by white space or punctuation). Must have `words` set to `true` to appear.
+                          description: "Mảng được mã hóa của các đơn vị từ vựng/khối từ vựng (không nhất thiết phải có khoảng trắng hoặc dấu câu). Phải đặt `words` thành `true` để xuất hiện."
                           items:
                             type: object
                             required: [offset, length, type, text]
                             properties:
                               offset:
                                 type: integer
-                                description: The offset at which the lexical chunk starts.
+                                description: "Vị trí bắt đầu của khối từ vựng."
                               length:
                                 type: integer
-                                description: The length of the lexical chunk.
+                                description: "Độ dài của khối từ vựng."
                               type:
                                 type: string
-                                description: The type of the lexical chunk.
+                                description: "Loại khối từ vựng."
                                 enum: [word, numeral, punctuation]
                               text:
                                 type: string
-                                description: The lexical chunk string.
+                                description: "Chuỗi khối từ vựng."
                               stopword:
                                 type: boolean
-                                description: Whether it's a stopword.
+                                description: "Đó có phải là từ dừng hay không."
                               role:
                                 type: string
-                                description: A semantic role of the word, if assigned.
+                                description: "Vai trò ngữ nghĩa của từ, nếu được gán."
                                 enum: [agent, patient, complement, circumstance, beneficiary, verb, surname, list_item, given_name, social_role, title, street_name, street_type, nickname, country, settlement, state, zipcode]
                               description:
                                 type: string
-                                description: Description of the disambiguated sense in the current context (always in English).
+                                description: "Mô tả ý nghĩa không rõ ràng trong bối cảnh hiện tại (luôn bằng tiếng Anh)."
                               definition:
                                 type: string
-                                description: Dictionary definition of the disambiguated sense in the current context (always in English).
+                                description: "Định nghĩa theo từ điển của nghĩa không rõ ràng trong bối cảnh hiện tại (luôn bằng tiếng Anh)."
                               wikidata:
                                 type: string
-                                description: A Wikidata ID of the current word-sense, if exists.
+                                description: "ID Wikidata của nghĩa từ hiện tại, nếu có."
                               lexeme:
                                 type: integer
-                                description: A unique lexeme identifier.
+                                description: "Một mã định danh trị từ vựng duy nhất."
                               family:
                                 type: integer
-                                description: A family identifier.
+                                description: "Một mã định danh họ."
                               grammar:
                                 $ref: "#/components/schemas/FeatureArray"
                         parse_tree:
                           type: object
-                          description: Hierarchically arranged graph of phrases detected in the sentence. Must have `parses` set to `true` to appear.
+                          description: "Biểu đồ được sắp xếp theo thứ bậc của các cụm từ được phát hiện trong câu. Phải đặt `parses` thành `true` để xuất hiện."
                           required: [id, phrases]
                           properties: 
                             id:
                               type: integer
-                              description: Internal runtime identifier of the sentence parse interpretation.
+                              description: "Mã định danh thời gian chạy nội bộ của quá trình diễn giải cú pháp câu."
                             phrases:
                               type: array
-                              description: The graph of phrases, with the root phrases at the top level.
+                              description: "Biểu đồ cụm từ, với cụm từ gốc ở cấp cao nhất."
                               items: 
                                 $ref: '#/components/schemas/Phrase'                                
                         corrected_text:
                           type: string
-                          description: Sentence text if corrected by the built-in spellchecker.
+                          description: "Văn bản câu nếu được sửa bằng trình kiểm tra chính tả tích hợp."
                   entities_summary:
                     type: array
                     items:
@@ -359,7 +359,7 @@ paths:
                       required: [type, name, mentions]
                       properties:
                         type:
-                          description: Type or types of the entity.
+                          description: "Loại hoặc các loại thực thể."
                           oneOf:
                             - type: string
                             - type: array
@@ -367,52 +367,52 @@ paths:
                                 type: string
                         name:
                           type: string
-                          description: Standard name of the entity.
+                          description: "Tên chuẩn của thực thể."
                         subtypes:
                           type: array
-                          description: Sub-types of the entity.
+                          description: "Các loại con của thực thể."
                           items:
                             type: string
                         subtype:
                           type: string
-                          description: Main sub-type of the entity.
+                          description: "Loại con chính của thực thể."
                         wikidata:
                           type: string
-                          description: Wikidata ID, when exists.
+                          description: "ID Wikidata, nếu có."
                         relations:
                           type: array
-                          description: Entity relations with other detected entities. 
+                          description: "Mối quan hệ của thực thể với các thực thể được phát hiện khác."
                           items: 
                             type: object
                             required: [to]
                             properties: 
                               to:
                                 type: string
-                                description: The entity connected to.
+                                description: "Thực thể được kết nối với."
                               links:
                                 type: array
-                                description: How the entities are connected.
+                                description: "Các thực thể được kết nối như thế nào."
                                 items: 
                                   type: string
                         mentions:
                           type: array
-                          description: Mentions of the entity found in the input text.
+                          description: "Các trường hợp đề cập đến thực thể được tìm thấy trong văn bản đầu vào."
                           items: 
                             type: object
                             required: [offset, length, sentence_index]
                             properties: 
                               offset:
                                 type: integer
-                                description: 0-based location in the sentence
+                                description: "Vị trí tính từ 0 trong câu"
                               length:
                                 type: integer
-                                description: Length of the fragment
+                                description: "Độ dài của đoạn văn bản"
                               sentence_index:
                                 type: integer
-                                description: Index of the sentence where the fragment is located
+                                description: "Chỉ số của câu nơi có đoạn văn bản"
                               text:
                                 type: string
-                                description: The fragment itself (`snippets` must be set to `true`)
+                                description: "Bản thân đoạn văn bản (`snippets` phải được đặt thành `true`)"
                   sentiment_expressions:
                       type: array
                       items:
@@ -421,7 +421,7 @@ paths:
                         properties:
                           polarity:
                             type: string
-                            description: The sentiment polarity
+                            description: "Phân cực cảm xúc"
                             enum:
                               - positive
                               - negative
@@ -429,29 +429,29 @@ paths:
                               - neutral
                           offset:
                             type: integer
-                            description: 0-based location in the sentence
+                            description: "Vị trí tính từ 0 trong câu"
                           length:
                             type: integer
-                            description: Length of the fragment
+                            description: "Độ dài của đoạn văn bản"
                           sentence_index:
                             type: integer
-                            description: Index of the sentence where the fragment is located
+                            description: "Chỉ số của câu nơi có đoạn văn bản"
                           targets:
                             type: array
-                            description: Targets of aspects (for aspect-based sentiment analysis).
+                            description: "Mục tiêu của các khía cạnh (để phân tích cảm xúc dựa trên khía cạnh)."
                             items:
                               type: string
                           reasons:
                             type: array
-                            description: Reason tags (for aspect-based sentiment analysis).
+                            description: "Thẻ lý do (để phân tích cảm xúc dựa trên khía cạnh)."
                             items:
                               type: string
                           text:
                             type: string
-                            description: The fragment itself (`snippets` must be set to `true`)
+                            description: "Bản thân đoạn văn bản (`snippets` phải được đặt thành `true`)"
                           explanation:
                             type: string
-                            description: Human-readable explanation of the rationale for flagging
+                            description: "Cách giải thích con người có thể hiểu được về lý do đánh dấu"
               examples:
                 Hello Tisane:
                   value:
@@ -538,11 +538,11 @@ paths:
                           - "call_for_violence"
                           - "death"
         '400':
-          description: Bad request - invalid JSON or language code.
+          description: "Yêu cầu không hợp lệ - mã JSON hoặc mã ngôn ngữ không hợp lệ."
         '401':
-          description: Unauthorized - invalid API key or quota exceeded.
+          description: "Không được phép - khóa API không hợp lệ hoặc vượt quá hạn ngạch."
         '500':
-          description: Internal server error
+          description: "Lỗi máy chủ nội bộ"
   /languages:
     get:
       operationId: languages
@@ -550,26 +550,26 @@ paths:
         - Tisane-API-Key: []
       tags:
         - NLU / NLP Methods
-      summary: List available languages
+      summary: "Liệt kê tất cả các ngôn ngữ có sẵn"
       description: >-
-        Retrieve a list of supported languages. 
+                      Truy xuất danh sách các ngôn ngữ được hỗ trợ.
         
         
-        The response includes the following attributes:
+                      Phản hồi bao gồm các thuộc tính sau:
 
-        * `id` - Language ID.
+                      * `id` - ID ngôn ngữ.
 
-        * `name` - Native name.
+                      * `name` - Tên bản ngữ.
 
-        * `englishName` - English name.
+                      * `englishName` - Tên tiếng Anh.
 
-        * `nativeEncoding` - Encoding of the language.
+                      * `nativeEncoding` - Mã hóa ngôn ngữ.
 
-        * `preferredFont` - Recommended font for display.
+                      * `preferredFont` - Phông chữ hiển thị được đề xuất.
 
-        * `latin` - Whether the language uses Latin script.
+                      * `latin` - Ngôn ngữ có sử dụng chữ Latin hay không.
 
-        * `rightToLeft` - Whether the language uses right-to-left script (e.g., Arabic, Hebrew, Persian).
+                      * `rightToLeft` - Ngôn ngữ có sử dụng chữ viết từ phải sang trái không (ví dụ: tiếng Ả Rập, tiếng Do Thái, tiếng Ba Tư).
 
       parameters:
         - name: Content-Type
@@ -579,7 +579,7 @@ paths:
           example: application/json
       responses:
         '200':
-          description: Successful response
+          description: "Phản hồi thành công"
           content:
             application/json:
               schema:
@@ -648,12 +648,12 @@ paths:
         - NLU / NLP Methods
       summary: Text clean-up
       description: >-
-        A service method to remove JavaScript, CSS tags, JSON, and other markup, returning pure decoded text.
+                      Một phương pháp dịch vụ để loại bỏ JavaScript, thẻ CSS, JSON và các đánh dấu khác, trả về văn bản đã giải mã thuần túy.
 
-        The request body includes the markup content from which text will be extracted.
+                      Nội dung yêu cầu bao gồm nội dung đánh dấu mà văn bản sẽ được trích xuất.
 
 
-        **Note: This method does not process binary content.**
+                      **Lưu ý: Phương pháp này không xử lý nội dung nhị phân.**
       requestBody:
         required: true
         content:
@@ -668,7 +668,7 @@ paths:
             type: string
       responses:
         '200':
-          description: Successful response
+          description: "Phản hồi thành công"
           content:
             text/plain:
               schema:
@@ -681,39 +681,51 @@ paths:
         - Tisane-API-Key: []
       tags:
         - NLU / NLP Methods
-      summary: Named entity comparison
+      summary: "So sánh thực thể được đặt tên"
       description: >-
-        Compares two compound named entities and identifies differences.
+                      So sánh hai thực thể có tên ghép và xác định các điểm khác biệt.
 
-        The request body should include:
+                      Nội dung yêu cầu phải bao gồm:
         
-        * `language1` (string) - IETF tag for the first entity's language.
+                      * `language1` (chuỗi) - Thẻ IETF cho ngôn ngữ của thực thể đầu tiên.
+                      
+                      * `entity1` (string) - Thực thể đầu tiên.
+                      
+                      * `entity1` (string) - The first entity.
+
+                      * `language2` (string) - Thẻ IETF cho ngôn ngữ của thực thể thứ hai.
+
+                      * `entity2` (string) - Thực thể thứ hai.
+
+                      * `type` (string) - Loại thực thể (currently only _person_ is supported).
         
-        * `entity1` (string) - The first entity.
 
-        * `language2` (string) - IETF tag for the second entity's language.
+                      Xem thêm thông tin: [Các thực thể được đặt tên trong Hướng dẫn phản hồi API Tisane](./tisane-api-response-guide.md#named-entities)
 
-        * `entity2` (string) - The second entity.
-
-        * `type` (string) - The entity type (currently only _person_ is supported).
+                      Phản hồi chứa:
         
-
-        More information: [Named Entities in the Tisane API Response Guide](./tisane-api-response-guide.md#named-entities)
-
-        The response contains:
+                      * `result` (string) - Kết quả so sánh:
+                      
+                      * `no_single_entity` - Một hoặc cả hai thực thể đều không hợp lệ.
+                      
+                      * `same` - Các thực thể giống hệt nhau (thứ tự tên có thể khác nhau).
+                      
+                      * `different` - Các thực thể khác nhau, chi tiết được nêu trong `differences`.
         
-        * `result` (string) - Comparison result:
-          * `no_single_entity` - One or both entities are invalid.
-          * `same` - Entities are identical (name order might differ).
-          * `different` - Entities differ, with details in `differences`.
-        
-        * `differences` (array of strings) - Lists detected differences:
-          * `given_name`
-          * `surname`
-          * `title` (e.g., Mr., Mrs.)
-          * `social_role` (e.g., academic degrees)
-          * `suffix`
-          * `variation` (e.g., spelling or style differences)
+                      * `differences` (mảng chuỗi) - Liệt kê các điểm khác biệt được phát hiện:
+                      
+                        * `given_name`
+                        
+                        * `surname`
+                        
+                        * `title` (Ví dụ: Ông, Bà)
+                        
+                        * `social_role` (ví dụ: bằng cấp học thuật)
+                        
+                        * `suffix`
+                        
+                        * `variation` (ví dụ: sự khác biệt về chính tả hoặc phong cách)
+                        
       requestBody:
         required: true
         content:
@@ -736,7 +748,7 @@ paths:
           example: application/json
       responses:
         '200':
-          description: Successful response
+          description: "Phản hồi thành công"
           content:
             application/json:
               schema:
@@ -755,23 +767,23 @@ paths:
         - NLU / NLP Methods
       summary: Semantic similarity
       description: >-
-        Calculate the semantic similarity between two text fragments, either in the same language or in different languages.
+                      Tính toán mức độ tương đồng về mặt ngữ nghĩa giữa hai đoạn văn bản, trong cùng một ngôn ngữ hoặc trong các ngôn ngữ khác nhau.
 
 
-        The request body should contain:
+                      Nội dung yêu cầu phải chứa:
         
-        * `content1` (string) - The first text fragment.
+                      * `content1` (chuỗi) - Đoạn văn bản đầu tiên.
 
-        * `language1` (string) - The IETF language code for `content1`.
+                      * `language1` (chuỗi) - Mã ngôn ngữ IETF cho `content1`.
 
-        * `content2` (string) - The second text fragment to compare.
+                      * `content2` (chuỗi) - Đoạn văn bản thứ hai cần so sánh.
 
-        * `language2` (string) - The IETF language code for `content2`.
+                      * `language2` (chuỗi) - Mã ngôn ngữ IETF cho `content2`.
 
-        * `settings` (object) - Additional settings as per specifications. More information: [Tisane API Configuration And Customization Guide](./tisane-api-configuration.md).
-        
-        
-        The response is a number between 0 and 1, representing the similarity of the submitted text fragments.
+                      * `settings` (đối tượng) - Các thiết lập bổ sung theo thông số kỹ thuật. Xem thêm thông tin: [Hướng dẫn cấu hình và tùy chỉnh API Tisane](./tisane-api-configuration.md).
+                      
+                      Phản hồi là một số nằm trong khoảng từ 0 đến 1, biểu thị mức độ giống nhau của các đoạn văn bản đã gửi.
+                      
       requestBody:
         required: true
         content:
@@ -809,18 +821,18 @@ paths:
         - NLU / NLP Methods
       summary: Detect language
       description: >-
-        Detects the languages used in the provided text fragment and returns the breakdown by offsets.
+                      Phát hiện các ngôn ngữ được sử dụng trong đoạn văn bản được cung cấp và trả về phân tích chi tiết theo độ lệch.
 
 
-        The request body should include:
+                      Nội dung yêu cầu phải bao gồm:
         
-        * `content` (string) - the text fragment to analyze.
+                      * `content` (chuỗi) - đoạn văn bản cần phân tích.
 
-        * `languages` (string, optional) - a vertical bar-delimited list of language codes to use as cues.
+                      * `languages` (chuỗi, tùy chọn) - danh sách mã ngôn ngữ được phân cách bằng dấu gạch đứng để sử dụng làm dấu hiệu.
 
-        * `delimiter` (string, optional) - a regular expression for segmenting the fragment; by default, the fragment is not segmented.
+                      * `delimiter` (chuỗi, tùy chọn) - một biểu thức chính quy để phân đoạn đoạn văn bản; theo mặc định, đoạn văn bản không được phân đoạn.
         
-        The response is a JSON structure containing `languages`, which provides a breakdown of language codes.
+                      Phản hồi là cấu trúc JSON chứa `languages`, cung cấp thông tin phân tích về mã ngôn ngữ.
       requestBody:
         required: true
         content:
@@ -830,22 +842,22 @@ paths:
               properties:
                 content:
                   type: string
-                  description: The text fragment to analyze.  
+                  description: "Đoạn văn bản cần phân tích."
                 languages:
                   type: string
-                  description: A vertical bar-delimited list of language codes to use as cues.
+                  description: "Danh sách mã ngôn ngữ được phân cách bằng dấu gạch đứng để sử dụng làm dấu hiệu."
                 delimiter:
                   type: string
-                  description:  A regular expression for segmenting the fragment; by default, the fragment is not segmented            
+                  description: "Biểu thức chính quy để phân đoạn đoạn văn bản; theo mặc định, đoạn văn bản không được phân đoạn."
             examples: 
-              Basic:
+              Cơ bản:
                 value:
                   content: "c'est la vie"
-              Hints for ambiguous cases:
+              "Gợi ý cho những trường hợp không rõ ràng":
                 value:
                   content: "singular"
                   languages: "es|ar"
-              Breakdown of languages segmenting by line:
+              "Phân tích quá trình phân đoạn ngôn ngữ theo từng dòng":
                 value: 
                   content: "скушай\r\nmuffin\r\nכפארה"
                   languages: "en|ru|th|he"
@@ -858,27 +870,27 @@ paths:
           example: application/json
       responses:
         '200':
-          description: Successful response
+          description: "Phản hồi thành công"
           content:
             application/json:
               schema:
                 type: object
               examples:
-                Basic:
+                Cơ bản:
                   value:
                     languages:
                       - offset: 0
                         length: 12
                         language: fr
                         score: 1181
-                Hints for ambiguous cases:
+                "Gợi ý cho những trường hợp không rõ ràng":
                   value:
                     languages:
                       - offset: 0
                         length: 8
                         language: es
                         score: 1137       
-                Breakdown of languages segmenting by line:      
+                "Phân tích quá trình phân đoạn ngôn ngữ theo từng dòng":
                   value:
                     languages:
                       - offset: 0
@@ -900,25 +912,24 @@ paths:
         - Tisane-API-Key: []
       tags:
         - NLU / NLP Methods
-      summary: Translate text
+      summary: "Dịch văn bản"
       description: >-
-        This method translates the input text.
+                      Phương pháp này dịch văn bản đầu vào.
 
-        The request body should include the following elements:
+                      Nội dung yêu cầu phải bao gồm các phần tử sau:
 
-        * `from` (string) - A standard IETF tag for the source language. Use `*` or a vertical bar-delimited set of language codes to invoke autodetect.
+                      * `from` (chuỗi) - Thẻ IETF chuẩn cho ngôn ngữ nguồn. Sử dụng `*` hoặc một bộ mã ngôn ngữ được phân cách bằng dấu gạch đứng để gọi chức năng tự động phát hiện.
 
-        * `to` (string) - A standard IETF tag for the target language. If the source and target languages are the same, paraphrasing will be applied.
+                      * `to` (chuỗi) - Thẻ IETF chuẩn cho ngôn ngữ đích. Nếu ngôn ngữ nguồn và ngôn ngữ đích giống nhau, sẽ áp dụng cách diễn đạt lại.
 
-        * `content` (string) - The text content to translate.
+                      * `content` (chuỗi) - Nội dung văn bản cần dịch.
 
-        * `settings` (object) - Additional translation settings.
+                      * `settings` (đối tượng) - Cài đặt bản dịch bổ sung.
 
 
-        More information: [Tisane API Configuration And Customization Guide](./tisane-api-configuration.md)
+                      Xem thêm thông tin: [Hướng dẫn cấu hình và tùy chỉnh API Tisane](./tisane-api-configuration.md)
 
-        
-        The response is the transformed text.
+                      Phản hồi là văn bản đã được chuyển đổi.
       requestBody:
         required: true
         content:
@@ -937,62 +948,62 @@ paths:
                   properties: 
                     snippets:
                       type: boolean
-                      description: "When set to `true`, relevant fragments are included in `abuse`, `sentiment_expressions`, and `entities_summary` sections."
+                      description: "Khi được đặt thành `true`, các đoạn văn bản có liên quan sẽ được bao gồm trong các phần `abuse`, `sentiment_expressions` và `entities_summary`."
                     abuse:
                       type: boolean
-                      description: "Whether to output `abuse`. Default: `true`"
+                      description: "Có xuất ra `abuse` hay không. Mặc định: `true`"
                     sentiment:
                       type: boolean
-                      description: "Whether to output sentiment. Default: `true`"
+                      description: "Có xuất ra `sentiment` hay không. Mặc định: `true`"
                     topics:
                       type: boolean
-                      description: "Whether to output topics. Default: `true`"
+                      description: "Có xuất ra `topics` hay không. Mặc định: `true`"
                     entities:
                       type: boolean
-                      description: "Whether to output entity information. Default: `true`"
+                      description: "Có xuất ra `entity information` hay không. Mặc định: `true`"
                     relations:
                       type: boolean
-                      description: "When `true`, relations between the entities are provided."
+                      description: "Khi có giá trị `true`, mối quan hệ giữa các thực thể sẽ được cung cấp."
                     disable_spellcheck:
                       type: boolean
-                      description: "When set to `true`, spellchecking is not used. Default: `false` (the spellchecking is on by default)"
+                      description: "Khi được đặt thành `true`, kiểm tra chính tả không được sử dụng. Mặc định: `false` (bật kiểm tra chính tả theo mặc định)"
                     words:
                       type: boolean
-                      description: When set to `true`, individual lexical chunks are provided.
+                      description: "Khi được đặt thành `true`, các khối từ vựng riêng lẻ sẽ được cung cấp."
                     state:
                       type: boolean
-                      description: "When set to `true`, the long-term memory contents are returned."
+                      description: "Khi được đặt thành `true`, nội dung bộ nhớ dài hạn sẽ được trả về."
                     memory:
                       $ref: "#/components/schemas/Memory"
-                      description: Initializes the long-term memory content.
+                      description: "Khởi tạo nội dung bộ nhớ dài hạn."
                   additionalProperties: true
             examples:
-              Translate a Japanese sentence:
+              "Dịch một câu tiếng Nhật":
                 value:
                   from: "ja"
                   to: "en"
                   content: "彼女はりんごを食べます"
                   settings: {}
-              Auto-detect language and translate Chinese name to English:
+              "Tự động phát hiện ngôn ngữ và dịch tên tiếng Trung sang tiếng Anh":
                 value:
                   from: "*"
                   to: "en"
                   content: "汪杰世"
                   settings:
                     entity: "person"
-              Translate from English to Russian:
+              "Dịch từ tiếng Anh sang tiếng Nga":
                 value:
                   from: "en"
                   to: "ru"
                   content: "The movie is available on amazon prime" 
                   settings: {}   
-              Translate Russian drug addict jargon to English:
+              "Dịch thuật ngữ tiếng Nga về người nghiện ma túy sang tiếng Anh":
                 value:
                   from: "ru"
                   to: "en"
                   content: "юзаю амф умеренно" 
                   settings: {} 
-              Translate from Hebrew to Russian preserving gender:
+              "Dịch từ tiếng Do Thái sang tiếng Nga giữ nguyên giới tính":
                 value:
                   from: "he"
                   to: "ru"
@@ -1006,28 +1017,28 @@ paths:
           example: application/json
       responses:
         '200':
-          description: Successful translation response
+          description: "Phản hồi dịch thành công"
           content:
             text/plain:
               schema:
                 type: string
               examples:                
-                Translate a Japanese sentence:
+                "Dịch một câu tiếng Nhật":
                   value: "She is eating an apple"
-                Auto-detect language and translate Chinese name to English:
+                "Tự động phát hiện ngôn ngữ và dịch tên tiếng Trung sang tiếng Anh":
                   value: "Wang Jie Shi"
-                Translate from English to Russian:
+                "Dịch từ tiếng Anh sang tiếng Nga":
                   value: "Фильм доступен на amazon prime"
-                Translate Russian drug addict jargon to English:
+                "Dịch thuật ngữ tiếng Nga về người nghiện ma túy sang tiếng Anh":
                   value: "I moderately take amphetamine"
-                Translate from Hebrew to Russian preserving gender:
+                "Dịch từ tiếng Do Thái sang tiếng Nga giữ nguyên giới tính":
                   value: "Я люблю китаянок"
         '400':
-          description: Bad request - invalid JSON or language code.
+          description: "Yêu cầu không hợp lệ - mã JSON hoặc mã ngôn ngữ không hợp lệ."
         '401':
-          description: Unauthorized - invalid API key or quota exceeded.
+          description: "Không được phép - khóa API không hợp lệ hoặc vượt quá hạn ngạch."
         '500':
-          description: Internal server error
+          description: "Lỗi máy chủ nội bộ"
   /lm/inflections:
     get:
       operationId: inflections
@@ -1035,9 +1046,9 @@ paths:
         - Tisane-API-Key: []
       tags:
         - Language Model Direct Access
-      summary: List inflected forms
+      summary: "Liệt kê các dạng biến cách"
       description: >-
-        Retrieves inflected forms of a specified lexeme within a given language family.
+                      Truy xuất các dạng biến cách của một trị từ vựng cụ thể trong một họ ngôn ngữ nhất định.
       parameters:
         - name: language
           in: query
@@ -1045,7 +1056,7 @@ paths:
             type: string
           required: true
           description: >-
-            The code of a language in Tisane. Example: `en`.
+            Mã của một ngôn ngữ trong Tisane. Ví dụ: `en`.
           example: en
         - name: lexeme
           in: query
@@ -1053,7 +1064,7 @@ paths:
             type: string
           required: true
           description: >-
-            The ID of a lexeme to inspect. 
+            ID của trị từ vựng cần kiểm tra.
           example: 3130180
         - name: family
           in: query
@@ -1061,11 +1072,11 @@ paths:
             type: string
           required: true
           description: >-
-            The ID of a family to inspect. 
+            ID của họ cần kiểm tra.
           example: 58443
       responses:
         '200':
-          description: Successful response
+          description: "Phản hồi thành công"
           content:
             application/json:
               schema:
@@ -1087,7 +1098,7 @@ paths:
                           value:
                             type: string
               examples:
-                Inflected forms of "buy" in English:
+                "Các dạng biến cách của 'buy' trong tiếng Anh":
                   value:
                   - text: "bought"
                     features:
@@ -1256,7 +1267,7 @@ paths:
                         value: "ALL"
                       - index: 22
                         value: "ALL"
-                Inflected forms of "United States" in Russian:
+                "Các dạng biến cách của 'United States' trong tiếng Nga":
                   value:
                   - features:
                       - index: 9

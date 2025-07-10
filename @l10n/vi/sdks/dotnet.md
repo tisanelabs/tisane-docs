@@ -128,7 +128,7 @@ string DetectLanguage(string content, string likelyLanguages, string delimiter)
 Xác định ngôn ngữ trong văn bản.
 
 - `content`: Văn bản cần phân tích
-- `likelyLanguages`: Danh sách phân cách bằng dấu gạch ngang của các mã ngôn ngữ có thể xuất hiện (ví dụ: de|fr|ja). Sử dụng *, ?,  hoặc một chuỗi rỗng nếu ngôn ngữ là không xác định).
+- `likelyLanguages`: Danh sách phân cách bằng dấu gạch ngang của các mã ngôn ngữ có thể xuất hiện (ví dụ: de|fr|ja). Sử dụng *, ?,  hoặc một chuỗi rỗng nếu ngôn ngữ là không xác định.
 - `delimiter`: Loại phân cách tùy chỉnh tùy chọn (biểu thức chính quy, kiểu Google RE2) để phân đoạn văn bản. Ví dụ:  câu, đoạn văn. Nếu bỏ qua, toàn bộ nội dung sẽ được phân tích dưới dạng một khối duy nhất.
 
 Ví dụ:
