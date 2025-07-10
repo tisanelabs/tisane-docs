@@ -646,7 +646,7 @@ paths:
         - Tisane-API-Key: []
       tags:
         - NLU / NLP Methods
-      summary: Text clean-up
+      summary: "Dọn dẹp văn bản"
       description: >-
                       Một phương pháp dịch vụ để loại bỏ JavaScript, thẻ CSS, JSON và các đánh dấu khác, trả về văn bản đã giải mã thuần túy.
 
@@ -690,14 +690,12 @@ paths:
                       * `language1` (chuỗi) - Thẻ IETF cho ngôn ngữ của thực thể đầu tiên.
                       
                       * `entity1` (string) - Thực thể đầu tiên.
-                      
-                      * `entity1` (string) - The first entity.
 
                       * `language2` (string) - Thẻ IETF cho ngôn ngữ của thực thể thứ hai.
 
                       * `entity2` (string) - Thực thể thứ hai.
 
-                      * `type` (string) - Loại thực thể (currently only _person_ is supported).
+                      * `type` (string) - Loại thực thể (_person_).
         
 
                       Xem thêm thông tin: [Các thực thể được đặt tên trong Hướng dẫn phản hồi API Tisane](./tisane-api-response-guide.md#named-entities)
@@ -765,7 +763,7 @@ paths:
         - Tisane-API-Key: []
       tags:
         - NLU / NLP Methods
-      summary: Semantic similarity
+      summary: Sự tương đồng về mặt ngữ nghĩa
       description: >-
                       Tính toán mức độ tương đồng về mặt ngữ nghĩa giữa hai đoạn văn bản, trong cùng một ngôn ngữ hoặc trong các ngôn ngữ khác nhau.
 
@@ -806,7 +804,7 @@ paths:
           example: application/json
       responses:
         '200':
-          description: Successful response
+          description: Phản hồi thành công
           content:
             application/json:
               schema:
@@ -819,7 +817,7 @@ paths:
         - Tisane-API-Key: []
       tags:
         - NLU / NLP Methods
-      summary: Detect language
+      summary: Phát hiện ngôn ngữ
       description: >-
                       Phát hiện các ngôn ngữ được sử dụng trong đoạn văn bản được cung cấp và trả về phân tích chi tiết theo độ lệch.
 

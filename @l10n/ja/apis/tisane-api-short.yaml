@@ -646,7 +646,7 @@ paths:
         - Tisane-API-Key: []
       tags:
         - NLU / NLP Methods
-      summary: Text clean-up
+      summary: テキストのクリーンアップ
       description: >-
                       JavaScript、CSSタグ、JSON、その他のマークアップを削除し、デコードされた純粋なテキストを返すサービスメソッド。
 
@@ -691,8 +691,6 @@ paths:
                       
                       * `entity1`（文字列） -最初のエンティティ。
                       
-                      * `entity1` (string) - The first entity.
-
                       * `language2`（文字列） - 2番目のエンティティの言語のIETFタグ。
 
                       * `entity2`（文字列） - 2番目のエンティティ。
@@ -764,7 +762,7 @@ paths:
         - Tisane-API-Key: []
       tags:
         - NLU / NLP Methods
-      summary: Semantic similarity
+      summary: 意味的類似性
       description: >-
                       2つのテキスト断片の意味的類似度を計算します。同じ言語のテキスト断片でも、異なる言語のテキスト断片でも可能です。
 
@@ -818,7 +816,7 @@ paths:
         - Tisane-API-Key: []
       tags:
         - NLU / NLP Methods
-      summary: Detect language
+      summary: 言語を検出する
       description: >-
                       提供されたテキスト断片で使用されている言語を検出し、オフセットごとの内訳を返します。
 
