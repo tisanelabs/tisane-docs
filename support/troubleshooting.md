@@ -13,6 +13,8 @@ This means your request failed authorization. Possible reasons:
 
 - Monthly Quota Exceeded
   - If you've reached the monthly quota, consider upgrading on the [Subscription Plans page](https://tisane.ai/subscription-plans/). Multiple notifications are sent when approaching the monthly quota.
+  
+You can see your consumption statistics on the [Developer Portal Reports page](https://dev.tisane.ai/reports).
 
 ## API calls fail with error code 400 (Bad Request)
 
