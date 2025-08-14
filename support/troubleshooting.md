@@ -1,6 +1,19 @@
 # Troubleshooting
 If your requests to Tisane API fail, check the error codes and troubleshooting steps below.
 
+## API calls fail with error code 401 (Unauthorized)
+
+This means your request failed authorization. Possible reasons:
+
+- Rate Limit Exceeded
+  - Each subscription plan has a rate limit. The rate limit of the free Community Plan is set to 10 requests per minute only. Usually, it's enough to test, but not enough to go to production. Check the limits on the [Subscription Plans page](https://tisane.ai/subscription-plans/). If the current rate limit is not enough, consider upgrading.
+
+- Incorrect API Key
+  - Ensure you provide the `Ocp-Apim-Subscription-Key` HTTP header with the correct API key value.
+
+- Monthly Quota Exceeded
+  - If you've reached the monthly quota, consider upgrading on the [Subscription Plans page](https://tisane.ai/subscription-plans/). Multiple notifications are sent when approaching the monthly quota.
+
 ## API calls fail with error code 400 (Bad Request)
 
 Usually this means malformed or invalid request body. In `/parse` and `/transform`, the input content and valid language codes must be specified.
@@ -10,19 +23,6 @@ Possible reasons:
 - Invalid JSON. Check for unterminated string literals or unescaped double quotes in your strings.
 - Invalid language code(s). Verify that the language model exists and the attribute name is correct (`language` in `/parse`, `from` and `to` in `/transform`).
 - Missing `content` element.
-
-## API calls fail with error code 401 (Unauthorized)
-
-This means your request failed authorization. Possible reasons:
-
-- Incorrect API Key
-  - Ensure you provide the `Ocp-Apim-Subscription-Key` HTTP header with the correct API key value.
-
-- Rate Limit Exceeded
-  - Each subscription plan has a rate limit. The rate limit of the free Community Plan is set to 10 requests per minute only (enough to test, not enough to go to production for most purposes). Check the limits on the [Subscription Plans page](https://tisane.ai/subscription-plans/).
-
-- Monthly Quota Exceeded
-  - If you've reached the monthly quota, consider upgrading on the [Subscription Plans page](https://tisane.ai/subscription-plans/). Multiple notifications are sent when approaching the monthly quota.
 
 ## API calls fail with error code 404
 
