@@ -2,7 +2,7 @@
 
 Yes.
 
-The method is `POST /feedback.` (Note: it’s a method in the LaMP web service, not Tisane.)
+The method is `POST /feedback.` 
 
 Simply forward the original Tisane API request, specifying your API key or your custom code in the Authorization header.
 
