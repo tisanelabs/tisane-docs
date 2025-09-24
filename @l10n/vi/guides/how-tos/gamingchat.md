@@ -49,21 +49,3 @@ Ví dụ có bộ cờ  `game violence`:
 
 Xem thêm phần: [Kiểm duyệt 2 yếu tố](../abuse/whatis2fm.md)
 
-##  Sử dụng Tisane trong một nền tảng iGaming
-
-Các khách hàng iGaming của Tisane thường sử dụng Tisane để kiểm duyệt:
-
-- Trò chuyện thời gian thực
-- Tên người dùng
-
-Logic có thể khác với quy trình kiểm duyệt trò chuyện. Ví dụ:  *BitcoinKing*, *Hitler*, *nakedsupermodels* v.v. thể hiện khá rõ ý định của người dùng.
-
-Hai chức năng kiểm duyệt được xử lý theo cùng một phương thức (`POST /parse`). 
-
-Điểm khác biệt duy nhất là cài đặt `format`:
-
-- Với trò chuyện, sử dụng `"format":"dialogue"`. 
-- Với tên người dùng, sử dụng `"format":"alias"`.
-
-Các đối tác của chúng tôi tại PubNub cung cấp cả cơ sở hạ tầng trò chuyện và [bảng điều khiển kiểm duyệt mã nguồn mở được tích hợp liền mạch cho Tisane.](https://www.pubnub.com/demos/moderation-dashboard/).
-

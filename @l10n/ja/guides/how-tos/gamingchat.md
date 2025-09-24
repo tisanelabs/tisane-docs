@@ -48,22 +48,3 @@ Tisaneは、このジレンマに対処する2つの方法を提示します。
 ![tisaneGvOk.png](/images/tisaneGvOk.png)
 
 こちらも参考：[2要素モデレーション](../abuse/whatis2fm.md)
-
-##  iGamingプラットフォームでTisaneを使用
-
-TisaneのiGamingのクライアントは通常、以下をモデレートするためにTisaneを使用します。
-
-- リアルタイムチャット
-- ユーザー名
-
-ロジックはチャットモデレーションとは異なります。例：  *BitcoinKing*、*Hitler*、*nakedsupermodels*などは、ユーザーの意図について大体の見当はつきます。
-
-2つのモデレーション機能は、同じ方法（`POST /parse`）で処理されます。 
-
-唯一の違いは、`format`設定です。
-
-- チャットには `"format":"dialogue"`を使用する。 
-- ユーザー名には`"format":"alias"`を使用する。
-
-PubNubのパートナーはチャットインフラと[Tisane向けのシームレスに統合されたオープンソースのモデレーションダッシュボード](https://www.pubnub.com/demos/moderation-dashboard/)の両方を提供しています。
-

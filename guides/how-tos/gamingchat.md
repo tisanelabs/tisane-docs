@@ -49,21 +49,4 @@ Example with the  `game violence` flag set:
 
 Also see: [2-Factor Moderation](../abuse/whatis2fm.md)
 
-##  Using Tisane in an iGaming platform
-
-Tisane’s iGaming clients usually use Tisane to moderate:
-
-- Real-time chat
-- User names
-
-The logic may be different from the chat moderation. For example:  *BitcoinKing*, *Hitler*, *nakedsupermodels* etc. give a pretty good idea about the user’s intentions.
-
-The two moderation functions are handled by the same method (`POST /parse`). 
-
-The only difference is the `format` setting:
-
-- For the chat, use `"format":"dialogue"`. 
-- For user names, use `"format":"alias"`.
-
-Our partners at PubNub provide both chat infrastructure and a [seamlessly integrated open-source moderation dashboard for Tisane](https://www.pubnub.com/demos/moderation-dashboard/).
 
