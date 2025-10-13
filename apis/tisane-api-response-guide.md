@@ -47,10 +47,10 @@ Every instance contains the following attributes:
 
 The supported problematic types are:
 
-- `personal_attack` - Direct insults or attacks targeting an individual. For example: instances of cyberbullying. Note: Criticism of ideas, posts, or general negative sentiment is not the same as a personal insult. See: [Personal Attack](/guides/abuse/personalattack.md)
+- `personal_attack` - Direct insults / bullying / attacks targeting an individual. For example: instances of cyberbullying. Note: Criticism of ideas, posts, or general negative sentiment is not the same as a personal insult. See: [Personal Attack](/guides/abuse/personalattack.md)
 - `bigotry` - Hate speech or expression of bigoted opinions; adversarial remarks targetting <a href="https://en.wikipedia.org/wiki/Protected_group" target="_blank">protected groups</a>. This includes not just racial slurs but any hostile statements directed at the group as a whole. See: [Bigotry and Hate Speech](/guides/abuse/hatespeechandbigotry.md)
 - `profanity` - Use of profane language, regardless of the context or intent. Note that racial slurs are not captured by this type. See: [Profanity](/guides/abuse/profanity.md)
-- `sexual_advances` - Attempts, whether welcome or unwelcome, to seek sexual favors or gratification. Also see: [Sexual Advances](/guides/abuse/sexualadvances.md)
+- `sexual_advances` - Sexual solicitation. Attempts, whether welcome or unwelcome, to seek sexual favors or gratification. Also see: [Sexual Advances](/guides/abuse/sexualadvances.md)
 - `criminal_activity` - Content involving attempts to sell or acquire illegal items, engage in criminal services, issue threats, or similar actions. Also see: [Criminal Activity](/guides/abuse/criminalactivity.md)
 - `external_contact` - Attempts to initiate communication or payment through external channels. For example: Phone, email, messaging apps. These attempts might violate rules in certain communities, such as gig economy platforms or e-commerce sites. Also see: [Attempts to Establish External Contact](/guides/abuse/externalcontact.md)
 
@@ -60,7 +60,7 @@ The supported problematic types are:
 - `contentious` - Content likely to incite or provoke emotional reactions from individuals or groups. Also see: [Contentious Content](/guides/abuse/contentious.md)
 - `disturbing` - Graphic or unsettling descriptions that might be distressing to readers. Also see: [Disturbing Content](/guides/abuse/disturbing.md)
 - `no_meaningful_content` - Nonsensical or gibberish text that lacks clear meaning. Also see: [Meaningless Content](/guides/abuse/nomeaningfulcontent.md)
-- `data_leak` - Sensitive personal information. For example: Passwords, ID numbers. Also see: [Data Leaks](/guides/abuse/dataleak.md)
+- `data_leak` - Sensitive personal information or privacy violations. For example: Passwords, ID numbers. Also see: [Data Leaks](/guides/abuse/dataleak.md)
 - `spam` - Spam content. Also see: [Spam](/guides/abuse/spam.md)
 - `social_hierarchy` - Forceful assertion of hierarchy in a community. For example: Someone is acting as a control freak. Also see: [Assertion of Hierarchy](/guides/abuse/socialhierarchy.md)
 - `generic` - Content that doesn't fit into any specific category; undefined.

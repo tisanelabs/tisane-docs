@@ -1,4 +1,4 @@
-# Bigotry and Hate Speech
+# Hate Speech (Bigotry)
 
 This type covers hate speech or expression of bigoted opinions; adversarial remarks targetting [protected groups](https://en.wikipedia.org/wiki/Protected_group) (in other terms, a group that may be targeted for discrimination). This includes not just racial slurs but any hostile statements directed at the group as a whole. 
 

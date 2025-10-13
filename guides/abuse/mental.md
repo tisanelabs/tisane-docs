@@ -1,4 +1,4 @@
-# Mental Issues
+# Self-harm / Mental Health (Mental Issues)
 
 Detected utterances indicating mental issues, self-harm, suicidal thoughts, or plans to commit suicide are logged under the `abuse` section, with the `type` attribute set to `mental_issues`.
 

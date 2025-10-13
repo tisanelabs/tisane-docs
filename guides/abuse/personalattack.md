@@ -1,4 +1,4 @@
-# Personal Attack
+# Bullying / Insult: Personal Attack
 
 A personal attack is an insult, an ad hominem attack, an instance of cyberbullying, or any other kind of attack on a participant in a conversation. Instances of detected personal attacks are logged under the `abuse` section, with the `type` attribute set to `personal_attack`.
 

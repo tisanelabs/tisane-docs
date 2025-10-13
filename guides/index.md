@@ -23,17 +23,17 @@ Kick off your journey with Tisane by learning how to quickly set up and start us
 
 This section covers the concepts relevant to detection of concept of interest to moderators or, in law enforcement applications, of investigators.
 
-* [Personal Attacks/Insults/Cyberbullying](./abuse/personalattack.md)
-* [Bigotry and Hate Speech](./abuse/hatespeechandbigotry.md)
+* [Bullying / Insult (Personal Attack)](./abuse/personalattack.md)
+* [Hate Speech (Bigotry)](./abuse/hatespeechandbigotry.md)
 * [Attempts to Establish External Contact](./abuse/externalcontact.md)
-* [Sexual Advances](./abuse/sexualadvances.md)
+* [Sexual Solicitation (Sexual Advances)](./abuse/sexualadvances.md)
 * [Adult-Only Content](./abuse/adultonly.md)
 * [Allegations](./abuse/allegation.md)
 * [Criminal Activity](./abuse/criminalactivity.md)
   - [Difference between Criminal Activity, Allegation, and Disturbing](./abuse/criminalallegationdisturbing.md)
-* [Mental Issues and Suicidal Ideation](./abuse/mental.md)
+* [Self-harm / Mental Health (Mental Issues)](./abuse/mental.md)
 * [Profanities](./abuse/profanity.md)
-* [Data Leaks](./abuse/dataleak.md)
+* [Privacy Violations (Data Leaks)](./abuse/dataleak.md)
 * [Contentious Content](./abuse/contentious.md)
 * [Disturbing Content](./abuse/disturbing.md)
 * [Meaningless Content](./abuse/nomeaningfulcontent.md)

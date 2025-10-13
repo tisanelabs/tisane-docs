@@ -1,4 +1,4 @@
-# Data Leaks
+# Privacy Violations (Data Leaks)
 
 Instances of leaked data etc. are logged under the `abuse` section, with the `type` attribute set to `data_leak`.
 

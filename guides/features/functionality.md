@@ -9,10 +9,10 @@ All features are available across all supported languages. All output is provide
 Tisane offers sophisticated capabilities for abuse detection, sentiment analysis, and entity recognition:
 
 - Detect problematic content for content moderation and investigations:
-  - Personal attacks, insults, cyberbullying
+  - Insults, cyberbullying, personal attacks
   - Hate speech
   - Profanity
-  - Sexual advances
+  - Sexual solicitation
   - Adult only references
   - Criminal activity (trade in restricted items like drugs, firearms, etc.)
   - Threats
