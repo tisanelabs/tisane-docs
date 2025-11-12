@@ -28,6 +28,7 @@ links:
   - href: https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap
 seo:
   title: Tisane Developer Documentation
+  projectTitle: Tisane Developer Documentation
   description: Tisane is an NLP platform, used for content moderation & more.
 mockServer:
   off: true  
