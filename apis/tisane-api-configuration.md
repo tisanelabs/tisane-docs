@@ -281,7 +281,7 @@ Reassignments are defined in the `assign` section as an array of structures with
 
    #### Flags
 
-Flags serve as contextual hints that either providing information beyond the current text input, or tweak the way analysis is done in a specific way. Each flag is represented as a string. (Some of these flags may be toggled automatically with specific textual input.) 
+Flags serve as contextual hints that either provide information beyond the current text input, or tweak the way analysis is done in a specific way. Each flag is represented as a string. (Some of these flags may be toggled automatically with specific textual input.) 
 
 In addition to the flags returned in the `memory` section, the following flags can be set manually:
 
