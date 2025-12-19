@@ -1,6 +1,6 @@
 ﻿# Overview
 
-Tisane Embedded allows in-process integration of the Tisane functionality in desktop and server applications, eliminating the need to connect to a remote server. The two principal components of the package are the runtime library and the set of language models. 
+Tisane Embedded allows in-process integration of the Tisane functionality, eliminating the need to connect to a remote server. The two principal components of the package are the runtime library and the set of language models. 
 
 The core library is based on POSIX C/C++ and uses RocksDB to store its language models, supporting all POSIX-compliant OSes. For easier integration in .NET applications, Core .NET wrapper component is provided.
 
