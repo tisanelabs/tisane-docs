@@ -3,8 +3,7 @@
 ## The Challenge Of Competitive Language
 
 *“Kill him! Kill him NOW!”*
-*“I will kick your a*!”*
-*“Touch your chest. Then push the ball harder.”*
+*“I will kick your a\*!”*
 
 When processing chat in computer games and sports-related communities, moderation APIs face a dilemma. 
 
