@@ -297,8 +297,8 @@ In addition to the flags returned in the `memory` section, the following flags c
 | `my_departure`          | The author mentioned leaving.                                |
 | `paranoid_mode`         | Erring on the side of caution, especially for languages tending to omit the subject. |
 | `possible_minor`        | One of the parties in the conversation may be a minor. (Detection of online grooming.)   |
-| `sexually_conservative` | Any photo-sharing or ambiguous interaction is assumed sexual. |
-| `trusted_party`         | The author claims to be a trusted individual. For example: Spouse, relative. |
+| `sexually_conservative` | Any ambiguous interaction (e.g. photo sharing) is assumed sexual. |
+| `trusted_party`         | The author claims to be a trusted individual. For example: spouse, relative. |
 | `waste`                 | The topic is about waste (organic/inorganic).                |
 | `won_prize`             | Mentions or implications of winning money/prizes.            |
 | `work_from_home`        | Mentions working from home.                                  |
