@@ -1,358 +1,356 @@
-# Configuration and Customization
+# 設定とカスタマイズ
 
-This section covers the ways you can configure and customize the API's behavior through various parameters.
+このセクションでは、様々なパラメーターを通してAPIの動作を設定・カスタマイズする方法について説明します。
 
-The settings structure enables you to:
+この設定では、以下のことが可能になります。
 
-1. Provide cues about the content being processed to improve analysis results.
-2. Customize output and select specific sections to display.
-3. Define standards for tags to conform the standards you use.
+1. 処理されるコンテンツに関するヒントを提供し、分析結果を向上する。
+2. アウトプットをカスタマイズし、表示する特定のセクションを選択する。
+3. タグの規格を定義し、使用する規格に準拠する。
 
-### General Notes
+### 注意点
 
-- All settings are optional.
-- To use default settings, provide an empty object: `{}`.
-- Specify only the settings you want to modify.
+- すべての設定はオプションです。
+- 初期設定を使用するには、空のオブジェクト`{}`.
+- 変更したい設定のみを指定してください。
 
-## Content Cues
+## コンテンツのヒント
 
-Content cues help tailor the analysis by telling where the content comes from, what topics are to be expected, and more.
+コンテンツのヒントにより、コンテンツの出所や予想されるトピックがわかることで、分析がカスタマイズされます。
 
-### Format
+### フォーマット
 
-The `format` setting allows using format-aware logic.
+`format` 設定により、フォーマットを認識するロジックを使用することができます。
 
-`format` (string) - Defines the format of the content. This influences how the underlying language models process the content. For example: when Tisane is told it's a review, it might look for sentiment more aggressively. With aliases, Tisane may try segment words and expect specific length. And so on. 
+初期設定：空欄/未定義
 
-Default: empty/undefined.
+#### 対応するフォーマット値
 
-#### Supported Format Values
+対応する値は以下の通りです。
 
-The supported values are:
+- `review` - 製品、サービス、基本レビューに使用。難読化された単語を含む可能性のあるセンチメントやプロモーション・スパム（不要な商業勧誘）を優先的に検出する。
+- `dialogue` -ダイアログ内のコメント/投稿に使用。悪口やその他の個人攻撃など、文脈特有の合図を検出する。例："snowflake"という単語を含むコメントは、個人攻撃と考えられる場合がある（レビューや名前で使用される場合を除く）。
 
-- `review` - For product, service, or general reviews. It prioritizes detecting sentiment and promotional spam (unwanted commercial solicitation) that may contain obfuscated words.
-- `dialogue` - For comments/posts in a dialogue. It detects context-specific cues, such as name calling and other personal attacks. For example: A comment made of the word "snowflake" might be flagged as a personal attack (unlike if it's a review or an alias).
+- `shortpost` - マイクロブロギングの投稿に使用。他のツイートへの返信ではないツイートなど。
 
-- `shortpost` - For microblogging posts. For example, a tweet which is not a reply to another tweet.
+- `longform` - 長文の投稿や記事に使用。
 
-- `longform` - For long posts or articles.
+- `proofread` - 校正されている投稿に使用。このフォーマットでは、スペルチェックは自動的に無効となる。
+- `alias` - オンラインコミュニティでのニックネーム、またはユーザー名を表す。
 
-- `proofread` - For posts that have been proofread. In this format, spellchecking is automatically disabled.
-- `alias` - Represents a nickname in online communities or a username.
+- `search` - 検索クエリに使用。検索クエリは必ずしも完全で文法的に正しい文章とは限らない。 
 
-- `search` - For search queries; search queries are not necessarily complete or grammatically correct sentences. 
+### スペルチェックと敵対的文章操作
 
-### Spellchecking and Adversarial Text Manipulations
+この設定で、スペルチェックの方針を管理します。スペルチェックが適用されるタイミングや方法を管理し、エラーや誤検出を最小限に抑えます。
 
-These settings control the spellchecking policies. They help manage when and how spellchecking is applied to minimize errors and false positives.
+- `disable_spellcheck`（ブーリアン） - `true`に設定すると、自動スペルチェックを無効にする。初期設定：`false`（スペルチェックが有効）
+- `lowercase_spellcheck_only`（ブーリアン） - 小文字の単語のみにスペルチェックを実施する。これにより、固有名詞の誤検出を防ぐことができる。初期設定：`false`（すべての単語に適用）
 
-- `disable_spellcheck` (boolean) - Disables automatic spellchecking when set to `true`. Default: `false` (spellchecking is enabled).
-- `lowercase_spellcheck_only` (boolean) - Applies spellchecking only to lowercase words. This helps avoid false positives on proper nouns. Default: `false` (applies to all words).
+### パースの設定
 
-### Parsing Settings
+この設定により、語彙的なフィルタリングとパースの動作を制御し、より正確なテキスト解析を可能にします。希少な用語のフィルタリング、文脈に特化したパース、言語境界判定のカスタマイズなどを行うことで、言語処理を改善します。
 
-These settings control lexical filtering and parsing behavior, allowing for more precise text analysis. They help refine language processing by filtering rare terms, enabling context-specific parsing, and customizing language detection boundaries.
+- `min_generic_frequency`（整数） -  頻度に基づいて、希少または難解な用語を除外する。ドメインのない語彙的項目のみに適用する。有効な範囲：'0' から '10' （数値が高いほど希少用語であることを示す）。
+- `subscope`（ブーリアン） - ハッシュタグ、URL、難読化されたテキスト（例：*“ihateyou”*）などの特定のコンテキストのサブスコープ解析を有効にする。初期設定：`false`
+- `lang_detect_segmentation_regex`（文字列） - 正規表現を使った言語境界判定をカスタマイズする。例：`(([\r\n]|[.!?][ ]))`。この正規表現は改行と文末の句読点を境界として扱う。これは、複数の言語を含むテキストに有用である。
+- `disable_phrases`（ブーリアン） -  `true`の場合、構文構造はマッピングされない。**単純なエンティティを検出する必要がある場合、または "bag of words"モードに戻る場合にのみ使用する。**
+- `disable_commonsense_cues`（ブーリアン） - `true`の場合、構文構造はマッピングされるが、コモンセンス知識は適用されない。処理のスピードは上がるが、精度は落ちる。文脈に依存する構造（多くが`不正行為`、一部がエンティティ）は検出されない。
 
-- `min_generic_frequency` (integer) -  Excludes rare or esoteric terms based on frequency. Only applies for lexical items without domains. Valid range: '0' to '10' (higher values exclude more rare terms).
-- `subscope` (boolean) - Enables sub-scope parsing for specific contexts such as hashtags, URLs, obfuscated text (e.g., *“ihateyou”*). Default: `false`.
-- `lang_detect_segmentation_regex` (string) - Custom language detection boundaries using regular expressions. For example: `(([\r\n]|[.!?][ ]))`.This regex treats newlines and sentence-ending punctuation as boundaries. This can be useful for texts that contain multiple languages.
-- `disable_phrases` (boolean) - if `true`, syntactic structures are not mapped. **Only use if you need to detect simple entities or fall back to "bag of words" mode.**
-- `disable_commonsense_cues` (boolean) - if `true`, syntactic structures are mapped but the common-sense knowledge is not applied. Speeds up the processing but decreases the accuracy; context-dependent structures (most of `abuse`, some entities) will not be detected.
+### ドメインのカスタマイズ
 
-### Domain Customization
+この設定により、特定のドメインの影響力を強めたり弱めたりすることで、コンテンツの関連性を細かく制御することができます。 
 
-This setting allows for fine-tuned control over content relevance by making specific domains more or less influential/prominent. 
+- `domain_factors`（構造体の配列） -  この設定は、セッション固有のヒントを提供し、異なるコンテンツドメインの関連性を調整する。これは、ユースケースに基づいて特定のタイプのコンテンツを拡張または縮小するのに役立つ。
 
-- `domain_factors` (array of structures) -  This setting provides session-specific cues to adjust the relevance of different content domains. This helps to amplify or suppress specific types of content based on your use case.
-
-#### Array Element Format
+#### 配列要素のフォーマット
 
 `{ "domain_id": multiplier }`
 
-`domain_id` (string): The identifier for a specific domain of interest.
+`domain_id` (string): 特定の関心ドメインの識別子。
 
-`multiplier` (number): A factor that increases or decreases the relevance of the domain.
+`multiplier` (number): ドメインの関連性を増減させる要因。
 
-Example: 
+例： 
 ```json
 "domain_factors": {"12345": 2.3, "2222": 5.0}
 ```
 
-#### Sample Use Cases
+#### サンプルユースケース
 
-1. To amplify relevant domains, by setting values greater than 1.
+1. 関連するドメインを拡張するには、1より大きな値を設定します。
 
-Example:
+例：
 
-Emphasizing topics such as crime or drugs:
+犯罪やドラッグなどのトピックを強調：
 
 `"domain_factors": {"31058": 5.0, "45220": 5.0, "14112": 5.0, "14509": 3.0, "28309": 5.0, "43220": 5.0, "34581": 5.0}`. 
 
-2. To suppress irrelevant domains, by setting values less than 1. This helps reduce noise from unrelated topics.
+2. 関連のないドメインを縮小するには、1より小さい値を設定します。これは、無関係なトピックからのノイズを減らすのに役立ちます。
 
-### Temporal Context (RESERVED)
+### 時間的コンテキスト（保留中）
 
-The temporal context feature ensures more accurate language interpretation by considering how word usage has evolved over time.
+時間的コンテキスト特徴量は、単語の用法が時間とともにどのように変化してきたかを考慮することで、より正確な言語解釈を保証します。
 
-- `when` (date string, format YYYY-MM-DD) - Enables you to specify the creation date of the content. This helps the model filter out anachronistic word meanings that didn’t exist at the specified time.
+- `when`（日時文字列、形式 YYYY-MM-DD）- コンテンツの作成日を指定できる。これにより、特定の時期のモデルが存在していなかった時代錯誤の語義をフィルタリングできるようにする。
 
-For example: The words _troll_, _mail_, and _post_ had different meanings before the Internet era. For historical texts, this setting helps ignore modern word senses that didn’t exist at that time.
+例：_troll_、_mail_、_post_という単語は、インターネット時代以前には今とは異なる意味を持っていました。これを設定することで、歴史的な文章の場合、当時存在しなかった現代的な語義を無視することができます。
 
-## Customizing the Output
+## アウトプットをカスタマイズ
 
-The following settings allow you to customize the output by specifying relevant/irrelevant functionality and the required level of detail. 
+以下の設定により、関連/非関連機能や必要な詳細レベルを指定してアウトプットをカスタマイズすることができます。 
 
-All settings are optional, with default values provided.
+すべての設定はオプションです。初期設定が決められています。
 
-### Response Customization
+### レスポンスのカスタマイズ
 
-Response customization enables you to eliminate irrelevant sections from the response JSON structure, or show sections normally not included in the response. 
+レスポンスのカスタマイズにより、JSONレスポンス構造から無関係なセクションを削除したり、通常はレスポンスに含まれないセクションを表示したりすることができます。 
 
-The following settings control which aspects of the content are reported:
+以下の設定は、コンテンツのどの側面を報告するかを管理します。
 
-- `abuse` (boolean) - Outputs information on detected instances of problematic content. Default: `true`.
-- `sentiment` (boolean) - Outputs sentiment-related snippets. Default: `true`.
-- `document_sentiment` (boolean) - Outputs document-level sentiment. It provides an overall sentiment analysis for the entire text. Default: `false`.
-- `entities` (boolean) - Outputs named entities detected in the text. For example: People, organizations, locations. Default: `true`.
-- `topics` (boolean) - Outputs topics identified in the content. Default: `true`.
+- `abuse`（ブーリアン） - 問題のあるコンテンツの検出されたインスタンスに関する情報をアウトプットする。初期設定：`true`
+- `sentiment`（ブーリアン） - センチメントに関連するスニペットをアウトプットする。初期設定：`true`
+- `document_sentiment`（ブーリアン） - ドキュメントレベルのセンチメントをアウトプットする。これは、テキスト全体のセンチメント分析を提供する。初期設定：`false`
+- `entities`（ブーリアン） - テキスト内で検出された固有名詞のエンティティをアウトプットする。例：人、組織、場所。初期設定：`true`
+- `topics`（ブーリアン） - コンテンツ内で特定されたトピックをアウトプットする。初期設定：`true`
 
-Note: if the structure in question is not detected in the input, the section is omitted.
+注：疑わしい構造がインプットで検出されない場合、そのセクションは省略されます。
 
-#### Topic Detection
+#### トピック検出
 
-Topic detection enables you to identify key topics (subjects, themes) within the content. 
+トピック検出により、コンテンツ内の主要なトピック（主題、テーマ）を特定することができます。 
 
-The following settings control how topics are extracted and presented:
+以下の設定により、トピックの抽出と表示方法が管理できます。
 
 
-- `topic_stats` (boolean) - Includes coverage statistics for each topic, if enabled. Default: `false`. When set to `true`, the output becomes an object with the following attributes:
+- `topic_stats`（ブーリアン） - 有効になっている場合、各トピックのカバレッジ統計を含める。初期設定：`false``true`に設定されている場合は、アウトプットは以下の属性を持つオブジェクトになる。
 
-  - `topic` (string): The topic name.
+  - `topic`（文字列）：トピックの名前。
 
-  - `coverage` (floating-point number): The proportion of sentences in the input that refer to the topic.
+  - `coverage`（浮動小数点数）：トピックに言及するインプットの文章の割合。
 
-- `optimize_topics` (boolean) - Removes less specific topics when they overlap with more specific ones, if enabled. For example: When the topic is `cryptocurrency`, the optimization removes `finance`. Default: `false`.
+- `optimize_topics`（ブーリアン） - 有効になっている場合、特定度の低いトピックが特定度の高いトピックと重複している際に特定度の低いトピックを削除する。例：トピックが`暗号資産`である場合、最適化機能により`金融`が削除される。初期設定：`false`
 
-#### Low-level Functionality
+#### 低レベル機能
 
-These settings provide deep insights into the structure and meaning of text by breaking it down into lexical chunks, definitions, and phrase structures. The detailed insights may be used when matching particular criteria not reflected in the upper-level sections like `abuse` or `topics`. For example, when looking for all noun phrases, or references to different types of motor vehicles, etc.
+この設定は、テキストを語彙チャンク、定義、フレーズ構造に分解することで、テキストの構造と意味に対する深い洞察を提供します。詳細な洞察は、 `abuse`や `topics`など、上位レベルのセクションには反映されていない特定の条件に合致する場合に使用されます。たとえば、すべての名詞句を探す場合や、さまざまなタイプの自動車を指す場合などです。
 
-- `words` (boolean) - Outputs lexical chunks (or words) for every sentence. Default: `false`
+- `words`（ブーリアン） - 文章ごとに語彙チャンク（または単語）をアウトプットする。初期設定：`false`
 
-In languages without spaces (Chinese, Japanese, Thai), results of tokenization are considered words.
+スペースを利用しない言語（中国語、日本語、タイ語）では、トークン化の結果が単語とみなされる。
 
-In languages using compounds (German, Dutch, Norwegian, Hungarian), the compound words are divided into individual lexical components. 
+複合語を使う言語（ドイツ語、オランダ語、ノルウェー語、ハンガリー語）では、複合語は個々の語彙要素に分割される。 
 
-- `fetch_definitions` (boolean) - Includes dictionary definitions of the words in the input text. Default: `false`. 
+- `_fetchdefinitions`（ブーリアン) - 入力テキスト内の単語の辞書定義を含める。初期設定：`false` 
 
-Note: `fetch_definitions` is only considered when `words` is set to `true`.
+注：`fetch_definitions`は、`words`が`true`に設定されているときにのみ考慮されます。
 
-- `parses` (boolean) - Outputs parse forests representing the hierarchical structure of phrases within sentences. Default: `false`.
+- `parses`（ブーリアン）- 文章内のフレーズの階層構造を表すパースフォレストをアウトプットする。初期設定：`false`
 
-- `deterministic` (boolean) - Controls whether to output only the detected sense or include most morphologically feasible interpretations:
+- `deterministic`（ブーリアン） - 検出された語義のみをアウトプットするか、形態論的に実現可能な大部分の解釈を含めるかどうかを管理する。
 
-  - If `true` (default): Outputs only the detected sense.
+  - `true`（初期設定）の場合：検出された語義のみをアウトプットする。
 
-  - If `false`: Outputs n-best senses.
+  - `false`の場合：N-best語義をアウトプットする。
 
 
-### Explainability
+### 説明可能性
 
-These settings control the inclusion of relevant text fragments and explanations for detected abuse, sentiment, and entities. They help provide clarity on why specific text segments were flagged or extracted.
+この設定では、検出された不正行為、センチメント、およびエンティティに関連するテキストフラグメントと説明を含めるように管理します。特定のテキストセグメントがなぜフラグを受けたのか、あるいは抽出されたのかを明確にするのに役立ちます。
 
-- `snippets` (boolean) - Includes text snippets in the abuse, sentiment, and entities sections. Default: `false`
+- `snippets`（ブーリアン） - 不正行為、感情、エンティティの各セクションにテキストスニペットを含める。初期設定：`false`
 
-- `explain` (boolean) - Provides reasoning or explanations for detected abuse and sentiment snippets, where possible. Default: `false`.
- ## Standards and Formats
-The following parameters determine the standards and formats used in the response object.
+- `explain`（ブーリアン） - 検出された不正行為やセンテンススニペットについて、可能であれば理由や説明を提供する。初期設定：`false`
+ ## 規格とフォーマット
+以下のパラメータは、レスポンスオブジェクトで使用される規格とフォーマットを決定します。
 
- ### Feature Standard
+ ### 特徴量規格
 
-- `feature_standard` (string) - Specifies the standard for outputting features related to grammar, style, and semantics. 
+- `feature_standard`（文字列） - 文法、スタイル、セマンティクスに関する特徴量のアウトプットの規格を指定する。 
 
- The supported values are:
+ 対応する値は以下の通りです。
 
-- `ud`- <a href="https://universaldependencies.org/u/pos/" target="_blank">Universal Dependencies tags</a> (default)
-- `penn` - <a href="https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html" target="_blank">Penn treebank tags</a>
-- `native` -  Tisane's native feature codes
-- `description` - Tisane's native feature descriptions
-- `glossing` - <a href="https://en.wikipedia.org/wiki/List_of_glossing_abbreviations" target="_blank">standard glossing abbreviations</a>
+- `ud`- <a href="https://universaldependencies.org/u/pos/" target="_blank">Universal Dependenciesタグ</a>（初期設定）
+- `penn` - <a href="https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html" target="_blank">Penn treebankタグ</a>
+- `native` -  Tisaneのネイティブな特徴量コード
+- `description` - Tisaneのネイティブな特徴量記述
+- `glossing` - <a href="https://en.wikipedia.org/wiki/List_of_glossing_abbreviations" target="_blank">標準的なグロッシングの略語</a>
 
-Note: Tisane native codes (and their descriptions) offer the largest number of feature designations, followed by the glossing abbreviations, followed by the Universal Dependencies, and then followed by the Penn treebank tags.
+注：Tisaneのネイティブコード（およびその記述）は、最も多くの特徴量指定を提供し、次いでグロッシングの略語、Universal Dependencies、そしてPenn treebankタグが続きます。
 
-### Topic Standard
+### トピック規格
 
-- `topic_standard` (string) - Defines the standard used for outputting topics in the response object. 
+- `topic_standard`（文字列） - レスポンスオブジェクトのトピックのアウトプットに使用される基準を定義する。 
 
-The supported values are:    
+対応する値は以下の通りです。    
 
-- `iptc_code` - IPTC topic taxonomy code
+- `iptc_code` - IPTCトピックタクソノミーコード
 
-- `iptc_description` - IPTC topic taxonomy description (default)
-- `iab_code` - IAB topic taxonomy code
-- `iab_description` - IAB topic taxonomy description
-- `native` - Tisane's domain description (derived from the family description)
+- `iptc_description` - IPTCトピックタクソノミーの記述（初期設定）
+- `iab_code` - IABトピックタクソノミーコード
+- `iab_description` - IABトピックタクソノミーの記述
+- `native` - Tisaneのドメインの記述（ファミリーの記述から派生）
 
-### Sentiment Analysis Type
+### センチメント分析
 
-- `sentiment_analysis_type` (string) - Determines the sentiment analysis strategy used. 
+- `sentiment_analysis_type`（文字列） - 使用するセンチメント分析ストラテジーを決定する。 
 
-The supported values are:
+対応する値は以下の通りです。
 
-* `products_and_services` - The most common type of sentiment analysis: products and services.
-* `entity` - Sentiment analysis with entities as targets.
+* `products_and_services` - センチメント分析の最も一般的なタイプ：製品とサービス
+* `entity` - エンティティをターゲットとしたセンチメント分析。
 
-## Context and Long-Term Memory
+## コンテキストと長期記憶
 
-Human understanding of language goes beyond processing individual sentences in isolation. Comprehension often requires context beyond current verbal or textual input, including gestures, visuals, or knowledge based on prior verbal or textual input. 
+人間の言語理解は、個々の文章を単独で処理するだけではありません。理解するためには、ジェスチャー、視覚、または事前の言語や文字に基づく知識など、現在の言語やテキスト入力以外の文脈が必要になることが多くあります。 
 
-In some cases, code-words or indirect references can conceal or obscure the original intended meaning of words.
+場合によっては、隠語や間接的な言及によって、言葉の本来の意図する意味を隠したり、曖昧にされたりすることもあります。
 
-The long-term memory module provides a way to address these gaps.
+長期記憶モジュールは、こうしたギャップに対処する方法を提供します。
 
-### When Text Only is Not Enough
+### テキストだけでは不十分な場合
 
-Oftentimes, more than just textual input is required to perform an NLP task:
+多くの場合、NLPタスクを実行するためには、テキスト入力以上のものが必要とされます。
 
-- Abuse: A term referring to an ethnicity or religious group may not be offensive on its own, but when it is paired with a derogatory image (For example: an ape, a pig), the intent to offend is clear.
-- Gender Ambiguity in Translation: Languages like English don’t always indicate a person's gender. When translating to languages that require it (For example: Russian or French), additional context is needed.
-- Scams: Fraudsters may extract details, piece-by-piece, over multiple messages. In isolation, without referencing previous messages, it’s hard or impossible to detect the moment when crime is committed.
+- 迫害的行為：民族や宗教団体を指す言葉は、それだけでは攻撃的でないかもしれませんが、軽蔑的なイメージ（例えば、猿や豚など）と組み合わされた場合、不快にさせる意図が明らかになります。
+- 翻訳におけるジェンダーの曖昧さ：英語のような言語では、必ずしも人の性別を示しません。それが必要な言語に翻訳する場合（例えば、ロシア語やフランス語など）、さらなるコンテキストが必要になります。
+- 詐欺行為：詐欺の場合、メッセージを複数回に分けて送り、少しずつ詳細を聞き出すことがあります。過去のメッセージを参照せずに、一回で犯罪が行われていることを察知するのは困難であり、不可能です。
 
-Tisane's long-term memory module addresses these challenges. It consists of three components (all optional):
+Tisaneの長期記憶モジュールは、このような問題に対応します。これは、3つのコンポーネント（すべてオプション）で構成されています。
 
-- Reassignments - Reassigning meanings, attributes, and hypernyms for custom interpretation. 
-- Flags - To provide non-textual context.
-- Antecedents -  For accurate pronoun and reference tracking.
+- 再割り当て - カスタム解釈のために意味、属性、上位語を再割り当てします。 
+- フラグ - テキスト以外の文脈を提供します。
+- 先行詞 - 正確な代名詞と参照トラッキングに使用します。
 
-This ensures more precise language understanding. The module helps detect hidden abuse, scams, and contextual nuances.
+これにより、さらに正確な言語理解が可能になります。このモジュールは、隠れた不正行為、詐欺、文脈のニュアンスを検出するのに役立ちます。
 
-#### What Is A hypernym?
+#### 上位語とは？
 
-A hypernym is a word that serves as a broad category under which more specific words (called hyponyms) fall. For example, *color* is a hypernym of *pink*; *vehicle* is a hypernym of *truck*. In computational linguistics and natural language processing (NLP), hypernyms help categorize words hierarchically, which can be useful for filtering or refining content analysis.
+上位語とは、具体的な単語（下位語と呼ばれる）が該当する大まかなカテゴリーとして機能する単語のことです。例えば*color*は*pink*の上位語であり、*vehicle*は*truck*の上位語です。計算言語学や自然言語処理（NLP）では、上位語はコンテンツ分析のフィルタリングや絞り込みに有用であり、単語を階層的に分類するのに役立ちます。
 
-####  Reassignments
+####  再割り当て
 
-Reassignments modify how text is analyzed by adjusting attributes and conditions based on context. 
+再割り当ては、文脈に基づいて属性や条件を調整することで、テキストの分析方法を変更します。 
 
-Examples:
+例：
 
-- If a word is a verb in 1st or 2nd person, assign a specific gender. This will generate more accurate translations to a language where inflected forms may be different for a different gender.
+- 単語が1人称または2人称の動詞の場合は、特定の性別を指定します。こうすることで、活用形が性別によって異なる可能性のある言語に対して、より正確な翻訳を生成することができます。
 
-- Overwriting the original meaning of a group of words (including all inflected forms).  This allows detecting code-words and secret language.
+- 語群（すべての活用形を含む）の本来の意味を書き換える。  これにより、暗号語や秘密の言語を検出することが可能になります。
 
-- Adding features or hypernyms. For example, we may want to mark a specific category of artifacts as `item_of_interest`, which will cause these artifacts to be extracted as an entity.  
+- 特徴量や上位語を追加する。たとえば、特定のカテゴリーの成果物を`item_of_interest`としてマークし、これらの成果物をエンティティとして抽出することもできます。  
 
-##### How Reassignments Work
+##### 再割り当てのしくみ
 
-Reassignments are defined in the `assign` section as an array of structures with two main components: conditions (`if` )  and attributes (`then`). 
+再割り当ては、`assign`セクションで、条件（`if`）と属性（`then`）という2つの主要な要素を持つ構造体の配列として定義されます。 
 
-- `if` - The condition that must match, based on a combination of:
+- `if` - 以下の組み合わせに基づいて、一致しなければならない条件：
 
-  - `regex` - A regular expression (RE2 syntax)
-  - `family` - A family ID
-  - `features` - A list of feature values. For example: `[{"index":1, "value":"NOUN"}]`.
-  - `hypernym` - A hypernym's family ID
+  - `regex` - 正規表現（RE2構文）
+  - `family` - ファミリーID
+  - `features` - 特徴量のリスト。例：`[{"index":1, "value":"NOUN"}]`.
+  - `hypernym` - 上位語のファミリーID
 
-- `then` -  The attributes to assign if all requirements in the condition match:
-     - `family` - a family ID
-     - `features` - A list of feature values. For example: `[{"index":5, "value":"F"}]`.
-     - `hypernym` - A hypernym's family ID
+- `then` -  条件のすべての要件が一致する場合に割り当てる属性：
+     - `family` - ファミリーID
+     - `features` - 特徴量のリスト。例：`[{"index":5, "value":"F"}]`.
+     - `hypernym` - 上位語のファミリーID
      
 
- Examples:
+ 例：
 
-1. Assume the speaker is female (if 1st person, assign feminine gender):
+1. 話し手が女性であると仮定する（1人称の場合、性別を女性にする）：
 
 ```json
  `"assign":[{"if":{"features":[{"index":9,"value":"1"}]},"then":{"features":[{"index":5,"value":"F"}]}}]`
 ```
 
-2. Assume any mention of a container refers to an illegal item: 
+2. コンテナの記載がある場合に、それは違法な品物を指していると仮定する： 
 
 ```json
    `"assign":[{"if":{"family":26888},"then":{"hypernym":123078}}]`
 ```
 
-3. Mark attacks on specifically named 3rd parties as personal attacks (by redefining names as "discussion participants"):
+3. 具体的に名指しされた第三者への攻撃を個人攻撃とみなす（名前を「議論参加者」と再定義する）：
 
  ```json
    `"assign":[{"if":{"features":[{"index":14,"value":"NA"},{"index":22,"value":"PERS"}]},"then":{"features":[{"index":33,"value":"DIPA"}],"hypernym":123887}}]`
  ```
 
-   #### Flags
+   #### フラグ
 
-Flags serve as contextual hints that either providing information beyond the current text input, or tweak the way analysis is done in a specific way. Each flag is represented as a string. (Some of these flags may be toggled automatically with specific textual input.) 
+フラグは、現在のテキスト入力を超える情報を提供したり、特定の方法で分析方法を微調整したりする文脈的ヒントの役割を果たします。それぞれのフラグは、文字列として表示されます。（これらのフラグの中には、特定のテキスト入力によって自動的に切り替えられるものもあります。 
 
-In addition to the flags returned in the `memory` section, the following flags can be set manually:
+`memory`セクションで返されるフラグに加えて、以下のフラグを手動で設定することができます。
 
-| **Flag**                | **Meaning**                                                  |
+| **フラグ**                | **意味**                                                  |
 | ----------------------- | ------------------------------------------------------------ |
-| `agents_of_bad_things`  | A bad actor or was previously referred to.                  |
-| `aggressive_crime_scan` | When uncertain, assume crime-related intent.                 |
-| `bad_animal`            | Context involves an animal that symbolizes bad qualities. For example: pig, ape, snake. |
-| `bulk_message`          | The message was sent in bulk.                                |
-| `death_related`         | The context involves death.                                  |
-| `game_violence_ok`      | In gaming chats, allow calls to violence.                    |
-| `make_money`            | Context is about making money.                               |
-| `my_departure`          | The author mentioned leaving.                                |
-| `sexually_conservative` | Any photo-sharing or ambiguous interaction is assumed sexual. |
-| `trusted_party`         | The author claims to be a trusted individual. For example: Spouse, relative. |
-| `waste`                 | The topic is about waste (organic/inorganic).                |
-| `won_prize`             | Mentions or implications of winning money/prizes.            |
-| `work_from_home`        | Mentions working from home.                                  |
-| `organization`          | An organization was mentioned.                               |
-| `role`                  | A position or role was mentioned.                            |
+| `agents_of_bad_things`  | 以前は脅威アクターと呼ばれていた。                  |
+| `aggressive_crime_scan` | 不確実な場合は、犯罪に関連する意図があると想定する。                 |
+| `bad_animal`            | 文脈に、悪い性質を象徴する動物が登場する。例：豚、猿、蛇など。 |
+| `bulk_message`          | メッセージが大量に一括送信される。                                |
+| `death_related`         | 文脈に死が含まれる。                                  |
+| `game_violence_ok`      | ゲームのチャットで、暴力に関連するコールを許可する。                    |
+| `make_money`            | お金を稼ぐことに関する文脈である。                               |
+| `my_departure`          | 著者が去ることについて言及した。                                |
+| `possible_minor`        | 会話の相手方のうちの1人が未成年者である可能性があります。（オンライングルーミングの検出） |
+| `paranoid_mode`         | 慎重を期しましょう。特に主語が省略される可能性がある場合は注意が必要です。 |
+| `sexually_conservative` | あらゆる写真共有やあいまいなやりとりは性的なものとみなされる。 |
+| `trusted_party`         | 著者が信頼できる人物だと主張している。例：配偶者、親族。 |
+| `waste`                 | 廃棄物（有機/無機）に関するトピックである。                |
+| `won_prize`             | 賞金や賞品獲得に関して言及または含意している。            |
+| `work_from_home`        | 在宅勤務について言及する。                                  |
+| `organization`          | 組織について言及する。                               |
+| `role`                  | 役職や役割について言及する。                            |
 
-####    Antecedents
+####    先行詞
 
-Antecedents help with coreference resolution. 
+先行詞は共参照を解決する上で有用です。 
 
-This provides context for pronouns or other references, that may impact analysis results.
+分析結果に影響を与える可能性のある、代名詞やその他の参照の文脈を提供します。
 
-##### Structure
+##### 構成
 
-Each antecedent contains:
+各先行詞には以下が含まれます。
 
-- `family` - The family ID of the antecedent
- - `features` - A list of feature values. For example: `{"index":36, "value":"WFH"}`.
+- `family` - 先行詞のファミリーID
+ - `features` - 特徴量のリスト。例：`{"index":36, "value":"WFH"}`.
 
-##     Signal To Noise Ranking
+##     信号対雑音ランキング
 
-When analyzing posts that comment on an issue or article, it's useful to prioritize those that are most relevant and based on reason, rather than emotion. The signal-to-noise ranking helps achieve this by filtering content for relevance and logical quality.
+ある問題や記事に対するコメントの投稿を分析する際には、感情ではなく、最も関連性が高く、理性に基づくものを優先することが有効です。信号対雑音ランキングは、コンテンツの関連性と論理的品質をフィルタリングすることで、これを達成するのに役立ちます。
 
-### How It Works
+### しくみ
 
-To calculate the signal to noise ranking:    
-1. Analyze the article headline using `keyword_features` and (optionally) `stop_hypernyms` in the settings. Extract the `relevant` attribute.
-2. Rank posts by relevance using the `relevant` attribute.
+信号対雑音ランキングの算出方法    
+1. 設定の`keyword_features`と（オプションの）`stop_hypernyms`を使って記事の見出しを分析します。`relevant`属性を抽出します。
+2. `relevant`属性を使用して関連性別に投稿をランク付けします。
 
-#### Step 1:  Identify Relevant Concepts
+#### ステップ1：  関連するコンセプトを特定
 
-(This step can be omitted, if we already know the relevant concepts.)
+関連するコンセプトを判断するために、記事の見出しを分析します。通常はこれで十分です。
 
-To determine relevant concepts, we analyze the article's headline. This is usually sufficient.
+この分析には2つの重要な設定が影響します。
 
-Two key settings affect this analysis:
+- `keyword_features`（文字列値を持つ文字列のオブジェクト） - 単語の特徴を定義する。一致するものが見つかれば、対応するファミリーIDが、関連する可能性のあるファミリーIDのセットに追加されます。
+- `stop_hypernyms`（整数の配列） - 抽象的な用語や感情など、不要な概念をフィルタリングする。関連する可能性のあるファミリーIDにこの設定にリストされる上位語がある場合、そのファミリーIDは考慮されません。例：見出しに *Fear and Loathing in Las Vegas*とあった場合、*Las Vegas*のみをピックアップします。この設定はオプションです。
 
-- `keyword_features` (an object of strings with string values) - Defines the characteristics to look for in a word. If a match is found, the corresponding family ID is added to the set of potentially relevant family IDs.
-- `stop_hypernyms` (an array of integers) - Filters out unwanted generalizations, such as abstract terms or emotion. If a potentially relevant family ID has a hypernym listed in this setting, it will not be considered. For example: In the headline *Fear and Loathing in Las Vegas*, we might only want *Las Vegas*. This setting is optional.
+`keyword_features`が使われている場合、レスポンスには、特定されたファミリーIDのある`relevant`属性が含まれます。  
 
-If `keyword_features` is used, the response will include a `relevant` attribute, containing the identified family IDs.  
+ステップ2（「関連性に基づいて投稿をランク付け」）を行う際に、`relevant`配列を設定に含めることをお勧めします。これにより、ファミリーIDに関連するコンセプトに言及した投稿の優先順位付けが容易になり、ランキングが最も関連性の高いコンテンツに基づいて行われるようになります。
 
-We recommend you include the `relevant` array in the settings when you do Step 2 ("Rank posts for relevance"). It helps prioritize posts that mention concepts related to those family IDs, ensuring the ranking process focuses on the most relevant content.
+#### ステップ2：関連性に基づいて投稿をランク付け
 
-#### Step 2: Rank Posts For Relevance
+ステップ1の`relevant`属性を使って、投稿やコメントを評価します。 
 
-Use the `relevant` attribute from step 1 to assess posts or comments. 
+ランキングが上がるのは、以下の場合です。
 
-Ranking is boosted when:
+* 関連するドメイン、上位語、関連するファミリーが投稿に表示されているとき。 
+* センチメント（肯定的または否定的）が特定の側面と結びついているとき。
 
-* Relevant domains, hypernyms, or related families appear in the post. 
-* Sentiment (positive or negative) is linked to specific aspects.
+ランキングがペナルティを受けるのは、以下の場合です。
 
-Ranking is penalized when:
+- 否定性が特定の側面に結びついていないとき。
+- 不正なコンテンツが検出されたとき（特定の犯罪コンテンツを探している場合を除く）。
 
-- Negativity is not tied to specific aspects.
-- Abusive content is detected (unless looking for specific criminal content).
-
-Note: The `abuse_not_noise` parameter (when set to `true`) prevents abuse from being penalized.
+注：`abuse_not_noise`パラメータ（`true`に設定されている場合）は、不正行為をペナルティの対象にしません。
