@@ -159,10 +159,10 @@ The table below maps each Perspective API attribute to its closest Tisane equiva
 
 | Perspective Attribute | Definition | Tisane Equivalent | Notes |
 |---|---|---|---|
-| `SEXUALLY_EXPLICIT` | Contains explicit sexual content | `adult_only` and/or `sexual_advances` | `adult_only` covers explicit sexual content; `sexual_advances` covers solicitation |
+| `SEXUALLY_EXPLICIT` | Contains explicit sexual content | `adult_only` (with `sex` tag) and/or `sexual_advances` | `adult_only` (with `sex` tag) covers explicit sexual content; `sexual_advances` covers solicitation |
 | `FLIRTATION` | Pickup lines, compliments on appearance, or sexual advances | `sexual_advances` | Tisane's `sexual_advances` type covers the full spectrum from flirting to explicit solicitation |
 | `ATTACK_ON_COMMENTER` | Attack on the author of an article or post | `personal_attack` | Tisane's `personal_attack` covers attacks on any conversation participant |
-| `INCOHERENT` | Difficult to understand or lacking in coherent ideas | `no_meaningful_content` | Tisane detects gibberish and meaningless content under this type |
+| `INCOHERENT` | Difficult to understand or lacking in coherent ideas | No direct equivalent; `no_meaningful_content` is closest | Tisane detects gibberish and meaningless content under this type |
 | `INFLAMMATORY` | Intentionally inflammatory content likely to provoke anger | `contentious` | Tisane's `contentious` type covers content likely to start adversarial arguments |
 | `LIKELY_TO_REJECT` | Content a moderator would likely reject | No direct equivalent | Use Tisane's overall `abuse` array combined with severity filtering as a proxy |
 | `OBSCENE` | Obscene or grossly offensive content | `profanity` with `severity: "high"` or `"extreme"` | Filter by higher severity levels to approximate Perspective's OBSCENE attribute |
