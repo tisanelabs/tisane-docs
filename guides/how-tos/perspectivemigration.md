@@ -2,13 +2,13 @@
 
 ## Why Migrate?
 
-Google's Perspective API is being **sunset in 2026** and will no longer accept requests after that date. Tisane API is a natural language processing platform purpose-built for content moderation, offering comparable — and in many ways broader — coverage of problematic content types, with multi-language support, structured JSON responses, severity ratings, and explainability built in.
+Google's Perspective API is being **sunset in 2026** and will no longer accept requests after 2026. Tisane API is a natural language processing platform purpose-built for content moderation, offering comparable – and in many ways broader – coverage of problematic content types, with multi-language support, structured JSON responses, severity ratings, and explainability built in.
 
 This guide covers everything you need to migrate your integration: account setup, request/response format changes, and a full attribute mapping table.
 
 ---
 
-## Step 1 — Create a Tisane Account and Obtain an API Key
+## Step 1 – Create a Tisane Account and Obtain an API Key
 
 1. Go to [https://tisane.ai](https://tisane.ai) and sign up for a free account.
 2. Log in and navigate to your account dashboard to retrieve your **primary or secondary API key**.
@@ -22,7 +22,7 @@ Ocp-Apim-Subscription-Key: YOUR_API_KEY
 
 ---
 
-## Step 2 — Understand the API Differences
+## Step 2 – Understand the API Differences
 
 ### Endpoint
 
@@ -43,7 +43,7 @@ This means Tisane gives you richer, more actionable output out of the box, but i
 
 ---
 
-## Step 3 — Rewrite Your Request
+## Step 3 – Rewrite Your Request
 
 ### Perspective API Request (before)
 
@@ -79,13 +79,13 @@ Header: Ocp-Apim-Subscription-Key: YOUR_KEY
 
 - Replace `comment.text` → `content`
 - Add a `language` field (ISO 639-1 code, e.g. `"en"`, `"de"`, `"fr"`)
-- Remove `requestedAttributes` — Tisane returns all detected abuse types by default
+- Remove `requestedAttributes` – Tisane returns all detected abuse types by default
 - Add a `settings` object to configure output (optional but recommended)
 - The `format` setting (e.g. `"dialogue"`, `"review"`, `"alias"`) helps Tisane apply context-appropriate analysis
 
 ---
 
-## Step 4 — Rewrite Your Response Handling
+## Step 4 – Rewrite Your Response Handling
 
 ### Perspective API Response (before)
 
@@ -140,7 +140,7 @@ While the severity thresholds do not indicate probability, they may be used to p
 
 ---
 
-## Step 5 — Attribute Mapping
+## Step 5 – Attribute Mapping
 
 The table below maps each Perspective API attribute to its closest Tisane equivalent. Because Tisane uses a category + severity model rather than per-attribute scores, some Perspective attributes map to a Tisane type + severity filter combination.
 
@@ -150,7 +150,7 @@ The table below maps each Perspective API attribute to its closest Tisane equiva
 |---|---|---|---|
 | `TOXICITY` | Rude, disrespectful, or unreasonable comment likely to make people leave a discussion | `personal_attack`, `bigotry`, `profanity` (any severity) | Tisane separates toxicity into specific subtypes for more actionable results |
 | `SEVERE_TOXICITY` | Very hateful, aggressive, or disrespectful content | `personal_attack` / `bigotry` / `profanity` with `severity: "high"` or `"extreme"` | Filter by severity to match the high-confidence bar of SEVERE_TOXICITY |
-| `IDENTITY_ATTACK` | Negative or hateful comments targeting identity (race, religion, gender, etc.) | `bigotry` | Direct equivalent — Tisane's `bigotry` type covers protected class targeting |
+| `IDENTITY_ATTACK` | Negative or hateful comments targeting identity (race, religion, gender, etc.) | `bigotry` | Direct equivalent – Tisane's `bigotry` type covers protected class targeting |
 | `INSULT` | Insulting, inflammatory, or negative comment towards a person | `personal_attack` | Direct equivalent for attacks on conversation participants |
 | `PROFANITY` | Swear words, curse words, or other obscene/offensive language | `profanity` | Direct equivalent; Tisane also detects obfuscated profanity (e.g. `f***`) |
 | `THREAT` | Describes an intention to inflict harm | `criminal_activity` with tag `threat` | Tisane classifies explicit threats under `criminal_activity` |
@@ -166,7 +166,7 @@ The table below maps each Perspective API attribute to its closest Tisane equiva
 | `INFLAMMATORY` | Intentionally inflammatory content likely to provoke anger | `contentious` | Tisane's `contentious` type covers content likely to start adversarial arguments |
 | `LIKELY_TO_REJECT` | Content a moderator would likely reject | No direct equivalent | Use Tisane's overall `abuse` array combined with severity filtering as a proxy |
 | `OBSCENE` | Obscene or grossly offensive content | `profanity` with `severity: "high"` or `"extreme"` | Filter by higher severity levels to approximate Perspective's OBSCENE attribute |
-| `SPAM` | Irrelevant or unsolicited bulk messages | `spam` | Direct equivalent — Tisane has a `spam` abuse type |
+| `SPAM` | Irrelevant or unsolicited bulk messages | `spam` | Direct equivalent – Tisane has a `spam` abuse type |
 | `UNSUBSTANTIAL` | Trivial or short content | No direct equivalent | Tisane does not have a direct unsubstantial signal; use text length checks in your own logic |
 
 ### Tisane-Only Abuse Types (No Perspective Equivalent)
@@ -176,7 +176,7 @@ These types are available in Tisane but have no Perspective API counterpart, giv
 | Tisane Type | Description |
 |---|---|
 | `criminal_activity` | Attempts to buy/sell illegal items, drugs, stolen data, criminal services |
-| `external_contact` | Attempts to establish off-platform contact (phone, email, IM) — useful for gig economy or e-commerce platforms |
+| `external_contact` | Attempts to establish off-platform contact (phone, email, IM) – useful for gig economy or e-commerce platforms |
 | `mental_issues` | Content indicative of suicidal ideation or severe depression |
 | `allegation` | Claimed knowledge or accusation of misconduct |
 | `bigotry` (broader) | Covers implicit bigotry/hate speech/stereotyping, not just explicit slurs |
@@ -186,7 +186,7 @@ These types are available in Tisane but have no Perspective API counterpart, giv
 
 ---
 
-## Step 6 — Language Support
+## Step 6 – Language Support
 
 Perspective API supports a limited set of languages per attribute (e.g. `TOXICITY` supports English, Spanish, French, German, Portuguese, Italian, Russian).
 
@@ -196,7 +196,7 @@ Tisane API features built-in automatic language identification.
 
 ---
 
-## Step 7 — Advanced Settings
+## Step 7 – Advanced Settings
 
 Tisane exposes several optional settings that have no Perspective equivalent but are useful for fine-tuning moderation:
 
@@ -217,7 +217,7 @@ To replicate Perspective's `doNotStore` flag (prevents logging of submitted text
 
 ## Quick Code Migration Examples
 
-### Python (before — Perspective)
+### Python (before – Perspective)
 
 ```python
 import googleapiclient.discovery
@@ -234,7 +234,7 @@ if toxicity_score > 0.7:
     flag_content()
 ```
 
-### Python (after — Tisane)
+### Python (after – Tisane)
 
 ```python
 import requests
@@ -260,7 +260,7 @@ if should_flag:
     flag_content()
 ```
 
-### JavaScript (before — Perspective)
+### JavaScript (before – Perspective)
 
 ```javascript
 const response = await fetch(
@@ -278,7 +278,7 @@ const score = data.attributeScores.TOXICITY.summaryScore.value;
 if (score > 0.7) flagContent();
 ```
 
-### JavaScript (after — Tisane)
+### JavaScript (after – Tisane)
 
 ```javascript
 const response = await fetch("https://api.tisane.ai/parse", {
