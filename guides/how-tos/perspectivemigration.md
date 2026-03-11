@@ -203,15 +203,14 @@ Tisane exposes several optional settings that have no Perspective equivalent but
 ```json
 "settings": {
   "abuse": true,
-  "format": "forum",           // Context hint: "forum", "review", "chat", "alias"
+  "format": "alias",           // Context hint: "dialogue", "review", "proofread", "alias", and more
   "snippets": true,            // Return matching text snippets
   "explain": true,             // Return human-readable explanations
-  "sentiment": true,           // Return sentiment analysis
-  "document_sentiment": true   // Return document-level sentiment
+  "sentiment": false           // Omit sentiment analysis
 }
 ```
 
-To replicate Perspective's `doNotStore` flag (prevents logging of submitted text), contact Tisane support or review the on-premises deployment option.
+As Tisane does not store or log submitted text, Perspective's `doNotStore` flag is not relevant. However, if you have particular data residency or security requirements, [contact Tisane for the on-premises deployment option](https://tisane.ai/on-prem).
 
 ---
 
