@@ -64,6 +64,14 @@ If you're getting an error other than 401, check for invalid JSON formatting:
 
 While we cannot guarantee 100% accuracy, please [send us a note](https://tisane.ai/contact-us/#support) and we will look into it. We are constantly working on improving the accuracy of Tisane, and your collaboration is appreciated.
 
+## I Have Not Received an Email Notification after Signing Up
+
+As the spam filters become more restrictive, we observed cases when the notification was either moved to a spam folder, or blacklisted completely.
+
+If you can't find the sign-up notification in your spam folder, contact us to help.
+
+(In the long term, we are upgrading our developer portal to allow signing up from Google, GitHub, and LinkedIn.)
+
 ## Can I process text from a markup content (HTML or XML)?
 
 Here is a generic regular expression that can be used in any programming language to remove HTML tags from text:
