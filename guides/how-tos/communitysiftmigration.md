@@ -574,7 +574,6 @@ async function moderateText(text, lang = 'en') {
 | Real-time pre-publish filtering | Yes | Yes | Both support sub-100ms latency at scale |
 | Webhook / push decisions | Yes | No — synchronous only | Must rework to inline decision logic |
 | Dashboard UI | Yes | No | Tisane is API-only |
-| Spam detection | Yes | Yes (with `"spam": true` in settings) | |
 | Sentiment analysis | No | Yes | Tisane bonus capability |
 | Topic extraction | No | Yes (IAB/IPTC) | Tisane bonus capability |
 | Named entity extraction | No | Yes | Tisane bonus capability |
