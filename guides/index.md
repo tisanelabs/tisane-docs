@@ -46,6 +46,7 @@ This section covers the concepts relevant to detection of concept of interest to
 Guides to help you implement and fine-tune Tisane for various content moderation scenarios:
 
 * [Migrating from Perspective API to Tisane API](./how-tos/perspectivemigration.md)
+* [Migrating from Two Hat Community Sift to Tisane API](./how-tos/communitysiftmigration.md)
 * [Filtering By Keyword Blocklists](./how-tos/blocklists.md)
 * [Locating a Text Snippet Using Location Data](./how-tos/locateasnippet.md)
 * [Moderating Live Chat](./how-tos/liveusercontent.md)
